@@ -1,7 +1,7 @@
 +++
 title = "ASCII"
 description = "127 characters we can all agree upon"
-date = 2020-02-04T14:43:27-08:00
+date = 2020-02-04T14:52:26-08:00
 image = "ascii.png"
 +++
 

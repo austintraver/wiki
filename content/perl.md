@@ -1,7 +1,7 @@
 +++
 title = "Perl"
 description = "The scripting language your old colleague left you stuck with debugging"
-date = 2020-02-04T14:43:27-08:00
+date = 2020-02-04T14:52:27-08:00
 image = "perl.jpg"
 +++
 

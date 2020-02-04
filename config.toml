@@ -3,6 +3,7 @@ title = "Helpful Wiki"
 staticDir = ["static/css", "static/js", "static/img"]
 languageCode = "en-us"
 publishDir = "docs"
+relativeURLs = true
 [markup]
   [markup.highlight]
     style = "dracula"

@@ -1,7 +1,7 @@
 +++
 title = "AWS"
 description = "Amazon Web Services"
-date = 2020-02-04T14:43:27-08:00
+date = 2020-02-04T14:52:26-08:00
 image = "aws.jpg"
 +++
 
