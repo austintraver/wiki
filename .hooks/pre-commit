@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+hugo
+git add ./docs
