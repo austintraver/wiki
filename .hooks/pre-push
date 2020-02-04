@@ -2,3 +2,4 @@
 
 hugo
 git add ./docs
+git commit --amend
