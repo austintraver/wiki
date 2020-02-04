@@ -1,7 +1,7 @@
 +++
 title = "Python"
 description = "The best programming language"
-date = 2020-01-30T20:14:57-08:00
+date = 2020-02-04T07:47:38-08:00
 image = "python.png"
 +++
 

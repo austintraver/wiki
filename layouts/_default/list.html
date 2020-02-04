@@ -1,6 +1,6 @@
 {{ define "head" }}
-  <link rel="stylesheet" href="list.css">
-  <link rel="stylesheet" href="header.css">
+  {{ partial "head.html" }}
+  <link rel="stylesheet" href={{ "list.css" | relURL }}>
 {{ end }}
 
 
@@ -13,7 +13,7 @@
 
 <div id="main">
   <div class="sidebar sticky">
-    <img class="sidebar" id="headshot" src="headshot.jpg">
+    <img class="sidebar" id="headshot" src={{ "headshot.jpg" | relURL }}>
     <div class="content">
       <p style="font-size: 24pt; font-weight: bold"> Austin Traver </p>
       <p style="font-style: italic"> Teaching to avoid learning... </p>
@@ -27,7 +27,7 @@
 
 
   <div class="grid">
-  {{ range .Pages }}
+  {{ range .Pages.ByDate.Reverse }}
       {{ $image := path.Join "static" "img" (.Param "image") }}
       {{ if fileExists $image -}}
       <div class="block">

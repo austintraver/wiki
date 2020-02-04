@@ -1,11 +1,9 @@
 +++
 title = "GPG"
 description = "Encryption using the GNU privacy guard"
-date = 2020-01-30T20:14:57-08:00
+date = 2020-02-04T14:38:25-08:00
 image = "gpg.jpg"
 +++
-
-# `gpg`
 
 ## Getting Started
 

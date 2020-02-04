@@ -1,5 +1,10 @@
-.body {
+body {
   font-family: -apple-system, "Helvetica Neue", sans-serif;
+  margin: 0px;
+}
+
+blockquote {
+  font-size: max(1em, 12px);
 }
 
 a:-webkit-any-link {
@@ -8,6 +13,15 @@ a:-webkit-any-link {
   text-decoration: underline;
 }
 
-p {
+pre {
   font-size: 16pt;
+  letter-spacing: 1.05;
+  line-height: 150%;
+  padding: 10pt;
+  font-family: -apple-system, Courier, monospace;
+  border-radius: 10pt;
+}
+
+li {
+  font-size: 14pt;
 }

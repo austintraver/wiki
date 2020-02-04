@@ -1,7 +1,7 @@
 +++
 title = "printf"
 description = "Printing formatted strings in literally every programming language"
-date = 2020-01-30T20:14:57-08:00
+date = 2020-02-04T07:45:37-08:00
 image = "printf.jpg"
 +++
 

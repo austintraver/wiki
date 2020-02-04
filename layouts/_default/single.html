@@ -1,19 +1,22 @@
 {{ define "head" }}
-  <link rel="stylesheet" href="single.css">
-  <link rel="stylesheet" href="header.css">
+  {{ partial "head.html" }}
+  <link rel="stylesheet" href={{ "single.css" | relURL }}>
 {{ end }}
 
 {{ define "main" }}
 
   {{ $image := path.Join "static" "img" (.Param "image") }}
   {{ if fileExists $image -}}
-  <div id=hero style='background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url({{ .Param "image" | absURL }})'>
+  <div class="hero" style='background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url({{ .Param "image" | absURL }})'>
+    <h1>{{.Title}}</h1>
+    <h2>{{.Description}}</h2>
+    <p id="date">{{ dateFormat "Monday, Jan 2, 2006" .Date }}<p>
 
   </div>
   {{- end }}
 
-      <div>{{ dateFormat "Monday, Jan 2, 2006" .Date }}</div>
       <div>{{if .Params.author}}Author: {{.Params.Author}}{{end}}</div>
-      <div>{{.Content}}</div>
-  </div>
+    <div class="main">
+    {{.Content}}
+    </div>
 {{ end }}

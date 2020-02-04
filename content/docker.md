@@ -1,7 +1,7 @@
 +++
 title = "Docker"
 description = "How to containerize literally everything"
-date = 2020-01-30T20:14:57-08:00
+date = 2020-02-04T07:31:20-08:00
 image = "docker.png"
 +++
 
