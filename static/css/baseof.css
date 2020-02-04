@@ -1,0 +1,13 @@
+.body {
+  font-family: -apple-system, "Helvetica Neue", sans-serif;
+}
+
+a:-webkit-any-link {
+  font-size: 18pt;
+  color: grey;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 16pt;
+}

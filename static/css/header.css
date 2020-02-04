@@ -1,0 +1,38 @@
+.navbar {
+  height: 10%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+  display: flex;
+  padding: 20px;
+}
+
+a#magnet {
+  opacity: 75%;
+  transition: 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  display: flex;
+  width: 30%;
+  height: 100%;
+  text-decoration: none;
+}
+
+a#magnet:hover {
+  opacity: 100%;
+}
+
+img#logo {
+  height: 100%;
+  object-fit: scale-down;
+  display: block;
+}
+
+.navbar p {
+  color: black;
+  font-size: 24pt;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: white;
+  text-shadow: 2px 2px black;
+  letter-spacing: 0.1em;
+}

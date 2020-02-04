@@ -1,5 +1,5 @@
 baseURL = "https://helpful.wiki/"
 title = "Helpful Wiki"
-theme = ["giraffe"]
+staticDir = ["static/css", "static/js", "static/img"]
 languageCode = "en-us"
 publishDir = "docs"

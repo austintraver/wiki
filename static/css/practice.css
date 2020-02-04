@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  padding: 0.5em;
+  margin: 2% 5% 2% 5%;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 5%;
+  grid-row-gap: 10px;
+}
+
+.grid em {
+  background: lightblue;
+  font-size: 30px;
+}
