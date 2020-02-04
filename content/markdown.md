@@ -1,7 +1,7 @@
 +++
 title = "Markdown"
 description = "A lazy solution to writing less HTML"
-date = 2020-02-04T07:40:31-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "markdown.png"
 +++
 

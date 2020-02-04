@@ -1,7 +1,7 @@
 +++
 title = "Man"
 description = "Manual pages from the command line"
-date = 2020-02-04T07:39:54-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "man.png"
 +++
 

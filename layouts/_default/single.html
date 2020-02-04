@@ -1,7 +1,11 @@
 {{ define "head" }}
   {{ partial "head.html" }}
   <link rel="stylesheet" href={{ "single.css" | relURL }}>
+  {{ if isset .Params "image" }}
+    <meta property="og:image" content={{ .Param "image" | absURL }}>
+  {{ end }}
 {{ end }}
+
 
 {{ define "main" }}
 

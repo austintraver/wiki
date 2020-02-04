@@ -1,7 +1,7 @@
 +++
 title = "MongoDB"
 description = "The database for you and me"
-date = 2020-02-04T07:41:33-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "mongo.png"
 +++
 

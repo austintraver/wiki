@@ -1,7 +1,7 @@
 +++
 title = "SSL"
 description = "the Secure Socket Layer"
-date = 2020-02-04T07:23:14-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "ssl.jpg"
 +++
 

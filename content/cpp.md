@@ -1,7 +1,7 @@
 +++
 title = "C / C++"
 description = "Low-level programming for high-level tryhards"
-date = 2020-02-04T07:30:42-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "c.jpg"
 +++
 

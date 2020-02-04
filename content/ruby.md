@@ -1,7 +1,7 @@
 +++
 title = "Ruby"
 description = "Write it fast, run it slow"
-date = 2020-02-04T07:47:16-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "ruby.jpg"
 +++
 

@@ -1,7 +1,7 @@
 +++
 title = "Git"
 description = "Version control for the stuff-messer-upper in all of us"
-date = 2020-02-04T07:33:48-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "git.png"
 +++
 

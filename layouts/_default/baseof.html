@@ -5,8 +5,8 @@
     <title>{{.Title}} | {{.Site.Title}}</title>
     <link rel="stylesheet"  href={{ "baseof.css" | relURL }}/>
     {{ template "_internal/opengraph.html" . }}
-  {{ block "head" . }}
-  {{ end }}
+    {{ block "head" . }}
+    {{ end }}
   </head>
   <body>
     {{ partial "header" . }}

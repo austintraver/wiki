@@ -1,7 +1,7 @@
 +++
 title = "HTML"
 description = "Writing stuff down the hard way"
-date = 2020-02-04T07:35:38-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "html.png"
 +++
 

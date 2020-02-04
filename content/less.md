@@ -1,7 +1,7 @@
 +++
 title = "Less"
 description = "Because less is literally more, I'm not joking"
-date = 2020-02-04T07:38:39-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "less.jpg"
 +++
 

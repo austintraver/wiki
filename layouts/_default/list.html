@@ -1,6 +1,10 @@
 {{ define "head" }}
   {{ partial "head.html" }}
   <link rel="stylesheet" href={{ "list.css" | relURL }}>
+  {{ if isset .Params "image" }}
+    <meta property="og:image" content={{ .Param "image" | absURL }}>
+  {{ end }}
+
 {{ end }}
 
 

@@ -1,7 +1,7 @@
 +++
 title = "Bash"
 description = "The GNU shell scripting language"
-date = 2020-02-04T07:29:33-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "bash.jpg"
 +++
 

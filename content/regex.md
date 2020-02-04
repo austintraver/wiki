@@ -1,7 +1,7 @@
 +++
 title = "Regular Expressions"
 description = "Anything but regular..."
-date = 2020-02-04T07:47:26-08:00
+date = 2020-02-04T14:43:27-08:00
 image = "regex.jpg"
 +++
 

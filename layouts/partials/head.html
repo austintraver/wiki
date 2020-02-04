@@ -1,5 +1,2 @@
 <link rel="stylesheet" href={{ "header.css" | relURL }}>
 <link rel="stylesheet" href={{ "footer.css" | relURL }}>
-{{ if (.Param "image") -}}
-<meta property="og:image" content={{ .Param "image" | relURL }}>
-{{ end }}
