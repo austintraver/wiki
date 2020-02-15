@@ -1157,3 +1157,9 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
   ```sh
   lp ~/path/to/file.pdf
   ```
+
+* Check the current printer configurations
+
+  ```sh
+  lpstat -v
+  ```
