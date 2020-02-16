@@ -1,0 +1,34 @@
+div.hero {
+  /* Have this <div> tag serve as a flexbox */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 30vw;
+  background-image: var(--url);
+  object-fit: cover;
+  object-position: bottom;
+  /* opacity: 70%; */
+}
+
+div.hero:hover {
+  /* opacity: 90%; */
+}
+
+div.hero > h1 {
+  display: block;
+  color: white;
+  width: 12%;
+  font-weight: bold;
+  font-size: 51pt;
+  border-color: white;
+  border-style: solid;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+div.hero > p {
+  display: inline;
+}

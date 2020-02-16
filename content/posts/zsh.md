@@ -1551,3 +1551,19 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
       exit 0
   esac
   ```
+
+## Pairing Scalars and Arrays
+
+If you're using a shell scripting language, you often have to export directories to the environment, such as for `PATH`, which requires a list of directories separated by a colon.
+
+Zsh gives you the ability to link two variables together, a scalar and an array. You can specify the delimiter that separates elements, and once you have, adding items to the array will add items to the scalar. An example is provided below:
+
+* Linking a scalar and an array
+
+  ```sh
+  typeset -T COLORS colors ':'
+  colors=(red)
+  colors+=(blue green)
+  echo ${COLORS}
+  # => "red:blue:green"
+  ```

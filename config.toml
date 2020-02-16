@@ -7,3 +7,5 @@ relativeURLs = true
 [markup]
   [markup.highlight]
     style = "dracula"
+[permalinks]
+  posts = "/:title"

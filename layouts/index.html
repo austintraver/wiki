@@ -1,0 +1,33 @@
+{{ define "head" }}
+  {{ partial "head.html" }}
+  {{ if isset .Params "image" }}
+    <meta property="og:image" content={{- .Param "image" | absURL -}}>
+  {{ end }}
+{{ end }}
+
+
+{{ partial "header" . }}
+{{ partial "banner" . }}
+{{ partial "sidebar" . }}
+
+<link rel="stylesheet" href={{ "index.css" | relURL }}>
+<div id="main">
+  <div class="grid">
+  {{ range where .Site.RegularPages.ByDate.Reverse "Section" "posts" }}
+    {{ $image := path.Join "static" "img" (.Param "image") }}
+    {{ if fileExists $image -}}
+      <div class="block">
+        <a href="{{ ref . .File.ContentBaseName }}">
+          <img class="teaser" src='{{ .Param "image" | absURL }}'/>
+          {{- .Title -}}
+        </a>
+        <p>
+          {{- .Description -}}
+        </p>
+      </div>
+    {{ end }}
+  {{ end }}
+  </div>
+</div>
+
+{{ partial "footer" . }}

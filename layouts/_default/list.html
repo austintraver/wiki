@@ -2,49 +2,6 @@
   {{ partial "head.html" }}
   <link rel="stylesheet" href={{ "list.css" | relURL }}>
   {{ if isset .Params "image" }}
-    <meta property="og:image" content={{ .Param "image" | absURL }}>
+    <meta property="og:image" content={{- .Param "image" | absURL -}}>
   {{ end }}
-
-{{ end }}
-
-
-{{ define "main" }}
-  <div class="hero" style='background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url({{ "books.jpg" | absURL }}'>
-    <h1>{{.Title}}</h1>
-    <p>{{.Content}}<p>
-
-  </div>
-
-<div id="main">
-  <div class="sidebar sticky">
-    <img class="sidebar" id="headshot" src={{ "headshot.jpg" | relURL }}>
-    <div class="content">
-      <p style="font-size: 24pt; font-weight: bold"> Austin Traver </p>
-      <p style="font-style: italic"> Teaching to avoid learning... </p>
-    </div>
-    <div class="wrapper">
-      <a href='mailto:atraver@usc.edu'>Email</a> </br>
-      <a href='https://helpful.wiki'>Website</a> </br>
-      <a href='https://github.com/austintraver'>GitHub</a>
-    </div>
-  </div>
-
-
-  <div class="grid">
-  {{ range .Pages.ByDate.Reverse }}
-      {{ $image := path.Join "static" "img" (.Param "image") }}
-      {{ if fileExists $image -}}
-      <div class="block">
-        <a href="{{ .File.ContentBaseName }}">
-        <img class="teaser" src='{{ .Param "image" | absURL }}'/>
-        <br>
-        {{.Title}}
-        </a>
-        <p>{{.Description}}</p>
-      </div>
-      {{ end }}
-  {{ end }}
-  </div>
-
-</div>
 {{ end }}
