@@ -110,8 +110,9 @@ Ranked from weakest to strongest
 |^ C|Interrupt a job|SIGINT|2|Tell a process that it should not continue, the most common way to end a program|
 |⌃ \\ |Quit a job|SIGQUIT|3|Similar to an interrupt, but a little stronger (can still be caught), and will produce a core dump. The strongest of the signals that can be called via keyboard shortcuts|
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** Many people don't know that on Mac OS, there's an alternative to using **⌃ C** to end a program: **⌘ .**
+{{% /notice %}}
 
 
 ## Signals
@@ -242,8 +243,9 @@ $ du -chs
 * `-c`
 * `-s`
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** The snapshot that you're given with `$ df -kh` is not always recent. If you've made some big changes to the available amount of storage, the discrepancy could be very large. To get an up-to-date version of the available storage on your computer, type `$ du -chs`
+{{% /notice %}}
 
 
 ## Customization
@@ -280,8 +282,9 @@ However, if the executable file is located in one of the directories specified b
 echo -e ${PATH//:/\\n}
 ```
 
-{: .notice--info}
+{{% notice info %}}
 Normally each directory in the path is seperated by a : not a newline, but I find this to be a clearer output.
+{{% /notice %}}
 
 ### Using `#!` the "hashbang"
 

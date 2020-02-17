@@ -68,8 +68,9 @@ On a Unix system, you can set the environment variable `CLASSPATH` like so:
   export CLASSPATH = ~/path/to/packages:.
   ```
 
-  {: .notice--warning}
+  {{% notice warning %}}
   **Warning:** Don't forget to add the trailing `.` at the end of your list of imports, because that is how to specify the current directory as part of the classpath.
+  {{% /notice %}}
 
   Any package directories, located within `~/path/to/packages`, (e.g. `~/path/to/packages/example/Greet.class`) can now be imported with `import example.Greet`
 
@@ -150,8 +151,9 @@ In archive syntax, the meanings of those flags are as follows:
 * `​-v`​: verbose output about file information (fileside, modificaiton time, compression ratio)
 * `​-f`​: the next input after 'f' will be a filename
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** These are the same flags used in the `tar` program on your terminal! No need to remember new flags.
+{{% /notice %}}
 
 ### The Java API
 
@@ -310,8 +312,9 @@ public class temp {
 }
 ```
 
-{: .notice--success}
+{{% notice success %}}
 **Update:** As of `java` 8.0, there is a `java.time` library, which provides a much more convenient implementation than manually defining the string syntax.
+{{% /notice %}}
 
 ```java
 import java.time.*;
@@ -446,8 +449,9 @@ int[] A = {null, null, null};
   }
   ```
 
-  {: .notice--warning}
+  {{% notice warning %}}
   **Note:** you can’t modify the values of element using this syntax. Calling `​element += 1`​ would not change the values in the array
+  {{% /notice %}}
 
 ### Copying an Array
 
@@ -523,8 +527,9 @@ Reader stdin = new BufferedReader(System.in); // reads in data from std::cin
 Writer stdout = new BufferedWriter(System.out); // writes output to std::cout
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** be sure to call the `​close()`​ method on a stream when you are done using it.
+{{% /notice %}}
 
 ### Customizing stdin, stdout, stderr
 
@@ -792,8 +797,9 @@ if (!result.wasNull()){
 connection.close();
 ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** a single call to a Connection object’s `​close()`​ method will implicitly call the `​close()`​ method on any existing `Statement` objects that exist. Closing those will implicitly call close on any `​ResultSet`​ objects that exist. Therefore, the only cleanup to perform at the end of a function is to call `connection.close()`
+{{% /notice %}}
 
 ### Datatypes `SQL` vs. `java`
 
@@ -809,8 +815,9 @@ connection.close();
 | `TIME` | `java.sql.Time` |
 | `TIMESTAMP` | `java.sql.Timestamp` |
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** to convert `SQL` to `java` in terms of time, use the `java.sql.Timestamp` class, as it's capable of converting a `java.util.Date` object down to nanosecond granularity.
+{{% /notice %}}
 
 ## Networking
 

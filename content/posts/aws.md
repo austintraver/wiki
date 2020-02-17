@@ -50,8 +50,9 @@ EC2, Amazon's Elastic Compute Cloud, is a virtual server that can perform comput
 
 ## AWS CLI
 
-{: .notice--success}
+{{% notice success %}}
 **Tip:** If you ever need help for a given command, the documentation is surprisngly robust for this program, so suppress that urge to go to Stack Overflow! You can type `help` after any subcommand and a manual page will appear to explain the available functionality.
+{{% /notice %}}
 
 ```sh
 aws configure --profile tommy
@@ -90,8 +91,9 @@ export AWS_ACCESS_KEY_ID='foo'
 export AWS_SECRET_ACCESS_KEY='bar'
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** Any environment variables set in your shell, such as in the code snippet above, will override the configurations set in `~/.aws/config` and `~/.aws/credentials`
+{{% /notice %}}
 
 ## `--query`
 
@@ -131,8 +133,9 @@ my_object = json.load(my_file)
 print(my_object)
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** Be sure to use the `.download_file()` method first, as you can't access the S3 bucket's version directly, (or so I believe).
+{{% /notice %}}
 
 Uploading a file to an S3 bucket can be done as follows:
 
@@ -175,8 +178,9 @@ bucket = s3.Bucket('tamagotchi')
 bucket.delete()
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** You won't be able to delete a bucket until all of the objects within it have been deleted as well.
+{{% /notice %}}
 
 ## IAM
 

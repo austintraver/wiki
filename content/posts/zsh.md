@@ -1,11 +1,11 @@
 +++
-title = "Shell"
+title = "Zsh"
 description = "Your new favorite programming language"
 date = 2020-02-04T14:52:27-08:00
-image = "shell.jpg"
+image = "zsh.jpg"
 +++
 
-# shell
+# Shell Scripting
 
 There are a handful of shell scripting languages, many of which will come by default with your operating system. On both macOS and Linux based operating systems, you can count on having at least one of the following shells by default.
 
@@ -14,8 +14,9 @@ There are a handful of shell scripting languages, many of which will come by def
 * `bash`: the Bourne Again shell, written in 1989 by Brian Fox for GNU
 * `zsh`: the Z shell, written in 1990 by Paul Falstad, released open source under the MIT license
 
-{: .notice--success}
+{{% notice tip %}}
 **TIL:** All of these shell scripting languages were written in the `C` programming language.
+{{% /notice %}}
 
 This guide uses `zsh` as the shell language of choice, so your mileage may vary if you try to use these commands in another shell scripting language. The reason `zsh` is chosen is because it's the default shell on the macOS operating system, but more importantly, because it is my favorite shell
 
@@ -195,8 +196,9 @@ else
 fi
 ```
 
-{: .notice--info}
+{{% notice note %}}
 **Tip:** You can use the `;` character to signify a newline without actually providing one. This is useful for compressing a script or writing one-liners on your terminal.
+{{% /notice %}}
 
 * Check the user
 
@@ -217,8 +219,9 @@ if [[ ${UID} -ne 0 ]]; then echo "You are not the root user"; fi
 |`-ge`|is greater than or equal to|
 |`-z`|is null|
 
-{: .notice--danger}
+{{% notice warning %}}
 **Warning:** In shell scripting, you can only use `==` and `!=` to see if two **strings** are of equal value.
+{{% /notice %}}
 
 ## Arithmetic Evaluation
 
@@ -952,8 +955,9 @@ echo ./*(/OL:q)
   fi
   ```
 
-  {: .notice--warning}
-  **Note:** if there exists an alias by this name, it will return the alias definition instead of the path to the executable file
+{{% notice info %}}
+**Note:** if there exists an alias by this name, it will return the alias definition instead of the path to the executable file
+{{% /notice %}}
 
 
 ## Count the Number of Words in a String
@@ -1040,8 +1044,38 @@ echo ${(w)#string} # 4 (number of words)
   echo ${#array2} # => '3'
   ```
 
-  {: .notice--success}
-  **Tip:** `zsh` gives you a lot of flexibility with what syntax to separate arguments supplied to flags. You can use `[...]` `<...>` `{...}` or `(...)`
+{{% notice tip %}}
+**Tip:** `zsh` gives you a lot of flexibility with what syntax to separate arguments supplied to flags. You can use `[...]` `<...>` `{...}` or `(...)`
+{{% /notice %}}
+
+* Append `.old` to each scalar in the array
+
+    ```sh
+    files=(
+        ./one.txt
+        ./two.txt
+        ./three.txt
+    )
+    print -l ${files/%/.old}
+    # => ./one.txt.old
+    # => ./two.txt.old
+    # => ./three.txt.old
+    ```
+
+* Prepend `old.` to each scalar in the array
+
+    ```sh
+    people=(
+        man
+        woman
+        maid
+    )
+    print -l ${files/#/old.}
+    # => old.man
+    # => old.woman
+    # => old.maid
+    ```
+
 
 
 * Print each unique word in a paragraph
@@ -1185,19 +1219,22 @@ Ternary operators are supported within a double parentheses evaluation
   # => 6
   ```
 
-  {: .notice--warning}
+  {{% notice info %}}
   **Note:** Don't do this with string comparisons because inside of (( ... )) all strings are treated as the number `0`
+  {{% /notice %}}
 
-  {: .notice--danger}
+  {{% notice warning %}}
   **Warning:** Be careful about comparing strings, because sorting is by lexicographical order which means that a word is sorted in the following way: treat each number as a word in a dictionary. the value of a word would correspond with its location in the dictionary. "a < z" because "a" would be at a lower index number in the dictionary
+  {{% /notice %}}
 
   ```sh
   [[ "apple" < "banana" ]] && echo "yes" || echo "no"
   # => "yes"
   ```
 
-  {: .notice--danger}
+  {{% notice warning %}}
   **Warning:** Inside of double brackets, the evalution is not a true ternary operator, because the third statement will still execute if an error is thrown by the second statement
+  {{% /notice %}}
 
   ```sh
   [[ 1 -eq 1 ]] && asdf || echo "Not true"
@@ -1205,8 +1242,9 @@ Ternary operators are supported within a double parentheses evaluation
   # => "Not true"
   ```
 
-  {: .notice--success}
+  {{% notice tip %}}
   **Workaround:** You can fix this problem by surrounding the truth evaluation by curly brackets, and appending a `;:;` to the end of the statement. this will cause the command to report the error when it occurs, and then return `true` which will cause the or statement to not evaluate, since the first two statements returned `true`
+  {{% /notice %}}
 
   ```sh
   [[ 1 == 1 ]] && { asdf ;:; } || echo "Not true"
@@ -1283,8 +1321,9 @@ echo $message
 # => I don't want to brag, but I have like 3 friends."
 ```
 
-{: .notice--warning}
+{{% notice info %}}
 **Note:** this won't work for floating points, because bash will truncate the decimals when evaluating division
+{{% /notice %}}
 
 ```sh
 echo "6 / 8 = $(( 6 / 8 ))"
@@ -1453,8 +1492,9 @@ Sometimes you have an array of elements, and you need to remove a value from the
   array[${array[(i)charlie]}]=()
   ```
 
-{: .notice--success}
+{{% notice tip %}}
 **Good News:** There's a much less ugly way to do this in `zsh` version 5.0 using the `${array:|filter}` syntax. It's documented in "Parameter Expansion" of `man zshexpn`
+{{% /notice %}}
 
 * Removing an element from an array
 

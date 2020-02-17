@@ -1,16 +1,24 @@
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{.Title}} | {{.Site.Title}}</title>
-    <link rel="stylesheet"  href={{ "baseof.css" | relURL }}/>
+    <link rel="stylesheet" href={{ "baseof.css" | relURL }} />
     {{ template "_internal/opengraph.html" . }}
     {{ block "head" . }}
+        {{ if isset .Params "image" }}
+            <meta property="og:image" content={{- .Param "image" | absURL -}}>
+        {{ end }}
+        <link rel="stylesheet" href='{{ path.Join .File.TranslationBaseName ".css" }}'>
     {{ end }}
-  </head>
-  <body>
-  {{ block "main" . }}
+</head>
 
-  {{ end }}
-  </body>
+<body>
+    {{ partial "navbar" . }}
+    {{ block "main" . }}
+
+    {{ end }}
+    {{ partial "footer" . }}
+</body>
+
 </html>

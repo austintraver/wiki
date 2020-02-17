@@ -115,41 +115,6 @@ You can change the way a table's text aligns by appending a `:` to the dashes be
 | :---         |      :---:     |  ---:         |
 | Check        | This           | Out           |
 
-## Notices
-
-I do not believe that this is currently a feature of GitHub flavored markdown, but it works on GitHub pages. There are a variety of tags you can place above a section of code in order to format the way that it appears to a user. This allows the section to pop out to the reader.
-
-This code snippet will be processed and formatted to become the notices that you see further below.
-
-```plaintext
-{: .notice--primary}
-This is an **primary** style notice.
-
-{: .notice--info}
-This is an **info** style notice.
-
-{: .notice--warning}
-This is an **warning** style notice.
-
-{: .notice--success}
-This is an **success** style notice.
-```
-
-{: .notice--primary}
-This is an **primary** style notice.
-
-{: .notice--info}
-This is an **info** style notice.
-
-{: .notice--warning}
-This is an **warning** style notice.
-
-{: .notice--success}
-This is an **success** style notice.
-
-{: .notice--danger}
-This is an **danger** style notice.
-
 ## Escaping Characters in Markdown
 
 Some characters are special by default, and must be escaped by the escape character `\` in order for Markdown to interpret them literally. This is only required when Markdown would otherwise interpret the character specially, for instance, to type `*literal asterisks*` one must type `\* literal asterisks\*`

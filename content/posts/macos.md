@@ -66,8 +66,9 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
 |⌃ P|Move cursor ↑|
 |⌃ N|Move cursor ↓|
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** These look arbitrary, but they use a helpful pneumonic, hidden as it may be. Forward, Backward, Previous, Next.
+{{% /notice %}}
 
 ### Secret
 
@@ -78,8 +79,9 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
 |⌘ ⌃ F|Open app in full-screen|
 |⌥ ⌘ I|Open inspect element|
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** You can open inspect element in many more apps than you think. Give it a try!
+{{% /notice %}}
 
 
 * Disable sleep entirely
@@ -224,8 +226,9 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
 |⌥ ⌘ D|Show/Hide the dock|
 
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** You can add the control `⌃` character to your usual screenshot command, to have screenshots save directly to your clipboard.
+{{% /notice %}}
 
 #### Change screenshot capture type
 
@@ -245,8 +248,9 @@ By default, screenshots save to `~/Desktop`. I prefer them to be saved to `~/Dow
 defaults write com.apple.screencapture location /Users/austin/Downloads && killall SystemUIServer
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** I had a little bit of trouble with this command. I don't think it works anymore. As of Mac OS Mojave, you have to press ⌘ ⇧ 5, click `options` and then select **Other Location...** to choose a new default save location for screenshots.
+{{% /notice %}}
 
 #### Screenshot directly from terminal
 
@@ -286,8 +290,9 @@ You can even use `screencapture` to record video. The `-V` flag specifies to cap
   screencapture -V 10 example.mp4 &
   ```
 
-{: .notice--info}
+{{% notice info %}}
 This is mostly just for fun, it's not as practical as the other ways to go about doing the same thing. If you don't want to use the terminal type ⌘ ⇧ 5 which will give you a host of options to choose from. This is a new feature in OS X Mojave.
+{{% /notice %}}
 
 ### Change default screenshot location
 
@@ -378,8 +383,9 @@ Store your keyboard shortcuts in the directory `~/Library/KeyBindings/DefaultKey
 * `→` : `\U2192`
 * `↓` : `\U2193`
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** Any shortcuts you make using this method will not appear in the keyboard shortcut settings page in your computer.
+{{% /notice %}}
 
 ## Fix Permissions
 
@@ -406,8 +412,9 @@ If you mess up your `/etc/sudoers` file, you'll have to boot into single-user mo
 
 `defaults` is a powerful tool to utilize when exporting and importing settings across machines. Although there is no built-in method to sync keyboard shortcuts across computers, you can use the `defaults` program to set various keyboard shortcuts. When doing so, refer to the syntax below for how to denote modifier keys:
 
-{: .notice--success}
+{{% notice success %}}
 **Tip:** You can replace `NSGlobalDomain` with the `-g` flag to specify that the `defaults` command is global in scope.
+{{% /notice %}}
 
 * Disabling key repeat
 
@@ -590,8 +597,9 @@ There is a hidden command, called airport. To use it, add the following director
   # => /Volumes/Time Machine Backups/Backups.backupdb/My Macbook Pro/2019-08-07-061700
   ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** You have to run all of these as root, so before using `tmutil`, start with `sudo -i`
+{{% /notice %}}
 
 * Turn on Time Machine
 
@@ -649,8 +657,9 @@ By default, Time Machine will back up everything on your drive. You may, however
   tmutil removeexclusion ~/Downloads
   ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** By default, Time Machine will continue to ignore the files in an excluded directory *even if you move the directory somewhere else*. To have an absolute path excluded instead, use the `-p` flag.
+{{% /notice %}}
 
 * Exclude files in the absolute path `~/Downloads` from backups
 
@@ -745,8 +754,9 @@ If you're setting up processes in `/Library/LaunchDaemons`, which are run as the
   launchctl print-disabled user/$UID
   ```
 
-  {: .notice--warning}
+  {{% notice warning %}}
   **Note:** `launchtl` keeps an un-erasable record of disabled/enabled launch daemons. If you make a typo when adding daemon, and disable it, there is no way to erase it as an entry.
+  {{% /notice %}}
 
 * Enable a daemon service
 
@@ -935,8 +945,9 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
   dseditgroup -o edit -a tommy -t user admin
   ```
 
-  {: .notice--info}
+  {{% notice info %}}
   **Tip:** This is the command that is equivalent to checking the box "Allow user to administer this computer" on the Users & Groups page
+  {{% /notice %}}
 
 * Remove `tommy` from the list of users who are members of the `admin` group
 
@@ -1018,8 +1029,9 @@ There are three directories that are not protected:
   sudo defaults write com.apple.loginwindow LoginHook /path/to/script
   ```
 
-  {: .notice--warning}
+  {{% notice warning %}}
   **Note:** It's preferrable to have these processes launch as LaunchAgents, but LoginHooks still work in the latest version of macOS.
+  {{% /notice %}}
 
 * Adding a graphic+text banner to appear upon login
 
@@ -1049,8 +1061,9 @@ There are three directories that are not protected:
   sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
   ```
 
-  {: .notice--success}
+  {{% notice success %}}
   **Tip:** You can also just press `option-return` to toggle this view-mode if you'd rather not enable it by default
+  {{% /notice %}}
 
 
 ## `diskutil`

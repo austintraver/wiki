@@ -18,8 +18,9 @@ JSON documents can be the following two types:
 | Array |`[]`  square brackets | `[ "Hello", "JSON" ]` |
 | Object |`{}` curly braces | `{"Hello":"JSON"}` |
 
-{: .notice--warning}
+{{% notice warning %}}
 **Difference with Javascript:** Since double quotes are considered standard in Javascript, JSON **requires** double quotes. Javascript code recognizes strings in objects with surrounding single quotes `'a string'` or double quotes `"also a string"`. When in doubt, use https://JSONLinter.com
+{{% /notice %}}
 
 ## JSON Arrays
 
@@ -124,5 +125,6 @@ jp --filename --unquoted
 # "value"
 ```
 
-{: .notice--success}
+{{% notice success %}}
 **Tip:** When the output is a single string, it retains its quotes. `"output"`. If you'd prefer the output to be unquoted `output`, add `export JP_UNQUOTED=1` to your rcfile. If you'd like to manually specify when the output should be unquoted, you can add the `-u` or `--unquoted` argument to your `jp` command.
+{{% /notice %}}

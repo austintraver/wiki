@@ -49,8 +49,9 @@ The config file is located at `/etc/mogndob.conf`
   use example
   ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** If the database doesn't yet exist, switching to it will implicitly create it.
+{{% /notice %}}
 
 * List all available databases
 
@@ -58,8 +59,9 @@ The config file is located at `/etc/mogndob.conf`
   show dbs
   ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** If you switch to a new database and don't add anything, the command above won't show you the current database you are using since there isn't anything inside of it.
+{{% /notice %}}
 
 
 

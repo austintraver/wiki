@@ -180,8 +180,9 @@ table = ff.create_table(df)
 py.iplot(table, filename='table1')
 ```
 
-{: .notice--success}
+{{% notice success %}}
 **Tip:** When using a jupyter notebook, use the `iplot()` method, which will plot the data inline. If you'd like the graph to be shared with others, use the `plot()` method.
+{{% /notice %}}
 
 #### Plotting Offline
 
@@ -196,8 +197,9 @@ figure = [data]
 py.iplot(data, filename='height_weight')
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** Your graph will not appear if you don't call the `init_notebook_mode()` method first!
+{{% /notice %}}
 
 The only big difference between plotting online and plotting offline is whether to use `plotly.plotly` or `plotly.offline` for your import. Both will include the `plot()` and `iplot()` methods.
 
@@ -363,8 +365,9 @@ If you have your own modules that you want to use, there's a way to tell `python
 
 To do this, set the environment variable `PYTHONPATH` in your shell, and export that variable. For example, `export PYTHONPATH=~/example/python/modules`. Now, all of the folders within this directory will be considered a module. For instance, if `~/example/python/modules/ex` was a folder containing python code, now you'd be able to type `import ex` in future python programs.
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** If you forget to call `export`, `python` will be unable to reference the `PYTHONPATH` variable.
+{{% /notice %}}
 
 
 ## Sockets

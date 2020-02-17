@@ -1,13 +1,11 @@
-<link rel="stylesheet"  href={{ "sidebar.css" | relURL }}/>
-<div class="sidebar">
-  <img id="headshot" src={{ "headshot.jpg" | relURL }}>
-  <div class="content">
-    <p style="font-size: 24pt; font-weight: bold"> Austin Traver </p>
-    <p style="font-style: italic"> Teaching to avoid learning... </p>
-  </div>
-  <div class="wrapper">
-    <a href='mailto:atraver@usc.edu'>Email</a> </br>
-    <a href='https://helpful.wiki'>Website</a> </br>
-    <a href='https://github.com/austintraver'>GitHub</a>
-  </div>
+<link rel="stylesheet"  href='{{ relURL "sidebar.css" }}'/>
+<div id="sidebar">
+    <img id="headshot" src='{{ relURL "headshot.jpg" }}'>
+    <p id="author"> Austin Traver </p>
+    <p id="tagline"> Teaching to avoid learning... </p>
+    <ul id="plugs">
+        <li href='mailto:atraver@usc.edu'>Email</a> </br>
+        <li href='https://helpful.wiki'>Website</a> </br>
+        <li href='https://github.com/austintraver'>GitHub</a>
+    </ul>
 </div>

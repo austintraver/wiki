@@ -31,8 +31,9 @@ Stopping the `mysql` Server
 brew services stop mysql
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** This is assuming you installed `mysql` using `brew` (and why wouldn't you?)
+{{% /notice %}}
 
 Export a Database to `.sql` File
 
@@ -89,8 +90,9 @@ SELECT COUNT(*) AS rows FROM db.name
 
 * You can use the `DISTINCT` keyword to get the number of unique values for a key-column.
 
-{: .notice--warning}
+{{% notice warning %}}
 If you use the `DISTINCT` keyword, it will apply to *all* fields that are being selected from.
+{{% /notice %}}
 
 ```sql
 SELECT COUNT(DISTINCT year) FROM db.name
@@ -109,8 +111,9 @@ SELECT DISTINCT states, names FROM my_table ORDER BY states, names
 * By default, the `ORDER BY` statement will order by `ASC` but you can still include the `ASC` if you would like to.
 
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** Always put the `ORDER BY` statement at the end of your query.
+{{% /notice %}}
 
 ### `LIMIT`
 
@@ -312,8 +315,9 @@ GROUP BY
   payment_processor
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** The `WHERE` clause must come before the `GROUP BY` clause, because the `WHERE` clause is filtering the data set that `GROUP BY` will apply to.
+{{% /notice %}}
 
 ### Grouping by Multiple Columns
 
@@ -352,8 +356,9 @@ FROM
 * You can use `COUNT(*)` to determine the number of records in the table.
 * You can use `COUNT(column_name)` to determine the number of rows in the table that contain a value for that key-column name.
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** Make sure to use `AS` to alias the name of the column returned by this value, as by default it will return some junk name, such as `f0_`
+{{% /notice %}}
 
 ### `JOIN`
 
@@ -402,8 +407,9 @@ Opening a database
 USE my_database;
 ```
 
-{: .notice--success}
+{{% notice success %}}
 **Tip:** This command even works if you're already inside a different database!
+{{% /notice %}}
 
 ### Database Tables
 
@@ -573,8 +579,9 @@ Supporting UTF-8 encoding
 SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
 ```
 
-{: .notice--success}
+{{% notice success %}}
 **Update:** If you're using `mysql` version 8 or later, this option is chosen by default.
+{{% /notice %}}
 
 ## Database Administration
 

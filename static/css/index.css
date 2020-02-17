@@ -1,31 +1,70 @@
-.grid {
+#main {
+
+}
+
+div#grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 300px;
+  margin-top: 4vh;
+  grid-row-gap: 4vh;
 }
 
-.block {
-  margin-left: 1.7%;
-  float: left;
-  padding: 10px;
-  line-height: 1.5;
-  margin-bottom: 2em;
-  font-family: -apple-system, "Helvetica Neue", sans-serif;
-  opacity: 75%;
-  transition: 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+/* Mobile */
+@media screen and (max-aspect-ratio: 2/3) {
+    div#grid {
+        grid-row-gap: 3vh;
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
-.block:hover {
-  opacity: 1
+/* Desktop */
+@media screen and (min-aspect-ratio: 2/3) {
+    div#grid {
+        margin-left: 5vh;
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-.block a {
-  color: #5197ad;
+/* Individual elements of the grid */
+div#block {
+    margin: 0% 2%;
+    line-height: 1.5;
+    margin-bottom: 2em;
+    font-family: sans-serif;
+    transition: 2s;
+    opacity: 75%;
+    background: rgb(0, 0, 0, 80%);
 }
 
-.block p {
-  color: black;
-  font-size: 12pt;
-  font-weight: normal;
-  margin: 1px;
+div#block:hover {
+    opacity: 100%;
+}
+
+a#pagelink {
+    text-decoration: none;
+}
+
+/* A link to an individual page on the wiki */
+a#pagelink > h1 {
+    color: white;
+    font-size: 3vh;
+    margin-left: 1vw;
+}
+
+#block > p {
+    color: white;
+    text-decoration: none;
+    margin-left: 1vw;
+    font-style: italic;
+}
+
+#block > a {
+    color: black;
+    font-size: 12pt;
+    font-weight: normal;
+    margin: 1px;
+}
+
+img#teaser {
+    width: 100%;
+    object-fit: cover;
 }

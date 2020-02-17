@@ -1,26 +1,22 @@
 {{ define "head" }}
-  {{ partial "head.html" }}
-  <link rel="stylesheet" href={{ "single.css" | relURL }}>
-  {{ if isset .Params "image" }}
-    <meta property="og:image" content={{ .Param "image" | absURL }}>
-  {{ end }}
+<link rel="stylesheet" href='{{ relURL "single.css" }}'>
+<link rel="stylesheet" href='{{ relURL "notice.css" }}'>
+    {{ if isset .Params "image" }}
+    <meta property="og:image" content='{{ .Param "image" | absURL }}'>
+    {{ end }}
 {{ end }}
 
-
 {{ define "main" }}
-
-  {{ $image := path.Join "static" "img" (.Param "image") }}
-  {{ if fileExists $image -}}
-  <div class="hero" style='background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url({{ .Param "image" | absURL }})'>
-    <h1>{{.Title}}</h1>
-    <h2>{{.Description}}</h2>
-    <p id="date">{{ dateFormat "Monday, Jan 2, 2006" .Date }}<p>
-
-  </div>
-  {{- end }}
-
-      <div>{{if .Params.author}}Author: {{.Params.Author}}{{end}}</div>
-    <div class="main">
+    {{ $image := path.Join "static" "img" (.Param "image") }}
+    {{ if fileExists $image -}}
+    <div id="hero" style='background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)), url({{ .Param "image" | absURL }})'>
+        <h1>{{ .Title }}</h1>
+        <h2>{{ .Description }}</h2>
+        <p id="date">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</p>
+    </div>
+    {{ end }}
+    {{ partial "sidebar" . }}
+    <div id="main">
     {{.Content}}
     </div>
 {{ end }}

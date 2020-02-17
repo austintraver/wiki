@@ -7,8 +7,9 @@ image = "transmission.jpg"
 
 # Transmission
 
-{: .notice--danger}
+{{% notice danger %}}
 **Disclaimer:** Pirating videos is not only bad, it's illegal. As a result, you should never run the commands below. This is an educational blog post, and I'm educating you guys on exactly what you *shouldn't* do.
+{{% /notice %}}
 
 ## Getting Started
 
@@ -36,8 +37,9 @@ This will install the required programs that you need to use this software.
 * `transmission-remote` will handle the p2p transfer of data
 * `watch` will show the file downloading
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** Make sure that after you've completed these commands, you actually launch the daemon for `transmission`. To do this, type the following. If you don't, you'll get an error message `Transmission is not running.`
+{{% /notice %}}
 
 ```sh
 brew services start transmission-cli
@@ -64,8 +66,9 @@ View a real-time status of all transmission files
 watch -n 0.1 'transmission-remote -l'
 ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** You can close this window by pressing [⌃ C] (or [⌘ .] on Mac OS)
+{{% /notice %}}
 
 ## Playing videos
 
@@ -104,8 +107,9 @@ Configurations are stored at `~/.config/transmission-daemon`, you can write the 
 transmission-daemon --dump-settings &> ~/.config/transmission-daemon
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** Be careful that you don't also have a `~/.config/settings.json`, because `transmission-daemon` will prefer these settings over those in `~/.config/transmission-daemon`
+{{% /notice %}}
 
 ## Specifying a Custom Configuration File Directory
 

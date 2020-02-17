@@ -19,8 +19,9 @@ sudo systemsetup -f -setremotelogin off
 sudo systemsetup -getremotelogin
 ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** Add the `-f` flag to `--force` your `systemsetup` to disable a confirmation prompt when running your command. After all, confirmation messages are failsafes and those are only for people who make mistakes.
+{{% /notice %}}
 
 * Generating an `ssh` key on your computer
 
@@ -34,8 +35,9 @@ sudo systemsetup -getremotelogin
   gpg --export-secret-subkeys <auth_key_id>! | openpgp2ssh <auth_key_id> > ~/.ssh/id_rsa
   ```
 
-  {: .notice--success}
+  {{% notice success %}}
   **Tip:** If you don't have that command, [it's this perl script](https://github.com/dkg/monkeysphere/blob/master/src/share/keytrans)
+  {{% /notice %}}
 
 Once you have that key, you ought to convert it into make a bunch of different types
 
@@ -125,8 +127,9 @@ Opening a single application
 DISPLAY=:0.0 open -a Safari
 ```
 
-{: .notice--info}
+{{% notice info %}}
 Use the `export` keyword in your shell to open all applications on your remote computer
+{{% /notice %}}
 
 ```sh
 export DISPLAY=:0.0
@@ -191,8 +194,9 @@ A *bastion* refers to a small computer, hosted remotely, that works as a *jump b
 
 ## Configuring your SSH Client
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** If you need to better understand what a given setting means for your SSH server, you can type `$ man ssh_config`
+{{% /notice %}}
 
 ## Configuring your SSH Server
 
@@ -200,8 +204,9 @@ The config file for a computer's SSH server (used to handle incoming SSH connect
 
 If you open up this file (use sudo) you'll notice that most of the settings are commented out. If a setting is commented out, that means that it's a default setting. If you uncomment it, nothing would change, so don't go nuts uncommenting files. It's useful to leave the comments. That way, when a preference is not commented out, you know it's a setting you've manually reconfigured.
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** If you need to better understand what a given setting means for your SSH server, you can type `$ man sshd_config`
+{{% /notice %}}
 
 ## Enabling/Disabling Access to Users
 
@@ -287,8 +292,9 @@ scp ~/Downloads/file.txt john@172.20.10.7:~/Downloads/file.txt
 scp john@170.20.10.7:~/Desktop/file.txt ~/Documents/
 ```
 
-{: .notice--success}
+{{% notice success %}}
 **Tip:** If you need to edit a file on a remote computer, you can actually use `scp` to do so, as follows
+{{% /notice %}}
 
 ```sh
 # Option 1: Specifying the path relative to the user's home directory

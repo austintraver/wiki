@@ -1,27 +1,25 @@
 body {
-  font-family: -apple-system, "Helvetica Neue", sans-serif;
-  margin: 0px;
+    text-rendering: geometricPrecision;
+    font-family: -apple-system, sans-serif;
+    margin: 0px;
 }
 
 blockquote {
-  font-size: max(1em, 12px);
+    font-size: max(1em, 12px);
 }
 
-a:-webkit-any-link {
-  font-size: 18pt;
-  color: grey;
-  text-decoration: underline;
+a:visited {
+    color: black;
 }
 
 pre {
-  font-size: 16pt;
-  letter-spacing: 1.05;
-  line-height: 150%;
-  padding: 10pt;
-  font-family: -apple-system, Courier, monospace;
-  border-radius: 10pt;
+    letter-spacing: 1.05;
+    line-height: 150%;
+    padding: 10pt;
+    font-family: -apple-system, Courier, monospace;
+    border-radius: 10pt;
 }
 
 li {
-  font-size: 14pt;
+    font-size: 14pt;
 }

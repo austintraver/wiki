@@ -39,8 +39,9 @@ Start running a docker image
 docker run ubuntu echo 'hello'
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** Every time you use the `run` command it creates a new container, so if you type `run ubuntu` three times you will have three `ubuntu` containers.
+{{% /notice %}}
 
 Start running the container in interactive mode, establishing a connection to the container with a console
 
@@ -100,5 +101,6 @@ Remove an image from docker
 docker rmi ubuntu
 ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** You can also specify the first 2 characters of its container ID if the name associated with the docker container is too verbose to type out in its entirety. You can't, however, type just part of the containers name. This shortcut only applies to the container ID.
+{{% /notice %}}

@@ -1,31 +1,53 @@
-.sidebar {
+div#sidebar {
   position: sticky;
   text-align: center;
-  top: 2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   float: left;
-  padding: 2%;
-  width: 20%;
-  font-family: -apple-system, "Helvetica Neue", sans-serif;
+  top: 2vh;
+  width: 15vw;
+  margin-top: 2vh;
+  font-family: sans-serif;
   color: rgb(73, 78, 82);
 }
 
+p#author {
+    font-weight: bold;
+    font-size: 2.5vh;
+}
+
+p#tagline {
+    font-size: 1.5vh;
+    font-style: italic;
+}
+
+ul#plugs {
+  color: dimgrey;
+}
+
+ul#plugs > li {
+  letter-spacing: 1.5;
+  font-size: 1.5vh;
+  margin: 0.5vh;
+}
+
+
 img#headshot:hover {
-  transition: 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  transition: 2s;
   opacity: 100%;
 }
 
 img#headshot {
   opacity: 75%;
-  width: 125px;
+  width: 50%;
   border-radius: 50%;
 }
 
-img.teaser {
-  width: 100%;
-  object-fit: cover;
-}
-
-.wrapper {
-  color: grey;
-  letter-spacing: 1.5;
+/* Mobile */
+@media screen and (max-aspect-ratio: 2/3) {
+    /* Disable the sidebar when using mobile */
+    div#sidebar {
+        display: none;
+    }
 }

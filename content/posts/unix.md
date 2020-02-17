@@ -7,8 +7,9 @@ image = "unix.jpg"
 
 # Unix
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** If you're using these snippets make sure you've installed `coreutils`
+{{% /notice %}}
 
 * Installing `coreutils` on macOS
 
@@ -31,8 +32,9 @@ image = "unix.jpg"
   sudo passwd -l root
   ```
 
-  {: .notice--danger}
+  {{% notice danger %}}
   **Warning:** Although this account disables root login via password entry, it does not disable root login via SSH keys. To disable SSH access to the root account, set `PermitRootLogin no` in `/etc/ssh/sshd_config`
+  {{% /notice %}}
 
 
 # `date`
@@ -142,8 +144,9 @@ The `du` command stands for *disk usage*. It can tell you information about how 
   du -sBT ~/Desktop
   ```
 
-  {: .notice--warning}
+  {{% notice warning %}}
   **Note:** For file sizes, `du` rounds up to the nearest block. If there is a file that is less than 1TB in size, `du` will still report the size as `1T` when the flag `-BT` is specified.
+  {{% /notice %}}
 
 You can also set the environment variable `DU_BLOCK_SIZE` to have a default setting for the size of blocks reported by `du`
 
@@ -377,8 +380,9 @@ Examples
   tar --dir /Users/tommy --create example --file archive.tgz -a
   ```
 
-  {: .notice--info}
+  {{% notice info %}}
   **Tip:** `tar` can automatically determine which compression algorithm to use based on the specified style extension when using the `-a` flag
+  {{% /notice %}}
 
 * Append a file to an archive
 
@@ -497,8 +501,9 @@ brew install tree
   # => 3
   ```
 
-  {: .notice--warning}
+  {{% notice warning %}}
   **Note:** Herestrings implicitly append a trailing `\n` newline, which is why `wc` returns three characters.
+  {{% /notice %}}
 
 * Count the occurences of a single char `/` from stdin
 
@@ -642,7 +647,9 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
 
 * Adding a symlink for an executable file
 
-{: .notice--success} **Tip:** This is a vague title, but when you do `sudo apt install yarnpkg` you can't use the command `yarn`, instead you have to use `yarnpkg` which is unfamiliar. In order to restore it to its normal state, you can run the following command:
+{{% notice success %}}
+**Tip:** This is a vague title, but when you do `sudo apt install yarnpkg` you can't use the command `yarn`, instead you have to use `yarnpkg` which is unfamiliar. In order to restore it to its normal state, you can run the following command:
+{{% /notice %}}
 
   ```sh
   sudo update-alternatives /usr/bin/yarn yarn /usr/bin/yarnpkg 1

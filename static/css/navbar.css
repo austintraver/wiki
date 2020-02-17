@@ -1,0 +1,39 @@
+a#navbar {
+    background-color: lightgrey;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    padding: 2vh 1vw;
+    box-shadow: 0 0 2vh 4vh;
+    z-index: 1;
+    text-decoration: none;
+}
+
+a#navbar > h1:hover {
+    opacity: 100%;
+}
+
+a#navbar > img:hover {
+    opacity: 100%;
+}
+
+a#navbar > img {
+    max-height: 100%;
+    margin-right: 5%;
+}
+
+a#navbar > * {
+    opacity: 75%;
+    transition: 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+a#navbar > h1 {
+    font-size: 4vh;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    padding: 1%;
+    border-radius: 20px;
+    background: rgb(0, 0, 0, 50%);
+}

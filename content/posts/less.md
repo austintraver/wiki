@@ -43,8 +43,9 @@ You can type `/info` to search the current screen and below for `info`.
 |N|Find the next instance of `info`|
 |⇧ N|Find the previous instance of `info`|
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** This search functionality supports regular expressions, which lets you make more powerful searches.
+{{% /notice %}}
 
 ## Why is it called `less`?
 

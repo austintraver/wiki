@@ -81,8 +81,9 @@ In vim, the alt key is often referred to as the **meta key**.
 
 Notation: **< M - x >** is the same as **⌥ X**
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** If you're using MacOS, make sure your terminal has the setting "Use Option as Meta Key" enabled. However, you're not done. You still won't be able to bind
+{{% /notice %}}
 
 ## Basic Launch Commands
 
@@ -133,8 +134,9 @@ In the mid 1970s, GNU's file editor, `ed` needed some extensions. Instead of upd
 
 If you're inside `vim` you can enter ex mode by typing `:` in command mode. You will automatically exit ex mode by submitting the command or deleting the text on the line.
 
-{: .notice--info}
+{{% notice info %}}
 Ex mode is confusingly also referred to as command-line mode since it can be invoked directly from the command line `ex file.txt` or `vim -E file.txt`
+{{% /notice %}}
 
 ### `ex` Commands
 
@@ -252,27 +254,84 @@ Your `~/.vimrc` file is a file that contains *Vimscript* code. It automatically 
 It's good to write as many comments as possible, as you'll one day forget what is in your `~/.vimrc` file
 
 
-## Internal-Variables
+### Variables
+
+#### Internal-Variables
 
 When you see something like `g:onedark_termcolors:256` in your `~/.vimrc` it's referring to an internal variable.
 
-Also, the "rc" in ~/.vimrc stands for *run commands*
+Fun fact, not sure where to put it: The "rc" in ~/.vimrc stands for *run commands*
 
 You can always check `:help internal-variables` to review the types of internal-variables but here are the most common ones.
 
-Usually you only add global variables in your `~/.vimrc` file, which is why they are typically preceded with `g:`.
-
-### Variables with no prefix
-
 * If the variable is declared with no prefix within a function, it is local to the function.
-* If the variable is declared out of a function, it is global.
+* If the variable is declared out of a function, it is global, and can be accessed while using vim either as the interactive editor or in a script
 
-#### Useful commands
+An example of setting variables using the `let` keyword
 
-```vim
-" View the filename and extension "
-:echo @%
-```
+    ```vim
+    " Create a script variable called dotfiles pointing to the config directory
+    " this variable will not exist outside of the script it was declared in
+    let s:dotfiles = fnamemodify(stdpath('config'), ':h')
+
+    " Create a global variable which can be referenced later on if this file has been sourced
+    let g:my_variable = [1, 2, 3]
+    echo type(g:my_variable)
+    " => 3
+
+    " (More info on the type() function) (:h type)
+
+    "   type  | value | function({expr})
+    " ----------------------------------
+    " Number:     0     type(v:t_number)
+    " String:     1     type(v:t_string)
+    " Funcref:    2     type(v:t_func)
+    " List:       3     type(v:t_list)
+    " Dictionary: 4     type(v:t_dict)
+    " Float:      5     type(v:t_float)
+    " Boolean:    6     type(v:true) [or] type(v:false)
+    " Null:       7     type(v:null)
+    ```
+
+#### Basic Functions
+
+* Splitting a string into a list
+
+    ```vim
+    " Create a string, some words with a ':' in between
+    let my_string = "one:two:three"
+
+    " Split the string into a list at each ':'
+    let my_list = split(my_string, ':')
+    " => ['one', 'two', 'three']
+    ```
+
+* Joining a list into a string
+
+    ```vim
+    let my_directories = ['.', 'Desktop', 'file.txt']
+    " Join each item in the list together into a string using '/'
+    let my_path = join(my_directories, '/')
+    " => './Desktop/file.txt'
+    ```
+
+* Filtering duplicates out of a list, leaving only `uniq()` elements
+
+    ```vim
+    " Reducing a list to its unique elements
+    let number_list = [1, 2, 2, 2, 3, 4, 4, 5]
+    call uniq(number_list)
+    " => [1, 2, 3, 4, 5]
+
+    " Copying a list, but only the unique elements
+    let duplicate_number_list = [1, 2, 2, 2, 3, 4, 4, 5]
+    let unique_number_list = uniq(copy(duplicate_number_list))
+    " => [1, 2, 3, 4, 5]
+    " !Important: if you don't call copy(),
+    "             you modify the contents of the original variable
+    ```
+
+
 
 ### Special Characters
 
@@ -297,11 +356,13 @@ let g:markdown_fenced_languages = ['html', 'ruby', 'python', 'bash=sh']
 let g:markdown_minlines = 100
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** Bash is not one of the supported languages of Markdown. Therefore, you have to map any `bash` code-blocks to be rendered as `sh` code-blocks with the syntax `bash=sh`
+{{% /notice %}}
 
-{: .notice--success}
+{{% notice success %}}
 **Update:** If you have the latest version of vim, this is no longer necessary, the default mappings include `['c++=cpp', 'viml=vim', 'bash=sh']`
+{{% /notice %}}
 
 ### Help
 
@@ -390,8 +451,9 @@ vim scp://user@remote.network/Documents/file.txt
 * `ZZ` only write to the file if it has been modified.
   - equivalent to `:x`
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** Even if you haven't made any changes, `:wq` will update the file's last modified date to the current time. To avoid this, use `:x`
+{{% /notice %}}
 
 ### Confirmation Prompt
 
@@ -436,8 +498,9 @@ However, there's a problem. If `:up` was modified, we would want it to preserve 
 
 `cnorea w up`
 
-{: .notice--success}
+{{% notice success %}}
 **Good News:** Although `vim` tells you that custom commands must start with an upper case letter, using `cnorea` allows you to bypass this rule entirely. Customize away!
+{{% /notice %}}
 
 ### Editing Text Commands
 
@@ -485,8 +548,9 @@ If you open a help page, it opens a viewport in the top vertical half of the scr
 
 The typical syntax for managing a viewport in normal mode is ⌃ W <key>. Luckily you don't have to let go of the <Ctrl> key when you press the second key, as `vim` binds both `<C-w>o` and `<C-w><C-o>` to the same function by default.
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** This doesn't always hold true. For instance, `<C-w><C-c>` won't close the active window, but `<C-w>c` will. The reason is that `<C-c>` is the undo command, so `vim` decided not to rebind it.
+{{% /notice %}}
 
 To see all of the bindings, type `:tab h index`
 
@@ -541,13 +605,30 @@ To see all of the bindings, type `:tab h index`
 
 ## Registers
 
-The register `"+` is the computer's clipboard. If you want to copy or paste a range of code, you can use this register to do so.
+* Register `%` contains the name of the current file
 
-You can use `:[yank]` to copy to a register. For instance, the following command copies lines 25,35 to the system clipboard.
+* Register `#` contains the name of the alternate file
 
+* Register `":` contains the most recently executed command
+
+* Register `".` contains the most recently inserted text
+
+* Register `"/` contains the most recently searched for pattern
+
+* Register `"_` is a black-hole register, useful for scripting when you don't want to modify the contents of current registers
+
+* register `"+` is the computer's clipboard. If you want to copy or paste a range of code, you can use this register to do so.
+    - In normal mode: type `gg"+yG` to copy the entire files contents in your clipboard
+    - In ex mode: You can use the `:y[ank]` comamnd, for instance, `:%y+` will copy the current file's contents into your clipboard as well
+
+
+### Writing to registers
+
+```vim
+" Modifying the most recently searched item
+let @/ = "hello"
 ```
-:25,35 y +
-```
+
 
 ### `vimdiff`
 
@@ -569,7 +650,7 @@ To test any of these out, you can type `echo expand('%:p')`
 
 Splitting the filepath can be done by appending `:h` or `:t` as follows:
 
-* `%p:h` the `:h` will return everything left of the right-most `/`, in this case being `/Users/atraver/notes/_pages`
+* `%p:h` the `:h` will return everything left of the right-most `/`, in this case being `/Users/austin/notes/_pages`
 * `%p:t` does the exact same thing, but will return everything right of the right-most `/`, in this case being `vim.md`
 
 ### Motions (Text Objects)
@@ -784,3 +865,62 @@ The `netrw` tool, (which stands for *Network Read/Write*) within vim is a useful
 * `R`: Rename file
 * `X`: Execute current file
 * `x`: Run current file using specified program
+
+## String Manipulation
+
+* Performing brace expansion
+
+    ```vim
+    echo split(expand("hunt{er,ed,ing}"), '\n')
+    " => ['hunter', 'hunted', 'hunting']
+    ```
+
+* Performing filename expansion
+
+    ```vim
+    echo expand("~/Documents/file.txt")
+    " => '/Users/austin/Documents/file.txt'
+    ```
+
+* Performing environment variable expansion
+
+    ```vim
+    echo expand("$HOME/Desktop/picture.jpg")
+
+    let g:other_file = expand("%:p:h") . "/other.txt"
+    " Modifiers:
+    " %         Relative path to the current file
+    " :p		Expands to the absolute path
+    " :h		Expands to the head (the parent directory of the file)
+    " :t		Expands to the tail (the file, without the preceding directories)
+    " :r		Expands to the root of the filename (the filename, without the '.ext'
+    " :e		Expands to the just `.ext` of the filename extension only
+    ```
+
+* Querying the directories of the XDG Base Directory Specification
+
+    ```vim
+    echo stdpath("config")
+    " => '/Users/austin/.config/nvim'
+
+    echo stdpath("data")
+    " => '/Users/austin/.local/share/nvim
+
+    echo stdpath("cache")
+    " => '/Users/austin/.cache/nvim
+    ```
+
+* Adding the subdirectories `/vim` and `/vim/after` to the config variable `&runtimepath`
+
+```vim
+let &runtimepath .= ','.join(split(expand($XDG_CONFIG_HOME ."/vim{,/after}"),'\n'), ',')
+```
+
+* Adding the parent directory of the subdirectory found using `stdpath`
+
+```vim
+" (the stdpath() function only exists in `nvim`)
+let s:dotfiles = fnamemodify(stdpath('config'), ':h')
+echo s:dotfiles
+" => '/Users/austin/dot'
+```

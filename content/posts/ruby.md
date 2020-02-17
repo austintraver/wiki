@@ -23,8 +23,9 @@ brew install ruby
 apt install ruby-full
 ```
 
-{: .notice--danger}
+{{% notice danger %}}
 **Warning:** You're not done! `brew` won't add `ruby` to `/usr/local/bin`. Instead, it adds it to `/usr/local/opt/ruby/bin/ruby`. Currently, calls made to `ruby` and `gem` will default to the system's version of ruby, instead of the one installed with `brew`. To fix this, add `/usr/local/opt/ruby/bin` to the beginning of your `${PATH}`
+{{% /notice %}}
 
 ## Input/Output
 

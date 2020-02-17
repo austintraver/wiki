@@ -33,8 +33,9 @@ image = "git.png"
   source ~/.zshrc
   ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** For the rest of these examples, we're assuming that the user has a GitHub account with the username `tommy`
+{{% /notice %}}
 
 * Creating a local git repository
 
@@ -139,8 +140,9 @@ git config --global user.signingkey C1C27DC14DB20F99
 git config --global commit.gpgsign true
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** You must use a GPG key that uses the RSA 4096 algorithm. To generate a key, follow below
+{{% /notice %}}
 
 ```sh
 gpg --full-generate-key
@@ -279,8 +281,9 @@ git credential-osxkeychain erase
 
 The next time you clone using HTTPS, you will be prompted for your username and password again.
 
-{: .notice--warning}
+{{% notice warning %}}
 **Warning:** Press return twice. If you don't have any pre-existing information stored, this may not seem intuitive. If you try to erase an empty configuration, git will look as if it was running a program. It actually printed the existing configuration, but that configuration was empty, so it printed a blank configuration file. `git` is still waiting for user input, so simply press return again to confirm your erase command.
+{{% /notice %}}
 
 ![Imgur](https://i.imgur.com/Qj23AFd.jpg)
 
@@ -290,8 +293,9 @@ A note on the figure above, node **A** is the *root commit* in this repository. 
 
 A *branch* is a collection of all the commits in a graph that trace back to a tip. The nodes above labeled **F**, **4**, and **Z** are the *tips* of each of their respective branches.
 
-{: .notice--info}
+{{% notice info %}}
 **Note:** A single commit can be part of multiple branches.
+{{% /notice %}}
 
 * **release**: {A, B, C, X, Y, Z}
 * **master**: {A, B, C, D, E, F, 1, 2}

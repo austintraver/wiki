@@ -25,8 +25,9 @@ The `printf` command allows us to format output printed to a shell or written to
 | `\v` | vertical tab |
 | `\\` | backslash |
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** These escape sequences will only be interpreted in the original format string. They will not be interpreted in the subsequent argument strings unless the `%b` format specifier is used.
+{{% /notice %}}
 
 ### Argument Index Specifiers
 
@@ -66,8 +67,9 @@ printf 'The number 10 in hex is %x\n' 10
 printf 'This is %d%% luck, %d%% skill, %d%% concentrated power of will\n' 10 20 15
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** Be sure to include a `\n` at the end of the format string, because a newline is not included by default.
+{{% /notice %}}
 
 ### Width & Precision
 

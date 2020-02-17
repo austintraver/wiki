@@ -32,8 +32,9 @@ sed -i '.old' 's/original/replacement/' myfile.txt
 # myfile.txt.old will contain the original string
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** When it comes to substitution commands, both the input and the replacement must be nested inside of `/` chars `s/like/this/`
+{{% /notice %}}
 
 ### Replacing text in a file
 
@@ -59,8 +60,9 @@ sed -i -e 's/local/remote/g' -e 's/real/virtual/g' file.txt
 sed -i 's/local/remote/g;s/real/virtual/g' file.txt
 ```
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** There can be some compatibility problems with using `;` and it's recommended to use the `-e` flag when attempting to put multiple commands in a single `sed` execution.
+{{% /notice %}}
 
 ### Extended Regular Expressions
 

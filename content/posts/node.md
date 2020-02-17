@@ -65,8 +65,9 @@ $ node
 5
 ```
 
-{: .notice--info}
+{{% notice info %}}
 **Warning:** In this example, we used `_` , which refers to the previous expression. However, this feature has been deprecated, and you'll get an annoying warning if you try to use it.
+{{% /notice %}}
 
 You'll notice that the return value is printed below each statement executed.
 

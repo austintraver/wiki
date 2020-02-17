@@ -103,8 +103,9 @@ curl https://api.github.com/users/${user}/gpg_keys | jp '[0].raw_key' | gpg --im
   gpg -a --export-secret-keys example@pm.me > ./example.asc
   ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** Use the `-a` flag when exporting keys. This flag will encrypt the file into a readable cipher of jumbled ASCII text, instead of a binary file filed with 0s and 1s.
+{{% /notice %}}
 
 * By default, exporting a key will be directed to the standard output. It is common convention to give a binary key file the `.key` extension and ASCII armored key files the `.asc` extension.
 
@@ -134,8 +135,9 @@ Use the `-r` flag to specify the recipient of the file. You can use this flag mu
   gpg -r John -r Cam -se file.txt
   ```
 
-{: .notice--info}
+{{% notice info %}}
 **Tip:** It might be a good idea to specify your own key ID so that you can decrypt the file later on as well.
+{{% /notice %}}
 
 
 ## Decrypting a file
@@ -146,8 +148,9 @@ Use the `-r` flag to specify the recipient of the file. You can use this flag mu
   gpg -d example.txt.gpg
   ```
 
-  {: .notice--info}
+  {{% notice info %}}
   **Tip:** If you have multiple private keys, you don't need to specify which one to decrypt a file. `gpg` can figure out which key to use.
+  {{% /notice %}}
 
 
 ## Signing a message
@@ -177,8 +180,9 @@ If you have multiple private keys on your keyring, you may want to encrypt a doc
 
 If you import somebody's public key, that doesn't mean you trust them, it just tells `gpg` about the key. If your friend gives you his key, you should tell `gpg` that you trust it by adding your key signature to the public key.
 
-{: .notice--warning}
+{{% notice warning %}}
 **Note:** The vocab thrown around on the internet can be a little confusing so it's important to clarify some terms here. Declaring that you trust a key is known as "certification", "certifying a key", "key signing", or "signing a key".
+{{% /notice %}}
 
 ```sh
 # import a friend's key
