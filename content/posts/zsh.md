@@ -14,7 +14,7 @@ There are a handful of shell scripting languages, many of which will come by def
 * `bash`: the Bourne Again shell, written in 1989 by Brian Fox for GNU
 * `zsh`: the Z shell, written in 1990 by Paul Falstad, released open source under the MIT license
 
-{{% notice tip %}}
+{{% notice info %}}
 **TIL:** All of these shell scripting languages were written in the `C` programming language.
 {{% /notice %}}
 
@@ -196,7 +196,7 @@ else
 fi
 ```
 
-{{% notice note %}}
+{{% notice info %}}
 **Tip:** You can use the `;` character to signify a newline without actually providing one. This is useful for compressing a script or writing one-liners on your terminal.
 {{% /notice %}}
 
@@ -1044,7 +1044,7 @@ echo ${(w)#string} # 4 (number of words)
   echo ${#array2} # => '3'
   ```
 
-{{% notice tip %}}
+{{% notice info %}}
 **Tip:** `zsh` gives you a lot of flexibility with what syntax to separate arguments supplied to flags. You can use `[...]` `<...>` `{...}` or `(...)`
 {{% /notice %}}
 
@@ -1242,7 +1242,7 @@ Ternary operators are supported within a double parentheses evaluation
   # => "Not true"
   ```
 
-  {{% notice tip %}}
+  {{% notice info %}}
   **Workaround:** You can fix this problem by surrounding the truth evaluation by curly brackets, and appending a `;:;` to the end of the statement. this will cause the command to report the error when it occurs, and then return `true` which will cause the or statement to not evaluate, since the first two statements returned `true`
   {{% /notice %}}
 
@@ -1492,7 +1492,7 @@ Sometimes you have an array of elements, and you need to remove a value from the
   array[${array[(i)charlie]}]=()
   ```
 
-{{% notice tip %}}
+{{% notice info %}}
 **Good News:** There's a much less ugly way to do this in `zsh` version 5.0 using the `${array:|filter}` syntax. It's documented in "Parameter Expansion" of `man zshexpn`
 {{% /notice %}}
 
