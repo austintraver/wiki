@@ -1,6 +1,6 @@
 +++
 title = "Welcome"
-date = 2020-02-16T19:40:46-08:00
+date = 2020-02-16T19:54:58-08:00
 image = "books.jpg"
 +++
 

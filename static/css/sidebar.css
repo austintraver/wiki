@@ -15,6 +15,7 @@ div#sidebar {
 p#author {
     font-weight: bold;
     font-size: 2.5vh;
+    margin-bottom: 0;
 }
 
 p#tagline {
@@ -24,6 +25,9 @@ p#tagline {
 
 ul#plugs {
   color: dimgrey;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 ul#plugs > li {
@@ -42,6 +46,16 @@ img#headshot {
   opacity: 75%;
   width: 50%;
   border-radius: 50%;
+}
+
+li > a {
+    text-decoration: none;
+    color: dimgrey;
+    font-size: 2vh;
+}
+
+li > a:visited {
+    color: dimgrey;
 }
 
 /* Mobile */
