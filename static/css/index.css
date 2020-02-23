@@ -1,70 +1,67 @@
-#main {
-
-}
-
 div#grid {
   display: grid;
-  margin-top: 4vh;
-  grid-row-gap: 4vh;
+  grid-column-gap: 1vw;
+  flex: 6;
 }
 
 /* Mobile */
 @media screen and (max-aspect-ratio: 2/3) {
-    div#grid {
-        grid-row-gap: 3vh;
-        grid-template-columns: repeat(1, 1fr);
-    }
+  div#grid {
+    grid-row-gap: 3vh;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 /* Desktop */
 @media screen and (min-aspect-ratio: 2/3) {
-    div#grid {
-        margin-left: 5vh;
-        grid-template-columns: repeat(4, 1fr);
-    }
+  div#grid {
+    grid-row-gap: 4vh;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Individual elements of the grid */
 div#block {
-    margin: 0% 2%;
-    line-height: 1.5;
-    margin-bottom: 2em;
-    font-family: sans-serif;
-    transition: 2s;
-    opacity: 75%;
-    background: rgb(0, 0, 0, 80%);
+  margin: 0% 2%;
+  line-height: 1.5;
+  margin-bottom: 2em;
+  font-family: sans-serif;
+  transition: 1s;
+  opacity: 80%;
+  background: rgb(0, 0, 0, 80%);
 }
 
 div#block:hover {
-    opacity: 100%;
+  opacity: 100%;
 }
 
+/* The clickable link to access a page on the wiki */
 a#pagelink {
-    text-decoration: none;
+  background-color: dimgrey;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 1px;
 }
 
 /* A link to an individual page on the wiki */
 a#pagelink > h1 {
-    color: white;
-    font-size: 3vh;
-    margin-left: 1vw;
+  text-decoration: underline;
+  font-size: 2rem;
+  margin-left: 1vw;
 }
 
-#block > p {
-    color: white;
-    text-decoration: none;
-    margin-left: 1vw;
-    font-style: italic;
-}
-
-#block > a {
-    color: black;
-    font-size: 12pt;
-    font-weight: normal;
-    margin: 1px;
+/* A description of an individual page on the wiki */
+a#pagelink > h2 {
+  font-size: 1rem;
+  margin-left: 1vw;
+  padding-bottom: 1vh;
+  font-weight: normal;
+  font-style: italic;
 }
 
 img#teaser {
-    width: 100%;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
 }

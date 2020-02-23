@@ -1,5 +1,5 @@
-<link rel="stylesheet" href='{{ relURL "banner.css" }}'>
 <div id="banner" style='--url: url({{ relURL "books.jpg" }})'/>
-  <h1>{{- .Title -}}</h1>
+  <link rel="stylesheet" href='{{ relURL "banner.css" }}'>
+  <h1>{{ .Title }}</h1>
   {{- .Content -}}
 </div>

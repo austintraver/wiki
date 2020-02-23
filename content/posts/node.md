@@ -154,23 +154,15 @@ It's Nodejs convention to use the module name for variable used to call its func
 
 **How to Import Your Own Modules**
 
-To import and use code you wrote in another file, you can import a filename directly by giving its relative path.
+## Importing Modules
 
+To import and use code you wrote in another file, use the `require()` function, passing in the parameter of the filepath
 
-```js
-require('/path/to/filename')
-```
+* Importing code from the file `hello.js`
 
-For example, to import your code from a file `helloWorld.js`:
-
-```js
-const helloWorld = require('./helloWorld.js')
-```
-
-### Getting other packages
-
-To use other packages, you can download them using a package manager such as `npm` and then `require` them in any of your Node applications. More on the node package managers such as `npm` and `yarn` coming soon...
-
+  ```js
+  const helloWorld = require('./hello.js')
+  ```
 
 ## The Core
 
@@ -229,128 +221,137 @@ Using a TCP connection, we can recieve messages from client's standard input on 
 For example:
 
 
-`tcp-server.js`
+* Example of a TCP Server:
 
-```js
+  ```js
 
-var net = require('net')
+  var net = require('net')
 
-var server = net.createServer( (conn) => {
-        console.log('connected')
+  var server = net.createServer( (conn) => {
+          console.log('connected')
 
-        conn.on('data', (data) => {
-                console.log(data + ' from ' + conn.remoteAddress + ' ' +
-                        conn.remotePort)
-                conn.write('Repeating: ' + data)
-        })
+          conn.on('data', (data) => {
+                  console.log(data + ' from ' + conn.remoteAddress + ' ' +
+                          conn.remotePort)
+                  conn.write('Repeating: ' + data)
+          })
 
-        conn.on('close', () => {
-                console.log('client closed connection')
-        })
-}).listen(8124)
+          conn.on('close', () => {
+                  console.log('client closed connection')
+          })
+  }).listen(8124)
 
-console.log('listening on port 8124')
-
-
-```
-----
-`tcp-client.js`
-```js
-
-var net = require('net')
-
-var client = new net.Socket()
-client.setEncoding('utf8') // opional
-
-// connect to server
-client.connect ('8124', 'localhost', () => {
-        console.log('connected to server')
-        client.write('Who needs a browser to communicate?!')
-})
-
-// prepare for input from terminal
-process.stdin.resume()
-
-// when receive data, send to the server
-process.stdin.on('data', (data) => {
-        client.write(data)
-})
-
-// when receive data back, print to console
-client.on('data', (data) => {
-        console.log(data)
-})
-
-// when serves closed
-client.on('close', () => {
-        console.log('connection is closed')
-})
-```
+  console.log('listening on port 8124')
 
 
-The `.pipe(<stream>)` is used to send the ouput of one stream to another. To send the output of one process to another, for example:
+  ```
 
-```js
-process.stdin.pipe(process.stdout)
-```
+* Example of a TCP Client:
 
-#### Reading streams with `readline`
+  ```js
+
+  var net = require('net')
+
+  var client = new net.Socket()
+  client.setEncoding('utf8') // opional
+
+  // connect to server
+  client.connect ('8124', 'localhost', () => {
+          console.log('connected to server')
+          client.write('Who needs a browser to communicate?!')
+  })
+
+  // prepare for input from terminal
+  process.stdin.resume()
+
+  // when receive data, send to the server
+  process.stdin.on('data', (data) => {
+          client.write(data)
+  })
+
+  // when receive data back, print to console
+  client.on('data', (data) => {
+          console.log(data)
+  })
+
+  // when serves closed
+  client.on('close', () => {
+          console.log('connection is closed')
+  })
+  ```
+
+## Working with I/O
+
+The `.pipe(<stream>)` is used to send the ouput of one stream to another.
+
+* Sending the output of one process to another:
+
+  ```js
+  process.stdin.pipe(process.stdout)
+  ```
+
+### Reading streams with `readline`
 The readline module allows the reading of standard I/O streams line by line during program execution. When the programmer is done reading a stream, they must be closed. The REPL is implemented by piping your terminal input `stdin`, executing Javascript commands and piping `stdout` back to your terminal.
 
-#### Using system streams with `child_process`
+### Using system streams with `child_process`
 
 Using the `child_process` module, a Node application can make system calls and recieve input from standard I/O. We do this in Node by defining a child process and redirecting its input and output by defining functions for whenever specific input is recieved.
 
 For example, let's take the command `ls`:
 
-- define function call in format `spawn("<name>" , [ "flag1", "flag2", ...])`
+* Defining a function call
 
-```js
-const { spawn } = require('child_process')
-const ls = spawn('ls', ['-la'])
-```
+  ```js
+  // format: `spawn("<name>" , [ "flag1", "flag2", ...])`
+  const { spawn } = require('child_process')
+  const ls = spawn('ls', ['-la'])
+  ```
 
-- tell Node what to do for function I/O in the format: `.on( <param>, <callback>)`
-    - `stdin`
-    - `stdout`
-    - `stderr`
+You can specify how the function interacts with I/O by using the `.on()` method
 
+Specifying how `ls()` interacts with `stdin`, `stdout`, and `stderr`:
 
-```js
-ls.stdout.on('data', (data) => {
-console.log(`The output of ls is ${data}`)
-})
+  ```js
+  ls.stdout.on('data', (data) => {
+    console.log(`The output of ls is ${data}`)
+  })
 
-ls.stderr.on('data', (data) => {
+  ls.stderr.on('data', (data) => {
     console.log(`ls exited with error ${data}`)
-})
-```
+  })
+
+  ls.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+  }
+  ```
 
 
 
 The program below illustrates an elaborate way to execute the command: `ls | grep "fork"`
 
-```js
-const {spawn} = require('child_process');
-const ls = spawn('ls')
-const grep = spawn('grep', ['fork']);
+* Simulating the execution of the shell command `ls | grep "fork"`
 
+  ```js
+  const {spawn} = require('child_process');
+  const ls = spawn('ls')
+  const grep = spawn('grep', ['fork']);
 
-ls.stdout.on('data', (data) => {
+  ls.stdout.on('data', (data) => {
     grep.stdin.write(data);
-});
+  });
 
-ls.stderr.on('data',(data)=>{
-    console.log(`exiting with error: ${data}`)
-})
-ls.on('close', (code) => {
+  ls.stderr.on('data', (data) => {
+    grep.stderr.write(`Error: ${data}`)
+  })
+
+  ls.on('close', (code) => {
     grep.stdin.end()
-});
+  });
 
-grep.stdout.on('data', (data) => {
-    console.log(data.toString())
-})
-```
+  grep.stdout.on('data', (data) => {
+    grep.stdout.write(data.toString())
+  })
+  ```
 
 ### Utilities
 
@@ -363,27 +364,28 @@ The utilities object enables inheritance in Node. An object can be inherited by 
 As mentioned previously, event based programming is fundamental to the Node philosophy. The `events` module allows programmers to define actions for events much like `try/catch` blocks in Java and C++ or `try/except` blocks in Python. This method of programming puts the programmer in an event driven mindset to focus on all the events that a program must handle. Node modules are written to minimize the amount of boilerplate code written and shift focus to the actions.
 
 Here are the steps to define an event:
+
 1. require: `require('events')`
 2. instantiate
 3. define the **callback**
 4. define the **event**
 
-For example:
+* Defining and triggering an event:
 
-```js
-// import specific module function to use
-var eventEmitter = require('events').EventEmitter
-var counter = 0
+  ```js
+  // import specific module function to use
+  var eventEmitter = require('events').EventEmitter
+  var counter = 0
 
-// create an event emitter object
-var em = new eventEmitter()
+  // create an event emitter object
+  var em = new eventEmitter()
 
-// define a callback when the event 'timed' occurs
-em.on('timed', (data) => console.log('timed ' + data))
+  // define a callback when the event 'timed' occurs
+  em.on('timed', (data) => console.log('timed ' + data))
 
-// trigger the event for example
-setInterval( () => em.emit('timed', counter++), 3000)
-```
+  // trigger the event for example
+  setInterval( () => em.emit('timed', counter++), 3000)
+  ```
 
 # JavaScript
 
@@ -408,23 +410,27 @@ JavaScript also has some built-in objects
 
 ### Specifying Integer Type
 
-```js
-let val = 10
-let hex = 0x2f // (47)
-let exponential = 1.2e4 // (1.2 * 10^4)
-let max = Infinity
-let min = -Infinity
-```
+* Specifying integers using different formats:
+
+  ```js
+  let val = 10
+  let hex = 0x2f // (47)
+  let exponential = 1.2e4 // (1.2 * 10^4)
+  let max = Infinity
+  let min = -Infinity
+  ```
 
 ### Number Properties
 
-```js
-let maxValue = Number.MAX_VALUE
-let minValue = Number.MIN_VALUE
+* Specifying values using the properties of `Number`:
 
-let maxInt = Number.MAX_SAFE_INTEGER
-let minInt = Number.MIN_SAFE_INTEGER
-```
+  ```js
+  let maxValue = Number.MAX_VALUE
+  let minValue = Number.MIN_VALUE
+
+  let maxInt = Number.MAX_SAFE_INTEGER
+  let minInt = Number.MIN_SAFE_INTEGER
+  ```
 
 ## Special Characters
 
@@ -441,9 +447,9 @@ let minInt = Number.MIN_SAFE_INTEGER
 |`\v`|vertical tab|
 |\&grave;|grave symbol|
 
-### Back-Tick Strings
+### String Substitutions
 
-You can use back-ticks to allow for value substitution inside of a string.
+* Using the backtick syntax to substitue a variable's value inside of a string.
 
 ```js
 const temp = 22.5
@@ -452,25 +458,31 @@ console.log(`The value is ${temp}`)
 
 ### `null` and `undefined`
 
-When a variable is initialized without assigning it a value, it has the value `undefined`. Generally, you should use `null` if you need to assign a variable to an invalid value.
+* A variable is `undefined` when it is initialized without being assigned a value.
+* A variable is only `null` when it is assigned as such
 
 ## Objects
 
-```js
-const person = {
-  name: "Austin",
-  age: 21
-}
-```
+* Creating an object:
+
+  ```js
+  const person = {
+    name: "Austin",
+    age: 21
+  }
+  ```
 
 ## UTF-8
 
 A variable can be defined using normal letters, as well as UTF-8 characters
 
-```js
-const 你好 = "Hello"
-console.log(你好)
-```
+* Creating a variable using UTF-8 characters
+
+  ```js
+  const 你好 = "Hello"
+  console.log(你好)
+  // => "Hello"
+  ```
 
 ## Arrow Functions
 
@@ -478,59 +490,60 @@ Arrow functions allow us to give a function an identifier.
 
 ```js
 // After this has been written, we can now call the identifier and give it input
-const my_function = (x) => x * x
+const squareIt = (x) => x * x
 
-my_function(10) // '100'
+squareIt(10) // '100'
 ```
 
 ## Equality '==' vs. '==='
 
-`===` is known as the "identity operator"
-`==` is known as the "equality operator"
+* `===` is known as the *identity operator*
+* `==` is known as the *equality operator*
 
 The identity operator `===` will compare both types and values between two variables. JavaScript objects are compared by reference, not by value. An object is equal to itself, but not equal to a different object with the same value.
 
-Here are some cases where the two are different:
+* Examples of the two operators being different:
 
-```javascript
-true === '1' // false
-true == '1' // true
+  ```js
+  true === '1' // false
+  true == '1' // true
 
-true === 1 // false
-true == 1 // true
+  true === 1 // false
+  true == 1 // true
 
-null === undefined // false
-null == undefined // true
-```
+  null === undefined // false
+  null == undefined // true
+  ```
 
-Here are some cases where the two are the same:
+* Examples of the two operators being the same:
 
-```javascript
-[1, 2] === [1, 2] // false
-[1, 2] == [1, 2] // false
+  ```js
+  [1, 2] === [1, 2] // false
+  [1, 2] == [1, 2] // false
 
-0 === 0.0 // true
-0 == 0.0 // true
-```
+  0 === 0.0 // true
+  0 == 0.0 // true
+  ```
 
 
-Here are some edge cases:
+Some edge cases worth noting:
+
 * The equality operator `==` will attempt to convert the two variables
 * Not a number or `NaN` is not equal in comparison to anything, even with itself
 
-```javascript
-NaN === NaN // false
-NaN == NaN // false
-x = NaN
-x === NaN // false
-x !== x // true
-```
+  ```js
+  NaN === NaN // false
+  NaN == NaN // false
+  x = NaN
+  x === NaN // false
+  x !== x // true
+  ```
 
 ## the "in" operator
 
 The `in` operator evaluates to true if the left-side value is the name of a property of the right-side object
 
-```javascript
+```js
 const data = [7, 8, 9]
 "0" in data // true: array has an element "0"
 1 in data // true: numbers are converted into strings

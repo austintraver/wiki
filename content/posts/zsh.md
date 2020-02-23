@@ -816,6 +816,8 @@ Included below are some features of the extended glob option:
 
 ## Glob Qualifiers
 
+Section 14.8.7 of the manual covers all of this in greater detail.
+
 * `(:a)`: return each globbed file's absolute path.
 
   ```sh
@@ -945,18 +947,75 @@ Ascending Order
 echo ./*(/OL:q)
 ```
 
+* Select the largest regular file within a directory
+
+```sh
+# 'L': (normally) sort by length (of file, i.e. its size), ascending
+
+# (Using ascending order, and picking the last element)
+#
+echo ./*(.DoL[-1])
+
+# (Using descending order, and picking the last element)
+# 'O': reverse order
+echo ./*(.DOL[1])
+```
+
+* Select all files larger than 2MB in a directory
+
+```sh
+# 'm' (megabytes) (and 'k' for kilobytes)
+# '-' (smaller than 2)
+echo ./*(.Lm-2)
+```
+
+* Select the most recently modified file within a directory
+
+```sh
+echo ./*(.om[1])
+```
+
+* Select all files modified within the last hour
+
+```sh
+# 'M' for Months
+# 'w' for weeks
+# 'h' for hours
+# 'm' for minutes
+# 's' for seconds
+# '-': modified less than '#' hours ago
+# '+': modified more than '#' hours ago
+print -l ./*(.mh-1)
+```
+
+* Select all files that aren't named `tmp`
+
+```sh
+# '#': the delimiter between the expansion flag and the string
+# `$REPLY`: every file name specified by the glob ./*
+print -l ./*(e#'[[ ! -e $REPLY/tmp ]]'#)
+```
+
 ## Checking if a Command Exists
 
   ```sh
+  # [ Wrong way, see below ]
   if [[ =brew ]]; then
+    echo "Command exists"
+  else
+    echo "Command not found"
+  fi
+
+  # [ Right way, note the (( parentheses )) ]
+  if (( ${+commands[brew]} )); then
     echo "Command exists"
   else
     echo "Command not found"
   fi
   ```
 
-{{% notice info %}}
-**Note:** if there exists an alias by this name, it will return the alias definition instead of the path to the executable file
+{{% notice warning %}}
+**Note:** if there exists an alias by this name, it will return the alias definition instead of the path to the executable file. Furthermore, if the command is not found, it will print an error to the console.
 {{% /notice %}}
 
 
@@ -1146,7 +1205,7 @@ The `whence` command is very useful, and can replace many common commands
 
 Sometimes you want to supply some text in a script across multiple lines. Furthermore, this is happening at a point where you're already in some nested layers of indented logic. Luckily `zsh` provides a way to supply a multi-line string, stripped of any leading `\t` tab characters. It's called a `here-doc` and it's referred to with the `<<-` operator.
 
-* Storing the contents of a here-doc in `file.txt`
+* Storing the contents of a here-doc in `file.txt`:
 
   ```sh
   if [[ true ]]; then
@@ -1157,12 +1216,39 @@ Sometimes you want to supply some text in a script across multiple lines. Furthe
     EOF
 
   fi
+  ```
 
+* Printing the contents of `file.txt`:
+
+  ```sh
   # Print the contents of 'file.txt'
-  cat 'file.txt'
-  # 1 leading tab
-  # 2 leading tabs
-  # 3 leading tabs
+  < 'file.txt' >&1
+  # [ Output ]
+  # ==========
+  # => 1 leading tab
+  # => 2 leading tabs
+  # => 3 leading tabs
+  ```
+
+### Expanding Parameters in Files
+
+If you have a super long string of text, for instance, a SQL query, you may want to save the contents of that query in a different file. It's possible you may need to store a variable in the query, and if so, you can use the `(e)` paramater expansion flag when referencing the string. This flag causes the string to have any `${variable}` words treated as if they were a normal shell variable, and not text from the file.
+
+* Expanding parameters as if they were variables in a file:
+
+  ```sh
+  # (file.txt)
+  '''
+  Hello, my name is $USER
+  and my favorite directory is $HOME
+  '''
+
+  info=${(e)$(<./file.txt)}
+  print ${info}
+  # [ Output ]
+  # ==========
+  # => Hello, my name is austin
+  # => and my favorite directory is /Users/austin
   ```
 
 ## `exit` vs. `logout`
@@ -1592,7 +1678,13 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
   esac
   ```
 
-## Pairing Scalars and Arrays
+
+## `typeset`
+
+* `typeset -E <var>`: declare `<var>` as a floating type variable.
+* `typeset -i <var>`: declare `<var>` as an integer type variable.
+
+### Pairing Scalars and Arrays
 
 If you're using a shell scripting language, you often have to export directories to the environment, such as for `PATH`, which requires a list of directories separated by a colon.
 

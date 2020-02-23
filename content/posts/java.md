@@ -5,8 +5,6 @@ date = 2020-02-04T14:52:27-08:00
 image = "java.jpg"
 +++
 
-# java
-
 * Download `java`
 
   ```sh

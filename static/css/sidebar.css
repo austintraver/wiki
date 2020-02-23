@@ -4,12 +4,14 @@ div#sidebar {
   display: flex;
   align-items: center;
   flex-direction: column;
-  float: left;
-  top: 2vh;
-  width: 15vw;
-  margin-top: 2vh;
+  flex: 1;
+  top: 11vh;
+  padding: 5vh 0vw;
+  margin-right: 2vw;
   font-family: sans-serif;
   color: rgb(73, 78, 82);
+  background-color: rgb(200, 200, 200);
+  border-radius: 5%;
 }
 
 p#author {
@@ -36,25 +38,32 @@ ul#plugs > li {
   margin: 0.5vh;
 }
 
+ul#plugs > li:hover {
+  font-weight: bold;
+}
 
-img#headshot:hover {
-  transition: 2s;
+img#headshot,
+ul#plugs > li {
+  opacity: 80%;
+}
+
+img#headshot:hover,
+ul#plugs > li:hover {
   opacity: 100%;
 }
 
 img#headshot {
-  opacity: 75%;
   width: 50%;
   border-radius: 50%;
+  transition: 0.5s;
 }
 
 li > a {
-    text-decoration: none;
-    color: dimgrey;
     font-size: 2vh;
 }
 
-li > a:visited {
+li > a:any-link {
+    text-decoration: none;
     color: dimgrey;
 }
 

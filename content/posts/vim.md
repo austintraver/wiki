@@ -546,6 +546,9 @@ And just press <C-d> when you're done to return to vim
 
 If you open a help page, it opens a viewport in the top vertical half of the screen. This is a good time to learn the commands for managing multiple viewports, as it's often useful to be working on multiple documents at once.
 
+{{% notice tip %}}
+**Tip:**: You can press `K` in normal mode to open a help page on whatever word the cursor is currently on.
+
 The typical syntax for managing a viewport in normal mode is ⌃ W <key>. Luckily you don't have to let go of the <Ctrl> key when you press the second key, as `vim` binds both `<C-w>o` and `<C-w><C-o>` to the same function by default.
 
 {{% notice warning %}}

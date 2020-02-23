@@ -1,25 +1,46 @@
-body {
-    text-rendering: geometricPrecision;
-    font-family: -apple-system, sans-serif;
-    margin: 0px;
+#main {
+  margin: 1vh 1vw;
+  display: flex;
+  align-items: start;
 }
 
-blockquote {
-    font-size: max(1em, 12px);
+/* Mobile */
+@media screen and (max-aspect-ratio: 2/3) {
+  #main {
+    margin: 2vh 3vw;
+  }
+}
+
+/* Desktop */
+@media screen and (min-aspect-ratio: 2/3) {
+  #main {
+    font-size: 125%;
+  }
+}
+
+body {
+  text-rendering: geometricPrecision;
+  font-family: -apple-system, sans-serif;
+  margin: 0px;
 }
 
 a:visited {
-    color: black;
+  color: black;
 }
 
 pre {
-    letter-spacing: 1.05;
-    line-height: 150%;
-    padding: 10pt;
-    font-family: -apple-system, Courier, monospace;
-    border-radius: 10pt;
+  letter-spacing: 1.05;
+  line-height: 150%;
+  padding: 10pt;
+  font-family: -apple-system, Courier, monospace;
+  border-radius: 10pt;
 }
 
-li {
-    font-size: 14pt;
+code:not(div.highlight pre code) {
+  /* background-color: #282a36; */
+  color: white;
+  background-color: rgba(40, 44, 51, 60%);
+  border-radius: 3px;
+  padding: 0vh 3px;
+  /* mix-blend-mode: difference; */
 }

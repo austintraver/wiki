@@ -5,11 +5,13 @@ languageCode = "en-us"
 publishDir = "docs"
 relativeURLs = true
 [markup]
-  [markup.highlight]
-    style = "dracula"
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-
+    [markup.highlight]
+        style = "dracula"
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
 [permalinks]
-  posts = "/:title"
+    posts = "/:title"
+[frontmatter]
+    modified = ["modified", ":fileModTime"]
+    date = ["date", "modified"]

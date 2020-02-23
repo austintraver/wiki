@@ -1,31 +1,25 @@
 {{ define "head" }}
-    {{ if isset .Params "image" }}
-        <meta property="og:image" content={{ .Param "image" | absURL }}>
-    {{ end }}
-    <link rel="stylesheet" href='{{ relURL "/index.css" }}'>
+  {{ if isset .Params "image" }}
+    <meta property="og:image" content={{ .Param "image" | absURL }}>
+  {{ end }}
+  <link rel="stylesheet" href='{{ relURL "/index.css" }}'>
 {{ end }}
 
 {{ define "main" }}
-    {{ partial "banner" . }}
-    {{ partial "sidebar" . }}
-    <div id="main">
-        <div id="grid">
-            {{ range where .Site.RegularPages.ByDate.Reverse "Section" "posts" }}
-            {{ $image := path.Join "static" "img" (.Param "image") }}
-            {{ if fileExists $image -}}
-            <div id="block">
-                <a id="pagelink" href="{{ ref . .File.ContentBaseName }}">
-                    <img id="teaser" src='{{ .Param "image" | absURL }}' />
-                    <h1>
-                    {{- .Title -}}
-                    </h1>
-                </a>
-                <p>
-                    {{- .Description -}}
-                </p>
-            </div>
-            {{ end }}
-            {{ end }}
-        </div>
-    </div>
+{{ partial "banner" . }}
+<div id="main">
+  {{ partial "sidebar" . }}
+  <div id="grid">
+    {{ range where .Site.RegularPages.ByLastmod.Reverse "Section" "posts" }}
+      {{ $image := path.Join "static" "img" (.Param "image") }}
+      {{ if fileExists $image -}}
+        <a id="pagelink" href="{{ ref . .File.ContentBaseName }}">
+          <img id="teaser" src='{{ .Param "image" | absURL }}' />
+          <h1>{{.Title}}</h1>
+          <h2>{{.Description}}</h2>
+        </a>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
 {{ end }}
