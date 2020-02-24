@@ -18,24 +18,16 @@ div#grid {
     grid-row-gap: 4vh;
     grid-template-columns: repeat(3, 1fr);
   }
+  a#pagelink {
+    transition: 0.3s;
+    filter: opacity(80%);
+  }
+  a#pagelink:hover {
+    filter: opacity(100%);
+  }
 }
 
 /* Individual elements of the grid */
-div#block {
-  margin: 0% 2%;
-  line-height: 1.5;
-  margin-bottom: 2em;
-  font-family: sans-serif;
-  transition: 1s;
-  opacity: 80%;
-  background: rgb(0, 0, 0, 80%);
-}
-
-div#block:hover {
-  opacity: 100%;
-}
-
-/* The clickable link to access a page on the wiki */
 a#pagelink {
   background-color: dimgrey;
   color: white;

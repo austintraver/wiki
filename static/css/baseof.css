@@ -1,3 +1,10 @@
+@media(prefers-color-scheme: dark) {
+  body {
+    background-color: rgb(40,40,40);
+    color: white;
+  }
+}
+
 #main {
   margin: 1vh 1vw;
   display: flex;
@@ -31,16 +38,40 @@ a:visited {
 pre {
   letter-spacing: 1.05;
   line-height: 150%;
-  padding: 10pt;
+  padding: 10px;
   font-family: -apple-system, Courier, monospace;
-  border-radius: 10pt;
+  border-radius: 10px;
 }
 
-code:not(div.highlight pre code) {
+table {
+  color: black;
+}
+
+th {
+  background-color: rgb(200, 200, 200);
+}
+tr:nth-child(odd) {
+  background-color: rgb(240, 240, 240);
+}
+tr:nth-child(even) {
+  background-color: rgb(220, 220, 220);
+}
+
+code:not(div.highlight code) {
+/* p > code { */
   /* background-color: #282a36; */
+  background-color: rgba(16, 16, 16, 80%);
   color: white;
-  background-color: rgba(40, 44, 51, 60%);
   border-radius: 3px;
-  padding: 0vh 3px;
+  padding: 1px 3px;
   /* mix-blend-mode: difference; */
+}
+
+@media(prefers-color-scheme: dark) {
+  code:not(div.highlight code) {
+    filter: invert();
+  }
+  table {
+    filter: invert();
+  }
 }
