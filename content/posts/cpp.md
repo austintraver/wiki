@@ -82,3 +82,33 @@ g++ --std=gnu++1z # (GNU c++ standard)
   # on AWS EC2:      'skylake-avx512'
   # on Raspberry Pi: 'cortex-a72'
   ```
+
+## Printing Strings in C
+
+### `snprintf`
+
+* Printing a string using a char buffer:
+
+  ```c
+  #include <stdio.h>
+  #include <stdint.h>
+
+  int main() {
+      uint8_t size = 100;
+      char buffer[size];
+      const char* format = "It takes %hhu to tango.";
+      uint8_t value = 2;
+      snprintf(buffer, size, format, value);
+      printf(buffer);
+  }
+  ```
+
+## Printing Small Values
+
+The format specifiers to print small values are as follows
+
+| Name | Format Specifier | C Data Type |
+| :---: | :---: | :---: |
+| Unsigned 1-byte Digit (Base 10) | `%hhu` | `uint8_t` |
+| Unsigned 1-byte Digit (Hex) | `%hhx` | `uint8_t` |
+

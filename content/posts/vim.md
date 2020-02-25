@@ -927,3 +927,41 @@ let s:dotfiles = fnamemodify(stdpath('config'), ':h')
 echo s:dotfiles
 " => '/Users/austin/dot'
 ```
+
+## Custom Functions & Commands
+
+I wrote this function because I thought it wasn't built in natively, but it serves as a useful example of how to declare a function and how to declare a command.
+
+```vim
+" Function to open a wiki page for note-taking
+" :h function()
+function Jot(entry)
+    let entry = glob('~/wiki/content/posts/' . entry)
+    " Add the suffix if it hasn't yet been added
+    if entry !~ "\.md"
+        entry += "\.md"
+    endif
+    tabedit entry
+endfunction
+
+" :h command-nargs
+" :h q-args
+" Create a command (with tab completion) for opening wiki posts
+command -nargs=1 -complete=file_in_path Jot call Jotf(<q-args>)
+```
+
+* The `<q-args>` parameter will tell Vim that you'd like to pass in the argument as a string. If you'd like Vim to think you've passed in a variable declared in the environment, use `<args>` instead.
+
+### Quick Note on `&path` and `:find`
+
+In the future, if you want to be able to easily edit a file in the future, you can add the directory that it list within to the `&path` variable. From there, you can simply type `:fin[d] file`.
+
+Once that command is received, Vim will check each directory specified in `&path`, and find a match to `file` or a file that matches `file` and has a suffix specified by `&suffixadd`. If it finds a match, it will open that file for editing in a new buffer. If you'd like it to open in a new tab, you can use `:tabf[ind]` instead.
+
+## For Loop
+
+```vim
+for number in [1, 2, 3, 4]
+    echo number
+endfor
+```

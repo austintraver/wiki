@@ -4,18 +4,18 @@
 {{ end }}
 
 {{ define "main" }}
-{{ $image := path.Join "static" "img" (.Param "image") }}
-{{ if fileExists $image -}}
-<div id="hero" style='--url:  url({{ .Param "image" | relURL }})'>
-  <h1>{{ .Title }}</h1>
-  <h2>{{ .Description }}</h2>
-  <p id="date">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</p>
-</div>
-{{ end }}
-<div id="main">
-  {{ partial "sidebar" . }}
-  <div id="content">
-  {{- .Content -}}
+  {{ $image := path.Join "static" "img" (.Param "image") }}
+  {{ if fileExists $image }}
+  <div id="hero" style='--url:  url({{ .Param "image" | relURL }})'>
+    <h1>{{ .Title }}</h1>
+    <h2>{{ .Description }}</h2>
+    <p id="date">{{ dateFormat "Monday, Jan 2, 2006" .Date }}</p>
   </div>
-</div>
+  {{ end }}
+  <div id="main">
+    {{ partial "sidebar" . }}
+    <div id="content">
+    {{- .Content -}}
+    </div>
+  </div>
 {{ end }}

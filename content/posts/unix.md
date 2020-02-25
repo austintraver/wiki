@@ -5,7 +5,7 @@ date = 2020-02-04T14:52:27-08:00
 image = "unix.jpg"
 +++
 
-# Unix
+## Using `coreutils` on macOS
 
 {{% notice warning %}}
 **Note:** If you're using these snippets make sure you've installed `coreutils`
