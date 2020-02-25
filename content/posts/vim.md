@@ -965,3 +965,12 @@ for number in [1, 2, 3, 4]
     echo number
 endfor
 ```
+
+## Help Tags
+
+To open up the right help page for your package, sometimes you need to generate the helptags, as this isn't usually done automatically when you clone the package. To do that, run the following command
+
+```vim
+" Generate helptags for all help files in the runtime
+:helptags ALL
+```
