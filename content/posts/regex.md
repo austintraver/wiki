@@ -1,5 +1,6 @@
 +++
 title = "Regular Expressions"
+url = "/regex"
 description = "Anything but regular..."
 date = 2020-02-04T14:52:27-08:00
 image = "regex.jpg"

@@ -1,5 +1,6 @@
 +++
 title = "C / C++"
+url = "/cpp"
 description = "Low-level programming for high-level tryhards"
 date = 2020-02-04T14:52:26-08:00
 image = "c.jpg"
@@ -111,4 +112,3 @@ The format specifiers to print small values are as follows
 | :---: | :---: | :---: |
 | Unsigned 1-byte Digit (Base 10) | `%hhu` | `uint8_t` |
 | Unsigned 1-byte Digit (Hex) | `%hhx` | `uint8_t` |
-
