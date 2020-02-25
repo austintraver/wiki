@@ -66,9 +66,9 @@ On a Unix system, you can set the environment variable `CLASSPATH` like so:
   export CLASSPATH = ~/path/to/packages:.
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Warning:** Don't forget to add the trailing `.` at the end of your list of imports, because that is how to specify the current directory as part of the classpath.
-  {{% /notice %}}
+{{% /notice %}}
 
   Any package directories, located within `~/path/to/packages`, (e.g. `~/path/to/packages/example/Greet.class`) can now be imported with `import example.Greet`
 
@@ -447,9 +447,9 @@ int[] A = {null, null, null};
   }
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Note:** you can’t modify the values of element using this syntax. Calling `​element += 1`​ would not change the values in the array
-  {{% /notice %}}
+{{% /notice %}}
 
 ### Copying an Array
 

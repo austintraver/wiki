@@ -1305,22 +1305,22 @@ Ternary operators are supported within a double parentheses evaluation
   # => 6
   ```
 
-  {{% notice info %}}
+{{% notice info %}}
   **Note:** Don't do this with string comparisons because inside of (( ... )) all strings are treated as the number `0`
-  {{% /notice %}}
+{{% /notice %}}
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Warning:** Be careful about comparing strings, because sorting is by lexicographical order which means that a word is sorted in the following way: treat each number as a word in a dictionary. the value of a word would correspond with its location in the dictionary. "a < z" because "a" would be at a lower index number in the dictionary
-  {{% /notice %}}
+{{% /notice %}}
 
   ```sh
   [[ "apple" < "banana" ]] && echo "yes" || echo "no"
   # => "yes"
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Warning:** Inside of double brackets, the evalution is not a true ternary operator, because the third statement will still execute if an error is thrown by the second statement
-  {{% /notice %}}
+{{% /notice %}}
 
   ```sh
   [[ 1 -eq 1 ]] && asdf || echo "Not true"
@@ -1328,9 +1328,9 @@ Ternary operators are supported within a double parentheses evaluation
   # => "Not true"
   ```
 
-  {{% notice info %}}
+{{% notice info %}}
   **Workaround:** You can fix this problem by surrounding the truth evaluation by curly brackets, and appending a `;:;` to the end of the statement. this will cause the command to report the error when it occurs, and then return `true` which will cause the or statement to not evaluate, since the first two statements returned `true`
-  {{% /notice %}}
+{{% /notice %}}
 
   ```sh
   [[ 1 == 1 ]] && { asdf ;:; } || echo "Not true"

@@ -4,6 +4,7 @@ staticDir = ["static/css", "static/js", "static/img"]
 languageCode = "en-us"
 publishDir = "docs"
 relativeURLs = true
+enableInlineShortcodes = true
 [markup]
     [markup.highlight]
         style = "dracula"

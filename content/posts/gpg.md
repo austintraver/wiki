@@ -148,9 +148,9 @@ Use the `-r` flag to specify the recipient of the file. You can use this flag mu
   gpg -d example.txt.gpg
   ```
 
-  {{% notice info %}}
+{{% notice info %}}
   **Tip:** If you have multiple private keys, you don't need to specify which one to decrypt a file. `gpg` can figure out which key to use.
-  {{% /notice %}}
+{{% /notice %}}
 
 
 ## Signing a message

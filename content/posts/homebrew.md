@@ -222,9 +222,9 @@ After the previous step, you'll have a file `gcc--9.2.catalina.bottle.tar.gz` in
   mv 'gcc--9.2.catalina.bottle.tar.gz' ./homebrew-tap/Bottles/gcc-9.2.catalina.bottle.tar.gz
   ```
 
-  {{% notice danger %}}
+{{% notice danger %}}
   **Warning:** By default, the name of the bottle is a little off. You need to make sure there is exactly one hyphen `-` between the name of the formula and the formula's version number.
-  {{% /notice %}}
+{{% /notice %}}
 
 Next, you'll need to add the output from the bottling command to your recipe. The `sha256` value represents the checksum of the archive you just created. You can verify that it matches the bottle file with `sha -a 256 ./path/to/bottle.tar.gz`
 
@@ -268,9 +268,9 @@ Next, we'll need to actually add the file to the repository. Since this is a bin
   git lfs install --local
   ```
 
-  {{% notice danger %}}
+{{% notice danger %}}
   **Warning:** If you don't include the `--local` flag, `git-lfs` will modify your global git configuration, which will cause Homebrew to throw errors when it is updating your tap. If you've already made the mistake, you can reverse it by entering the command `git lfs uninstall` followed by the command `git lfs install --local`
-  {{% /notice %}}
+{{% /notice %}}
 
 * Add any compressed `tar` archives to large file storage
 

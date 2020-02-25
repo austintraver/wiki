@@ -35,9 +35,9 @@ sudo systemsetup -getremotelogin
   gpg --export-secret-subkeys <auth_key_id>! | openpgp2ssh <auth_key_id> > ~/.ssh/id_rsa
   ```
 
-  {{% notice success %}}
+{{% notice success %}}
   **Tip:** If you don't have that command, [it's this perl script](https://github.com/dkg/monkeysphere/blob/master/src/share/keytrans)
-  {{% /notice %}}
+{{% /notice %}}
 
 Once you have that key, you ought to convert it into make a bunch of different types
 

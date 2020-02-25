@@ -754,9 +754,9 @@ If you're setting up processes in `/Library/LaunchDaemons`, which are run as the
   launchctl print-disabled user/$UID
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Note:** `launchtl` keeps an un-erasable record of disabled/enabled launch daemons. If you make a typo when adding daemon, and disable it, there is no way to erase it as an entry.
-  {{% /notice %}}
+{{% /notice %}}
 
 * Enable a daemon service
 
@@ -945,9 +945,9 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
   dseditgroup -o edit -a tommy -t user admin
   ```
 
-  {{% notice info %}}
+{{% notice info %}}
   **Tip:** This is the command that is equivalent to checking the box "Allow user to administer this computer" on the Users & Groups page
-  {{% /notice %}}
+{{% /notice %}}
 
 * Remove `tommy` from the list of users who are members of the `admin` group
 
@@ -1029,9 +1029,9 @@ There are three directories that are not protected:
   sudo defaults write com.apple.loginwindow LoginHook /path/to/script
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Note:** It's preferrable to have these processes launch as LaunchAgents, but LoginHooks still work in the latest version of macOS.
-  {{% /notice %}}
+{{% /notice %}}
 
 * Adding a graphic+text banner to appear upon login
 
@@ -1061,9 +1061,9 @@ There are three directories that are not protected:
   sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
   ```
 
-  {{% notice success %}}
+{{% notice success %}}
   **Tip:** You can also just press `option-return` to toggle this view-mode if you'd rather not enable it by default
-  {{% /notice %}}
+{{% /notice %}}
 
 
 ## `diskutil`

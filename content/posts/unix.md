@@ -5,18 +5,7 @@ date = 2020-02-04T14:52:27-08:00
 image = "unix.jpg"
 +++
 
-## Using `coreutils` on macOS
-
-{{% notice warning %}}
-**Note:** If you're using these snippets make sure you've installed `coreutils`
-{{% /notice %}}
-
-* Installing `coreutils` on macOS
-
-  ```sh
-  brew install coreutils
-  export path=('/usr/local/opt/coreutils/libexec/gnubin' ${path})
-  ```
+# Unix
 
 ## User Management
 
@@ -32,12 +21,25 @@ image = "unix.jpg"
   sudo passwd -l root
   ```
 
-  {{% notice danger %}}
-  **Warning:** Although this account disables root login via password entry, it does not disable root login via SSH keys. To disable SSH access to the root account, set `PermitRootLogin no` in `/etc/ssh/sshd_config`
-  {{% /notice %}}
+{{% notice danger %}}
+**Warning:** Although this account disables root login via password entry, it does not disable root login via SSH keys. To disable SSH access to the root account, set `PermitRootLogin no` in `/etc/ssh/sshd_config`
+{{% /notice %}}
 
 
-# `date`
+## Using `coreutils` on macOS
+
+{{% notice warning %}}
+**Note:** If you're using these snippets make sure you've installed `coreutils`
+{{% /notice %}}
+
+* Installing `coreutils` on macOS
+
+  ```sh
+  brew install coreutils
+  export path=('/usr/local/opt/coreutils/libexec/gnubin' ${path})
+  ```
+
+## `date`
 
 The `date` command lets you get the date in your terminal. It contains the `-I` flag which allows you to get the date in ISO8601 format. `-Is` to print the ISO8601 date as well as the current time up to seconds.
 
@@ -62,7 +64,7 @@ Examples
   ```
 
 
-# `disown`
+## `disown`
 
 If you have a process running in the background of your terminal, you can release it. The process will continue, retaining the original PID, but it will no longer be part of your terminal session.
 
@@ -140,13 +142,13 @@ The `du` command stands for *disk usage*. It can tell you information about how 
 
 * In terabytes
 
-  ```
+  ```sh
   du -sBT ~/Desktop
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Note:** For file sizes, `du` rounds up to the nearest block. If there is a file that is less than 1TB in size, `du` will still report the size as `1T` when the flag `-BT` is specified.
-  {{% /notice %}}
+{{% /notice %}}
 
 You can also set the environment variable `DU_BLOCK_SIZE` to have a default setting for the size of blocks reported by `du`
 
@@ -380,9 +382,9 @@ Examples
   tar --dir /Users/tommy --create example --file archive.tgz -a
   ```
 
-  {{% notice info %}}
+{{% notice info %}}
   **Tip:** `tar` can automatically determine which compression algorithm to use based on the specified style extension when using the `-a` flag
-  {{% /notice %}}
+{{% /notice %}}
 
 * Append a file to an archive
 
@@ -501,9 +503,9 @@ brew install tree
   # => 3
   ```
 
-  {{% notice warning %}}
+{{% notice warning %}}
   **Note:** Herestrings implicitly append a trailing `\n` newline, which is why `wc` returns three characters.
-  {{% /notice %}}
+{{% /notice %}}
 
 * Count the occurences of a single char `/` from stdin
 
