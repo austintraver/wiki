@@ -94,6 +94,158 @@ div#banner {
   border-style: solid;
   text-align: center;
   background-color: rgb(255, 255, 255, 50%);
-  backdrop-filter: 4px;
+  backdrop-filter: 4px; /* Chrome */
+  -webkit-backdrop-filter: 4px; /* Safari */
+
 }
 ```
+
+## Responsive Layout
+
+* Use the `@media` query to find out the user's device width. Some standard sizes have been included below.
+
+  ```css
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+  /* aspect-ratio: 0.56338 */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-width: 320px)
+  and (max-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* Portrait */
+@media only screen
+  and (min-width: 320px)
+  and (max-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen
+  and (min-width: 320px)
+  and (max-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+  /* aspect-ratio: 0.562219 */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-width: 375px)
+  and (max-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-width: 375px)
+  and (max-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-width: 375px)
+  and (max-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+  /* aspect-ratio: 0.5625 */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-width: 414px)
+  and (max-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-width: 414px)
+  and (max-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-width: 414px)
+  and (max-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone X, 11 ----------- */
+  /* aspect-ratio: 0.461823 */
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-width: 375px)
+  and (max-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-width: 375px)
+  and (max-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+  and (min-width: 375px)
+  and (max-width: 812px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone XS Max, 11 Pro Max ----------- */
+  /* aspect-ratio: 0.462054 */
+
+
+/* Portrait and Landscape */
+@media only screen
+  and (min-width: 414px)
+  and (max-width: 896px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+
+}
+
+/* Portrait */
+@media only screen
+  and (min-width: 414px)
+  and (max-width: 896px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen
+  and (min-width: 414px)
+  and (max-width: 896px)
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) {
+
+}
+  ```

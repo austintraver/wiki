@@ -50,7 +50,7 @@ Within the Java file, you would access the input in the following way
 
 ```java
 String street = System.getProperty("street"); // "sesame"
-String network = SystemgetProperty("network"); // "pbs"
+String network = System.getProperty("network"); // "pbs"
 ```
 
 ## The Classpath

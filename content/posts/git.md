@@ -78,6 +78,12 @@ git remote add origin
   git push
   # Explicit push of branch "master" to remote "origin"
   git push origin master
+  # Push the current branch to the same name on the remote
+  git push origin HEAD
+
+  # Push the current branch to the remote ref matching master in the origin repository.
+  git push origin HEAD:master
+
   ```
 
 ## Objects in Git
@@ -89,72 +95,6 @@ A *blob* is an opaque chunk of binary data, which represents an entire file. Any
 ### Tree
 
 A *tree* is a portion of the repository's content at a given point in time.
-
-### Signature
-
-Each commit in git is signed by the author of the commit with their cryptographic signature. Usually, this is SSH, but it can be GPG as well.
-
-* Make a signed commit
-
-  ```sh
-  git commit --gpg-sign
-  ```
-
-* Verify the signature of a commit
-
-  ```sh
-  git verify-commit HEAD
-  ```
-
-* Merge all commits, but only if all of its commits were signed
-
-  ```sh
-  # Short form
-  git merge --verify -S develop
-
-  # Long form
-  git merge --verify-signatures --gpg-sign develop
-  ```
-
-* Sign the previous commit
-
-  ```sh
-  git commit --amend --no-edit -n -S
-  ```
-
-* Sign every commit since `<commit>`
-
-  ```sh
-  git filter-branch --commit-filter 'git commit-tree -S "$@";' <commit>..HEAD
-  ```
-
-
-If you'd like to have GitHub show a `Verified` tag next to your commits, specify to `git` on your local machine that you'd like to sign your commits locally
-
-```sh
-# List all keys as well as their corresponding key ID
-gpg -k --keyid-format LONG
-# Specify the key ID for git to use for signing commits
-git config --global user.signingkey C1C27DC14DB20F99
-# Automatically sign commits
-git config --global commit.gpgsign true
-```
-
-{{% notice warning %}}
-**Note:** You must use a GPG key that uses the RSA 4096 algorithm. To generate a key, follow below
-{{% /notice %}}
-
-```sh
-gpg --full-generate-key
-```
-
-{: ..notice--warning}
-**Note:** You'll have to let GitHub know about this new key. To do so, copy the key ID to your clipboard and paste it inside the GitHub profile section for GPG keys.
-
-```sh
-gpg -k
-gpg --armor --export GitHub | pbcopy
-```
 
 ### Tag
 
@@ -305,6 +245,8 @@ Even after you merge two branches (in the case above, E is created from merging 
 
 The first branch is called the *master branch* It has this name by default, and it does not have any special properties.
 
+### Local Branches
+
 * Delete a branch from the local repository
 
   ```sh
@@ -315,6 +257,14 @@ The first branch is called the *master branch* It has this name by default, and 
   git branch --delete <branch>
   ```
 
+### Remote Branches
+
+* Push all local branches to the remote repository
+
+  ```sh
+  git push --all <remote>
+  ```
+
 * Delete a branch from a remote repository
 
   ```sh
@@ -323,6 +273,13 @@ The first branch is called the *master branch* It has this name by default, and 
 
   # Long form
   git push <remote> --delete <branch>
+  ```
+
+* Delete remote branches that are not present locally
+
+  ```sh
+  git push --prune <remote>
+  ```
 
 ## Configurations
 
@@ -428,6 +385,72 @@ Then, add `eval "$(hub alias -s)"` to your `.zshrc` file.
   ```sh
   git fetch userone,usertwo
   ```
+
+## Creating Signed Commits
+
+Each commit in git is signed by the author of the commit with their cryptographic signature. Usually, this is SSH, but it can be GPG as well.
+
+* Make a signed commit
+
+  ```sh
+  git commit --gpg-sign
+  ```
+
+* Verify the signature of a commit
+
+  ```sh
+  git verify-commit HEAD
+  ```
+
+* Merge all commits, but only if all of its commits were signed
+
+  ```sh
+  # Short form
+  git merge --verify -S develop
+
+  # Long form
+  git merge --verify-signatures --gpg-sign develop
+  ```
+
+* Sign the previous commit
+
+  ```sh
+  git commit --amend --no-edit -n -S
+  ```
+
+* Sign every commit since `<commit>`
+
+  ```sh
+  git filter-branch --commit-filter 'git commit-tree -S "$@";' <commit>..HEAD
+  ```
+
+
+If you'd like to have GitHub show a `Verified` tag next to your commits, specify to `git` on your local machine that you'd like to sign your commits locally
+
+```sh
+# List all keys as well as their corresponding key ID
+gpg -k --keyid-format LONG
+# Specify the key ID for git to use for signing commits
+git config --global user.signingkey C1C27DC14DB20F99
+# Automatically sign commits
+git config --global commit.gpgsign true
+```
+
+{{% notice warning %}}
+**Note:** You must use a GPG key that uses the RSA 4096 algorithm. To generate a key, follow below
+{{% /notice %}}
+
+```sh
+gpg --full-generate-key
+```
+
+{: ..notice--warning}
+**Note:** You'll have to let GitHub know about this new key. To do so, copy the key ID to your clipboard and paste it inside the GitHub profile section for GPG keys.
+
+```sh
+gpg -k
+gpg --armor --export GitHub | pbcopy
+```
 
 
 ## Adding Custom Aliases

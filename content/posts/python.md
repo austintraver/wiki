@@ -220,7 +220,7 @@ Regular Expression Flags
 | Special Character | Function |
 | :---: | :---: |
 |+ |Match 1 or more|
-|* |Match 0 or more|
+|\* |Match 0 or more|
 |?| 0 or 1|
 |{k}| Match k consecutive occurances of the preceeding pattern |
 |{m,n}| Match from m to n consecutive occurences (inclusive) of the preceeding pattern (as many as possible) |
@@ -374,7 +374,7 @@ To do this, set the environment variable `PYTHONPATH` in your shell, and export 
 
 ### Server-Side TCP Socket
 
-```python
+```py
 import socket
     # Create a TCP socket
     mysocket = socket.socket(
@@ -416,7 +416,7 @@ import socket
 print("exit")
 ```
 
-```python
+```py
 from socket import socket
 
     mysocket = socket.socket()
@@ -450,10 +450,77 @@ from socket import socket
 
 ### Pandas
 
-```python
+```py
 from pandas import DataFrame, Series, read_json
 barset["EMA12"] = barset["o"].ewm(span=12).mean()
 barset.to_json('ofile.json', date_format='iso', date_unit='s', orient='index')
 df = read_json('ofile1.json', orient='index', date_unit='s')
 print(df.head())
+```
+
+### Type Hints
+
+```py
+from typing import List, Set, Dict, Tuple, Optional, Callable, Iterator, Union
+
+# For simple built-in types, just use the name of the type
+x: int = 1
+x: float = 1.0
+x: bool = True
+x: str = "test"
+x: bytes = b"test"
+
+# For collections, the name of the type is capitalized, and the
+# name of the type inside the collection is in brackets
+x: List[int] = [1]
+x: Set[int] = {6, 7}
+
+# Same as above, but with type comment syntax
+x = [1]  # type: List[int]
+
+# For mappings, we need the types of both keys and values
+x: Dict[str, float] = {'field': 2.0}
+
+# For tuples, we specify the types of all the elements
+x: Tuple[int, str, float] = (3, "yes", 7.5)
+
+# Use Optional[] for values that could be None
+x: Optional[str] = some_function()
+# Mypy understands a value can't be None in an if-statement
+if x is not None:
+    print(x.upper())
+# If a value can never be None due to some invariants, use an assert
+assert x is not None
+print(x.upper())
+# This is how you annotate a function definition
+def stringify(num: int) -> str:
+    return str(num)
+
+# And here's how you specify multiple arguments
+def plus(num1: int, num2: int) -> int:
+    return num1 + num2
+
+# Add default value for an argument after the type annotation
+def f(num1: int, my_float: float = 3.5) -> float:
+    return num1 + my_float
+
+# This is how you annotate a callable (function) value
+x: Callable[[int, float], float] = f
+
+# A generator function that yields ints is secretly just a function that
+# returns an iterator of ints, so that's how we annotate it
+def g(n: int) -> Iterator[int]:
+    i = 0
+    while i < n:
+        yield i
+        i += 1
+
+# You can of course split a function annotation over multiple lines
+def send_email(address: Union[str, List[str]],
+               sender: str,
+               cc: Optional[List[str]],
+               bcc: Optional[List[str]],
+               subject='',
+               body: Optional[List[str]] = None
+               ) -> bool:
 ```

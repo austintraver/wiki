@@ -1107,6 +1107,18 @@ echo ${(w)#string} # 4 (number of words)
 **Tip:** `zsh` gives you a lot of flexibility with what syntax to separate arguments supplied to flags. You can use `[...]` `<...>` `{...}` or `(...)`
 {{% /notice %}}
 
+* Create an array out of the lines outputted by a command
+
+  ```sh
+  print -l ${(f)"$(networksetup -getinfo Wi-Fi)"}
+  ```
+
+* Extract the second line of output from a command
+
+  ```sh
+  print ${${(f)"$(networksetup -getinfo Wi-Fi)"}[2]}
+  ```
+
 * Append `.old` to each scalar in the array
 
     ```sh
@@ -1268,6 +1280,17 @@ If you have a super long string of text, for instance, a SQL query, you may want
   # => hap hep hip hop hup
   ```
 
+* Repeating a string multiple times
+
+  ```sh
+  print 'woah'{,}
+  # woah woah
+  print 'woah'{,,}
+  # woah woah woah
+  print 'woah'{,,,}
+  # woah woah woah woah
+  ```
+
 * Generating ranges of numbers
 
 ```sh
@@ -1284,7 +1307,7 @@ echo {a..z}
 echo {a..z..3}
 # => a d g j m p s v y
 
-echo -e {a..z} '\n' {A..Z} '\n' {0..9}
+print {a..z} '\n' {A..Z} '\n' {0..9}
 
 left=1
 right=9
@@ -1301,7 +1324,7 @@ Ternary operators are supported within a double parentheses evaluation
   a=5
   b=6
   max=$(( $a > $b ? a : b ))
-  echo $max
+  print $max
   # => 6
   ```
 
@@ -1314,7 +1337,7 @@ Ternary operators are supported within a double parentheses evaluation
 {{% /notice %}}
 
   ```sh
-  [[ "apple" < "banana" ]] && echo "yes" || echo "no"
+  [[ "apple" < "banana" ]] && print "yes" || print "no"
   # => "yes"
   ```
 
@@ -1323,7 +1346,7 @@ Ternary operators are supported within a double parentheses evaluation
 {{% /notice %}}
 
   ```sh
-  [[ 1 -eq 1 ]] && asdf || echo "Not true"
+  [[ 1 -eq 1 ]] && asdf || print "Not true"
   # => "bash: asdf: command not found"
   # => "Not true"
   ```
@@ -1333,7 +1356,7 @@ Ternary operators are supported within a double parentheses evaluation
 {{% /notice %}}
 
   ```sh
-  [[ 1 == 1 ]] && { asdf ;:; } || echo "Not true"
+  [[ 1 == 1 ]] && { asdf ;:; } || print "Not true"
   # => "bash: asdf: command not found"
   ```
 
@@ -1343,17 +1366,17 @@ Ternary operators are supported within a double parentheses evaluation
 ANSI C QUOTING with $'...' syntax
 
 ```sh
-echo $'2\nlines'
+print $'2\nlines'
 # => 2
 # => lines
 
-echo $'\x41'
+print $'\x41'
 # => A
 
-echo $'\u7231'
+print $'\u7231'
 # => 爱
 
-echo $'\U0001f602'
+print $'\U0001f602'
 # => 😂
 ```
 
@@ -1365,22 +1388,22 @@ You can use the `=~` operator to test a value against a pattern
 pie=good
 
 [[ $pie =~ d ]]
-echo $?
+print $?
 # => 0, it matches the regex!
 
 [[ $pie =~ [aeiou]d ]]
-echo $?
+print $?
 # => 0, still matches
 
 # No match because the regular expression has to capture the value of
 # the variable, not the variable itself
 [[ $pie =~ [p][i]e ]]
-echo $?
+print $?
 # => 1
 
 # No match because there's no literal '[aeoiu]d' inside the word "good"
 [[ $pie =~ "[aeiou]d" ]]
-echo $?
+print $?
 # => 1
 ```
 
@@ -1389,12 +1412,12 @@ echo $?
 ```sh
 a=2
 b=4
-echo $((a*b))
+print $((a*b))
 # => 8
 
 # You can even do assignments.  The last value calculated will be the output.
 b=$(( a *= 2 ))
-echo "b=$b a=$a"
+print "b=$b a=$a"
 # b=4 a=4
 ```
 
@@ -1403,7 +1426,7 @@ echo "b=$b a=$a"
 ```sh
 a=$(( 1 + 1 ))
 message="I don't want to brag, but I have like $(( a + 1 )) friends."
-echo $message
+print $message
 # => I don't want to brag, but I have like 3 friends."
 ```
 
@@ -1412,11 +1435,11 @@ echo $message
 {{% /notice %}}
 
 ```sh
-echo "6 / 8 = $(( 6 / 8 ))"
+print "6 / 8 = $(( 6 / 8 ))"
 # => 6 / 8 = 0
 
 
-echo "6 / 8 = $(( 6 / 8.0 ))"
+print "6 / 8 = $(( 6 / 8.0 ))"
 # => 6 / 8 = 0.75
 ```
 
@@ -1437,8 +1460,8 @@ echo "6 / 8 = $(( 6 / 8.0 ))"
 
 ```sh
 func() {
-  echo 'output' >&1
-  echo 'error' >&2
+  print 'output' >&1
+  print 'error' >&2
 }
 
 # [ Version 1 ]
@@ -1458,9 +1481,9 @@ You can create your own file descriptor number and have it direct to any file yo
 
 exec 3> ~/three.txt
 
-echo 'one' >&1
-echo 'two' >&2
-echo 'three' >&3
+print 'one' >&1
+print 'two' >&2
+print 'three' >&3
 
 exec 3>&-
 exec {four}>&-
@@ -1477,10 +1500,10 @@ exec {four}>&-
   # (alternative: sysopen -w -u 3 /dev/null)
 
   shout() {
-    echo 'File descriptor 1' >&1
-    echo 'File descriptor 2' >&2
-    echo 'File descriptor 3' >&3
-    echo 'File descriptor fd' >&$fd
+    print 'File descriptor 1' >&1
+    print 'File descriptor 2' >&2
+    print 'File descriptor 3' >&3
+    print 'File descriptor fd' >&$fd
   }
 
   shout
@@ -1516,15 +1539,15 @@ Technically this is a little dangerous, especially for file descriptors 3-8, (fo
   # Open file descriptor `fd` that redirects to 'output.txt'
   exec {fd}> ~/output.txt
 
-  echo "{fd} points to file descriptor ${fd}"
+  print "{fd} points to file descriptor ${fd}"
   # => "{fd} points to file descriptor 12"
 
-  echo $'alpha\nbravo\ncharlie' >&$fd
+  print $'alpha\nbravo\ncharlie' >&$fd
 
   # Close file descriptor 'fd'
   exec {fd}>&−
 
-  echo $'alpha\nbravo\ncharlie' >&$fd
+  print $'alpha\nbravo\ncharlie' >&$fd
   ```
 
 ## Disowning a Job
@@ -1568,7 +1591,7 @@ Sometimes you have an array of elements, and you need to remove a value from the
   array=(alpha bravo charlie delta)
 
   # Getting the index of 'charlie'
-  echo ${array[(i)charlie]}
+  print ${array[(i)charlie]}
   # => "3"
 
   # Removing an element at an index (without leaving it as an empty slot)
@@ -1602,6 +1625,12 @@ Sometimes you have an array of elements, and you need to remove a value from the
   # Remove from 'array' any element matching the pattern 'charlie'
   group=${array:#charlie}
   # (alpha bravo delta)
+
+  # Remove from 'array' any element not matching the pattern 'CIDR*'
+  ${(M)array:#CIDR*}
+
+  # Remove any line from 'whois' that doesn't start with 'CIDR'
+  ${(M)${(@)${(f)${"$(whois 52.52.124.230)"}}}:#CIDR*}
   ```
 
 ## Background Jobs
@@ -1630,9 +1659,9 @@ The `commands` variable in `zsh` is an associative array whose keys are all of t
 
   ```sh
   if (( ! ${+commands[gpg]} )); then
-    echo "Command not found"
+    print "Command not found"
   else
-    echo "Command was found"
+    print "Command was found"
   fi
   ```
 
@@ -1681,8 +1710,27 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
 
 ## `typeset`
 
-* `typeset -E <var>`: declare `<var>` as a floating type variable.
+* `typeset -x <var>`: declare `<var>` as an exported global variable
+* `typeset -F <var>`: declare `<var>` as a floating type variable.
+* `typeset -E <var>`: declare `<var>` as a floating type variable (scientific notation).
 * `typeset -i <var>`: declare `<var>` as an integer type variable.
+* `typeset -a <var>`: declare `<var>` as an array type variable.
+* `typeset -A <var>`: declare `<var>` as an associative array type variable.
+* `typeset -r <var>`: declare `<var>` as a read-only variable.
+* `typeset -U <var>`: declare `<var>` as a unique-element only variable (for arrays)
+* `typeset -l <var>`: convert `<var>` to lower-case whenever expanded
+* `typeset -u <var>`: convert `<var>` to upper-case whenever expanded
+
+* Printing all variables of a certain `typeset`:
+
+  ```sh
+  # All variables with their types
+  typeset +
+  # All variables that are floating point
+  typeset -E +
+  # View the assignment of a variable
+  typeset USER
+  ```
 
 ### Pairing Scalars and Arrays
 
@@ -1696,6 +1744,177 @@ Zsh gives you the ability to link two variables together, a scalar and an array.
   typeset -T COLORS colors ':'
   colors=(red)
   colors+=(blue green)
-  echo ${COLORS}
+  print ${COLORS}
   # => "red:blue:green"
+  ```
+
+## Printing Colors
+
+Printing colors can be done with SGR escape codes, explained on the [ASCII](/ascii) page, but you can also do it with the prompt string format specifier syntax outlined below:
+
+  ```sh
+  print -P '%F{red}[red foreground]%f'
+  print -P '%K{red}[red background]%k'
+  print -P '%U[underline]%u'
+  print -P '%B[bold]%b'
+  print -P '%S[standout]%s
+  ```
+
+{{% notice info %}}
+Printing `%E` will clear from the cursor to the end of the line.
+{{% /notice %}}
+
+## Custom Keybindings
+
+Use the `zle` module for binding custom keys, code written using `zle` can be sourced in your configuration files.
+
+* Enabling vi-mode
+
+  ```sh
+  bindkey -v
+  ```
+
+* Creating custom key-binding using `zle` module:
+
+  ```sh
+  custom-command() {
+    print -n 'Hello world'
+	zle accept-line
+  }
+  # Register this command with the Zsh Line Editor
+  zle -N custom-command
+
+  # Bind this key to <Option-Shift-S> in Zsh vi-mode
+  bindkey -M viins '\ES' custom-command
+  ```
+
+* Binding the `<Return>` key or `<C-m>` to not execute the current line
+
+  ```sh
+  # in Zsh
+  bindkey -M viins '\C-m' self-insert-unmeta
+  ```
+
+## Completion Functions
+
+Let's say our program is called `hello`.
+
+Here's what will happen:
+
+1. You write a completion function, typically `_<cmd-name>`
+
+```sh
+_hello() {
+  # You write your code here
+}
+```
+
+2. You bind your function to a command
+
+```sh
+compdef _hello hello
+```
+
+- **Whenever** you press `<Tab>` after `hello`, `_hello` will be called.
+
+Whenever you want to throw out possible completions, you'll use one of the following utility functions(in this post):
+
+### compadd
+
+* Reference: `man zshcompwid`
+
+If you want to have this:
+
+  ```sh
+  hello <Tab>
+  # => cmd1    cmd2    cmd3
+  ```
+
+You'll write this:
+
+  ```sh
+  comdadd cmd1 cmd2 cmd3
+  ```
+
+### _describe
+
+If you want to have this:
+
+  ```sh
+  hello <Tab>
+  # => cmd1    --  description1
+  # => cmd2    --  description2
+  ```
+
+You'll write this:
+
+  ```sh
+  _describe 'command' "('cmd1:description1' 'cmd2:description2')"
+  ```
+
+**Note**: In both of above commands, we didn't consider which argument no. it is, means even `hello cmd1 <Tab>` will give same output. Next command will solve this problem.
+
+### `_arguments`
+
+Now this is a powerful one. You can control multiple arguments.
+
+By multiple arguments I mean `hello arg1 arg2` not `hello arg1|arg2`
+
+Here's the basic syntax: `_arguments <something> <something> ...` where `<something>` can either be:
+
+- `'-o[description]'` for an *option*
+- `'<argument number>:<message>:<what to do>'` for an *argument*
+
+First one is self-explanatory, whenever called it'll output the description:
+
+  ```sh
+  hello <Tab>
+  -o  --  description
+  ```
+
+For the second one, `<argument number>` is self-explanatory. I'll leave `message` empty to demonstrate a minimal example. For `<what to do>`, it can be quite a few things, two of which are provided below:
+
+1. List of arguments possible at given `argument number`. For example, if two arguments(`world` and `universe`) are possible at argument one(`hello world|universe`), we can write:
+
+  ```sh
+  _arguments '1: :(world universe)' <something> ...
+  ```
+
+2. Set variable `state` to an identifier. For example, if we want to call another function at argument no. 2, we can write:
+
+  ```sh
+  typeset state
+  _arguments '2: :->identifier'
+  case ${state} in
+    identifier)
+      #do some special work when we want completion for 2nd argument
+      ;;
+  esac
+  ```
+
+That might be confusing, lets sum up `_arguments` by an example:
+
+Lets say, our program has possible args like:
+
+  ```sh
+  hello [cat|head] <file at /var/log> one|two
+  ```
+
+Its completion function can be:
+
+  ```sh
+  _hello() {
+      local state
+      _arguments '1: :(cat head)' '2: :->log' '3: :->cache'
+      case ${state} in
+          log)
+              # This is for demonstration purpose only, you'll use _files utility to list a directories
+              _describe 'command' "($(ls $1))"
+              ;;
+          cache)
+              # This could be done above also, in _arguments, you know how :)
+              compadd one two
+              ;;
+      esac
+  }
   ```

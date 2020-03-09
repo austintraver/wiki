@@ -510,6 +510,61 @@ The `networksetup` command allows you to configure your System Preference's *Net
   networksetup -setsocksfirewallproxystate Wi-Fi off
   ```
 
+* List preferred wireless networks
+
+  ```sh
+  networksetup -listpreferredwirelessnetworks en0
+  ```
+
+* Remove a preferred wireless network
+
+  ```sh
+  networksetup -removepreferredwirelessnetwork en0 <network>
+  ```
+
+* Connect to a WiFi Network
+
+  ```sh
+  networksetup -setairportnetwork en0 <WiFi name> <password>
+  ```
+
+* List order of network devices used to connect to the internet
+
+  ```sh
+  networksetup -listnetworkserviceorder
+  ```
+
+* Check if Wi-Fi is currently enabled
+
+  ```sh
+  networksetup -getnetworkserviceenabled Wi-Fi
+  ```
+
+* Get the name of the current network an interface is connected to
+
+  ```sh
+  networksetup -getairportnetwork en0
+  ```
+
+* Print detailed information about the current network connection
+
+  ```sh
+  networksetup -getinfo Wi-Fi
+  # dhcp configuration
+  # IP address: 10.26.206.163
+  # Subnet mask: 255.255.0.0
+  # Router: 10.26.0.1
+  # Client ID:
+  # IPv6: Automatic
+  # IPv6 IP address: none
+  # IPv6 Router: none
+  # Wi-Fi ID: 6c:96:cf:dc:e5:cb
+  ```
+
+
+
+
+
 ## `airport`
 
 There is a hidden command, called airport. To use it, add the following directory to your `${PATH}`
@@ -528,24 +583,6 @@ There is a hidden command, called airport. To use it, add the following director
 
   ```sh
   airport -z
-  ```
-
-* List preferred wireless networks
-
-  ```sh
-  networksetup -listpreferredwirelessnetworks en0
-  ```
-
-* Remove a preferred wireless network
-
-  ```sh
-  networksetup -removepreferredwirelessnetwork en0 <network>
-  ```
-
-* Connect to a WiFi Network
-
-  ```sh
-  networksetup -setairportnetwork en0 <WiFi name> <password>
   ```
 
 ## `scutil`
@@ -789,7 +826,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 1. Create a user named `tommy`
 
   ```sh
-  dscl . -create /Users/tommy
+  dscl . create /Users/tommy
   ```
 
 2. Set `tommy`'s shell to `/bin/zsh`
@@ -814,19 +851,19 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 5. Give tommy a `UID` number, (for instance, 502)
 
   ```sh
-  dscl . -create '/Users/tommy' UniqueID 502
+  dscl . create '/Users/tommy' UniqueID 502
   ```
 
 6. Give tommy the primary group ID of `20` (the default for the `staff` group on macOS)
 
   ```sh
-  dscl . -create '/Users/username' PrimaryGroupID 20
+  dscl . create '/Users/username' PrimaryGroupID 20
   ```
 
 7. Give tommy the password `fighton`
 
   ```sh
-  dscl . -passwd /Users/tommy 'fighton'
+  dscl . passwd /Users/tommy 'fighton'
   ```
 
 8. Add tommy to the list of user's that can be logged into with `ssh`
@@ -888,31 +925,31 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 * Get a list of all users short names
 
   ```sh
-  sudo dscl . -list /Users
+  sudo dscl . list /Users
   ```
 
 * Get detailed info on a particular user
 
   ```sh
-  sudo dscl . -read /Users/<username>
+  sudo dscl . read /Users/<username>
   ```
 
 * Get a specific value from a user
 
   ```sh
-  dscl . -read /Users/<username> <key>
+  dscl . read /Users/<username> <key>
   ```
 
 * Get detailed info on *all* users
 
   ```sh
-  dscl . -readall /Users
+  dscl . readall /Users
   ```
 
 * Get a specific value from all users
 
   ```sh
-  dscl . -readall /Users <key>
+  dscl . readall /Users <key>
   ```
 
 * Get concise information about all users
@@ -924,7 +961,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 * Get all of the groups that user `root` is associated with
 
   ```sh
-  dscl . -search /Groups GroupMembership root
+  dscl . search /Groups GroupMembership 'root'
   ```
 
 * Get the name os all of the groups
@@ -936,24 +973,75 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 * Check if the user `tommy` is a member of the group `admin`
 
   ```sh
-  dseditgroup -o checkmember -m tommy admin
+  dseditgroup -o checkmember -m 'tommy' 'admin'
   ```
 
-* Add `tommy` to the list of users who are members of the `admin` group
+* Add the user `tommy` to the group `admin`
 
   ```sh
-  dseditgroup -o edit -a tommy -t user admin
+  dseditgroup -o edit -a 'tommy' -t user 'admin'
   ```
 
+* Change a user's information
+
+  ```sh
+  # [ macOS ]
+  sudo dscl . change /Users/austin RealName 'Austin Traver' 'Fake Name'
+  # confirming the change
+  finger austin
+  # reverting the chang
+  sudo dscl . -change /Users/austin RealName 'Fake Name' 'Austin Traver'
+  ```
+
+
 {{% notice info %}}
-  **Tip:** This is the command that is equivalent to checking the box "Allow user to administer this computer" on the Users & Groups page
+**Tip:** This is the command that is equivalent to checking the box "Allow user to administer this computer" on the Users & Groups page
 {{% /notice %}}
 
 * Remove `tommy` from the list of users who are members of the `admin` group
 
   ```sh
-  dseditgroup -o edit -d tommy -t user admin
+  dseditgroup -o edit -d 'tommy' -t user 'admin'
   ```
+
+{{% notice info %}}
+**Update:** Apparently DSCL is no longer the recommended way to create users, and instead one should use the `sysadminctl` command instead. A tutorial has been included below.
+{{% /notice %}}
+
+## `sysadminctl`
+
+* Create a user `tommy` whose password is `fighton`
+
+  ```sh
+  # Use the user 'billy' and his password 'gobruins' to escalate privileges
+  sysadminctl -adminUser 'billy' -adminPassword 'gobruins' \
+    -addUser 'tommy' \
+    -password 'fighton' \
+    -fullName 'Tommy Trojan' \
+    -UID 502 \
+    -shell /bin/zsh \
+    -home /Users/tommy
+
+  # Create the home directory for 'tommy'
+  sudo createhomedir -c
+  ```
+
+* Add a user's password to those capable of unlocking the FileVault at boot
+
+  ```sh
+# Use the existing admin account 'billy' whose password is 'gobruins'
+# to allow the new admin account 'tommy' to login with the 'fighton' password
+  sysadminctl -adminUser 'billy' -adminPassword 'gobruins' -secureTokenOn 'tommy' -password 'fighton'
+  ```
+
+## `fdesetup`
+
+* Restart the computer, but bypass FileVault
+
+  ```sh
+  sudo fdesetup authrestart
+  ```
+
 
 ## Single User Mode
 
@@ -1161,9 +1249,14 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 * Make this printer the default
 
   ```sh
-  lpoptions -E -d 'Brother'
-  # Creates ~/.cups/lpoptions with one line: "Default Brother"
+  lpoptions -E -d 'Brother' -o sides=two-sided-long-edge
+  # Creates ~/.cups/lpoptions with one line: "Default Brother sides=two-sided-long-edge"
   ```
+
+  - `-p 'Brother'`: Name the printer "Brother"
+  - `-E`: Use TLS encryption when communicating across the network
+  - `-d`: Make this the default printer
+  - `-o`: Set the option `sides` to `two-sided-long-edge`
 
 * Print a file
 
@@ -1175,4 +1268,26 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 
   ```sh
   lpstat -v
+  ```
+
+### Virtual Network Computing VNC
+
+Virtual Network Computing, or *VNC*, is more commonly known as *Screen Sharing*, as this is the name of the application used for VNC on macOS. Your computer listens for VNC connections on port 5900, and you can use the `vnc://user@host.net` syntax to reach a particular user at a particular address.
+
+* Launching a Screen Share from the terminal:
+
+  ```sh
+  open vnc://tommy@trojan.net
+  ```
+
+* Enabling **Screen Sharing** from the terminal:
+
+  ```sh
+  sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
+  ```
+
+* Disabling **Screen Sharing** from the terminal:
+
+  ```sh
+  sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
   ```

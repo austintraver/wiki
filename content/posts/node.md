@@ -49,61 +49,56 @@ console.log(fs.writeFileSync("file.md", "**Hello World!** Bet your browser JS ca
 
 Then in the console, run the file by typing `$ node helloworld.js`. This will create the file `file.md` with the text: `Hello World! Bet your browser JS can't do this!`.
 
-Alternatively, you can run this in the `node` console. In your terminal, typing `node` creates a shell utilizing a REPL:
-* Read
-* Evaluate
-* Print
-* Loop
+Alternatively, you can run this in the `node` console. In your terminal, typing `node` creates a shell utilizing a *Read Evaluate Print Loop* (**REPL**)
 
 What this means is that as expressions are evaluated, their return value is printed in the console. You can invoke the REPL by just typing `node` in your terminal. Then, you can test what expressions are doing. Which is useful for debugging expressions and playing around with Javascript.
 
-```
-$ node
-> a = 3
-4
-> ++_
-5
-```
+  ```js
+  /* Enter the number 4, then press enter */
+  4 // <Enter>
+  ++_ // Increment the previous expression by 1
+  ```
 
 {{% notice info %}}
 **Warning:** In this example, we used `_` , which refers to the previous expression. However, this feature has been deprecated, and you'll get an annoying warning if you try to use it.
 {{% /notice %}}
 
-You'll notice that the return value is printed below each statement executed.
+You'll notice that the return value is printed below each statement executed:
 
-```sh
-> v = "Vim"
-'Vim'
-> e = "Emacs"
-'Emacs'
-> console.log("I'm a pro since I use ", v)
-I'm a pro since I use Vim
-undefined
-```
-In the next example, we'll use dictionary and list data structures:
-```
-> listOfEditors = [v, e]
-[ 'Vim', 'Emacs' ]
-> editors = {}
-{}
-> editors[v] = "superior"
-'superior'
-> editors[e] = "inferior"
-'inferior'
-> editors
-{ Vim: 'superior', Emacs: 'inferior }
-```
+  ```js
+  v = "Vim"
+  // => 'Vim'
+  > e = "Emacs"
+  // => 'Emacs'
+  console.log("I'm a pro since I use ", v)
+  // => I'm a pro since I use Vim
+  ```
+
+
+* Using the *dictionary* and *list* data structures:
+
+  ```js
+  listOfEditors = [v, e]
+  // => [ 'Vim', 'Emacs' ]
+  editors = {}
+  // => {}
+  editors[v] = "superior"
+  // => 'superior'
+  editors[e] = "inferior"
+  // => 'inferior'
+  editors
+  // => { Vim: 'superior', Emacs: 'inferior }
+  ```
+
 You can exit the REPL by pressing `^D` or `^C^C`.
 
+The `process` variable, only accessible to you in Node, not in the browser. `process` is a list of current tasks that Node is executing.
 
-The `process` variable, only accessible to you in Node, not in the browser. `process` is a list of current tasks that Node is executing. Typing `process` in the REPL will dump a huge list and `process.exit()` command also exits the REPL.
-```sh
-$ node
-> process
-```
+* Typing `process` in the REPL will print out all environment variables
+
+* The `process.exit()` method is another way of exiting from the REPL, or from a program you've written.
 
 ## Module System
-
 
 Modules in Nodejs are essentially Javascript libraries. There are quite a few built-in libraries available by default in Nodejs, including (thanks to [W3 Schools](https://www.w3schools.com/nodejs/ref_modules.asp) for the rundown):
 
@@ -138,30 +133,24 @@ Modules in Nodejs are essentially Javascript libraries. There are quite a few bu
 
 **How to Import and Use a Module**:
 
-To use a module, you simply *require* using the format:
-```js
-require('<module name>')
-```
+* Importing and using a module using the `require(<module>)` method
 
-For example, to import and use the file system module `fs` just like we did above:
+  ```js
+  // Import and use the file system module `fs`
+  const fs = require('fs')
+  fs.writeFileSync('helloNode.txt', '**That was easy!**™️🤓')
+  ```
 
-```js
-const fs = require('fs')
-fs.writeFileSync('helloNode.txt', '**That was easy!**™️🤓')
-```
+* Conventionally, the identifier used for a module the name of that module.
 
-It's Nodejs convention to use the module name for variable used to call its functions.
+### Importing Modules
 
-**How to Import Your Own Modules**
-
-## Importing Modules
-
-To import and use code you wrote in another file, use the `require()` function, passing in the parameter of the filepath
+* To import and use code you wrote in another file, use the `require()` function, passing in the parameter of the filepath
 
 * Importing code from the file `hello.js`
 
   ```js
-  const helloWorld = require('./hello.js')
+  const hello = require('./hello.js')
   ```
 
 ## The Core
@@ -176,8 +165,8 @@ Nodejs requires a few critical components that allow it to provide its functiona
 
 These objects are also what separate Nodejs applications from vanilla Javascript code.
 
-
 ### Global objects
+
 There are three primary global objects available in Nodejs. They are:
 
 1. `global`
@@ -192,10 +181,6 @@ The process object provides access to the Node installation, the three methods o
 
 The Buffer object handles binary data. You can read any type of data through a buffer, including a file, input stream, or network connection. A Buffer object take up to two parameters:
 
-`Buffer(<input-data>, <encoding>)`
-
-- `<encoding>` (default: **UTF-8**) optional parameter
-
 ### Timers
 
 Timers in Nodejs allow programmers to delay and schedule execution of functions. The timer module includes the functions:
@@ -205,11 +190,10 @@ Timers in Nodejs allow programmers to delay and schedule execution of functions.
 - `setInterval `
 - `clearInterval`
 
-
-
 ### Sockets and Streams
 
 There are four major types of streamed connections in Nodejs:
+
 1. TCP - `net` module
 2. HTTP - `http` module
 3. UDP/Datagram Socket - `dgram` module
@@ -217,66 +201,85 @@ There are four major types of streamed connections in Nodejs:
 
 Using a TCP connection, we can recieve messages from client's standard input on the server program. The `process` is used directly here to access standard I/O streams.
 
-
-For example:
-
-
 * Example of a TCP Server:
 
   ```js
+  const net = require('net')
 
-  var net = require('net')
+  let listener = (connection) => {
+    /* Print 'Connected' */
+    console.log('Client has created a connection')
+    /* Print when data is received from this connection */
+    connection.on('data', (data) => {
+      /* Print the data and its source */
+      console.log(`data() called, received data from ${connection.remoteAddress}:${connection.remotePort}\n${data}`)
+      /* Repeat the data sent back to the client */
+      connection.write(`'server': ${data}`)
+    })
+    /* Print when the connection is closed by the client */
+    connection.on('close', () => {
+      console.log(`Client has closed the connection`)
+    })
+  }
 
-  var server = net.createServer( (conn) => {
-          console.log('connected')
+  /* Create a server object, with a callback function for a connection */
+  let server = new net.Server(listener)
 
-          conn.on('data', (data) => {
-                  console.log(data + ' from ' + conn.remoteAddress + ' ' +
-                          conn.remotePort)
-                  conn.write('Repeating: ' + data)
-          })
+  server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(`Error: Port ${error.port} already in use.`)
+    }
+    else {
+      console.error(error)
+    }
+  })
 
-          conn.on('close', () => {
-                  console.log('client closed connection')
-          })
-  }).listen(8124)
+  /* Set up a port number to be used by this server */
+  const PORT = 1234
 
-  console.log('listening on port 8124')
-
-
+  /* Spin up the server, listening on port 1234 */
+  server.listen(PORT)
+  console.log(`Listening on port ${PORT}`)
   ```
 
 * Example of a TCP Client:
 
   ```js
+  const net = require('net')
 
-  var net = require('net')
+  /* Create a client object with the corresponding listener */
+  let client = new net.Socket()
 
-  var client = new net.Socket()
-  client.setEncoding('utf8') // opional
+  const HOST = '127.0.0.1'
+  const PORT = 1234
 
-  // connect to server
-  client.connect ('8124', 'localhost', () => {
-          console.log('connected to server')
-          client.write('Who needs a browser to communicate?!')
+  // Connect to the server
+  client.connect(PORT, HOST, () => {
+    console.log('Connected to server')
+    // Send a message to the server
+    client.write('This is a message')
   })
 
   // prepare for input from terminal
   process.stdin.resume()
 
-  // when receive data, send to the server
+  // When user inputs data on `stdin`, send data to server
   process.stdin.on('data', (data) => {
-          client.write(data)
+    client.write(data)
   })
 
-  // when receive data back, print to console
+  // When receive data back, print to console
   client.on('data', (data) => {
-          console.log(data)
+    console.log(`data() called, received data: ${data}`)
   })
 
-  // when serves closed
   client.on('close', () => {
-          console.log('connection is closed')
+    console.log('close() called, connection to server has been closed')
+  })
+
+  /* Print when the connection is closed by the client */
+  client.on('end', () => {
+    console.log('end() called, server no longer receiving new connections')
   })
   ```
 
@@ -628,4 +631,22 @@ Add the following to your package's `package.json`
     hash: ''
   }
   */
+  ```
+
+## Express
+
+* Example of an Express server
+
+  ```js
+
+  // Construct an instance of a server
+  const server = require('express')();
+
+  // Save the server on a port
+  const PORT = 80
+
+  // Start listening for requests on the port
+  server.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`)
+  })
   ```

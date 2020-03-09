@@ -10,7 +10,7 @@ div#banner {
 }
 
 /* Mobile */
-@media screen and (max-aspect-ratio: 2/3) {
+@media screen and (max-aspect-ratio: 3/5) {
   div#banner {
     height: 60vh;
   }
@@ -27,7 +27,7 @@ div#banner {
 }
 
 /* Desktop */
-@media screen and (min-aspect-ratio: 2/3) {
+@media screen and (min-aspect-ratio: 3/5) {
   div#banner {
     height: 50vh;
   }

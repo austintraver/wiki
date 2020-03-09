@@ -292,4 +292,19 @@ The `printf` command's real utility is in its format specifiers, which allow you
 
   printf 'This is %d%% luck, %d%% skill, %d%% concentrated power of will\n' 10 20 15
   # =>    This is 10% luck, 20% skill, 15% concentrated power of will
+
+  printf '/%s\ ' {1..5}
+  # => /1\/2\/3\/4\/5\
+
+  printf '/%.s\' {1..5}
+  # => /\/\/\/\/\
+
+  ```
+
+* Printing `uint8_t` in base-10 and base-16
+
+  ```c
+  uint8_t value = 9;
+  printf("Dec\t%hhu\n", value);
+  printf("Dec\t%hhx\n", value);
   ```

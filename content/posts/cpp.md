@@ -84,11 +84,21 @@ g++ --std=gnu++1z # (GNU c++ standard)
   # on Raspberry Pi: 'cortex-a72'
   ```
 
-## Printing Strings in C
+## Input/Output
 
-### `snprintf`
+Import the `<stdio.h>` library to get started
 
-* Printing a string using a char buffer:
+### Formatted Strings
+
+* The `snprintf()` function can be used to write a formatted string to a buffer. The arguments supplied are as follows:
+  1. `char* buffer`
+  2. `int size`
+  3. `const char* format`
+  4. `<arg1>`, `<arg2>`, `...`
+
+* The `puts()` function writes a C-string to `stdout`, stopping at the first null terminator `\0` found. It additionall appends a newline `\n` to the output. To print to a particular stream instead of `stdout`, and/or to avoid the insertion of a trailing newline, `\n` instead of `stdout`, use the `fputs()` function instead.
+
+* Printing a formatted string to `stdout`:
 
   ```c
   #include <stdio.h>
@@ -100,15 +110,7 @@ g++ --std=gnu++1z # (GNU c++ standard)
       const char* format = "It takes %hhu to tango.";
       uint8_t value = 2;
       snprintf(buffer, size, format, value);
-      printf(buffer);
+      puts(buffer);
   }
   ```
 
-## Printing Small Values
-
-The format specifiers to print small values are as follows
-
-| Name | Format Specifier | C Data Type |
-| :---: | :---: | :---: |
-| Unsigned 1-byte Digit (Base 10) | `%hhu` | `uint8_t` |
-| Unsigned 1-byte Digit (Hex) | `%hhx` | `uint8_t` |

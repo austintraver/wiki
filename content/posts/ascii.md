@@ -23,17 +23,21 @@ echo -en 'Hexademical number 0x41 is the letter \x41\n'
 # => Hexademical number 0x41 is the letter A
 ```
 
-## ANSI Color Codes
+## Select Graphic Rendition (SGR)
 
-ANSI Color Codes are used to format output on terminals, as well as in many coding languages, such as `java`. An ANSI color code can be expressed by typing the escape character `0x1b` followed by `[` then the code number (e.g. `42`) and then the letter `m`. When you put that all together, it looks like `\x1b[42m`.The formatting will persist until the reset code is given, which is code #0. You can specify this with `\x1b[0m`
+## SGR Color Codes
+
+SGR Color Codes are used to format output on terminals, as well as in many coding languages, such as `java`. An SGR color code can be expressed by typing the escape character `0x1b` followed by `[` then the code number (e.g. `42`) and then the letter `m`. When you put that all together, it looks like `\x1b[42m`.The formatting will persist until the reset code is given, which is code #0. You can specify this with `\x1b[0m`
 
 * It's worth noting special attention to the escape character, which is decimal number `27` or hex value `0x1b` because it's often typed. For instance, try entering this command in your terminal. It will print a green background.
 
 ```sh
-echo -en '\x1b[42m Green \x1b[0m\n'
+echo -e -n '\x1b[42m Green \x1b[0m\n'
 ```
 
 Here are some of the most useful codes:
+
+### Font Style
 
 |Escape Code|Function|
 |:---:|:---:|
@@ -49,6 +53,12 @@ Here are some of the most useful codes:
 | `\x1b[24m` | disable underlined font |
 | `\x1b[25m` | disable blinking font |
 | `\x1b[27m` | disable inverted-font |
+
+
+### Foreground Color
+
+|Escape Code|Function|
+|:---:|:---:|
 | `\x1b[30m` | black foreground |
 | `\x1b[31m` | red foreground |
 | `\x1b[32m` | green foreground |
@@ -59,20 +69,208 @@ Here are some of the most useful codes:
 | `\x1b[37m` | white foreground |
 | `\x1b[38;5;<0-255>` | select 256-color foreground |
 | `\x1b[39m` | default foreground |
-| `\x1b[40m` | black background |
-| `\x1b[41m` | red background |
-| `\x1b[42m` | green background |
-| `\x1b[43m` | yellow background |
-| `\x1b[44m` | blue background |
-| `\x1b[45m` | magenta background |
-| `\x1b[46m` | cyan background |
-| `\x1b[47m` | white background |
-| `\x1b[48;5;<0-255>` | select 256-color background |
-| `\x1b[49m` | default background |
+
+
+### Background Color
+
+|Escape Code|Function|
+|:---:|:---:|
+| `\E[40m` | black background |
+| `\E[41m` | red background |
+| `\E[42m` | green background |
+| `\E[43m` | yellow background |
+| `\E[44m` | blue background |
+| `\E[45m` | magenta background |
+| `\E[46m` | cyan background |
+| `\E[47m` | white background |
+| `\E[48;5;<0-255>` | select 256-color background |
+| `\E[49m` | default background |
+
+
+### Cursor/Screen Color
+
+|Escape Code|Function|
+|:---:|:---:|
+| `\Ec`| Reset screen to initial state |
+
+#### Modifying Content
+
+|Escape Code|Function|
+|:---:|:---:|
+| `\E[J` / `\E[0J` | Clear from cursor to end of screen |
+| `\E[1J` | Clear from cursor to beginning of stream |
+| `\E[2J` | Clear entire screen |
+| `\E[3J` | Clear entire screen and delete all lines saved in the scrollback buffer |
+| `\E[K` / `\E[0K` | Erase from cursor to end of line |
+| `\E[1K` | Erase start-of-line up until the cursor |
+| `\E[2K` | Erase the entire line |
+| `\E[2X` | Erase 2 characters (replaced with whitespace) |
+| `\E[2P` | Delete 2 characters (left-shift the text that follows) |
+| `\E[2M` | Delete 2 lines |
+| `\E[2@` | Insert 2 spaces (right-shift the text that follows) |
+| `\E[2L` | Insert 2 lines (right-shift the text that follows) |
+
+
+#### Modify Screen
+
+|Escape Code|Function|
+|:---:|:---:|
+| `\E[2S` | Scroll up 2 lines |
+| `\E[2T` | Scroll down 2 lines |
+
+
+#### Cursor Movement
+
+|Escape Code|Function|
+|:---:|:---:|
+| `\E[2A`| Shift cursor up by 2 rows |
+| `\E[2B`| Shift cursor down 2 rows |
+| `\E[2C`| Shift cursor right 2 columns |
+| `\E[2D`| Shift cursor left 2 columns |
+| `\E[2E`| Shift cursor to the 1st column, 2 rows below |
+| `\E[2F`| Shift cursor to the 1st column, 2 rows above |
+| `\E[2G`| Move cursor to column 2 (current row) |
+| `\E[2d` | Move cursor to row 2 (current column) |
+| `\E[i;jH` | Move cursor to row `i`, column `j` |
+
+#### Misc.
+
+|Escape Code|Function|
+|:---:|:---:|
+| `\E[nb`| Repeat previous character `n` times |
+| `\E7` | Save cursor position |
+| `\E8` | Restore cursor position |
+
+
+* Examples
+
+```sh
+# Repeat the last character 2 times
+print -N '1234567890' '\E[2b'
+# => 123456789000
+```
+
+```sh
+# Replace a character
+print -N {9..1} '\E[3D' '_' '\E[2C'
+# => 1_3456789
+
+print -N '#####' $'\E7\E[2G1\E82'
+# => #1###2
+
+# Go to the 2nd row, add a 1, return, add a 2
+print -N '#####' '\E7' '\E[2G' '1' '\E8' '2'
+# => #1###2
+
+# Go back 2 columns, up 1 row, add a '0', return
+print -N '####\n####' '\E7' '\E[2D' '\E[1A' '0' '\E8'
+
+# Go back 3 columns, and erase 2 characters
+print -N 'hello' '\E[3D' '\E[2X'
+# => he o
+
+# Go back three columns, and remove two characters
+print -N 'hello '\E[3D '\E[2P'
+# => heo
+```
+
+* More examples:
+
+  ```sh
+  # Replace the '+' in the 1st column, 2nd-to-last row with '-'
+  print -N +{5..1}$'\n' '\E7' '\E[2A' '-' '\E8'
+  # +5
+  # +4
+  # +3
+  # -2
+  # +1
+  ```
+
+  ```sh
+  # Add two blank lines
+  print -N +{5..1}$'\n' '\E[3A' '\E[2L' '\E[2B' '\E[3B'
+  # +5
+  # +4
+  #
+  #
+  # +3
+  # +2
+  # +1
+  ```
+
+  {{% notice warning %}}
+  **Warning:** If you're moving around vertically, be sure to surround your statement with `\E7` and `\E8` or else you'll likely truncate your output. Any text located beyond the cursor's final position *will be deleted*
+  {{% /notice %}}
+
+  {{% notice warning %}}
+  **Warning:** If you're adding space vertically, be sure to move your cursor down by the same amount of rows when you've finished inserting. If you don't, your output will be truncated.
+  {{% /notice %}}
+
+
+* The program I wrote for practice, `globetrot`:
+
+  ```sh
+  for row in {2..${LINES}}; do
+    # Print a row of '#' characters
+    print -f '#'%.s {1..${COLUMNS}}
+    # Erase the left-most and right-most characters
+    #     (save) (left 1) (erase 1) (col 1) (erase 1) (return)
+    print -N '\E7' '\E[1D' '\E[X' '\E[1G' '\E[1X' '\E8' '\n'
+  done
+  # Erase all characters on the first row
+  print -N '\E7' '\E[1d' '\E[2K' '\E8'
+  # Erase all characters on the last row
+  print -N '\E[1A' '\E[2K' '\E[1B'
+
+  typeset -i i
+  typeset -i j
+
+  # Walk the '@' symbol across the first row [left -> right]
+  for (( j=1; j <= ${COLUMNS}; j+=1 )); do
+    print -N '\E7' "\E[1;${j}H" '\E[2K' '@' '\E8'
+    sleep 0.01
+  done
+
+  # Anchor the symbol to the last column
+  ((j=${COLUMNS}))
+
+  # Walk the '@' symbol along the last column [top -> bottom]
+  for (( i=2; i < ${LINES}; i+=1 )); do
+    # Erase the previous '@'
+    print -N '\E7' "\E[$((i-1));${j}H" '\E[X' '\E8'
+    # Create the next '@'
+    print -N '\E7' "\E[${i};${j}H" '@' '\E8'
+    sleep 0.01
+  done
+
+  ((i=${LINES}-1))
+
+  # Walk the '@' symbol along the last row, [right -> left]
+  for (( j=${COLUMNS}-1; j>=0; j-=1 )); do
+    # Erase the previous '@'
+    print -N '\E7' "\E[${i};$((j+1));H" '\E[X' '\E8'
+    # Create the next '@'
+    print -N '\E7' "\E[${i};${j}H" '@' '\E8'
+    sleep 0.01;
+  done
+
+  # Anchor the symbol to the first column
+  ((j=1))
+
+  # Walk the '@' symbol along the first column [bottom -> top]
+  for (( i=${LINES}-2; i >= 0; i-=1 )); do
+    # Erase the previous '@'
+    print -N '\E7' "\E[$((i+1));${j}H" '\E[X' '\E8'
+    # Create the next '@'
+    print -N '\E7' "\E[${i};${j}H" '@' '\E8'
+    sleep 0.01
+  done
+  ```
+
 
 ## Unicode
 
-### UTF
+### Unicode Transformation Format (UTF)
 
 Unicode Transformation Format (UTF) is one of the mapping methods engineered to encode text. It does this by mapping code points to code values. Each code value is a unique sequence of bytes.
 
@@ -80,9 +278,9 @@ Unicode Transformation Format (UTF) is one of the mapping methods engineered to 
 
 The UTF-16 encoding system, is not as simple as it's name suggests. Each char is not encoded with 16 bits, as is commonly assumed. UTF-16 is a *variable-width* encoding format.
 
-Java's `char` object is encoded using UTF-16 and so are Windows filenames, as well as the C++ RESTful API SDK written my Microsoft.
+Java's `char` object is encoded using UTF-16 and so are Windows filenames, as well as the C++ RESTful API SDK written my Microsoft, as well as the macOS operating system.
 
-It's rarely advantageous to use UTF-16 over UTF-8. The only time it will result in a smaller file size is if the majority of text in the file consists of Chinese or Japanese characters. Even so, if there is a large amount of whitespace (which is an ASCII character) then the UTF-8 encoding would still result in a smaller file size.
+It's rarely advantageous to use UTF-16 over UTF-8. The only time it will result in a smaller file size is if the majority of text in the file consists of Chinese or Japanese characters. Even so, if there is a large amount of whitespace (which is an ASCII character) then the UTF-8 encoding would still result in a smaller file size. The standard norm is increasingly becoming UTF-8, and the trend shows no sign of slowing down.
 
 ### UTF-32
 
@@ -101,25 +299,25 @@ Vim uses digraphs to encode non-ASCII characters with simple two key combos.
 
 For example, let's say you want to add a check mark for a to-do list:
 
-```
+```txt
 Cameron's To Do List:
 
 - Hack Austin Traver's computer (Done)
 - Buy a MacBook (IMPORTANT!)
 ```
+
 If you type `<C-k>OK` in vim, you'll get a check mark: ✓
 
-```
+```txt
 Cameron's To Do List:
 
 ✓ Hack Austin Traver's computer
 ★★ Buy a MacBook
 ```
 
-The command syntax uses:
-`\<C-k>{vim digraph}`.
+* The command syntax uses: `\<C-k>{vim digraph}`.
 
-You can see all multibyte characters if you type `:digraph`. Here are some useful digraphs:
+* You can see all multibyte characters if you type `:digraph`. Here are some useful digraphs:
 
 ### Symbols
 
@@ -175,23 +373,3 @@ You can see all multibyte characters if you type `:digraph`. Here are some usefu
 | 8969 | 0x2309 | >7 | ⌉ |
 | 8970 | 0x230A | 7< | ⌊ |
 | 8971 | 0x230B | 7> | ⌋ |
-
-
-### A Few Fractions
-
-| decimal | hex  | digraph | char |
-|:----:|:----:|:----:|:----:|
-| 2153| 0x8531  | 12 | ½ |
-| 2153| 0x8531  | 13 | ⅓ |
-| 2155| 0x8533  | 15 | ⅕ |
-| 2158| 0x8536  | 45 | ⅘ |
-| 2159| 0x8537  | 16 | ⅙ |
-
-Now you can write such atrocities as:
-
-```
-1. ⌊π⌋= 3 ∴ π ≡ 3
-
-   ∞
-2. ∑ n = -(⅙ ×½)
-```

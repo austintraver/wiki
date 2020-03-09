@@ -46,14 +46,17 @@ div#navbar a:any-link {
 }
 
 /* Mobile */
-@media screen and (max-aspect-ratio: 2/3) {
+@media screen and (max-aspect-ratio: 3/5) {
   div#navbar {
 
   }
 }
 
 /* Desktop */
-@media screen and (min-aspect-ratio: 2/3) {
+@media screen and (min-aspect-ratio: 3/5) {
+  div#navbar {
+    position: unset;
+  }
   div#navbar a {
     filter: opacity(80%);
     transition: 0.5;
@@ -63,15 +66,15 @@ div#navbar a:any-link {
   }
 }
 
-@media(prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   div#navbar {
     background-color: rgb(80, 80, 80);
     border-color: rgb(60, 60, 60);
     color: white;
   }
   div#navbar a#site {
-    background: rgb(40, 40, 40);
-    border-color: rgb(60, 60, 60);
+    background: var(--blue);
+    border-color: var(--blue) shade(20%);
   }
   div#navbar a:any-link {
     color: white;

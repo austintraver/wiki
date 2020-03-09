@@ -293,6 +293,13 @@ An example of setting variables using the `let` keyword
     " Null:       7     type(v:null)
     ```
 
+* Configuring Vim to limit its colors to a traditional *16-color* pallet
+
+  ```vim
+  " Only use 16 colors for the color-pallet
+  set t_Co=16
+  ```
+
 #### Basic Functions
 
 * Splitting a string into a list
@@ -974,3 +981,136 @@ To open up the right help page for your package, sometimes you need to generate 
 " Generate helptags for all help files in the runtime
 :helptags ALL
 ```
+
+## Pattern Searching
+
+* `<C-g>`: Go to next match
+* `<C-t>`: Go to previous match
+
+## Useful Window Keybindings
+
+| Hotkey | Effect |
+| :---: | :---: |
+| Ctrl-w [n] | open a new window (below), open empty |
+| Ctrl-w [v] | vertical split window |
+| Ctrl-w [s] | horizontal split window |
+| Ctrl-w [P] | go to preview window |
+| Ctrl-w [z] | close preview window |
+| Ctrl-w [R] | rotate window vertically  |
+| Ctrl-w [r] | rotate window downwards |
+| Ctrl-w [r] | rotate window upwards |
+| Ctrl-w [w] | cycle through windows |
+| Ctrl-w [p] | go to last accessed window |
+
+
+## Useful Pending Search Keybindings
+
+| Hotkey | Effect |
+| :---: | :---: |
+| Ctrl-g | Move cursor to next match |
+| Ctrl-t | Move cursor to prev match |
+
+
+## Netrw
+
+| Hotkey | Effect |
+| :---: | :---: |
+| mz | compress/decompress file |
+
+| Hotkey | Effect |
+| :---: | :---: |
+| `gh` | Start select mode |
+| `gv` | Reselect previous visual block |
+| `gn` | Search forward for last used search pattern |
+| `gN` | Search forward for previous used search pattern |
+| `dgn` | Delete the next match to the search pattern |
+| o | Go diagonally across selection area |
+| O | Go to other side of the current row's selection |
+| d | Delete highlighted |
+| c | Change highlightred |
+
+## Random Cool Keybindings
+
+| Hotkey | Effect |
+| :---: | :---: |
+| `z=` | Suggest spelling for word |
+| `@:` | Repeat last ex command |
+| `ga` | Print the UTF-8 character code for the character under the cursor |
+| `:=` | Print the last line number |
+| `+` | Move down to the first non-whitespace character in the row below |
+
+
+
+你
+😂
+
+
+## Knowing Where to Look For Help
+
+* `:help reference_toc`
+* `:help /[`: Help on a character when used for search patterns
+* `:help -r`: Help on a character passed as a command line flag
+* `:help c_<CR>`: Help on the return key when pressed during command mode
+* `:help :echo`: Help on the echo command
+* `:help 'option'`: Help on a particular option
+
+* Creating help files: `add-local-help` and `write-local-help` and `help-writing`
+
+## Useful Command Flags when Opening Vim
+
+* Reference: `:help starting.txt`
+
+```sh
+# :help -p
+vim -p ./*.md
+```
+
+* Open all markdown files in individual buffers
+
+  ```sh
+  # :help -O
+  vim -O ./*.md
+  ```
+
+## Useful Help Pages
+
+* `:help list-functions`
+* `:help key-notation`
+
+## Navigating Compressed Files
+
+* You can use vim to edit compressed files (e.g. `.gz`, `.tar`, and `.zip`)
+
+* Reference `:help pi_gzip.txt`
+* Reference `:help pi_tar.txt`
+* Reference `:help pi_zip.txt`
+
+## Jump Motions
+
+Useful to check out `:help jump-motions`
+
+* `ge`: Move back to the end of the previous word
+* `gE`: Move back to the end of the previous WORD
+* `)`: Move to the next sentence.
+* `'.'`: Move to where the last change was made
+* `<C-o>`: Go to previous jump
+* `<C-i>`: Go to next jump
+* `g;`: Go to where the previous change was made
+* `g,`: Go to where the next change was made
+* `]m`: Go to next function/method
+* `[m`: Go to previous function/method
+* `H`: Go to the top of the window
+* `M`: Go to the middle of the window
+
+## Quickly Open Help
+
+* In normal mode, you can view a help page for the word under the cursor by pressing `K`
+
+## Setting Keybindings
+
+* Setting a keybinding to execute something in command mode
+
+  ```vim
+  " Only set the mapping for this <buffer>
+  nnoremap <buffer> GG <CMD>echo 'woah'<CR>
+  ```

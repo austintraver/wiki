@@ -1,5 +1,5 @@
 {{ define "head" }}
-{{ if isset .Params "image" }}
-<meta property="og:image" content={{- .Param "image" | absURL -}}>
-{{ end }}
+  {{ if isset .Params "image" }}
+    <meta property="og:image" content={{- .Param "image" | absURL -}}>
+  {{ end }}
 {{ end }}

@@ -615,17 +615,6 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
   usermod <user> --login <new_username> --move-home --home <new_home_filepath>
   ```
 
-* Change a user's information on MacOS
-
-  ```sh
-  # [ macOS ]
-  sudo dscl . -change ~austin RealName 'Austin Traver' 'Fake Name'
-  # confirming the change
-  finger austin
-  # reverting the chang
-  sudo dscl . -change ~austin RealName 'Fake Name' 'Austin Traver'
-  ```
-
 * Change a user's information on a Linux OS
 
   ```sh

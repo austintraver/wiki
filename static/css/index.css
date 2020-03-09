@@ -5,18 +5,24 @@ div#grid {
 }
 
 /* Mobile */
-@media screen and (max-aspect-ratio: 2/3) {
+@media screen and (max-aspect-ratio: 3/5) {
   div#grid {
     grid-row-gap: 3vh;
     grid-template-columns: repeat(1, 1fr);
   }
+  img#teaser {
+    height: 38vh;
+  }
 }
 
 /* Desktop */
-@media screen and (min-aspect-ratio: 2/3) {
+@media screen and (min-aspect-ratio: 3/5) {
   div#grid {
     grid-row-gap: 4vh;
     grid-template-columns: repeat(3, 1fr);
+  }
+  img#teaser {
+    height: 19vh;
   }
   a#pagelink {
     transition: 0.3s;
