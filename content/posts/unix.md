@@ -591,7 +591,7 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
 
   ```sh
   # Keep a backup of the user's home directory, stored in the pwd
-  sudo deluser <user> --backup --remove-all-files <user>
+  sudo deluser <user> --backup --remove-all-files
   ```
 
 * Delete a group from the machine
@@ -624,6 +624,17 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
   chfn <user> -f "Austin Traver"
   # Long
   chfn <user> --full-name "Austin Traver"
+  ```
+
+* View which groups a user is associated with
+
+  ```sh
+  # For the current user (first group is the primary group)
+  groups
+  # => staff admin
+
+  # For any other user
+  groups <user>
   ```
 
 * Configuring DNS nameserver resolutions

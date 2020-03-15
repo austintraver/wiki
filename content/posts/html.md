@@ -74,6 +74,14 @@ If you write any of these three sequences somewhere in your HTML file, it will w
 | &#124; |`&#124;`|`&#x7c;`|`&vert;`|
 | } |`&#125;`|`&#x7d;`|`&rbrace;`|
 
+
+## Table
+
+|Char|Decimal Code Point|Hex Code Point|Character Entity|
+|:---:|:---:|:---:|:---:|
+| `\n` | 10 | `0xa` | `&NewLine;` |
+
+
 ## Sample HTML Page
 
 ```html

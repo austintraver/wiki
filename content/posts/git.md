@@ -139,6 +139,16 @@ The HEAD ref refers to the current branch that the user is working on.
   git branch feature tina/project
   ```
 
+* Setting the upstream for a branch
+
+  ```sh
+  # Short form
+  git branch -u <upstream>,
+
+  # Long form
+  git branch  --set-upstream-to=<upstream>
+  ```
+
 
 The branch you are working on has a `*` to identify it.
 
@@ -159,8 +169,11 @@ After you have made your changes, you can *merge* the changes back into the orig
 * Create a new branch that starts from the current commit of `master`, name this branch `feature`
 
   ```sh
-  # Checkout a new branch
-  git checkout --branch 'feature'
+  # Create a new branch and check it out
+  git checkout -b 'feature'
+
+  # Reset the working index, create a new branch, and check it out
+  git checkout -B 'feature'
   ```
 
 * Add all the changes and commit them
@@ -280,6 +293,8 @@ The first branch is called the *master branch* It has this name by default, and 
   ```sh
   git push --prune <remote>
   ```
+
+* Delete all local branches
 
 ## Configurations
 
@@ -593,3 +608,7 @@ Git isn't a utility designed for tracking binary files, such as a compiled C pro
   # Listing tracked paths
   # *.bin (.gitattributes)
   ```
+
+## GitHub Notes
+
+You can now use `@me` as a filter when performing a search on GitHub. For example, `is:issue state:open assignee:@me`

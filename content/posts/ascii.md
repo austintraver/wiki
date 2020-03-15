@@ -198,13 +198,13 @@ print -N 'hello '\E[3D '\E[2P'
   # +1
   ```
 
-  {{% notice warning %}}
-  **Warning:** If you're moving around vertically, be sure to surround your statement with `\E7` and `\E8` or else you'll likely truncate your output. Any text located beyond the cursor's final position *will be deleted*
-  {{% /notice %}}
+{{% notice warning %}}
+**Warning:** If you're moving around vertically, be sure to surround your statement with `\E7` and `\E8` or else you'll likely truncate your output. Any text located beyond the cursor's final position *will be deleted*
+{{% /notice %}}
 
-  {{% notice warning %}}
-  **Warning:** If you're adding space vertically, be sure to move your cursor down by the same amount of rows when you've finished inserting. If you don't, your output will be truncated.
-  {{% /notice %}}
+{{% notice warning %}}
+**Warning:** If you're adding space vertically, be sure to move your cursor down by the same amount of rows when you've finished inserting. If you don't, your output will be truncated.
+{{% /notice %}}
 
 
 * The program I wrote for practice, `globetrot`:

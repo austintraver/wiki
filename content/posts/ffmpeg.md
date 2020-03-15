@@ -79,3 +79,16 @@ Assuming you know the activation bytes of your file...
   ```sh
   for file in ~/episodes/*.mkv; do ffmpeg -i ${file} ${file:0:(-4)}.mp4; done
   ```
+
+## Concatenate Multiple `.mp3` Files
+
+
+  ```sh
+  #!/bin/zsh
+  ifile="concat:"
+  for file in ./*mp3; do
+    ifile+="${file}|"
+  done
+  ifile=${ifile:0:(-1)}
+  ffmpeg -i ${ifile} -i "001.mp3" -acodec copy "ofile.mp3" -map_metadata 0:1
+  ```

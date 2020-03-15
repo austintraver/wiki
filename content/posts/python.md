@@ -74,16 +74,16 @@ python -q
 
 A set in Python is implemented as a hash table. It has O(1) lookup and insertion time.
 
-Creating a set and inserting values:
+* Creating a set and inserting values:
 
-```py
-# Creating an empty set
-bag = {}
-bag = set()
-# Creating a set from a list of items
-bag = {1, 2}
-bag = set([1, 2])
-```
+  ```py
+  # Creating an empty set
+  bag = {}
+  bag = set()
+  # Creating a set from a list of items
+  bag = {1, 2}
+  bag = set([1, 2])
+  ```
 
 Adding items to a set:
 
@@ -524,3 +524,52 @@ def send_email(address: Union[str, List[str]],
                body: Optional[List[str]] = None
                ) -> bool:
 ```
+
+## Subprocesses
+
+Using the `subprocess` library, you can execute other commands from within your script, and capture the standard input and standard output of those commands
+
+* Capturing the standard input and output of the command `hello`
+
+  ```sh
+  #!/bin/zsh
+  # `hello` program
+
+  # Print one & two, separated by newline, to stdout
+  print 'one\ntwo' >&1
+
+  # Print 'three' to stderr
+  echo 'three' >&2
+  ```
+
+  ```py
+  from subprocess import run
+
+  # Capture the output in a variable named 'result'
+  result = run(args=['hello'], capture_output=True)
+
+# Decode the output
+  standard_output = result.stdout.decode()
+  print(standard_output)
+  # => 'one'
+  # => 'two'
+
+  # Decode the error
+  standard_error = result.stderr.decode()
+  print(standard_error)
+  # => 'three'
+  ```
+
+* Writing a program that prints to `stdout` and `stderr`
+
+  ```py
+  from sys import stdout, stderr
+
+  # Method 1
+  print('standard output', file=stdout)
+  print('standard error', file=stderr)
+
+  # Method 2
+  stdout.write("standard output\n")
+  stderr.write("standard error\n")
+  ```

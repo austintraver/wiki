@@ -37,6 +37,14 @@ These two programs were written in C during the mid 1970s and were eventually me
 * native package manager `:h packadd`
 * code-folding `:h folding`
 
+## Getting Started
+
+* Installing Vim and NeoVim on macOS
+
+```sh
+brew install vim --with-client-server
+```
+
 ## Learning `vim`
 
 Vim has a tutor mode, which can be accessed by typing `$ vimtutor`
@@ -112,16 +120,68 @@ This is the place to give the editor commands and make changes.
 
 ### Insert Mode
 
-Enter insert mode by typing `i` in command mode.
-Exit insert mode by typing **⌃ [** or **Esc**
+* Type `i` to enter insert mode
+
+* Type `<C-[>` or `<ESC>` to exit insert mode
+
+### Cmdline Mode
+
+* Type `:` to enter cmdline mode
+
+* Type `<Enter>` or `<C-m>` to exit cmdline mode
+
+* Type `<C-r>` `a` to insert the contents of register `a` with the contents of register `a`
+
+* Type `<C-r>` `=` to insert the result of the expression
+
+* Type `<C-\>` `e` to replace the entire contents of the command line with the result
+
+* Type `<C-d>` to list all matches of the current pattern
+
+#### Useful Commands
+
+* Insert the result of the expression into the text at the cursor location
+
+  ```vim
+  " Below the current line, add a line
+  " containing value of variable `g:ext`
+  put =g:ext
+
+  " Above the current line, add a line
+  " containing absolute filename
+  put! =&ft
+
+  " At the end of the file,
+  " add a line containing the string 'test'
+  $ put ='test'
+  ```
+
+* Display the content of registers
+
+  ```vim
+  " Of every register
+  display
+
+  " Of register `"=` in particular
+  display =
+
+
+
+### Selection Mode
+
+* Type `/` to begin a forward search
+
+* Type `?` to begin a backward search
+
+* Type `<Ctrl-G>` to move to the next match of the current search
+
+* Type `<Ctrl-T>` to move to the previous match of the current search
+  * Hint: `T` is above `G` on the keyboard
+
+* Type `<Ctrl-L>` to add one character of the current match to the search register
+
 
 ### `ex` Mode
-
-Also known as nter a command in `ex` mode, enter a `:` in normal mode.
-
-To exit `ex` mode, delete the `ex` command, or press <ESC>
-
-# `ex`
 
 ## The history of `ex`
 
@@ -264,8 +324,29 @@ Fun fact, not sure where to put it: The "rc" in ~/.vimrc stands for *run command
 
 You can always check `:help internal-variables` to review the types of internal-variables but here are the most common ones.
 
+|Namespace Type|Prefix|Scope|
+|:---:|:---:|:---:|
+| buffer-variable | `b:` | Local to the current buffer |
+| window-variable | `w:` | Local to the current window |
+| tabpage-variable | `t:` | Local to the current tab page |
+| global-variable | `g:` | Global |
+| local-variable | `l:` | Local to a function |
+| script-variable | `s:` | Local to a |:source|'ed Vim script |
+| function-argument | `a:` | Function argument (only inside a function) |
+| vim-variable | `v:` | Global, predefined by Vim |
+
+
 * If the variable is declared with no prefix within a function, it is local to the function.
+
 * If the variable is declared out of a function, it is global, and can be accessed while using vim either as the interactive editor or in a script
+
+### Examples
+
+* Assign the value of variable `var` to the result of `<expr>`
+
+  ```vim
+  let var = printf('filetype is %s', &filetype)
+  ```
 
 An example of setting variables using the `let` keyword
 
@@ -375,24 +456,26 @@ let g:markdown_minlines = 100
 
 You can get help in vim by typing `:help topicname`
 
-Usually this opens in a small window, so you can type **⌃ W O** which will expand the size of the window to encompass the full screen of the terminal. However, this will also close all other windows.
+Usually this opens in a small window, so you can type **⌃ W T** which open the current buffer in its own tab.
 
-A better option is to have the help page open in its own full-screen tab, which you can do with the substitution below
+An alternative option is to have the help page open in its own full-screen tab, which you can do with the substitution below
 ```vim
 " Old method "
-:h grep
+help grep
 " New method "
-:tab h grep
+tab help grep
 ```
 
 #### Tab navigation (normal mode)
-`gt` go to next tab
-`gT` go to previous tab
-`4gt` go to tab 4
+
+* `gt` go to next tab
+* `gT` go to previous tab
+* `4gt` go to tab 4
 
 ### Key Mappings
 
 You can specify which mode you would like to transform the operation of a given key combination.
+
 * `map`: transform the key combination for *all* modes.
 * `nmap`: transform the key combination for normal mode.
 * `imap`: transform the key combination for insert mode.
@@ -420,13 +503,15 @@ The syntax for vim regular expressions is slightly different than those used in 
 
 #### Metacharacters
 
-`\|` indicates alteration, e.g. `house\|home`
-`\(...\)` has two functions
-1. it allows for grouping, so that the `*` `\+` and `\=` operators can be used.
-2. it allows you to reference it in the replacement string with `\1`, `\2`, etc.
-  - e.g. `\([a-z]\).\1` would match `lol` or `kek`
+* `\|` indicates alteration, e.g. `house\|home`
+
+* `\(...\)` has two functions
+
+  1. it allows for grouping, so that the `*` `\+` and `\=` operators can be used.
+  2. it allows you to reference it in the replacement string with `\1`, `\2`, etc.
+  * e.g. `\([a-z]\).\1` would match `lol` or `kek`
 `\+` indicates "one or more" e.g. `\(ha\)\+` is one or more `ha` lines. Would match with `ha` or `haha` or `hahaha`
-`\=` will match zero or one of the preceding regular expression.
+`\?` will match zero or one of the preceding regular expression.
 `{3}` matches the preceding regular expression 3 times. `\(ha\)\{3}` would match `hahaha` but not `haha` or `hahahaha`
 `{,3}` matches the preceding regular expression between 0-3 times. It would match `ha` or `haha` but not
 `{3,}` matches the preceding regular expression at least 5 times.
@@ -613,23 +698,51 @@ To see all of the bindings, type `:tab h index`
 **Tip:** Use `:tabe file.txt` to open `file.txt` in a new tab.
 
 
+
 ## Registers
 
-* Register `%` contains the name of the current file
+### Read-Only Registers
 
-* Register `#` contains the name of the alternate file
+* `":` contains the most recently executed command
 
-* Register `":` contains the most recently executed command
+* `"%` contains the name of the current file
 
-* Register `".` contains the most recently inserted text
+* `".` contains the most recently inserted text
 
-* Register `"/` contains the most recently searched for pattern
+###  Special Registers
 
-* Register `"_` is a black-hole register, useful for scripting when you don't want to modify the contents of current registers
+* `"/` the most recently searched for pattern
 
-* register `"+` is the computer's clipboard. If you want to copy or paste a range of code, you can use this register to do so.
-    - In normal mode: type `gg"+yG` to copy the entire files contents in your clipboard
+* `#` the name of the alternate file
+
+* `"_` the black-hole register, useful for scripting when you don't want to modify the contents of current registers
+
+* `"+` is the computer's clipboard. If you want to copy or paste a range of code, you can use this register to do so.
+
+### Registers in Insert Mode
+
+When you're in insert mode, you can press `<C-r>`, followed by a register name, to insert the contents of that register
+
+### Registers in Command Mode
+
+* `<C-r>` followed by the name of a register inserts the contents of that register into the command line
+
+* `@a` will be evaluated as the contents of register `@a`
+
+* Setting the contents of the search register:
+
+  ```vim
+  let @/ = '<pattern>'
+  ```
+
+
+### Registers in Normal Mode
+
+* `gg"+yG` to copy the entire files contents in your clipboard
     - In ex mode: You can use the `:y[ank]` comamnd, for instance, `:%y+` will copy the current file's contents into your clipboard as well
+
+
+
 
 
 ### Writing to registers
@@ -638,6 +751,26 @@ To see all of the bindings, type `:tab h index`
 " Modifying the most recently searched item
 let @/ = "hello"
 ```
+
+* Copy each match to `/pattern/` as a line in register `@a`
+
+  ```vim
+  :global /pattern/ normal "AY
+  ```
+
+* Paste the previous pattern searched for in a command
+
+  ```vim
+  " Paste the pattern stored in the "/ register
+  %s_<C-r>/_
+  ```
+
+* Open the help page for the contents of register `"`
+
+  ```vim
+  " Actually input a <C-r> here
+  :help <C-r>"
+  ```
 
 
 ### `vimdiff`
@@ -800,6 +933,12 @@ If you've searched for a word, perhaps `/pattern` then you can use some familiar
 | [&grave; | jump to previous lowercase mark |
 | '' | jump back to previous line |
 | &grave;&grave; | jump back to previous line & column |
+| &grave;[ | jump to start of last change/yank |
+| &grave;] | jump to end of last change/yank |
+| &grave;< | jump to start of last visual area |
+| &grave;> | jump to end of last visual area |
+| &grave;. | jump to where the last change was made |
+| &grave;^ | jump to where insert mode was last stopped |
 
 ## Yanking
 
@@ -840,11 +979,11 @@ If you've searched for a word, perhaps `/pattern` then you can use some familiar
 
 ```vim
 " if you try this command, you'll get an error
-:source fnamemodify(stdpath('config'), ':h') . '/vim' . '/config.vim'
+source fnamemodify(stdpath('config'), ':h') . '/vim' . '/config.vim'
 " E484: Can't open file fnamemodify(stdpath('config'), ':h') . '/vim' . '/config.vim'
 
 " if you try this command, it will work
-:source `=fnamemodify(stdpath('config'), ':h') . '/vim' . '/config.vim'`
+source `=fnamemodify(stdpath('config'), ':h') . '/vim' . '/config.vim'`
 " Sourcing /Users/tommy/.config/vim/config.vim
 ```
 
@@ -855,7 +994,12 @@ The `netrw` tool, (which stands for *Network Read/Write*) within vim is a useful
 ### Getting Started
 
 * `vi .`: open up the file explorer upon launching, starting in the present working directory.
+
 * `:Tex`: open up the file explorer in a new tab.
+
+* `:Lex`: open up the file explorer on the left-side
+
+* `:Rex`: return to an existing file explore window
 
 
 ### Moving Files
@@ -989,18 +1133,19 @@ To open up the right help page for your package, sometimes you need to generate 
 
 ## Useful Window Keybindings
 
+Each of these commands is preceded by `\C-w`, or alternatively, the `:wincmd` command
 | Hotkey | Effect |
 | :---: | :---: |
-| Ctrl-w [n] | open a new window (below), open empty |
-| Ctrl-w [v] | vertical split window |
-| Ctrl-w [s] | horizontal split window |
-| Ctrl-w [P] | go to preview window |
-| Ctrl-w [z] | close preview window |
-| Ctrl-w [R] | rotate window vertically  |
-| Ctrl-w [r] | rotate window downwards |
-| Ctrl-w [r] | rotate window upwards |
-| Ctrl-w [w] | cycle through windows |
-| Ctrl-w [p] | go to last accessed window |
+| `n` | open a new window (below), open empty |
+| `v` | vertical split window |
+| `s` | horizontal split window |
+| `p` | go to preview window |
+| `z` | close preview window |
+| `R` | rotate window vertically  |
+| `r` | rotate window downwards |
+| `r` | rotate window upwards |
+| `w` | cycle through windows |
+| `p` | go to last accessed window |
 
 
 ## Useful Pending Search Keybindings
@@ -1024,10 +1169,10 @@ To open up the right help page for your package, sometimes you need to generate 
 | `gn` | Search forward for last used search pattern |
 | `gN` | Search forward for previous used search pattern |
 | `dgn` | Delete the next match to the search pattern |
-| o | Go diagonally across selection area |
-| O | Go to other side of the current row's selection |
-| d | Delete highlighted |
-| c | Change highlightred |
+| `o` | Go diagonally across selection area |
+| `O` | Go to other side of the current row's selection |
+| `d` | Delete highlighted |
+| `c` | Change highlightred |
 
 ## Random Cool Keybindings
 
@@ -1038,12 +1183,6 @@ To open up the right help page for your package, sometimes you need to generate 
 | `ga` | Print the UTF-8 character code for the character under the cursor |
 | `:=` | Print the last line number |
 | `+` | Move down to the first non-whitespace character in the row below |
-
-
-
-你
-😂
-
 
 ## Knowing Where to Look For Help
 
@@ -1060,17 +1199,77 @@ To open up the right help page for your package, sometimes you need to generate 
 
 * Reference: `:help starting.txt`
 
-```sh
-# :help -p
-vim -p ./*.md
-```
+* Open each file in its own tab
 
-* Open all markdown files in individual buffers
+  ```sh
+# :help -p
+  vim -p ./*.md
+  ```
+
+* Open each file in the same window, split horizontally
+
+  ```sh
+  # :help -o
+  vim -o ./*.md
+  ```
+
+* Open each file in the same window, split vertically
 
   ```sh
   # :help -O
   vim -O ./*.md
   ```
+
+* Open each file in its own tab
+
+  ```sh
+  # :help -p
+  vim -p ./*.md
+  ```
+
+* Open a file with the cursor starting on line 13
+
+  ```sh
+  # :help -+
+  vim '+13' file.txt
+  ```
+
+* Open a file with the cursor starting on the first match to `pattern`
+
+  ```sh
+  vim '+/pattern' file.txt
+  ```
+
+* Open a file and immediately execute a command
+
+  ```sh
+# Using `+`
+  vim '+echo "hello"' file.txt
+
+# Using `-c`
+vim -c 'echo "hello"' file.txt
+  ```
+
+* Open a file, and save the commands typed
+
+All the characters that you type are recorded in the file "scriptout", until you exit Vim.  This is useful if you want to create a script file to be used with `vim -s` or `:source!`.
+
+```sh
+# -h -w
+# -h :complex-repeat
+
+# Append normal mode input to the file `inputs.vim`
+vim -w 'inputs.vim' file.txt
+
+# Overwrite `inputs.vim`
+vim -W 'inputs.vim' file.txt
+```
+
+* Open a file, and execute the commands as input to normal mode of the file `inputs.vim`
+
+```sh
+vim -s 'inputs.vim'
+```
 
 ## Useful Help Pages
 
@@ -1114,3 +1313,54 @@ Useful to check out `:help jump-motions`
   " Only set the mapping for this <buffer>
   nnoremap <buffer> GG <CMD>echo 'woah'<CR>
   ```
+
+## Completion
+
+* `:h ins-complete-menu`
+
+* Set the maximum height of the completion menu to 10 rows
+
+  ```sh
+  set pumheight 10
+  ```
+
+## Substitution
+
+### `:s[ubstitute]`
+
+The `:s[ubstitute]` command is incredibly useful, some examples included below:
+
+* Substitute matches to pattern with `replacement`
+
+  ```vim
+  " One match, the current line
+  substitute /pattern/replacement
+
+  " All matches, the current line
+  substitute /pattern/replacement/g
+
+  " All matches, every line
+  % substitute /pattern/replacement/g
+  ```
+
+### `substitute()`
+
+The `substitute` command is also very useful, some examples includde below:
+
+* Substitute matches to `<expr>` with `<replacement>`
+
+  ```vim
+  let
+  ```
+
+### Replacement Expessions `\=`
+
+* `:h sub-replace-expression`
+
+* Substitute all matches with the result of `<expression>`
+
+  ```vim
+  " In this case, <expression> is expand("~")
+  % substitute /pattern/\='Directory ' . expand("~")/g
+
+test

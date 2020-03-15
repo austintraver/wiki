@@ -804,11 +804,12 @@ print -l "${(s.:.)PATH}"
 
 * `setopt NULL_GLOB`: If a glob pattern is not matched, don't return an error, return instead an empty string.
 
-#### `EXTENDED_GLOB`
+* `setopt EXTENDED_GLOB` will enable special glob patterns, examples provided below:
 
-`setopt EXTENDED_GLOB` will enable special glob patterns such as `#`, which allows you to "match zero-or-more instances of the preceeding pattern"
-
-For example, `./(.)#*`
+  ```sh
+  # Select any file in any directory, whose parent directory is not 'src', 'bin', or 'lib'
+  ./*/(*~src~bin~lib)/*(.); do
+  ```
 
 Included below are some features of the extended glob option:
 

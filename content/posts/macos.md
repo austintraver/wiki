@@ -902,7 +902,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
   sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWOTHERUSERS_MANAGED -bool false
   ```
 
-* Add `tommy` to the list of hidden users
+* Add `tommy` to the list of users hidden on the login screen
 
   ```sh
   sudo defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add "tommy"
@@ -1227,6 +1227,12 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 
   ```sh
   dns-sd -Z _ipp._tcp .
+  ```
+
+* Scan for hosts on the network that have enabled login via the `SSH` protocol.
+
+  ```sh
+  dns-sd -Z _ssh._tcp .
   ```
 
 * Ping the printer to see if it responds
