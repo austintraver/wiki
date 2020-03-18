@@ -374,8 +374,13 @@ say_something
 # => "Standard Output"
 # => "Standard Error"
 
-say_something &>-
-# (no output)
+say_something 1>&-
+# => func:1: 1: bad file descriptor
+# => "Standard Error"
+
+say_something 2>&-
+# => "Standard Output"
+# => zsh: write error
 ```
 
 ## Shell Arguments, Options, Flags
@@ -752,6 +757,12 @@ For all of these `TRAP[NAL]()` functions, if the final command is `return 0` (or
 
   ```sh
   fc -l 800 850
+  ```
+
+* List all commands in history that started with `sudo`
+
+  ```sh
+  fc -lim 'sudo *' 1
   ```
 
 ## Globbing
@@ -1446,16 +1457,19 @@ print "6 / 8 = $(( 6 / 8.0 ))"
 
 ## File Descriptors
 
-* `<&-` Close the standard input.
+* `1<&-`: Close the standard input.
 
-* `>&-` Close the standard output.
+* `1>&-`: Close the standard output.
 
 * `<&p`: Move the input from the coprocess to stdin
 
 * `>&p`: Move the output from the coprocess to output
 
-* `>&1` will be directed to `/dev/stdout`
-* `>&2` will be directed to `/dev/stderr`
+* `2>&1`: `/dev/stderr` will be directed to `/dev/stdout`
+
+* `1>&2`: `/dev/stdout` will be directed to `/dev/stderr`
+
+* `&> file.txt`:  both `/dev/stdout` and `/dev/stderr`
 
 * Redirect output and error to different files
 

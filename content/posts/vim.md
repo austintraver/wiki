@@ -727,6 +727,14 @@ When you're in insert mode, you can press `<C-r>`, followed by a register name, 
 
 * `<C-r>` followed by the name of a register inserts the contents of that register into the command line
 
+* `<C-r><C-w>` will insert the `word` currently under the cursor
+
+* `<C-r><C-a>` will insert the `WORD` currently under the cursor
+
+* `<C-r><C-l>` will insert the `line` currently under the cursor
+
+* `<C-r><C-p>` will insert the `file` under the cursor
+
 * `@a` will be evaluated as the contents of register `@a`
 
 * Setting the contents of the search register:
@@ -786,10 +794,31 @@ vim -d old.txt new.txt
 To test any of these out, you can type `echo expand('%:p')`
 
 * `%:.` the filepath relative to the current directory `vim.md`
+
 * `%:~` the filepath relative to the home directory `~/notes/_pages/vim.md`
+
 * `%:p` the absolute filepath `/Users/atraver/notes/_pages/vim.md`
+
 * `%:r` the filename root, without the extension `vim`
+
 * `%:e` the filename extension, without the root `md`
+
+### `expand()` Selectors
+
+As we saw above with `echo expand('%:p')`, we can do the same with some `expand()` selectors, shown below
+
+  ```vim
+  " :h :<cword>
+
+  " the [c]ursor [word] in its current position
+  echo expand('<cword>')
+
+  " the [c]ursor [WORD] in its current position
+  echo expand('<cWORD>')
+
+  " for autocommands, the filename of the buffer being manipulated
+  echo expand('<afile>')
+  ```
 
 Splitting the filepath can be done by appending `:h` or `:t` as follows:
 
@@ -875,7 +904,9 @@ Here are some additional examples:
 
 * `d?pattern` will delete everything from the cursor back to the last match.
 
-* `gnd` will delete the next match to the current pattern.
+* `dgn` will delete the next match search pattern match
+
+* `cgn` will change the next search pattern match
 
 * `gnD` will delete the entire line containing the next match to the current pattern.
 

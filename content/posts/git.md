@@ -498,7 +498,7 @@ git config --global --replace-all mergetool.prompt false
 
 Add this to your `~/.vimrc` so that when `vimdiff` is active, you can simply select window 1, 2, or 3
 
-```
+```vim
 if &diff
     map <leader>1 :diffget LOCAL<CR>
     map <leader>2 :diffget BASE<CR>
@@ -510,7 +510,7 @@ endif
 
 Add this to your `~/.gitconfig`
 
-```
+```gitconfig
 [merge]
   # tool = vimdiff
 	tool = codemerge
@@ -526,7 +526,7 @@ Add this to your `~/.gitconfig`
 
 Add this to your `~/.gitconfig`
 
-```
+```gitconfig
 [diff]
   tool = codediff
 [difftool "codediff"]
@@ -599,6 +599,28 @@ Git isn't a utility designed for tracking binary files, such as a compiled C pro
   ```sh
   git lfs track '*.tgz'
   git add '.gitattributes'
+  ```
+
+## Git Submodules
+
+Sometimes you need to use somebody's project as part of your project. It'd be wasteful to copy all of the revisions of their code base into your git repository, as you won't be the one making/reversing those edits. Thankfully the `git submodule` command allows us to use other repositories within our own.
+
+* Initialize repository for submodule support
+
+  ```sh
+  git submodule init
+  ```
+
+* Add a submodule to a repository
+
+  ```sh
+  git submodule add 'git@github.com:austintraver/homebrew-tap.git' relative/path/from/root
+  ```
+
+* View the status of all submodules
+
+  ```sh
+  git submodule summary
   ```
 
 * To see a list of all patterns currently being tracked by `git-lfs`, run git lfs track (with no arguments)

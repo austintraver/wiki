@@ -438,3 +438,13 @@ If you are typing out a command, and you include environment variables (e.g. `$P
 echo $HOME<TAB>
 echo /Users/austin
 ```
+
+## Speak from Terminal
+
+```sh
+# Speaking from terminal
+say 'hello world'
+
+# Singing from terminal
+say -v 'good news' di di di di di di
+```
