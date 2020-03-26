@@ -1372,16 +1372,38 @@ The `:s[ubstitute]` command is incredibly useful, some examples included below:
 
   " All matches, every line
   % substitute /pattern/replacement/g
+
+  " One match, current line, case insensitive
+  substitute /\cpattern/replacement/g
+
+  " One match, current line, case sensitive
+  substitute /\Cpattern/replacement/g
   ```
 
 ### `substitute()`
 
-The `substitute` command is also very useful, some examples includde below:
+The `substitute(expression, pattern, replacement, flags)` function is also very useful, some examples below:
 
-* Substitute matches to `<expr>` with `<replacement>`
+* Substitute first match of `<expr>` with `<replacement>`
 
   ```vim
-  let
+  let sentence = 'the quick brown fox jumped over the lazy dog'
+  echo substitute(sentence, '\<the\>', 'a', '')
+  ```
+
+  ```txt
+  a quick brown fox jumped over the lazy dog
+  ```
+
+* Substitute every match of `<expr>` with `<replacement>`
+
+  ```vim
+  let sentence = 'the quick brown fox jumped over the lazy dog'
+  echo substitute(sentence, '\<the\>', 'a', 'g')
+  ```
+
+  ```txt
+  a quick brown fox jumped over a lazy dog
   ```
 
 ### Replacement Expessions `\=`

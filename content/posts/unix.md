@@ -938,3 +938,9 @@ The `dns-sd` diagnostic tool is useful for network scanning. If you are trying t
   ```sh
   dns-sd -L "Tommy's MacBook Pro" _ssh._tcp
   ```
+
+* Look up all advertised bonjour services
+
+  ```sh
+  dns-sd -B _services._dns-sd._udp .
+  ```

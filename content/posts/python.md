@@ -13,15 +13,19 @@ image = "python.png"
 
 * On macOS
 
+Installing Python on macOS via Homebrew, at the time of writing, will not install the most current version of Python available, despite it being released 5 months ago.
+
   ```sh
-  brew install python3
-  export PATH=/usr/local/opt/python/libexec/bin:${PATH}
+  brew install python@3.8
+
+  # Add to .zshenv
+  path=(/usr/local/opt/python@3.8/libexec/bin ${path})
   ```
 
 * On Debian
 
   ```sh
-  sudo apt install python3
+  sudo apt install python3.8
   sudo apt install python3-pip
   sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
   sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1

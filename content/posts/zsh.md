@@ -1000,6 +1000,22 @@ echo ./*(.om[1])
 print -l ./*(.mh-1)
 ```
 
+* Add each directory to an array, but only if it exists
+
+```sh
+# Using
+# (N) enable null glob
+# (/) only match an existing directory
+typeset -a my_array
+my_array=( /usr(/N) /bin(/N) /asdf(/N))
+print -l ${my_array}
+```
+
+```txt
+/usr
+/bin
+```
+
 * Select all files that aren't named `tmp`
 
 ```sh
@@ -1224,6 +1240,24 @@ The `whence` command is very useful, and can replace many common commands
 * `whence -c` is equivalent to `which`
 * `whence -c` is equivalent to  `where`
 * `whence` is equivalent to `command -v`
+
+### Finding Commands Matching a Pattern
+
+You can use the `-m` option to match a pattern instead of a command name. Be sure to use a **quoted string** for your pattern, otherwise it is subject to filename expansion.
+
+* Finding commands starting with `print`
+
+  ```sh
+  whence -m 'print*'
+  ```
+
+  ```txt
+  print
+  printf
+  /usr/local/bin/printafm
+  /usr/local/opt/coreutils/libexec/gnubin/printenv
+  /usr/local/opt/coreutils/libexec/gnubin/printf
+  ```
 
 ## `here-doc`
 
@@ -1736,6 +1770,10 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
 * `typeset -l <var>`: convert `<var>` to lower-case whenever expanded
 * `typeset -u <var>`: convert `<var>` to upper-case whenever expanded
 
+### Printing Environment Variables
+
+#### Matching a Certain Type
+
 * Printing all variables of a certain `typeset`:
 
   ```sh
@@ -1746,6 +1784,44 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
   # View the assignment of a variable
   typeset USER
   ```
+
+#### Matching a Certain Pattern
+
+* Just the matching variable name:
+
+```sh
+typeset +m 'foo*'
+```
+
+```txt
+foo
+foo_fighters
+food
+```
+
+* Matching variable name and its assigned value:
+
+```sh
+typeset -m 'foo*'
+```
+
+```txt
+foo=bar
+foo_fighters=awesome
+food=(my life)
+```
+
+* Matching variables' `typeset` options, its name, and its assigned value
+
+```sh
+typeset -p -m 'foo*'
+```
+
+```txt
+typeset foo=bar
+typeset foo_fighters=awesome
+typeset -a food=( my life )
+```
 
 ### Pairing Scalars and Arrays
 
@@ -1768,8 +1844,8 @@ Zsh gives you the ability to link two variables together, a scalar and an array.
 Printing colors can be done with SGR escape codes, explained on the [ASCII](/ascii) page, but you can also do it with the prompt string format specifier syntax outlined below:
 
   ```sh
-  print -P '%F{red}[red foreground]%f'
-  print -P '%K{red}[red background]%k'
+  print -P '%F{9}[red foreground]%f'
+  print -P '%K{blue}[blue background]%k'
   print -P '%U[underline]%u'
   print -P '%B[bold]%b'
   print -P '%S[standout]%s

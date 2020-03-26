@@ -10,7 +10,7 @@
 <div id="main">
   {{ partial "sidebar" . }}
   <div id="grid">
-    {{ range where .Site.RegularPages.ByLastmod.Reverse "Section" "posts" }}
+    {{ range where .Site.RegularPages "Section" "posts" }}
       {{ $image := path.Join "static" "img" (.Param "image") }}
       {{ if fileExists $image -}}
         <a id="pagelink" href="{{ ref . .File.ContentBaseName }}">

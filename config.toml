@@ -5,6 +5,7 @@ languageCode = "en-us"
 publishDir = "docs"
 relativeURLs = true
 enableInlineShortcodes = true
+enableGitInfo = true
 [markup]
     [markup.highlight]
         style = "dracula"
@@ -14,5 +15,5 @@ enableInlineShortcodes = true
 [permalinks]
     posts = "/:title"
 [frontmatter]
-    modified = ["modified", ":fileModTime"]
+    lastmod = ["lastmod", ":git", ":fileModTime"]
     date = ["date", "modified"]
