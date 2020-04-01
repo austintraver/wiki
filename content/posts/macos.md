@@ -1,7 +1,6 @@
 +++
 title = "macOS"
 description = "The best OS a parents' money can buy"
-date = 2020-02-04T14:52:27-08:00
 image = "macos.jpg"
 +++
 
