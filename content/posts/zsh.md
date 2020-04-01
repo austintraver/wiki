@@ -2009,3 +2009,26 @@ Its completion function can be:
       esac
   }
   ```
+
+## Job Control
+
+
+There are several ways to refer to jobs in the shell. A job can be referred to by the process ID of any process of the job or by one of the following:
+
+* `%2`
+  The last job with job ID `2`
+
+* `%vi`
+  The last job whose command line begins with `vi`
+
+* `%?grep`
+  The last job whose command line contains `grep`
+
+* `%%`
+  The current job.
+
+* `%+`
+  Equivalent to `%%`.
+
+* `%-`
+  The previous job.

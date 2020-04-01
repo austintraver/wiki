@@ -735,7 +735,7 @@ When you're in insert mode, you can press `<C-r>`, followed by a register name, 
 
 * `<C-r><C-p>` will insert the `file` under the cursor
 
-* `@a` will be evaluated as the contents of register `@a`
+* `@a` will execute the contents of register `@a` as a series of normal mode commands
 
 * Setting the contents of the search register:
 
@@ -743,22 +743,42 @@ When you're in insert mode, you can press `<C-r>`, followed by a register name, 
   let @/ = '<pattern>'
   ```
 
+* You can repeat the last `:` command in normal mode by typing `@:`
 
-### Registers in Normal Mode
-
-* `gg"+yG` to copy the entire files contents in your clipboard
-    - In ex mode: You can use the `:y[ank]` comamnd, for instance, `:%y+` will copy the current file's contents into your clipboard as well
+* You can repeat the last register referenced via normal mode's `@` by typing `@@`
 
 
+### Copying to Clipboard
 
+1. Normal Mode
 
+  Use the `"` mapping to refer to the clipboard register `"+`
+
+  * Copying the contents of the active buffer to the clipboard
+
+    ```txt
+    gg"+yG
+    ```
+
+2. Command-line Mode
+
+  Use the `:y[ank]` comamnd
+
+  * Copying the contents of the active buffer to the clipboard
+
+    ```txt
+    :%y+
+    ```
 
 ### Writing to registers
 
-```vim
-" Modifying the most recently searched item
-let @/ = "hello"
-```
+The `@/` register stores the last search pattern
+
+* Modifying the most recently searched item
+
+  ```vim
+  let @/ = "\<word\>"
+  ```
 
 * Copy each match to `/pattern/` as a line in register `@a`
 
@@ -785,9 +805,11 @@ let @/ = "hello"
 
 On your terminal, the `vim` command has a `-d` flag which you can use to activate vim's *diff mode*.
 
-```sh
-vim -d old.txt new.txt
-```
+* Launching vim in *diff mode*
+
+  ```sh
+  vim -d old.txt new.txt
+  ```
 
 ### Filepath Shortcuts
 
@@ -823,13 +845,14 @@ As we saw above with `echo expand('%:p')`, we can do the same with some `expand(
 Splitting the filepath can be done by appending `:h` or `:t` as follows:
 
 * `%p:h` the `:h` will return everything left of the right-most `/`, in this case being `/Users/austin/notes/_pages`
+
 * `%p:t` does the exact same thing, but will return everything right of the right-most `/`, in this case being `vim.md`
 
 ### Motions (Text Objects)
 
 In vim, *motions*, otherwise known as *text objects* can be used to execute a modification in a way more specific than anything possible using just the mouse. They follow the following structure:
 
-```
+```txt
 <number> <command> <motion>
 ```
 
@@ -1415,5 +1438,4 @@ The `substitute(expression, pattern, replacement, flags)` function is also very 
   ```vim
   " In this case, <expression> is expand("~")
   % substitute /pattern/\='Directory ' . expand("~")/g
-
-test
+  ```

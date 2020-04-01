@@ -662,6 +662,25 @@ There is a hidden command, called airport. To use it, add the following director
   tmutil stopbackup
   ```
 
+### Speeding Up Time Machine Backups
+
+If you are having trouble because time machine is taking too long, there's a way to speed up the pace of the back-up.
+
+* Enabling speedy backups (by disabling priority filtering)
+
+  ```sh
+  sudo sysctl debug.lowpri_throttle_enabled=0
+  ```
+
+* Disabling speedy backups (by enabling priority filtering)
+
+  ```sh
+  sudo sysctl debug.lowpri_throttle_enabled=1
+  ```
+
+The changes made in this command are temporary, they will automatically reset to their default state on their own once the computer has been rebooted.
+
+
 ### Saving Local Snapshots
 
 By default, Time Machine will create *local snapshots*, locally stored backup volumes when it can't connect to your Time Capsule.
@@ -1296,4 +1315,16 @@ Virtual Network Computing, or *VNC*, is more commonly known as *Screen Sharing*,
 
   ```sh
   sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
+  ```
+
+### Icon Folder
+
+Icons are located in `/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/`
+SD Card Icons are located in `/System/Library/Extensions/IOSCSIArchitectureModelFamily.kext/Contents/Resources/`
+Drive Icons are located in `/System/Library/Extensions/IOStorageFamily.kext/Contents/Resources/`
+
+* Listing all icon files
+
+  ```sh
+  print -l /System/Library/**/*/Contents/Resources/*.icns
   ```

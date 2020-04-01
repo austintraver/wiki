@@ -53,7 +53,7 @@ The commands below will require you to log into your `mysql` server, which you c
 
 Connecting to MySQL server from the command line
 
-```shell
+```sh
 # [Local MySQL Server]
 mysql -u root
 # [Remote MySQL Server]
@@ -67,7 +67,7 @@ mysql \
 
 Connecting to MySQL server from `NodeJS`
 
-```javascript
+```js
 const connection = mysql.createConnection({
   host: "myremoteserver.amazonaws.com",
   user: "admin",
@@ -75,6 +75,7 @@ const connection = mysql.createConnection({
   database: "mydb"
 })
 ```
+
 ## `SQL` Clauses
 
 ### `AS`
@@ -462,7 +463,7 @@ Specifying default values for a table's key-columns
 CREATE TABLE Example (
 	number INT(4) DEFAULT -1,
 	word VARCHAR(10) DEFAULT '',
-	# specify a number with 6 digits max, of which 2 may be decimal points
+	-- specify a number with 6 digits max, of which 2 may be decimal points
 	latitude FLOAT(6,2) DEFAULT 0.00
 	longitude FLOAT(6,2) DEFAULT 0.00
 );
@@ -498,8 +499,12 @@ Creating a table with foreign keys
 CREATE TABLE Searches (
 	search_id INT(4) PRIMARY KEY AUTO_INCREMENT,
 	user_query VARCHAR(100) NOT NULL,
-	user_id INT(4) NOT NULL references Users(user_id)
-	# the foreign "Key column" (in this case userID) can have a different name than the column that it referenced
+  user_id INT(4)
+	user_id FOREIGN KEY references Users(user_id)
+	/*
+  The foreign "Key Column" (in this case 'user_id')
+  can have a different name than the column that it referenced
+  */
 );
 ```
 
@@ -532,8 +537,8 @@ ALTER TABLE this_table ADD new_column_name VARCHAR(10);
 Looking up the current user using `mysql`
 
 ```sql
-SELECT CURRENT_USER(); # Show current user
-SELECT user FROM mysql.user; # Show all users
+SELECT CURRENT_USER(); -- Show current user
+SELECT user FROM mysql.user; -- Show all users
 ```
 
 Changing a user’s password for `mysql`
@@ -543,41 +548,70 @@ SET PASSWORD FOR 'root'@'localhost' = 'root';
 ```
 
 
-Setting timezone in `mysql`
+### Setting The Time Zone
 
-```sql
-SET GLOBAL time_zone = '+00:00'; # set SQL's global time-zone value to UTC (London);
-SET time_zone = '+08:00'; # set SQL's session time-zone value to PST (California);
-```
+* Setting the time zone to Universal Coordinated Time (UTC)
 
-Converting a time-zone in `mysql`
+  ```sql
+  SET GLOBAL time_zone = '+00:00';
+  ```
 
-```sql
-SELECT CONVERT_TZ('2012-06-07 8:53:23', '-05:00', '+00:00');
-/*
-Convert the timestamp from it's "from_timezone" -05:00 (PST) to the "to_time
-zone" UTC time. It was 8:53 in California, which was (output: 13:53) in London
- */
-```
+* Permanently setting the time zone to California
+
+  ```sql
+  -- Option 1
+  SET GLOBAL time_zone = 'America/Los_Angeles';
+
+  -- Option 2 (Fixed offset, will not respect Daylight Savings)
+  SET GLOBAL time_zone = '-08:00'
+  ```
+
+* Temporarily setting the time zone to California time
+
+  ```sql
+  SET time_zone = 'America/Los_Angeles'
+  ```
+
+* Setting the time zone in the configuration file `~/.my.cnf`
+
+  ```txt
+  [client]
+  port = 3306
+
+  [mysqld]
+  prompt = '\u@\h [\d]> '
+  default-time-zone = '+00:00'
+  ```
+
+* Converting a time-zone in `mysql`
+
+  ```sql
+  /*
+  Convert the timestamp from it's "from_timezone" -05:00 (PST) to the "to_time
+  zone" UTC time. It was 8:53 in California, which was (output: 13:53) in London
+  */
+
+  SELECT CONVERT_TZ('2012-06-07 8:53:23', '-05:00', '+00:00');
+  ```
 
 ### Misc
 
-Creating a table that uses timestamps
+* Creating a table that uses timestamps
 
-```sql
-CREATE TABLE Searches (
-	search_id INT(4) PRIMARY KEY AUTO_INCREMENT,
-	search_query VARCHAR(100) NOT NULL,
-	period TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+  ```sql
+  CREATE TABLE Searches (
+    search_id INT(4) PRIMARY KEY AUTO_INCREMENT,
+    search_query VARCHAR(100) NOT NULL,
+    period TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+  ```
 
 
-Supporting UTF-8 encoding
+* Supporting UTF-8 encoding
 
-```sql
-SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
-```
+  ```sql
+  SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
+  ```
 
 {{% notice success %}}
 **Update:** If you're using `mysql` version 8 or later, this option is chosen by default.

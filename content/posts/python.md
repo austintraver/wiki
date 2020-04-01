@@ -31,38 +31,12 @@ Installing Python on macOS via Homebrew, at the time of writing, will not instal
   sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
   ```
 
-### Setting Up `pylint`
-
-* On macOS
-
-  ```sh
-  pip install pylint
-  export PATH="~/Library/Python/3.7/bin:${PATH}"
-  ```
-
-* On Debian
-
-  ```sh
-  sudo apt install pylint
-  ```
-
-```sh
-pylint --generate-rcfile > ~/.pylintrc
-```
-
-If `pylint` notifies you about a linting error that you don't like, add it as an entry, seperated by a comma, to `disable`. e.g.
-
-```
-disable=missing-docstring,
-        invalid-name,
-        bare-except
-```
 
 ### Silencing the `python` Console Welcome Message
 
 Normally, when you open the `python` console, the following welcome message will appear when you enter.
 
-```
+```txt
 Python 3.7.3 (default, Jun 19 2019, 07:38:49)
 [Clang 10.0.1 (clang-1001.0.46.4)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -155,6 +129,33 @@ jupyter notebook --generate-config
 ```sh
 pass="letmein"
 python -c "from notebook.auth import passwd; print(passwd('${pass}'))"
+```
+
+### Setting Up `pylint`
+
+* On macOS
+
+  ```sh
+  pip install pylint
+  export PATH="~/Library/Python/3.7/bin:${PATH}"
+  ```
+
+* On Debian
+
+  ```sh
+  sudo apt install pylint
+  ```
+
+```sh
+pylint --generate-rcfile > ~/.pylintrc
+```
+
+If `pylint` notifies you about a linting error that you don't like, add it as an entry, seperated by a comma, to `disable`. e.g.
+
+```
+disable=missing-docstring,
+        invalid-name,
+        bare-except
 ```
 
 ## Plotly
@@ -326,37 +327,48 @@ print(time.tzname)
 # => ('EST', 'EDT')
 ```
 
-```py
+* Print all timezones
 
+```py
 from datetime import datetime
 from pendulum import timezone, timezones
 
 for zone in timezones:
   print(zone)
+```
 
-zone = timezone("Pacific/Honolulu") # -10:00
-zone = timezone("America/Juneau") # -09:00
-zone = timezone("America/Los_Angeles") # -08:00
-zone = timezone("America/Denver") # -07:00
-zone = timezone("America/Chicago") # -06:00
-zone = timezone("America/New_York") # -05:00
-zone = timezone("Europe/London") # +00:00
-zone = timezone("Europe/Paris") # +01:00
-zone = timezone("Europe/Athens") # +02:00
-zone = timezone("Europe/Moscow") # +03:00
-zone = timezone("Asia/Tehran") # +03:30
-zone = timezone("Asia/Dubai") # +04:00
-zone = timezone("Asia/Kabul") # +04:30 (capitol of Afghanistan)
-zone = timezone("Asia/Dushanbe") # +05:00 (capitol of Tajikstan)
-zone = timezone("Asia/Kathmandu") # +05:45 (capitol of Nepal)
-zone = timezone("Asia/Dhaka") # +06:00 (capitol of Bangladesh)
-zone = timezone("Asia/Bangkok") # +07:00
-zone = timezone("Asia/Shanghai") # +08:00
-zone = timezone("Asia/Tokyo") # +09:00
-zone = timezone("Australia/Sydney") # +10:00
-zone = timezone("Asia/Noumea") # +11:00 (capitol of New Caledonia)
-zone = timezone("Pacific/Fiji") # +12:00
+* Some common timezones:
 
+```py
+[
+  timezone("Pacific/Honolulu"), # -10:00
+  timezone("America/Juneau"), # -09:00
+  timezone("America/Los_Angeles"), # -08:00
+  timezone("America/Denver"), # -07:00
+  timezone("America/Chicago"), # -06:00
+  timezone("America/New_York"), # -05:00
+  timezone("Europe/London"), # +00:00
+  timezone("Europe/Paris"), # +01:00
+  timezone("Europe/Athens"), # +02:00
+  timezone("Europe/Moscow"), # +03:00
+  timezone("Asia/Tehran"), # +03:30
+  timezone("Asia/Dubai"), # +04:00
+  timezone("Asia/Kabul"), # +04:30 (capitol of Afghanistan)
+  timezone("Asia/Dushanbe"), # +05:00 (capitol of Tajikstan)
+  timezone("Asia/Kathmandu"), # +05:45 (capitol of Nepal)
+  timezone("Asia/Dhaka"), # +06:00 (capitol of Bangladesh)
+  timezone("Asia/Bangkok"), # +07:00
+  timezone("Asia/Shanghai"), # +08:00
+  timezone("Asia/Tokyo"), # +09:00
+  timezone("Australia/Sydney"), # +10:00
+  timezone("Asia/Noumea"), # +11:00 (capitol of New Caledonia)
+  timezone("Pacific/Fiji") # +12:00
+]
+```
+
+* Other useful commands
+
+```py
 moment = datetime.now()
 
 print(moment.astimezone(zone).isoformat())
@@ -535,34 +547,38 @@ Using the `subprocess` library, you can execute other commands from within your 
 
 * Capturing the standard input and output of the command `hello`
 
-  ```sh
-  #!/bin/zsh
-  # `hello` program
+  * Shell script
 
-  # Print one & two, separated by newline, to stdout
-  print 'one\ntwo' >&1
+    ```sh
+    #!/bin/zsh
+    # `hello` program
 
-  # Print 'three' to stderr
-  echo 'three' >&2
-  ```
+    # Print one & two, separated by newline, to stdout
+    print 'one\ntwo' >&1
 
-  ```py
-  from subprocess import run
+    # Print 'three' to stderr
+    echo 'three' >&2
+    ```
 
-  # Capture the output in a variable named 'result'
-  result = run(args=['hello'], capture_output=True)
+  * Python script
 
-# Decode the output
-  standard_output = result.stdout.decode()
-  print(standard_output)
-  # => 'one'
-  # => 'two'
+    ```py
+    from subprocess import run
 
-  # Decode the error
-  standard_error = result.stderr.decode()
-  print(standard_error)
-  # => 'three'
-  ```
+    # Capture the output in a variable named 'result'
+    result = run(args=['hello'], capture_output=True)
+
+    # Decode the output
+    standard_output = result.stdout.decode()
+    print(standard_output)
+    # => 'one'
+    # => 'two'
+
+    # Decode the error
+    standard_error = result.stderr.decode()
+    print(standard_error)
+    # => 'three'
+    ```
 
 * Writing a program that prints to `stdout` and `stderr`
 

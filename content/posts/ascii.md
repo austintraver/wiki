@@ -373,3 +373,16 @@ Cameron's To Do List:
 | 8969 | 0x2309 | >7 | ⌉ |
 | 8970 | 0x230A | 7< | ⌊ |
 | 8971 | 0x230B | 7> | ⌋ |
+
+## The Racket with Brackets
+
+After diving down a Wikipedia rabbit hole, I finally figured out what to call all of the punctuation used when coding. **Brace yourselves** (ha.)
+
+Everything pair can validly be described as a bracket.
+
+| Spoken Name | Technical Name | Character |
+| :---: | :---: | :---: |
+| Bracket | Square bracket | `[` `]` |
+| Brace | Curly bracket `{` `}` |
+| Parenthesis | Round bracket | `(` `)` |
+| Chevron | Angle bracket | `<` `>` |
