@@ -631,6 +631,20 @@ Sometimes you need to use somebody's project as part of your project. It'd be wa
   # *.bin (.gitattributes)
   ```
 
+## The `log` Subcommand
+
+* View the date that a file was last added/commited
+
+  ```sh
+  git log -1 --format="%ai" -- /path/to/file
+  ```
+
+* View the date that files were first added/committed
+
+  ```sh
+  git log --format="format:%ci" --name-only --diff-filter=A
+  ```
+
 ## GitHub Notes
 
 You can now use `@me` as a filter when performing a search on GitHub. For example, `is:issue state:open assignee:@me`

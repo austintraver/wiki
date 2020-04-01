@@ -15,5 +15,6 @@ enableGitInfo = true
 [permalinks]
     posts = "/:title"
 [frontmatter]
-    lastmod = ["lastmod", ":git", ":fileModTime"]
-    date = ["date", "modified"]
+    # lastmod = ["lastmod", ":git", ":fileModTime"]
+    # date = [":default"] # ["date", "publishDate", "lastmod"]
+    date = [":git"]
