@@ -1787,7 +1787,7 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
 
 #### Matching a Certain Pattern
 
-* Just the matching variable name:
+* Print environment variables whose names match the pattern
 
 ```sh
 typeset +m 'foo*'
@@ -1799,7 +1799,7 @@ foo_fighters
 food
 ```
 
-* Matching variable name and its assigned value:
+* Print variable and its corresponding value for environment variables whose names match the pattern
 
 ```sh
 typeset -m 'foo*'
@@ -1811,7 +1811,7 @@ foo_fighters=awesome
 food=(my life)
 ```
 
-* Matching variables' `typeset` options, its name, and its assigned value
+* Print variables' `typeset` options, its name, and its assigned value, for each matching the pattern:
 
 ```sh
 typeset -p -m 'foo*'
@@ -1822,6 +1822,30 @@ typeset foo=bar
 typeset foo_fighters=awesome
 typeset -a food=( my life )
 ```
+
+* Print all keys in an associative array that **don't** start with `foo`
+
+  ```sh
+  print ${(k)example:#foo*}
+  ```
+
+* Print all keys in an associative array that **do** start with `foo`
+
+  ```sh
+  print ${(Mk)example:#foo*}
+  ```
+
+* Print all values in an associative array that **don't** start with `foo`
+
+  ```sh
+  print ${(v)example:#foo*}
+  ```
+
+* Print all values in an associative array that **do** start with `foo`
+
+  ```sh
+  print ${(Mv)example:#foo*}
+  ```
 
 ### Pairing Scalars and Arrays
 
@@ -2032,3 +2056,16 @@ There are several ways to refer to jobs in the shell. A job can be referred to b
 
 * `%-`
   The previous job.
+
+## Zsh Modules
+
+Zsh comes with many useful modules, but none are loaded by default. This is done in order to prevent optional features from needlessly slowing down the shell's startup time.
+
+### zsh/nearcolor
+
+* Print the closest match to violet (`#AFAFFF`) among the 256 terminal colors
+
+  ```sh
+  zmodload zsh/nearcolor
+  print -P '%F{#AFAFFF}Violet%f`
+  ```

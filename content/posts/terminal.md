@@ -104,7 +104,7 @@ Many of the keys you normally press can be entered with a control key combo inst
 Ranked from weakest to strongest
 
 |Shortcut|Output|Signal|Number|Notes|
-|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|:---:|
 |⌃ Z (1)|Pause a job |SIGTSTP|20|Also known as suspending a job|
 |⌃ Z (2)|Continue a job |SIGCONT|18|Pressing ⌃Z again will continue a process that was just suspended|
 |^ C|Interrupt a job|SIGINT|2|Tell a process that it should not continue, the most common way to end a program|

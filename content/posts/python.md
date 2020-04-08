@@ -79,6 +79,32 @@ bag.update(array)
 bag |= set(array)
 ```
 
+* Testing for membership in dicts/sets:
+
+  ```py
+  hashmap = {
+      'a': 1,
+      'b', 2,
+      'c', 3
+  }
+
+  keys = hashmap.keys()
+
+  # Test that {'a', 'b', 'c'} is a proper subset of hashmap's keys
+  print({'a', 'b', 'c'} < hashmap.keys())
+  # => False
+
+  # Test that {'a', 'b', 'c'} is a proper superset of hashmap's keys
+  print({'a', 'b', 'c'} > hashmap.keys())
+
+  # Test that 'a' and 'b' are a valid subset of hashmap's keys
+  print({'a', 'b'} <= hashmap.keys())
+  # => True
+
+  # Test that {'a', 'b', 'c'} is a superset of hashmap's keys
+  print({'a', 'b', 'c'} >= hashmap.keys())
+  ```
+
 ## `os.path()`
 
 ```py
@@ -593,3 +619,11 @@ Using the `subprocess` library, you can execute other commands from within your 
   stdout.write("standard output\n")
   stderr.write("standard error\n")
   ```
+
+## Filepaths
+
+```py
+from pathlib import Path
+
+filepath = Path.home() / 'Downloads' / 'meme.jpg'
+```

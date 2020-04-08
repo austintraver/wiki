@@ -2,7 +2,7 @@
 title = "Node"
 description = "JavaScript meets back-end server hosting"
 date = 2020-02-04T14:52:27-08:00
-image = "awk.jpg"
+image = "node.jpg"
 +++
 
 # Node.js
@@ -41,13 +41,15 @@ The Chrome V8 Javascript engine provides C++ bindings for Javascript. The V8 Eng
 
 Let's take a small example. Javascript has no concept of accessing system files, but in Node.js, we gain this functionality through modules. We'll get to modules later, but here's a small example of what you can do with Node.js using the built in filesystem module `fs`.
 
-Create the following file, `helloworld.js`:
-```js
-const fs = require("fs")
-console.log(fs.writeFileSync("file.md", "**Hello World!** Bet your browser JS can't do this!"))
-```
+* Create `helloworld.js`
 
-Then in the console, run the file by typing `$ node helloworld.js`. This will create the file `file.md` with the text: `Hello World! Bet your browser JS can't do this!`.
+  ```js
+  const fs = require("fs")
+  console.log(fs.writeFileSync("file.md", "**Hello World!** Bet your browser JS can't do this!"))
+  ```
+
+* Run `helloworld.js` with `$ node helloworld.js`
+  - This will create the file `file.md` with the text: `Hello World! Bet your browser JS can't do this!`.
 
 Alternatively, you can run this in the `node` console. In your terminal, typing `node` creates a shell utilizing a *Read Evaluate Print Loop* (**REPL**)
 
@@ -324,7 +326,7 @@ Specifying how `ls()` interacts with `stdin`, `stdout`, and `stderr`:
   })
 
   ls.on('close', (code) => {
-    console.log(`child process exited with code ${code}`);
+    console.log(`child process exited with code ${code}`)
   }
   ```
 
@@ -335,13 +337,13 @@ The program below illustrates an elaborate way to execute the command: `ls | gre
 * Simulating the execution of the shell command `ls | grep "fork"`
 
   ```js
-  const {spawn} = require('child_process');
+  const {spawn} = require('child_process')
   const ls = spawn('ls')
-  const grep = spawn('grep', ['fork']);
+  const grep = spawn('grep', ['fork'])
 
   ls.stdout.on('data', (data) => {
-    grep.stdin.write(data);
-  });
+    grep.stdin.write(data)
+  })
 
   ls.stderr.on('data', (data) => {
     grep.stderr.write(`Error: ${data}`)
@@ -349,7 +351,7 @@ The program below illustrates an elaborate way to execute the command: `ls | gre
 
   ls.on('close', (code) => {
     grep.stdin.end()
-  });
+  })
 
   grep.stdout.on('data', (data) => {
     grep.stdout.write(data.toString())
@@ -454,10 +456,10 @@ JavaScript also has some built-in objects
 
 * Using the backtick syntax to substitue a variable's value inside of a string.
 
-```js
-const temp = 22.5
-console.log(`The value is ${temp}`)
-```
+  ```js
+  const temp = 22.5
+  console.log(`The value is ${temp}`)
+  ```
 
 ### `null` and `undefined`
 
@@ -492,9 +494,10 @@ A variable can be defined using normal letters, as well as UTF-8 characters
 Arrow functions allow us to give a function an identifier.
 
 ```js
-// After this has been written, we can now call the identifier and give it input
+// Create a function 'squareIt' accepting an input 'x' and returning 'x' squared
 const squareIt = (x) => x * x
 
+// After 'squareIt' has been written, we can now call the identifier and give it input
 squareIt(10) // '100'
 ```
 
@@ -529,9 +532,10 @@ The identity operator `===` will compare both types and values between two varia
   ```
 
 
-Some edge cases worth noting:
+There are also some edge cases worth noting:
 
 * The equality operator `==` will attempt to convert the two variables
+
 * Not a number or `NaN` is not equal in comparison to anything, even with itself
 
   ```js
@@ -604,18 +608,21 @@ Add the following to your package's `package.json`
 
   ```js
   let absolute_filepath = path.resolve('./file.txt')
-  // => /Users/tommy/file.txt
+  console.log(absolute_filepath)
   ```
 
-
+  ```txt`
+  /Users/tommy/file.txt
+  ```
 
 * Convert local file `./file.txt` to `file://` URI form:
 
   ```js
   let uri = url.pathToFileURL('./file.txt')
   console.log(uri)
-  /*
-  [ Output ]
+  ```
+
+  ```txt
   URL {
     href: 'file:///Users/austin/hooman/node.html',
     origin: 'null',
@@ -630,7 +637,6 @@ Add the following to your package's `package.json`
     searchParams: URLSearchParams {},
     hash: ''
   }
-  */
   ```
 
 ## Express
@@ -638,15 +644,95 @@ Add the following to your package's `package.json`
 * Example of an Express server
 
   ```js
+  // Import the express library
+  const express = require('express')
 
-  // Construct an instance of a server
-  const server = require('express')();
+  // Construct a server object
+  const server = express()
 
-  // Save the server on a port
-  const PORT = 80
+  // Save the port number as a variable
+  const port = 1337
 
-  // Start listening for requests on the port
-  server.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
+  // Support JSON in POST requests
+  server.use(express.json())
+
+  // Respond to GET requests to /ping with 'pong'
+  server.get('/ping', (req, res) => {
+      console.log(req.query)
+      res.send('pong')
   })
+
+  // Respond to GET requests to /dog with `dog` as JSON
+  server.get('/dog', (req, res) => {
+      let dog = {
+          name: 'fido',
+          age: 2
+      }
+      res.status(200).json(dog)
+  })
+
+  // Respond to POST requests to /whoami by printing the content
+  server.post('/whomai', (req, res) => {
+      console.log(req.body)
+  })
+
+
+  // Begin the server, listening on the port declared above
+  server.listen(port, () => {
+      console.log(`Example app listening on ${port}!`)
+  })
+  ```
+
+## MongoDB
+
+* Example of a MongoDB insertion
+
+  ```js
+  const username = 'db_user'
+  const password = 'drop_it_like_its_hot'
+  const cluster = 'cluster0-asdf.mongodb.net'
+  const database = 'students'
+
+  const uri = `mongodb+srv://${username}:${password}@${cluster}`
+
+  // Import the MongoClient class from the 'mongodb' library
+  const {MongoClient} = require('mongodb')
+
+  // Construct an instance of a MongoDB Client
+  const client = new MongoClient(uri)
+
+
+  async function main() {
+      try {
+          // Establish a connection to the cloud-hosted database cluster
+          await client.connect()
+          // Use the database 'wiki' if it exists, and create it if it doesn't
+          const db = client.db("wiki")
+          //create user we will just want to pull the text they enter in text boxes
+          let user = {
+              username: "ttrojan",
+              password: "fighton"
+          }
+          // Use the collection 'users' if it exists, and create it if it doesn't
+          let collection = db.collection("users")
+
+          // Insert 'user' into the collection 'users' in the database 'wiki'
+          await collection.insertOne(user, (error, response) => {
+              if (error) {
+                throw error
+              }
+              console.log("User inserted:")
+              console.log(user)
+          })
+      } catch (e) {
+          // If there is an error in connection, print it
+          console.error(e)
+      } finally {
+          // Close the connection to the client when the function ends
+          await client.close()
+      }
+  }
+
+  // Execute the main function, printing errors if they occur
+  main().catch(console.error)
   ```
