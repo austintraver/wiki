@@ -9,29 +9,93 @@ image = "mongo.png"
 
 ## Getting Started
 
-#### Mac OS
+### Installing MongoDB
 
-```
-brew install mongodb
-```
+* On Mac OS
 
-#### Ubuntu
+  ```sh
+  brew tap mongodb/brew
+  brew install mongodb-community
+  ```
 
-```
-apt install mongodb
-```
+* On Ubuntu
+
+  ```sh
+  # Install GPG as a pre-requisite step
+  sudo apt-get install gnupg
+
+  # Add MongoDB's public GPG key to the `apt` program
+  wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+
+  # Add the MongoDB repository to the `apt` program's 'sources.list.d' directory
+  print "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+
+  # Update `apt` to register these changes
+  sudo apt-get update
+
+  # Install the latest version
+  sudo apt-get install -y mongodb-org
+  ```
+
+* Launching MongoDB
+
+  * On Ubuntu
+
+    ```sh
+    sudo systemctl start mongod
+    ```
+
+* Stopping MongoDB
+
+  * On Ubuntu
+
+    ```sh
+    sudo systemctl stop mongod
+    ```
+
+* Restarting MongoDB
+
+  * On Ubuntu
+
+    ```sh
+    sudo systemctl restart mongod
+    ```
+
+* Setting up MongoDB to run on startup
+
+  * On macOS
+
+    ```sh
+    brew services start mongodb/brew/mongodb-community
+    ```
+
+  * On Ubuntu
+
+    ```sh
+    sudo systemctl enable mongod
+    ```
+
+* The config file is located at `/usr/local/etc/mongod.conf`
+
+* The config file is located at `/etc/mongodb.conf`
+
+### Configuring MongoDB
+
+MongoDB config files are written in YAML, an example `mongodb.conf` file is provided below
 
 ## Connecting to a MongoDB Atlas Server
 
-`$ mongo "mongodb+srv://cluster0-h3iy9.mongodb.net/test" --username root`
+```sh
+# Using a single URI
+mongo mongodb+srv://tommy:fighton@cluster-name.mongodb.net/dbname
 
-#### Mac OS
+# Using a URI and two flags
+# Short Form
+mongo 'mongodb+srv://cluster-name.mongodb.net/dbname' -u 'tommy' -p 'fighton'
+# Long Form
+mongo 'mongodb+srv://cluster-name.mongodb.net/dbname' --username 'tommy' --password 'fighton'
+```
 
-The config file is located at `/usr/local/etc/mongod.conf`
-
-#### Ubuntu
-
-The config file is located at `/etc/mogndob.conf`
 
 # The MongoDB Shell
 
@@ -39,13 +103,13 @@ The config file is located at `/etc/mogndob.conf`
 
 * Show the name of the current database
 
-  ```
+  ```txt
   db
   ```
 
 * Switch to the database `example`
 
-  ```
+  ```txt
   use example
   ```
 
@@ -55,7 +119,7 @@ The config file is located at `/etc/mogndob.conf`
 
 * List all available databases
 
-  ```
+  ```txt
   show dbs
   ```
 
@@ -99,31 +163,3 @@ Documents can be represented in JavaScript Object Notation `JSON` and then inser
     username: "tommy"
   })
   ```
-
-```js
-
-const username = 'worker'
-const password = 'letmein'
-const cluster = "cluster-ayylmao.mongodb.net"
-const uri = `mongodb+srv://${username}:${password}@${cluster}/test?retryWrites=true&w=majority`;
-const {MongoClient} = require('mongodb')
-const client = new MongoClient(uri)
-async function main() {
-    try {
-        await client.connect()
-        await listDatabases(client);
-    }
-    catch (e) {
-        console.error(e);
-    }
-    finally {
-        await client.close();
-    }
-}
-async function listDatabases(client){
-    databasesList = await client.db().admin().listDatabases();
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
-main().catch(console.error);
-```

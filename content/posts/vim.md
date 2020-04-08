@@ -39,7 +39,17 @@ These two programs were written in C during the mid 1970s and were eventually me
 
 ## Getting Started
 
-* Installing Vim and NeoVim on macOS
+The original Vim package has grown to include everything and the kitchen sink. You'll find the amount of files and dependencies it adds to be rather excessive, as it will force the installation of several different programming languages, along with many features you likely don't need. For this reason, many developers have begun working on NeoVim, which is more in line with the original spirit of the Vim package. For this Wiki entry, I will be assuming that you are using NeoVim, but most of these commands should work in regular Vim as well.
+
+
+* Installing Vim
+
+  * On Ubuntu
+  ```sh
+  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo apt update
+  sudo apt install neovim
+  ```
 
 ```sh
 brew install vim --with-client-server

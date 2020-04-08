@@ -75,11 +75,18 @@ sed -E 's_[0-9]{3,4}_###_g' <<< "(650)941-8758"
 
 ### Prepending/Appending to Files
 
-You can prepend a line using `1i` and append using `\$a`
+You can prepend a line using `1i` and append using `$a`
 
-```sh
-# Prepend to the beginning of a file
-sed -i "1i My name is $(whoami)." file.txt
-# Append to the end of a file
-sed -i "\$a Nice to meet you, ${USER}." file.txt
-```
+* Prepending a line to the start of `file.txt`:
+
+  ```sh
+  # The whitespace after '1i' is not interpreted
+  sed -i '1i New last line' file.txt
+  ```
+
+* Appending a line to the end of `file.txt`:
+
+  ```sh
+  # The whitespace after '$a' is not interpreted
+  sed -i '$a New last line' file.txt
+  ```

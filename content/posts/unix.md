@@ -678,13 +678,21 @@ You can also do the same for `python3`
 
 * POSIX stands for "Portable Operating System Interface for (UNIX)"
 
-## File System Hierarchy
+## File Systems
+
+### File System Hierarchy
 
 * View the manual on file system hierarchies
 
   ```sh
   man hier
   ```
+
+## Volumes & Drives 
+
+The collection of non-volatile memory stored on a computer is kept in one or more *Volumes*. The collection of data is the *Volume*, and the device this volume exists on is what's known as the *Drive*. Back in the day, these drives were implemented as discs, hence the term *Floppy Disk Drive* and *Hard Disk Drive*. These days, we're moving on from disc drives, instead transitioning to *Solid State Drives*, which use transistors and circuits to store the volume (which contains the file system).
+
+The commands for performing various operations are different on macOS and Linux. I'll try to include an example of how to do each in the relevant section. (I ran out of time while writing this, so this is to be continued for now...)
 
 # `curl`
 
