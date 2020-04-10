@@ -627,3 +627,20 @@ from pathlib import Path
 
 filepath = Path.home() / 'Downloads' / 'meme.jpg'
 ```
+
+## Function Parameters
+
+There is a new function parameter syntax / to indicate that some function parameters must be specified positionally and cannot be used as keyword arguments
+
+```py
+def f(a, b, /, c, d, *, e, f):
+    print(a, b, c, d, e, f)
+```
+
+One use case for this notation is that it allows pure Python functions to fully emulate behaviors of existing C coded functions. For example, the built-in `divmod()` function does not accept keyword arguments:
+
+```py
+def divmod(a, b, /):
+    "Emulate the built in divmod() function"
+    return (a // b, a % b)
+```

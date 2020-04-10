@@ -92,3 +92,9 @@ Assuming you know the activation bytes of your file...
   ifile=${ifile:0:(-1)}
   ffmpeg -i ${ifile} -i "001.mp3" -acodec copy "ofile.mp3" -map_metadata 0:1
   ```
+
+## Capture Image from Webcam
+
+  ```sh
+  ffmpeg -loglevel quiet -y -f avfoundation -video_size 1280x720 -framerate 30 -i 0 -vframes 1 ./output.jpg
+  ```
