@@ -42,16 +42,14 @@ h2#p {
 }
 
 table {
-  display: block;
   margin-bottom: 1em;
-  max-width: 100%;
   border-collapse: collapse;
-  overflow-x: auto;
+  width: 100%;
+  font-size: 0.7em;
 }
 
 thead {
   background-color: #eeeeee;
-  border-bottom: 2px solid mix(#000, #eeeeee, 25%);
 }
 
 th {
@@ -66,7 +64,8 @@ td {
 }
 
 code {
-  overflow-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 
 li {
