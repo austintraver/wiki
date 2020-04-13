@@ -608,7 +608,7 @@ Add the following to your package's `package.json`
   console.log(absolute_filepath)
   ```
 
-  ```txt`
+  ```txt
   /Users/tommy/file.txt
   ```
 
