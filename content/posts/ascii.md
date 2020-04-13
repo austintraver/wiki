@@ -19,7 +19,7 @@ Control characters refer to things a computer must process, such as an alert, a 
 
 ```sh
 # Enable interpretation of backslash escapes, disable implicit trailing newline
-echo -en 'Hexademical number 0x41 is the letter \x41\n'
+print '0x41 in hex is the letter \x41'
 # => Hexademical number 0x41 is the letter A
 ```
 
