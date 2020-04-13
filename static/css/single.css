@@ -65,8 +65,8 @@ td {
   border-bottom: 1px solid mix(#000, $border-color, 25%);
 }
 
-pre {
-  overflow: scroll;
+code {
+  overflow-wrap: break-word;
 }
 
 li {

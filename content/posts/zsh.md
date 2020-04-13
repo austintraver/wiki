@@ -2069,3 +2069,13 @@ Zsh comes with many useful modules, but none are loaded by default. This is done
   zmodload zsh/nearcolor
   print -P '%F{#AFAFFF}Violet%f`
   ```
+
+
+## Multios
+
+* See output on `stdout` but save to `file.txt` as well
+
+```sh
+date >&1 >file
+```
+

@@ -18,25 +18,6 @@ As an interpreted language (like Python), Javascript requires a runtime engine t
 2. Safari uses [JavaScriptCore](https://developer.apple.com/documentation/javascriptcore)
 3. IE uses [who on 🌍 cares](https://github.com/Microsoft/ChakraCore)
 
-Let me explain in a simple diagram:
-
-```
-   +-------------+               +---------------+
-   |   BROWSER   |               |    SERVER     |
-   |  Client JS  |               |    Node JS    |
-   |-------------|               |---------------|
-   |    Other    |               | V8 JS Engine  |
-   |  JS Engine  |               |     (C++)     |
-   +------+-+----+               +-------+--+----+
-          | ^                            |  ^
-          | |                            |  |
-          | |                            |  |
-          | +----+----------------+<-----+  |
-          |      |   WEB SERVER   |         |
-          +----> +----------------+---------+
-
-```
-
 The Chrome V8 Javascript engine provides C++ bindings for Javascript. The V8 Engine then passes events and data between the server and client.
 
 Let's take a small example. Javascript has no concept of accessing system files, but in Node.js, we gain this functionality through modules. We'll get to modules later, but here's a small example of what you can do with Node.js using the built in filesystem module `fs`.
@@ -44,12 +25,19 @@ Let's take a small example. Javascript has no concept of accessing system files,
 * Create `helloworld.js`
 
   ```js
-  const fs = require("fs")
-  console.log(fs.writeFileSync("file.md", "**Hello World!** Bet your browser JS can't do this!"))
+  // ./helloworld.js
+  const fs = require('fs')
+  const story = 'It was the best of JS, it was the worst of JS'
+  fs.writeFileSync(
+    './story.txt', 
+    story
+  )
   ```
 
-* Run `helloworld.js` with `$ node helloworld.js`
-  - This will create the file `file.md` with the text: `Hello World! Bet your browser JS can't do this!`.
+  ```txt
+  ./story.txt
+  It was the best of JS, it was the worst of JS
+  ```
 
 Alternatively, you can run this in the `node` console. In your terminal, typing `node` creates a shell utilizing a *Read Evaluate Print Loop* (**REPL**)
 
@@ -70,7 +58,7 @@ You'll notice that the return value is printed below each statement executed:
   ```js
   v = "Vim"
   // => 'Vim'
-  > e = "Emacs"
+  e = "Emacs"
   // => 'Emacs'
   console.log("I'm a pro since I use ", v)
   // => I'm a pro since I use Vim
@@ -133,18 +121,6 @@ Modules in Nodejs are essentially Javascript libraries. There are quite a few bu
 - `vm`:	To compile JavaScript code in a virtual machine
 - `zlib`:	To compress or decompress files
 
-**How to Import and Use a Module**:
-
-* Importing and using a module using the `require(<module>)` method
-
-  ```js
-  // Import and use the file system module `fs`
-  const fs = require('fs')
-  fs.writeFileSync('helloNode.txt', '**That was easy!**™️🤓')
-  ```
-
-* Conventionally, the identifier used for a module the name of that module.
-
 ### Importing Modules
 
 * To import and use code you wrote in another file, use the `require()` function, passing in the parameter of the filepath
@@ -152,22 +128,20 @@ Modules in Nodejs are essentially Javascript libraries. There are quite a few bu
 * Importing code from the file `hello.js`
 
   ```js
-  const hello = require('./hello.js')
+  const hello = require('./hello')
   ```
 
 ## The Core
 
-Nodejs requires a few critical components that allow it to provide its functionality. These components are:
+Nodejs requires a few critical components that allow it to provide its functionality.  These objects are part of what separate Nodejs applications from vanilla Javascript code:
 
-1. the Global objects
-2. Timer methods
-3. Socket and Stream functionality
-4. the Utilities object
-5. Events
+    1. Global Objects
+    2. Timer Methods
+    3. Sockets and Streams
+    4. Utilities
+    5. Events
 
-These objects are also what separate Nodejs applications from vanilla Javascript code.
-
-### Global objects
+### Global Objects
 
 There are three primary global objects available in Nodejs. They are:
 
@@ -296,6 +270,7 @@ The `.pipe(<stream>)` is used to send the ouput of one stream to another.
   ```
 
 ### Reading streams with `readline`
+
 The readline module allows the reading of standard I/O streams line by line during program execution. When the programmer is done reading a stream, they must be closed. The REPL is implemented by piping your terminal input `stdin`, executing Javascript commands and piping `stdout` back to your terminal.
 
 ### Using system streams with `child_process`
@@ -329,8 +304,6 @@ Specifying how `ls()` interacts with `stdin`, `stdout`, and `stderr`:
     console.log(`child process exited with code ${code}`)
   }
   ```
-
-
 
 The program below illustrates an elaborate way to execute the command: `ls | grep "fork"`
 
@@ -546,9 +519,33 @@ There are also some edge cases worth noting:
   x !== x // true
   ```
 
-## the "in" operator
 
-The `in` operator evaluates to true if the left-side value is the name of a property of the right-side object
+## JavaScript Arrays
+
+The [Mozilla Javascript Documentation for Arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) will explain it better than I can.
+
+## The "in" operator
+
+The `in` operator evaluates to true if the left-side value is the name of a property of the right-side object. This results in some counterintuitive logic at times, an example is provided below:
+
+```js
+// Arrays
+let trees = ['redwood', 'bay', 'cedar', 'oak', 'maple']
+0 in trees        // returns true (array index 0 exists)
+3 in trees        // returns true (array index 3 exists)
+6 in trees        // returns false (array index 6 does not exist)
+'bay' in trees    // returns false (you must specify the index number, not the value at that index)
+'length' in trees // returns true (length is an Array property)
+Symbol.iterator in trees // returns true (arrays are iterable, works only in ES2015+)
+
+// Predefined objects
+'PI' in Math          // returns true
+
+// Custom objects
+let mycar = {make: 'Honda', model: 'Accord', year: 1998}
+'make' in mycar  // returns true
+'model' in mycar // returns true
+```
 
 ```js
 const data = [7, 8, 9]
