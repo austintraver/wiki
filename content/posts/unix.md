@@ -531,8 +531,9 @@ brew install tree
 
 * By default, `awk` delimits entries by runs of whitespace. If `FS` contains more than one character, it will delimit the line based on every occurance of the pattern.
 
-  ```
-  <pattern.awk>
+  ```awk
+  # "./pattern.awk"
+
   BEGIN {
     # Delimited once per comma
     FS = ","
@@ -547,8 +548,9 @@ brew install tree
 
 * Matching a pattern to a specific column in each row
 
-  ```
-  <pattern.awk>
+  ```awk
+  # "./pattern.awk"
+
   # If the first entry is "me"
   $1 ~ /^me$/ {
     print "person: " $1 " blog: fire"
@@ -952,3 +954,51 @@ The `dns-sd` diagnostic tool is useful for network scanning. If you are trying t
   ```sh
   dns-sd -B _services._dns-sd._udp .
   ```
+
+## Filesystem Hierarchy Standard
+
+* `/bin` Binary files
+
+* `/etc`: Host specific system configurations (config files)
+
+* `/lib`: Shared libraries
+
+* `/sbin`: System binaries
+
+* `/tmp`: Temporary files
+
+* `/include`: C/C++ header files
+
+* `/lib`: Object files and libraries
+
+* `/libexec`: Executable binaries that are only run by other commands, not by the user
+
+* `/man`: Manual pages
+
+* `/src`: Source code
+
+* `/share`: Architecture independent hierarchy
+
+* `/mnt`: Temporary mount point for a filesystem
+
+
+## Disk Utility Functions
+
+
+* Get a report of the last recorded amount of memory available in storage
+
+	```sh
+	df -kh
+	```
+
+* Begin recording a new entry for the last recorded amount of memory available in storage
+
+	```sh
+	du -chs
+	```
+
+## Binary Files
+
+* `uuencode`: Encode binary files
+
+* `uudecode`: Decode binary files

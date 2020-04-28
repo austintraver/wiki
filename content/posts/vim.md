@@ -1449,3 +1449,35 @@ The `substitute(expression, pattern, replacement, flags)` function is also very 
   " In this case, <expression> is expand("~")
   % substitute /pattern/\='Directory ' . expand("~")/g
   ```
+
+### Abandon Git Commit
+
+If you want to prevent Git from committing after editing the commit message, do:
+
+	```vim
+	:cq[uit]
+	```
+
+This will make Vi quit with an error code, preventing the commit operation from proceeding
+
+### Clearing Current File
+
+* Edit a new, unnamed buffer
+
+	```vim
+	ene[w]
+	```
+
+### Setting the File Name
+
+* Change the file name of the current buffer to `file.txt`
+
+	```vim
+	f[ile] file.txt
+	```
+
+* Remove the name of the current buffer
+
+	```vim
+	0f[ile]
+	```

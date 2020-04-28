@@ -38,7 +38,7 @@ It's a little easier to explain with an example:
 
 ```sh
 if [[ $# -eq 0 ]]; then
-  echo "Error: no options provided" >&2
+  print "Error: no options provided" >&2
   exit 1
 fi
 
@@ -46,7 +46,7 @@ fi
 options=$(getopt -o ho:i:w:: -l help,output:,input:,where:: -- "$@")
 
 if [[ $? -ne 0 ]]; then
-  echo "Error: incorrect options provided" >&2
+  print "Error: incorrect options provided" >&2
   exit 1
 fi
 
@@ -54,7 +54,7 @@ eval set -- "${options}"
 while true; do
   case "$1" in
   -h|--help)
-    echo "I'm sorry Dave, I'm afraid I can't do that"
+    print "I'm sorry Dave, I'm afraid I can't do that"
     ;;
   -o|--output)
     ofile=$2
@@ -84,15 +84,15 @@ while true; do
 done
 
 if [[ ${ifile} ]]; then
-  echo "Input file is ${ifile}"
+  print "Input file is ${ifile}"
 fi
 
 if [[ ${ofile} ]]; then
-  echo "Output file is ${ofile}"
+  print "Output file is ${ofile}"
 fi
 
 if [[ ${location} ]]; then
-  echo "Location is ${location}"
+  print "Location is ${location}"
 fi
 ```
 
@@ -139,8 +139,8 @@ A shell is interactive as long as it was not started with either a non-option ar
 
 ```sh
 case "$-" in
-  *i*)	echo This shell is interactive ;;
-  *)	echo This shell is not interactive ;;
+  *i*)	print This shell is interactive ;;
+  *)	print This shell is not interactive ;;
 esac
 ```
 
@@ -168,19 +168,26 @@ Sometimes you're in a situation where you'd like to run a command, but you don't
 * Examples of command substitution:
 
   ```sh
-  echo "My name is $(whoami)"
-  # My name is austin
+  print "My name is $(whoami)"
+  ```
+
+  ```txt
+  My name is austin
   ```
 
 ## Parameter Expansion
 
-For more information, see the `PARAMETER EXPANSION` section of `man zshexpn`
+To learn more, see the `PARAMETER EXPANSION` section of `man zshexpn`
 
 * Example of parameter expansion
 
   ```sh
   name='Austin'
-  echo My name is ${name}
+  print My name is ${name}
+  ```
+
+  ```txt
+  My name is Austin
   ```
 
 ## Conditional Expressions
@@ -188,13 +195,29 @@ For more information, see the `PARAMETER EXPANSION` section of `man zshexpn`
 When coding, we typically expect *less than* to be represented by the `<` character. In shell scripting, however, the `<` symbol has an entirely seperate meaning (more on that later). To perform an equality check, we have to use `-lt` to signify the same meaning. Also, we will use square brackets `[[ ]]` to contain the statement, and literally specify `then` as well as the end of our if statement. An example is provided below.
 
 ```sh
-number=4
-if [[ ${number} -lt 5]]; then
-  echo "less than five"
+name='Austin'
+if [[ ${name} == 'Austin' ]]; then
+  print "His name is Austin"
 else
-  echo "not less than five"
+  print "his name is not Austin"
 fi
 ```
+
+## Arithmetic Evaluation
+
+```sh
+number=4
+if (( number < 5 )); then
+  print "Number is less than five"
+else
+  print "Number is not less than five"
+fi
+```
+
+```txt
+Number is less than five
+```
+
 
 {{% notice info %}}
 **Tip:** You can use the `;` character to signify a newline without actually providing one. This is useful for compressing a script or writing one-liners on your terminal.
@@ -204,7 +227,7 @@ fi
 
 ```sh
 # Check if the script is being executed by the root user
-if [[ ${UID} -ne 0 ]]; then echo "You are not the root user"; fi
+if [[ ${UID} -ne 0 ]]; then print "You are not the root user"; fi
 ```
 
 ### All Conditional Flags
@@ -225,25 +248,39 @@ if [[ ${UID} -ne 0 ]]; then echo "You are not the root user"; fi
 
 ## Arithmetic Evaluation
 
+
 In order to perform arithmetic operations, surround variable names, integers, and operators in a `((...))` double quotations, like this:
 
-```sh
-# Appending '1' to the string '2'
-value=2
-value+=1
-echo ${value}
-# => 21
+* Adding to `1` the number `2`
 
-# Adding the number '1' to the number '2'
-value=2
-((value+=1))
-echo ${value}
-# => 3
-```
+  ```sh
+  value=1
+  ((value+=2))
+  print ${value}
+  ```
+
+  ```txt
+  3
+  ```
+
+If you don't do that, the variable is interpreted as a string, and the number will be *appended* to the variable's current value.
+
+* Appending to `1` the character `2`
+
+  ```sh
+  # Appending '1' to the string '2'
+  value=1
+  value+=2
+  print ${value}
+  ```
+
+  ```txt
+  12
+  ```
 
 ### `ls`
 
-### Useful Flags
+#### Useful Flags
 
 |Flag|Purpose|
 |:---:|:---:|
@@ -258,7 +295,7 @@ echo ${value}
 
 ### Colorized `ls`
 
-* If you're on macOS, you're likely using BSD's `ls`. To colorize the output of `ls`, include the `-G` flag or add `export CLICOLOR=1` to your `.zshrc` file.
+* If you're on macOS, you're likely using BSD's `ls`. To colorize the output of `ls`, include the `-G` flag or add `typeset -xg CLICOLOR=1` to your runtime configurations.
 
 * If you're using GNU's `ls`, supply the `--color=auto` argument to colorize the output of `ls`.
 
@@ -303,11 +340,14 @@ Some characters are special by default, and must be escaped by the escape charac
 | \` |Backtick|
 |`#`|Comment|
 
-Some characters are special, but only some of the time, such as `,`, for example:
+Some characters are special, but only some of the time, such as `,`, for example, in the case of brace expansion
 
   ```sh
-  echo cod{e,er,ing}
-  # => "code coder coding"
+  print cod{e,er,ing}
+  ```
+
+  ```txt
+  code coder coding
   ```
 
 
@@ -328,26 +368,36 @@ Double quotes are a little more permissive than single quotes.
 
 When a program is run in the background, the program is forked, and run in a sub-shell as a job, running asynchronously. You can add a single ampersand `&` at the end of a command to have it run in the background.
 
-```sh
-# Run example.py in the background, returns the number 1234
-python3 example.py &
-```
+* Run a program in the background
 
-You can declare multiple programs to run in the background with a single command
+  ```sh
+  python example.py &
+  ```
 
-```sh
-python3 one.py & python3 two.py & python3 three.py &
-```
+* Run multiple programs in the background (with only a single command)
+
+  ```sh
+  python one.py & python3 two.py & python3 three.py &
+  ```
 
 ### Run commands sequentially
 
-You can use a double ampersand `&&` to signal for jobs to run in sequential order. The second command will only run if the first command doesn't fail. A program fails if it returns a number other than 0.
+You can use a double ampersand `&&` to signal for commands to run in sequential order. The second command will only run if the first command doesn't fail. A program fails if it returns a number other than 0.
 
-```sh
-./program && echo 'Program returned 0'
-```
+* Only run the Python program `second.py` if the Node program `first.js` ended successfully
 
+  ```sh
+  node 'first.js' && python 'second.py'
+  ```
 
+You can use a double pipe `||` to signal for a command to run only if the previous command fails.
+
+* If Bash program `attempt.rb` did not end successfully, run the Ruby program `backup.sh`
+
+  ```sh
+  bash 'attempt.rb' || ruby 'backup.sh'
+  ```
+ 
 ### `/dev/null`
 
 #### Your own personal black hole
@@ -357,7 +407,7 @@ You can use a double ampersand `&&` to signal for jobs to run in sequential orde
 Run this command in your terminal to see what happens.
 
 ```sh
-echo "Silence me!" &> /dev/null
+print "Silenced" &> /dev/null
 ```
 
 However, there's an even easier way to do it. You can combine `stdout` and `stderr`, file descriptors `1` and `2` respectively using the `&>` redirection command, and then append a `-` to close both of the file descriptors.
@@ -365,23 +415,44 @@ However, there's an even easier way to do it. You can combine `stdout` and `stde
 Easier to demonstrate with an example
 
 ```sh
-say_something() {
-  echo "Standard Output" >&1
-  echo "Standard Error" >&2
+func() {
+  print "Standard Output" >&1
+  print "Standard Error" >&2
 }
-
-say_something
-# => "Standard Output"
-# => "Standard Error"
-
-say_something 1>&-
-# => func:1: 1: bad file descriptor
-# => "Standard Error"
-
-say_something 2>&-
-# => "Standard Output"
-# => zsh: write error
 ```
+
+* Execute `func` with both file descriptors open
+
+  ```sh
+  func
+  ```
+
+  ```txt
+  Standard Error
+  Standard Output
+  ```
+
+* Execute `func` with both standard output closed
+
+  ```sh
+  func 1>&-
+  ```
+
+  ```txt
+  func:1: 1: bad file descriptor
+  Standard Error
+  ```
+
+* Execute `func` with both standard error closed
+
+  ```sh
+  func 2>&-
+  ```
+
+  ```txt
+  Standard Output
+  func:2: 2: bad file descriptor
+  ```
 
 ## Shell Arguments, Options, Flags
 
@@ -391,13 +462,27 @@ Maybe `-v` should print verbose output. But other times, there's an argument ass
 
 ### Parsing Command-Line Arguments
 
-The keyword `${@}` contains the set of all arguments that followed the command.
+The keyword `${@}` contains the set of all arguments to a program/function
 
-```sh
-for arg in "${@}"; do
-  echo $arg
-done
-```
+* Printing out all of the arguments to a function
+
+  ```sh
+  func() {
+    for arg in ${@}; do
+      print "Argument: ${arg}"
+    done
+  }
+  ```
+
+  ```sh
+  func 'one' 'two' 'three'
+  ```
+
+  ```txt
+  Argument: one
+  Argument: two
+  Argument: three
+  ```
 
 ### Reading I/O
 
@@ -406,9 +491,9 @@ done
 * Prompt for input, save to variable
 
 ```sh
-echo "Enter a number"
+print "Enter a number"
 read num
-echo "You guessed $num"
+print "You guessed $num"
 ```
 
 * Prompt for password, save to variable
@@ -416,13 +501,13 @@ echo "You guessed $num"
 ```sh
 # Save the result in the variable 'secret'
 read -rs 'secret?Password:'
-echo "You entered ${secret}"
+print "You entered ${secret}"
 ```
 
 * Pass each word from piped input into an array
 
 ```sh
-echo "alpha bravo charlie" | read -A bases
+print "alpha bravo charlie" | read -A bases
 print -l ${bases}
 # alpha
 # bravo
@@ -440,7 +525,7 @@ read -u 0
 ```sh
 files=/Users/austintraver/Downloads/*
 for file in $files; do
-  echo $file
+  print $file
 done
 ```
 
@@ -449,7 +534,7 @@ done
 ```sh
 index=0
 while [[ ${index} -lt 5 ]]; do
-  echo ${index}
+  print ${index}
 
   # Lame variable increment
   index=$((index+1))
@@ -484,6 +569,7 @@ print ${val:(-6):2} # 45
 If you're looking for a way to remember these, there's a trick I use:
 
 Look down at your keyboard
+
   - `#` is on the left, so it cuts off the left-side.
   - `$` looks like an S, so it's the string.
   - `%` is on the right, so it cuts off the right-side.
@@ -495,12 +581,10 @@ Look down at your keyboard
 
 ```sh
 string='one/two/three/four/five'
-
-echo ${string#*/} # two/three/four/five
-echo ${string##*/} # five
-echo ${string%/*} # one/two/three/four
-echo ${string%%/*} # one
-
+print ${string#*/} # two/three/four/five
+print ${string##*/} # five
+print ${string%/*} # one/two/three/four
+print ${string%%/*} # one
 ```
 
 ## Length of a String
@@ -515,80 +599,152 @@ print ${(N)oldsum##*}
 
 Using the parameter expansion flag `(S)`, you can actually specify for the pattern to match substrings, similar to the way `grep` and `sed` work. For the `#` and `%` parameter expansion flags, they will still seek to cut from the beginning and the end respectively, but will cut out the first match found to the pattern (non-greedy) from the middle of the string. You can use `##` and `%%` to perform greedy searches.
 
-```sh
-string='one/two/three/two/one'
+* Remove the (S)ubstring `two` on the left
 
-# Remove the (S)ubstring 'two' on the left
-echo ${(S)string#two}
-#       one//three/two/one
+  ```sh
+  string='one/two/three/two/one'
+  print ${(S)string#two}
+  ```
 
-# Remove the (S)ubstring 'two' on the right
-echo ${(S)string%two}
-#       one/two/three//one
+  ```txt
+  one//three/two/one
+  ```
 
-# Extract the (M)atching (S)ubstring in the middle
-echo ${(MS)string#/t*o/}
-#         /two/three/two/
+* Remove the (S)ubstring `two` on the right
 
+  ```sh
+  string='one/two/three/two/one'
+  print ${(S)string%two}
+  ```
 
-string='the quick brown fox'
+  ```txt
+  one/two/three//one
+  ```
 
-# Non-greedy match starting from the left
-echo ${(MS)string#q*o}
-#           quick bro
+* Extract the (M)atching (S)ubstring in the middle
 
-# Greedy match starting from the left
-echo ${(MS)string##q*o}
-#           quick brown fo
+  ```sh
+  string='one/two/three/two/one'
+  print ${(MS)string#/t*o/}
+  ```
 
-```
+  ```txt
+  /two/three/two/
+  ```
+
+* Non-greedy match starting from the left
+
+  ```sh
+  string='the quick brown fox'
+  print ${(MS)string#q*o}
+  ```
+
+  ```txt
+  quick bro
+  ```
+
+* Greedy match starting from the left
+
+  ```sh
+  string='the quick brown fox'
+  print ${(MS)string##q*o}
+  ```
+
+  ```txt
+  quick brown fox
+  ```
 
 
 ## Splitting Strings
 
-You can index a string by its word index (1-indexed), even if there is punctuation in the sentence by using the (w) function inside of square braces.
+You can index a string by its word index (1-indexed), even if there is punctuation in the sentence by using the (w) flag inside of square braces.
 
 ```sh
 var='This sentence   has  inconsistent spaces'
-echo ${var[(w)5]} # spaces
+print ${var[(w)5]}
+```
+
+```txt
+spaces
+```
+
+```sh
 var='Sentence one. Sentence two.'
-echo ${var[(w)4]} # two.
+print ${var[(w)4]}
+```
+
+```txt
+two.
+```
+
+```sh
 var='You can even get the word that comes last'
-echo ${var[(w)-1]} # last
+print ${var[(w)-1]}
+```
+
+```txt
+last
 ```
 
 ## Referencing Command History
 
-* `!!` repeat previous command and all arguments
-* `!*` all of the arguments from the last command
-* `!^` the first argument of the previous command
-* `!$` the last argument supplied to the previous command
-* `$_` the last argument supplied to the previous command
+* `!!` the previous command and all arguments
+
+* `!*` the previous command's arguments
+
+* `!^` the previous command's first argument
+
+* `!$` the previous command's last argument
+
+* `!:2` the previous command's second argument
+
+* `!^-`: all the arguments of the previous command *except* for the last argument
+
+* `!:-`: the previous command except the last argument
+
 * `!#` the current command typed thus far
-* `!-`2 the second-to-last command
+
+* `!grep`: the most recent command starting with `grep`
+
+* `!?string?`: the most recent command containing `string`
+
+* `!-2`  the penultimate command
+
 * `!#:0` the command being typed
+
 * `!#:2` the second argument of the current command being typed
+
+Next, attached below are expansions for arguments outside the context of command history
+
+* `$_` an environment variable storing the last argument of the previous command
+
 * `$$` the process ID itself
+
 * `$*` a string containing all arguments entered on the last command
+
 * `$@` the array of the arguments entered on the last command
+
 * `$1` the first argument supplied to a command
+
 * `$2` the second argument supplied to a command
+
 * `$?` the return value of the previous command
+
 * `$-` the current options set for the shell (the single letter option names concatenated into a string)
 
 * Reference the first argument of the previous command
 
   ```sh
-  echo first second third
+  print first second third
 
-  print !:^
+  print !^
   # => "first"
   ```
 
 * Reference the last argument of the previous command
 
   ```sh
-  echo first second third
+  print first second third
 
   print !:$
   # => "third"
@@ -597,59 +753,68 @@ echo ${var[(w)-1]} # last
 * Reference the second argument of the previous command
 
   ```sh
-  echo first second third
+  print 'first' 'second' 'third'
 
   print !:2
-  # => "second"
+  # => This command would call `print 'second'`
   ```
 
 * Reference all arguments of previous command, excluding the last argument
 
   ```sh
-  echo first second third
+  print first second third
 
   print !:^-
-  # => "first second"
+  # => This command would call `print 'first' 'second'`
   ```
 
 * Reference the second-to-last command
 
   ```sh
-  echo 'three'
-  echo 'two'
-  echo 'one'
-  !-2 # => echo two
+  print 'three'
+  print 'two'
+  print 'one'
+
+  !-2 # This command would call `print 'two'`
   ```
 
 
 ### Substituting Text in Previous Commands
 
-Single Substitution:
-
 ```sh
-echo the quick brown fox
-# => the quick brown fox
-
-# [ Option 1 ]
-!!:s/brown/blue
-# => echo the quick blue fox
-
 # [ Option 2 ]
 ^brown^blue
-# => echo the quick blue fox
+```
+
+```txt
+print the quick blue fox
 ```
 
 Global Substitution:
 
 Using the previous syntax, you will only replace the first instance matched. If you want to replace all matches to the pattern, use the syntax below:
 
-```sh
-echo it is what it is
-# => it is what it is
+* Replace the first match to a pattern:
 
-!!:gs/is/be
-# => it be what it be
-```
+  ```sh
+  attitude="it is what it is"
+  print ${attitude:s/is/be}
+  ```
+
+  ```txt
+  it be what it is
+  ```
+
+* Replace all matches to a pattern
+
+  ```sh
+  attitude="it is what it is"
+  print ${attitude:gs/is/be}
+  ```
+
+  ```txt
+  it be what it be
+  ```
 
 * **Note:** When you are referring to parts of the previous command using the special characters `^`, `$`, `*`, `-`, or `%`, you can leave out the colon character, `:`, used to declare substitutions, that usually follows the `!!` character,
 
@@ -703,41 +868,47 @@ print "\x1b[E"
 
 ## Read Words Into Array
 
-* `words.txt`
 
-  ```text
-  the day is sunny the the
-  the sunny is is
+* Read in each word of `file.txt` into the array `${words}`
+
+  ```txt
+  (file.txt)
+  the day is sunny and
+  the sky is blue
   ```
 
   ```sh
-  words=($(<words.txt))
-  echo ${#words} # 10
-  echo ${words}
-  # => "the day is sunny the the the sunny is is"
+  words=($(<file.txt))
+  print "There are ${#words} words"
+  print ${words}
+  ```
+
+  ```txt
+  There are 10 words
+  the day is sunny and the sky is blue 
   ```
 
 ## Handling Signals With Trap
 
 ```sh
 TRAPINT() {
-	echo "TRAPINT() called: ^C was pressed"
+	print "TRAPINT() called: ^C was pressed"
 }
 
 TRAPQUIT() {
-	echo "TRAPQUIT() called: ^\\ was pressed"
+	print "TRAPQUIT() called: ^\\ was pressed"
 }
 
 TRAPTERM() {
-	echo "TRAPTERM() called: \`kill\` command received"
+	print "TRAPTERM() called: \`kill\` command received"
 }
 
 TRAPEXIT() {
-	echo "TRAPEXIT() called: happens at the end of the script no matter what"
+	print "TRAPEXIT() called: happens at the end of the script no matter what"
 }
 
 for i in {1..5}; do
-	echo ${i}
+	print ${i}
 	sleep 1
 done
 ```
@@ -781,31 +952,32 @@ For all of these `TRAP[NAL]()` functions, if the final command is `return 0` (or
 
 ## Operator Expansion
 
-* `"${(k)name}"`: If `name` is an associative array, the expression `${(k)name}` will expand to the list of keys contained by the array `name`
+If `name` is an associative array, the expression `${(k)name}` will expand to the list of keys contained by the array `name`
 
 * `(k)` Print the keys of a assorted array
 
-```zsh
-declare -A dict
-dict[a]=alpha
-dict[b]=bravo
-dict[c]=charlie
-print ${(k)dict}
-# => `a b c`
-```
+  ```sh
+  declare -A dict
+  dict[a]=alpha
+  dict[b]=bravo
+  dict[c]=charlie
+  print ${(k)dict}
+  ```
 
-You can split a string into an array by a delimiter with the `(s)` flag
+  ```txt
+  a b c
+  ```
 
-```sh
-PATH="/bin:/usr/bin:/usr/local/bin"
-print -l "${(s.:.)PATH}"
-# => /bin
-# => /usr/bin
-# => /usr/local/bin
-```
+* `(s)` Split a string into an array by a delimiter
 
-* **Note:** `zsh` has a builtin function `print` which is more versatile than the standard `echo` command. For instance, the `-l` flag will print each entry in an array on a seperate line. In this case, we split a string by the `:` as a delimiter, turned that into an array, and passed it as the argument to `print`
+  ```sh
+  PATH="/bin:/usr/bin:/usr/local/bin"
+  print "${(s.:.)PATH}"
+  ```
 
+  ```txt
+  /bin /usr/bin /usr/local/bin
+  ```
 
 ## Globbing
 
@@ -833,14 +1005,14 @@ Section 14.8.7 of the manual covers all of this in greater detail.
 * `(:a)`: return each globbed file's absolute path.
 
   ```sh
-  echo ./*(:a)
+  print ./*(:a)
   # ./example.txt => /Users/tommy/example.txt
   ```
 
 * `(:P)`: return each globbed file's absolute path, resolved of any symbolic links
 
   ```sh
-  echo ./*(:P)
+  print ./*(:P)
   # ./example.txt => /Users/tommy/example.txt => /Users/tommy/real/example.txt
   ```
 
@@ -849,25 +1021,25 @@ Section 14.8.7 of the manual covers all of this in greater detail.
   ```sh
   # [ Using (:A) ]
   ln -s /fake/path ~/Desktop/example
-  echo ~/Desktop/example(:A)
+  print ~/Desktop/example(:A)
   # => /Users/austin/Desktop/example
 
   # [ Using (:P) ]
-  echo ~/Desktop/example(:P)
+  print ~/Desktop/example(:P)
   # => /fake/path
   ```
 
 * `(:e)`: strip everything but the extension from each globbed file
 
   ```sh
-  echo ./*(:e)
+  print ./*(:e)
   # ./example.txt => txt
   ```
 
 * `(:r)`: strip the extension suffix
 
   ```sh
-  echo ./*(:r)
+  print ./*(:r)
   # ./example.txt => ./example
   ```
 
@@ -875,7 +1047,7 @@ Section 14.8.7 of the manual covers all of this in greater detail.
 
   ```sh
   val="./path/to/file.txt"
-  echo ${val:t}
+  print "${val} => ${val:t}"
   # ./path/to/example.txt => example.txt
   ```
 
@@ -883,15 +1055,11 @@ Section 14.8.7 of the manual covers all of this in greater detail.
 
   ```sh
   val="./path/to/file.txt"
-  echo ${val:h}
-  # ./path/to/file.txt => ./path/to
+  print "${val} => ${val:h}"
   ```
 
-* Putting it all together
-
-  ```sh
-  echo ./*(:ar)
-  # ./example.txt => /Users/atraver/example
+  ```txt
+  ./path/to/file.txt => ./path/to
   ```
 
 ## Globbing Specific Filetypes
@@ -904,21 +1072,21 @@ Section 14.8.7 of the manual covers all of this in greater detail.
 
 ```sh
 # All plain files
-echo ./*(.)
+print ./*(.)
 
 # Anything but directories
-echo ./*(^/)
+print ./*(^/)
 
 # Only empty directories
-echo ./*(/^F)
+print ./*(/^F)
 
 # [ Recursive Editions ]
 
 # All plain files
-echo ./**/*(.)
+print ./**/*(.)
 
 # Anything but directories
-echo ./**/*(^/)
+print ./**/*(^/)
 ```
 
 ### Ownership Globbing
@@ -955,90 +1123,91 @@ Ascending Order
 
 * Print all of the directories in descending order of size, in an escaped format to be re-usable by the shell
 
-```sh
-echo ./*(/OL:q)
-```
+  ```sh
+  print ./*(/OL:q)
+  ```
 
 * Select the largest regular file within a directory
 
-```sh
-# 'L': (normally) sort by length (of file, i.e. its size), ascending
+  ```sh
+  # 'L': (normally) sort by length (of file, i.e. its size), ascending
 
-# (Using ascending order, and picking the last element)
-#
-echo ./*(.DoL[-1])
+  # (Using ascending order, and picking the last element)
+  #
+  print ./*(.DoL[-1])
 
-# (Using descending order, and picking the last element)
-# 'O': reverse order
-echo ./*(.DOL[1])
-```
+  # (Using descending order, and picking the last element)
+  # 'O': reverse order
+  print ./*(.DOL[1])
+  ```
 
 * Select all files larger than 2MB in a directory
 
-```sh
-# 'm' (megabytes) (and 'k' for kilobytes)
-# '-' (smaller than 2)
-echo ./*(.Lm-2)
-```
+  ```sh
+  # 'm' (megabytes) (and 'k' for kilobytes)
+  # '-' (smaller than 2)
+  print ./*(.Lm-2)
+  ```
 
 * Select the most recently modified file within a directory
 
-```sh
-echo ./*(.om[1])
-```
+  ```sh
+  print ./*(.om[1])
+  ```
 
 * Select all files modified within the last hour
 
-```sh
-# 'M' for Months
-# 'w' for weeks
-# 'h' for hours
-# 'm' for minutes
-# 's' for seconds
-# '-': modified less than '#' hours ago
-# '+': modified more than '#' hours ago
-print -l ./*(.mh-1)
-```
+  ```sh
+  # 'M' for Months
+  # 'w' for weeks
+  # 'h' for hours
+  # 'm' for minutes
+  # 's' for seconds
+  # '-': modified less than '#' hours ago
+  # '+': modified more than '#' hours ago
+  print -l ./*(.mh-1)
+  ```
 
-* Add each directory to an array, but only if it exists
+* Add each directory to the `${folders}` array, but only if it exists
 
-```sh
-# Using
-# (N) enable null glob
-# (/) only match an existing directory
-typeset -a my_array
-my_array=( /usr(/N) /bin(/N) /asdf(/N))
-print -l ${my_array}
-```
+  ```sh
+  # Using
+  # (N) enable null glob
+  # (/) only match an existing directory
+  typeset -a folders
+  folders=( /usr(/N) /bin(/N) /asdf(/N) )
+  print ${folders}
+  ```
 
-```txt
-/usr
-/bin
-```
+  ```txt
+  /usr /bin
+  ```
 
 * Select all files that aren't named `tmp`
 
-```sh
-# '#': the delimiter between the expansion flag and the string
-# `$REPLY`: every file name specified by the glob ./*
-print -l ./*(e#'[[ ! -e $REPLY/tmp ]]'#)
-```
+  ```sh
+  # '#': the delimiter between the expansion flag and the string
+  # `$REPLY`: every file name specified by the glob ./*
+  print -l ./*(e#'[[ ! -e $REPLY/tmp ]]'#)
+  ```
 
 ## Checking if a Command Exists
+
+* Using *equals expansion*
 
   ```sh
   # [ Wrong way, see below ]
   if [[ =brew ]]; then
-    echo "Command exists"
+    print "Command exists"
   else
-    echo "Command not found"
+    print "Command not found"
   fi
 
   # [ Right way, note the (( parentheses )) ]
   if (( ${+commands[brew]} )); then
-    echo "Command exists"
+    print "Command exists"
   else
-    echo "Command not found"
+    print "Command not found"
   fi
   ```
 
@@ -1049,11 +1218,19 @@ print -l ./*(e#'[[ ! -e $REPLY/tmp ]]'#)
 
 ## Count the Number of Words in a String
 
-```sh
-sentence="hi my name is"
-echo ${#string} # 13 (number of characters)
-echo ${(w)#string} # 4 (number of words)
-```
+* Count the number of characters in a string
+
+  ```sh
+  sentence="Hello world"
+  print ${#string} # => 13
+  ```
+
+* Count the number of words in a string
+
+  ```sh
+  sentence="Hello world"
+  print ${(w)#string} # => 2
+  ```
 
 ## Reading Words
 
@@ -1070,11 +1247,11 @@ echo ${(w)#string} # 4 (number of words)
   words=($(<words.txt))
 
   # Printing all the words
-  echo ${words[@]}
+  print ${words[@]}
   # => "the day is sunny the the the sunny is is"
 
   # Printing the unique words
-  echo ${(u)words[@]}
+  print ${(u)words[@]}
   # => "the day is sunny"
   ```
 
@@ -1095,7 +1272,7 @@ echo ${(w)#string} # 4 (number of words)
   # Print the results, sorted (n)umerically
   # (O)pposite of ascending order
   for result in ${(On)count}; do
-    echo ${result}
+    print ${result}
   done
   ```
 
@@ -1123,12 +1300,12 @@ echo ${(w)#string} # 4 (number of words)
   # excluding the empty index value in the middle
   array1=(${(s_:_)string}) # using '_' as argument separator
   array1=(${(s[:])string}) # using '[]' as argument separator
-  echo ${#array1} # => '2'
+  print ${#array1} # => '2'
 
   # including the empty index value in the middle
   array2=("${(@s_:_)string}") # using '_' as argument separator
   array2=("${(@s[:])string}") # using '[]' as argument separator
-  echo ${#array2} # => '3'
+  print ${#array2} # => '3'
   ```
 
 {{% notice info %}}
@@ -1202,13 +1379,13 @@ echo ${(w)#string} # 4 (number of words)
   ```sh
   string=$'first\tsecond\nthird fourth fifth sixth'
   array=(${=string})
-  echo ${#array} # 6
+  print ${#array} # 6
   ```
 
 * Passing escape sequences to a string
 
   ```sh
-  echo $'name:\tAustin Traver\nid:\t1234'
+  print $'name:\tAustin Traver\nid:\t1234'
   # => name:  Austin Traver
   # => id:    1234
   ```
@@ -1217,9 +1394,9 @@ echo ${(w)#string} # 4 (number of words)
 
   ```sh
   if [[ ${+var} -eq 1 ]]; then
-    echo "Variable is set"
+    print "Variable is set"
   else
-    echo "Variable is not set"
+    print "Variable is not set"
   fi
   ```
 
@@ -1227,7 +1404,7 @@ echo ${(w)#string} # 4 (number of words)
 
   ```sh
   for ((i=0; i<10; ++i)); do
-    echo ${i}
+    print ${i}
   done
   ```
 
@@ -1317,12 +1494,12 @@ If you have a super long string of text, for instance, a SQL query, you may want
 
 * `return` will stop the execution of the script that made the call, but `exit` will close the shell that sourced that file to begin with
 
-## Curly Braces
+## Brace Expansion
 
 * Multiple mid-word character substitutions
 
   ```sh
-  echo h{a,e,i,o,u}p
+  print h{a,e,i,o,u}p
   # => hap hep hip hop hup
   ```
 
@@ -1339,39 +1516,65 @@ If you have a super long string of text, for instance, a SQL query, you may want
 
 * Generating ranges of numbers
 
-```sh
-echo {01..10}
-# => 01 02 03 04 05 06 07 08 09 10
+  ```sh
+  print {01..10}
+  ```
 
-echo {01..10..3}
-# => 01 04 07 10
+  ```txt
+  01 02 03 04 05 06 07 08 09 10
+  ```
 
-echo {a..z}
-# a b c d e f g h i j k l m n o p q r s t u v w x y z
+  ```sh
+  print {01..10..3}
+  ```
 
+  ```txt
+  01 04 07 10
+  ```
 
-echo {a..z..3}
-# => a d g j m p s v y
+  ```sh
+  print {a..z}
+  ```
 
-print {a..z} '\n' {A..Z} '\n' {0..9}
+  ```txt
+  a b c d e f g h i j k l m n o p q r s t u v w x y z
+  ```
 
-left=1
-right=9
+  ```sh
+  print {a..z..3}
+  ```
 
-echo {$left..$right}
-# => 1 2 3 4 5 6 7 8 9
-```
+  ```txt
+  a d g j m p s v y
+  ```
+
+  ```sh
+  print {a..z} '\n' {A..Z} '\n' {0..9}
+  ```
+
+  ```sh
+  left=1
+  right=9
+  print {$left..$right}
+  ```
+
+  ```txt
+  1 2 3 4 5 6 7 8 9
+  ```
 
 ## Ternary Operator
 
-Ternary operators are supported within a double parentheses evaluation
+Ternary operators are supported in Zsh, but only when they are used within an arithmetic evaluation, such as `(( a > b ? yes : no ))`
 
   ```sh
   a=5
   b=6
-  max=$(( $a > $b ? a : b ))
-  print $max
-  # => 6
+  max=$(( a > b ? a : b ))
+  print "The max is ${max}"
+  ```
+
+  ```txt
+  The max is 6
   ```
 
 {{% notice info %}}
@@ -1393,8 +1596,11 @@ Ternary operators are supported within a double parentheses evaluation
 
   ```sh
   [[ 1 -eq 1 ]] && asdf || print "Not true"
-  # => "bash: asdf: command not found"
-  # => "Not true"
+  ```
+
+  ```txt
+  bash: asdf: command not found
+  Not true
   ```
 
 {{% notice info %}}
@@ -1409,22 +1615,35 @@ Ternary operators are supported within a double parentheses evaluation
 # ANSI C Quotations
 
 
-ANSI C QUOTING with $'...' syntax
+* Print two lines using C quotes `$'...'`
+
+  ```sh
+  print $'2\nlines'
+  ```
+
+  ```txt
+  2
+  lines
+  ```
+
+
+  ```sh
+  print $'\x41'
+  # => A
+  ```
+
 
 ```sh
-print $'2\nlines'
-# => 2
-# => lines
-
-print $'\x41'
-# => A
-
 print $'\u7231'
 # => 爱
-
-print $'\U0001f602'
-# => 😂
 ```
+
+
+  ```sh
+  print $'\U0001f602'
+  # => 😂
+  ```
+
 
 ## Regular Expressions
 
@@ -1432,25 +1651,26 @@ You can use the `=~` operator to test a value against a pattern
 
 ```sh
 pie=good
+[[ $pie =~ d ]] && print 'Match found'
+```
 
-[[ $pie =~ d ]]
-print $?
-# => 0, it matches the regex!
 
-[[ $pie =~ [aeiou]d ]]
-print $?
-# => 0, still matches
 
+```sh
+[[ $pie =~ [aeiou]d ]] && print 'Match found'
+```
+
+
+```sh
 # No match because the regular expression has to capture the value of
 # the variable, not the variable itself
-[[ $pie =~ [p][i]e ]]
-print $?
-# => 1
+[[ $pie =~ [p][i]e ]] || print 'No match found'
+```
 
+
+```sh
 # No match because there's no literal '[aeoiu]d' inside the word "good"
-[[ $pie =~ "[aeiou]d" ]]
-print $?
-# => 1
+[[ $pie =~ "[aeiou]d" ]] || print 'No match found'
 ```
 
 ## Arithmetic Evaluation
@@ -1458,8 +1678,8 @@ print $?
 ```sh
 a=2
 b=4
-print $((a*b))
-# => 8
+print $((a*b)) # => 8
+
 
 # You can even do assignments.  The last value calculated will be the output.
 b=$(( a *= 2 ))
@@ -1473,7 +1693,10 @@ print "b=$b a=$a"
 a=$(( 1 + 1 ))
 message="I don't want to brag, but I have like $(( a + 1 )) friends."
 print $message
-# => I don't want to brag, but I have like 3 friends."
+```
+
+```txt
+I don't want to brag, but I have like 3 friends.
 ```
 
 {{% notice info %}}
@@ -1482,43 +1705,52 @@ print $message
 
 ```sh
 print "6 / 8 = $(( 6 / 8 ))"
-# => 6 / 8 = 0
+```
 
+```txt
+6 / 8 = 0
+```
 
+```sh
 print "6 / 8 = $(( 6 / 8.0 ))"
-# => 6 / 8 = 0.75
+```
+
+```txt
+6 / 8 = 0.75
 ```
 
 ## File Descriptors
 
-* `1<&-`: Close the standard input.
+* `<&-`: Close the standard input.
 
 * `1>&-`: Close the standard output.
+
+* `2>&-`: Close the standard error.
 
 * `<&p`: Move the input from the coprocess to stdin
 
 * `>&p`: Move the output from the coprocess to output
 
-* `2>&1`: `/dev/stderr` will be directed to `/dev/stdout`
+* `2>&1`: Redirect standard error to standard output
 
-* `1>&2`: `/dev/stdout` will be directed to `/dev/stderr`
+* `1>&2`: Redirect standard output to standard error
 
-* `&> file.txt`:  both `/dev/stdout` and `/dev/stderr`
+* `&> file.txt`: Redirect both standard output and standard error to `file.txt`
 
 * Redirect output and error to different files
 
-```sh
-func() {
-  print 'output' >&1
-  print 'error' >&2
-}
+  ```sh
+  func() {
+    print 'output' >&1
+    print 'error' >&2
+  }
 
-# [ Version 1 ]
-func 1>out.txt 2>err.txt
+  # [ Version 1 ]
+  func 1>out.txt 2>err.txt
 
-# [ Version 2 ]
-1> out.txt 2> err.txt func
-```
+  # [ Version 2 ]
+  1> out.txt 2> err.txt func
+  ```
 
 ### Custom File Descriptor
 
@@ -1538,38 +1770,38 @@ exec 3>&-
 exec {four}>&-
 ```
 
-  ```sh
-  # Open file descriptor 3, Direct output to this file descriptor
-  # toward the file ~/three.txt
-  exec 3> ~/three.txt
-  # Open file descriptor allocated by shell to unused
-  # file descriptor >= 10. Direct output to this file descriptor
-  # toward the file ~/fd.txt
-  exec {fd}> ~/fd.txt
-  # (alternative: sysopen -w -u 3 /dev/null)
+```sh
+# Open file descriptor 3, Direct output to this file descriptor
+# toward the file ~/three.txt
+exec 3> ~/three.txt
+# Open file descriptor allocated by shell to unused
+# file descriptor >= 10. Direct output to this file descriptor
+# toward the file ~/fd.txt
+exec {fd}> ~/fd.txt
+# (alternative: sysopen -w -u 3 /dev/null)
 
-  shout() {
-    print 'File descriptor 1' >&1
-    print 'File descriptor 2' >&2
-    print 'File descriptor 3' >&3
-    print 'File descriptor fd' >&$fd
-  }
+shout() {
+  print 'File descriptor 1' >&1
+  print 'File descriptor 2' >&2
+  print 'File descriptor 3' >&3
+  print 'File descriptor fd' >&$fd
+}
 
-  shout
-  # => (1:) 'File descriptor 1'
-  # => (2:) 'File descriptor 2'
+shout
+# => (1:) 'File descriptor 1'
+# => (2:) 'File descriptor 2'
 
-  # Close file descriptor 3
-  exec 3>&-
-  # Close file descriptor fd
-  exec {fd}>&-
+# Close file descriptor 3
+exec 3>&-
+# Close file descriptor fd
+exec {fd}>&-
 
-  shout
-  # => (1:) 'File descriptor 1'
-  # => (2:) 'File descriptor 2'
-  # => (3:) 'error: bad file descriptor'
-  # => (12:) 'error: bad file descriptor'
-  ```
+shout
+# => (1:) 'File descriptor 1'
+# => (2:) 'File descriptor 2'
+# => (3:) 'error: bad file descriptor'
+# => (12:) 'error: bad file descriptor'
+```
 
 Technically this is a little dangerous, especially for file descriptors 3-8, (for instance, #5 is used when spawning child processes), so it's best to do the alternative "variable name" method, shown below
 
@@ -1584,20 +1816,20 @@ Technically this is a little dangerous, especially for file descriptors 3-8, (fo
 * `{abc}>&-`: close file descriptor "abc"
 
 
-  ```sh
-  # Open file descriptor `fd` that redirects to 'output.txt'
-  exec {fd}> ~/output.txt
+```sh
+# Open file descriptor `fd` that redirects to 'output.txt'
+exec {fd}> ~/output.txt
 
-  print "{fd} points to file descriptor ${fd}"
-  # => "{fd} points to file descriptor 12"
+print "{fd} points to file descriptor ${fd}"
+# => "{fd} points to file descriptor 12"
 
-  print $'alpha\nbravo\ncharlie' >&$fd
+print $'alpha\nbravo\ncharlie' >&$fd
 
-  # Close file descriptor 'fd'
-  exec {fd}>&−
+# Close file descriptor 'fd'
+exec {fd}>&−
 
-  print $'alpha\nbravo\ncharlie' >&$fd
-  ```
+print $'alpha\nbravo\ncharlie' >&$fd
+```
 
 ## Disowning a Job
 
@@ -2078,4 +2310,132 @@ Zsh comes with many useful modules, but none are loaded by default. This is done
 ```sh
 date >&1 >file
 ```
+
+
+## Operating System Commands
+
+There are some ANSI escape sequences that allow you to write Operating System Commands (OSCs)
+
+* Set the title of the terminal tab to `TAB`
+
+  ```sh
+  # The `1` specifies to change the tab title
+  print '\x1b]1;TAB\x07'
+  ```
+
+* Set the title of the terminal window to `WINDOW`
+
+  ```sh
+  # The `2` specifies to change the window title
+  print '\x1b]2;WINDOW\x07'
+  ```
+
+## Default Zsh Options
+
+Included below, more for my reference, but could be helpful for anyone
+
+```sh
+# Print an error if a glob pattern is badly formed
+setopt BAD_PATTERN
+
+# Print an error if a glob pattern does not match any files
+setopt NOMATCH
+
+# Treat unset parameters as '' in subs, 0 in math, otherwise error
+setopt UNSET
+
+# Consider parentheses trailing a glob as qualifiers
+setopt BARE_GLOB_QUAL
+
+# Match regular expressions in `=~` case sensitively
+setopt CASE_MATCH
+
+# Perform =file expansion
+setopt EQUALS
+
+# Perform history expansion with `!`
+setopt BANG_HIST
+
+# Calling `typeset -x` implicitly calls `typeset -g -x`
+setopt GLOBAL_EXPORT
+
+# Allows a short-form syntax for `if`, `while`, `for`, etc.
+setopt SHORT_LOOPS
+
+# Run all background jobs at a lower priority
+setopt BG_NICE
+
+# Report the status of background jobs (typically it isn't done until <CR>)
+setopt NOTIFY
+
+# Confirm before logoff w/ background/suspended jobs
+setopt CHECK_JOBS
+setopt CHECK_RUNNING_JOBS
+
+# Send the HUP signal to running jobs when the shell exits
+setopt HUP
+
+# Treat '%' specially in prompt strings
+setopt PROMPT_PERCENT
+
+# Set $0 equal to name of script for funcs & script
+setopt FUNCTION_ARGZERO
+```
+
+## Short Form Syntax
+
+Zsh supports the traditional syntax for conditional statements and for loops. However, they also provide some more modern versions of each, as demonstrated below:
+
+* One line `if` statement, single command:
+
+  ```sh
+  if [[ ${USER} == 'austin' ]] print "That's him"
+  ```
+
+* Multi-line `if` statement, any number of commands:
+
+  ```sh
+  if [[ ${USER} == 'austin' ]] {
+    print "That's him"
+  } elif [[ ${USER} == 'valerie' ]]
+    print "That's her" 
+  } else {
+    print "That's nobody important"
+  }
+  ```
+
+* Multi-line `for` loop, any number of statements
+
+  ```sh
+  words=('one' 'two' 'three' )
+
+  for word in ${words}; {
+    print ${word}
+  }
+  ```
+
+
+* Syntax for short-form of `while` loop
+
+  ```sh
+  # Keep sleeping until the server starts running
+  while [[ $(curl http://127.0.0.1 -- &> /dev/null)$? -eq 7 ]] {
+    sleep 0.2
+  }
+  print "Server is now running"
+  ```
+
+## Silent Functions
+
+You can specify that a function can be silent *in its declaration*! If you know you're going to make a helper function that you don't want to ever see output from, you can define it using the syntax outlined in the example below:
+
+* Create a silent function
+
+  ```sh
+  func() {
+    print 'Never seen'
+    return 0
+  } &> /dev/null
+  ```
+
 

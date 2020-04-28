@@ -2,7 +2,8 @@ div#navbar {
   height: 8vh;
   padding: 1vh 1vw;
   z-index: 1;
-  position: sticky;
+  /* position: sticky; */
+  position: unset;
   background-color: white;
   border-bottom: solid;
   border-color: rgb(180, 180, 180);
@@ -36,7 +37,7 @@ div#navbar a > img:hover {
 }
 
 div#navbar a > img {
-  max-height: 100%;
+  height: inherit;
   max-width: 100%;
 }
 
@@ -54,14 +55,13 @@ div#navbar a:any-link {
 
 /* Desktop */
 @media screen and (min-aspect-ratio: 3/5) {
-  div#navbar {
-    position: unset;
-  }
-  div#navbar a {
-    filter: opacity(80%);
+  div#navbar img {
     transition: 0.5;
   }
-  div#navbar a:hover {
+  div#navbar img {
+    filter: opacity(80%);
+  }
+  div#navbar img:hover {
     filter: opacity(100%);
   }
 }
@@ -72,11 +72,7 @@ div#navbar a:any-link {
     border-color: rgb(60, 60, 60);
     color: white;
   }
-  div#navbar a#site {
-    background: var(--blue);
-    border-color: var(--blue) shade(20%);
-  }
-  div#navbar a:any-link {
+  div#navbar > img {
     color: white;
   }
 }

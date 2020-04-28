@@ -1255,3 +1255,7 @@ public class Create {
 }
 
 ```
+
+## Threads
+
+In the most recent release of Java, the `Thread.suspend()` and `Thread.resume()` methods have been deprecated

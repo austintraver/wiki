@@ -1,6 +1,6 @@
 div#grid {
   display: grid;
-  grid-column-gap: 1vw;
+  grid-column-gap: 3vh;
   flex: 6;
 }
 
@@ -18,7 +18,7 @@ div#grid {
 /* Desktop */
 @media screen and (min-aspect-ratio: 3/5) {
   div#grid {
-    grid-row-gap: 4vh;
+    grid-row-gap: 3vh;
     grid-template-columns: repeat(3, 1fr);
   }
   img#teaser {
@@ -38,9 +38,7 @@ a#pagelink {
   background-color: dimgrey;
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   font-weight: normal;
-  margin: 1px;
 }
 
 /* A link to an individual page on the wiki */

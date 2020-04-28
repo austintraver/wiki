@@ -43,3 +43,13 @@ draft = false
   }
   document.addEventListener("load", stylize);
   ```
+
+
+* Append an element to a list
+
+  ```js
+  let node = document.createElement("li");                 // Create a <li> node
+  let textnode = document.createTextNode("water");         // Create a text node
+  node.appendChild(textnode);                              // Append the text to <li>
+  document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with id="myList"
+  ```
