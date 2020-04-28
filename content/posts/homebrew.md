@@ -94,7 +94,19 @@ brew uninstall wget
 
 #### Where are my programs & applications installed?
 
-`brew` will symlink all of the files that you have installed to /usr/local/bin which is automatically part of your `$PATH` in bash. Therefore, if you install `wget` then you can call it directly from bash, because the program can be accessed at `/usr/local/bin/wget`
+`brew` will symlink all of the files that you have installed to `/usr/local/bin` which is automatically part of your `${PATH}` variable. Therefore, if you install `wget` then you can call it directly from your terminal, because the program will execute once it is found at `/usr/local/bin/wget`
+
+You can get more information than that, however. For instance, the command below shows you where a file was installed 
+
+```sh
+brew --prefix wget
+```
+
+```txt
+/usr/local/opt/wget
+```
+
+Note that although the returned output is correct, it's truly a symlink to the directory `/usr/local/Cellar/wget/0.8.5`
 
 #### Where is `brew` itself installed?
 

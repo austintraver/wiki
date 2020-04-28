@@ -77,24 +77,39 @@ Assuming you know the activation bytes of your file...
 ## Convert mkv to mp4
 
   ```sh
-  for file in ~/episodes/*.mkv; do ffmpeg -i ${file} ${file:0:(-4)}.mp4; done
+  for file in ~/episodes/*.mkv; do
+    ffmpeg -i ${file} ${file:0:(-4)}.mp4;
+  done
   ```
 
 ## Concatenate Multiple `.mp3` Files
 
 
   ```sh
-  #!/bin/zsh
-  ifile="concat:"
-  for file in ./*mp3; do
-    ifile+="${file}|"
-  done
-  ifile=${ifile:0:(-1)}
-  ffmpeg -i ${ifile} -i "001.mp3" -acodec copy "ofile.mp3" -map_metadata 0:1
+  # Create a string to specify which files to concatenate
+  typeset ifile="concat:one.mp3|two.mp3|three.mp3"
+
+  # Concatenate the files
+  ffmpeg -i ${ifile} -c:a copy -map_metadata 0:1 ofile.mp3
   ```
 
-## Capture Image from Webcam
+## Taking a Photo using only a Command Line
 
   ```sh
-  ffmpeg -loglevel quiet -y -f avfoundation -video_size 1280x720 -framerate 30 -i 0 -vframes 1 ./output.jpg
+	ffmpeg \
+		-f 'avfoundation' \
+		-video_size '1280x720' \
+		-framerate 30 \
+		-i 0 \
+		-vframes 1 \
+	./output.jpg
+  ```
+
+## Convert an MP3 Audiobook to an M4B Audiobook
+
+  ```sh
+  # For each audiobook in the folder
+  for audiobook in *.mp3; do
+    ffmpeg -i ${audiobook} -c:a aac -c:v copy ${audiobook:r}.m4b;
+  done
   ```

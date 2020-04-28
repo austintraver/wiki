@@ -9,12 +9,12 @@ image = "awk.jpg"
 
 * Seperate input fields by colon, return output separated by space, save into an array
 
-```sh
-gpg -k --with-colons \
-	| grep '^...:e' \
-	| awk -F ':' '{ print $5 }' \
-	| awk -v ORS=' ' 'NF' \
-	| read -A array
+  ```sh
+  gpg -k --with-colons \
+    | grep '^...:e' \
+    | awk -F ':' '{ print $5 }' \
+    | awk -v ORS=' ' 'NF' \
+    | read -A array
 
-gpg --delete-keys ${array}
-```
+  gpg --delete-keys ${array}
+  ```

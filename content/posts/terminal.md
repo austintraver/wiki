@@ -318,29 +318,29 @@ Note that `/` itself is the root directory, these are directories inside the `ro
 
 #### The `/bin` directories
 
-These are programs that are needed if you start the system with [single user mode](http://osxdaily.com/2018/10/29/boot-single-user-mode-mac/), a setting that is even more barebones than [recovery mode](http://osxdaily.com/2017/05/18/access-terminal-recovery-mode-mac/).
+These are programs that are needed if you start the system with *single user mode*. Single user mode is a startup mode even more barebones than *recovery mode*.
 
 #### The `/local` directories
 
 ##### `/usr/local/bin`
 
-This is for programs that are local to your user account. If you install a program here (and you should), then the other accounts on the computer won't be able to use it. Also, it's automatically in your $PATH.
+This is for programs that are local to your user account. If you install a program here (and you should), then the other accounts on the computer won't be able to use it. Also, it's automatically in your `${path}`
 
 ##### `/usr/local/sbin`
 
 This is the local *system* bin, which is used for programs that are needed to boot the system, but that you won't be executing directly.
 
-### Adding a directory to `$PATH`
+### The command path
 
-If you want to add a directory to `$PATH` you'll need to edit your `~/.zshrc`. To add the directory `/Users/tommytrojan/programs` to your path, you would add the following line.
+  If you want to add a directory to `${path}` you'll need to edit your `~/.zshrc`. To add the directory `/Users/tommytrojan/programs` to your path, you would add the following line.
 
-```sh
-export PATH=$PATH:/Users/tommytrojan/programs
-```
+* Add a folder of executable programs to the command path
 
-This will append `/Users/tommytrojan/programs` to the existing value of `PATH` which is accessed by typing `$PATH`. You can check this by typing `$ echo $PATH` in your terminal.
+  ```sh
+  path=(~/tommytrojan/programs ${path})
+  ```
 
-Now, if you had that file `greet` located in your computer at `/Users/tommytrojan/programs/greet` it would run by calling `$ greet` in your terminal.
+This will append `/Users/tommytrojan/programs` to the existing value of `${path}` which is accessed by typing `${path}`. 
 
 ## The `export` keyword
 

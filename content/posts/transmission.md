@@ -111,6 +111,9 @@ transmission-daemon --dump-settings &> ~/.config/transmission-daemon
 **Warning:** Be careful that you don't also have a `~/.config/settings.json`, because `transmission-daemon` will prefer these settings over those in `~/.config/transmission-daemon`
 {{% /notice %}}
 
+Be careful about determining where transmission is actually looking when launching with a config file. If `TRANSMISSION_HOME` is not set, Unix-based versions of Transmission will look for their settings in `${XDG_CONFIG_HOME}/transmission/`. Sometimes this isn't true, however, and sometimes on macOS, (for instance, when transmission is launched as a homebrew service), the config file is placed in `~/Library/Application Support/Transmission`.
+
+
 ## Specifying a Custom Configuration File Directory
 
 ```sh

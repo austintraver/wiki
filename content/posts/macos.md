@@ -82,6 +82,17 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
 **Tip:** You can open inspect element in many more apps than you think. Give it a try!
 {{% /notice %}}
 
+* Check the battery life from your terminal
+
+	```sh
+	pmset -g batt
+	```
+
+* Disable sleep for one session
+
+	```sh
+	pmset noidle &!
+	```
 
 * Disable sleep entirely
 
@@ -107,6 +118,18 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
   pmset schedule sleep "12/24/2019 08:00:00"
   ```
 
+* Schedule for computer to sleep in 1 hour:
+
+	```sh
+	sudo systemsetup -setcomputersleep 60
+	```
+
+* Check when the computer is scheduled to sleep
+
+	```sh
+	sudo systemsetup -getcomputersleep
+	```
+
 * Schedule for the computer to wake on 12/24 @ 8:00PM
 
   ```sh
@@ -116,7 +139,11 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
 * Restart the computer immediately
 
   ```sh
+	# Option 1
   sudo reboot now
+
+	# Option 2
+	sudo shutdown -r now
   ```
 
 * Shut down the computer immediately
