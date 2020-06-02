@@ -648,3 +648,13 @@ Sometimes you need to use somebody's project as part of your project. It'd be wa
 ## GitHub Notes
 
 You can now use `@me` as a filter when performing a search on GitHub. For example, `is:issue state:open assignee:@me`
+
+## GitHub Wikis
+
+You can clone wikis to your local machine, and then make changes to them as you would any other code base. 
+
+* Cloning the wiki for the `fighton` repo made by user `ttrojan`
+
+  ```sh
+  git clone 'https://github.com/ttrojan/fighton.wiki.git'
+  ```

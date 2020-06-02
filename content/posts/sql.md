@@ -375,8 +375,10 @@ The most common types of joins are, `INNER JOIN`, `OUTER JOIN`, `LEFT JOIN`, and
 Create a joined table containing every customer's name, the order ID, and the order date
 
 ```sql
-SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
-FROM Orders
+SELECT 
+  Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM 
+  Orders
 INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID
 ```
 
@@ -423,28 +425,37 @@ SHOW TABLES;
 Removing a table
 
 ```sql
-DROP TABLE this_table;
+DROP 
+  TABLE this_table;
 ```
 
 Renaming a table
 
 ```sql
-RENAME TABLE this_table TO new_table_name;
+RENAME 
+  TABLE this_table 
+  TO new_table_name;
 ```
 
 There are multiple ways that you can show/describe the Various Key-Columns in a Table
 
-```sql
-/* [Option 1] */
-DESC MyTable;
-/* [Option 2 ]*/
-SHOW COLUMNS FROM MyTable;
-/* [Option 3] */
-SHOW COLUMNS FROM MyDatabase.MyTable;
-/* [Option 4] */
-SHOW FULL COLUMNS FROM MyTable IN MyDatabase;
-/* "FULL" provides more detail */
-```
+  1. `DESC`
+
+    ```sql
+    DESC MyTable;
+    ```
+
+  2. `SHOW COLUMNS`
+
+    ```sql
+    SHOW COLUMNS FROM MyDatabase.MyTable;
+    ```
+
+  3. `SHOW FULL COLUMNS`
+
+    ```sql
+    SHOW FULL COLUMNS FROM MyTable IN MyDatabase;
+    ```
 
 Creating a table in a database
 
@@ -473,21 +484,32 @@ CREATE TABLE Example (
 Inserting a single record into a table
 
 ```sql
-INSERT INTO Searches (search_query) VALUES ('whoami');
+INSERT 
+  INTO Searches (search_query) 
+  VALUES ('whoami');
 ```
 
 Inserting a multiple records into a table at once
 
 ```sql
-INSERT INTO Searches (search_query)
-	VALUES ('also'), ('who are you'), ('and'), ('what\'s good');
+INSERT 
+  INTO Searches (search_query)
+	VALUES 
+    ('what is love'), 
+    ('baby dont hurt me'), 
+    ('dont hurt me'), 
+    ('no more')
 ```
 
 Finding the most recent search
 
 ```sql
-SELECT * FROM Searches
-	WHERE search_id=(SELECT MAX(search_id) FROM Searches);
+SELECT 
+  * 
+FROM 
+  Searches
+WHERE 
+  search_id=(SELECT MAX(search_id) FROM Searches);
 ```
 
 
@@ -511,35 +533,63 @@ CREATE TABLE Searches (
 Reference a foreign key
 
 ```sql
-SELECT userQuery FROM Users U, Searches S WHERE u.userID = s.userID AND s.userID = 1 ORDER BY searchID DESC;
+SELECT 
+  userQuery 
+FROM 
+  Users U, Searches S 
+WHERE 
+  u.userID = s.userID 
+  AND s.userID = 1 
+ORDER BY 
+  searchID DESC;
 ```
 
 Removing a foreign key from a table
 
 ```sql
-ALTER TABLE this_table DROP FOREIGN KEY my_foreign_key;
+ALTER 
+  TABLE this_table 
+DROP 
+  FOREIGN KEY my_foreign_key;
 ```
 
 Changing a key-column name in a table
 
 ```sql
-ALTER TABLE this_table CHANGE old_column_name new_column_name VARCHAR(10);
+ALTER 
+  TABLE this_table 
+CHANGE 
+  old_column_name 
+  new_column_name VARCHAR(10);
 ```
 
 Adding a key-column to a table
 
 ```sql
-ALTER TABLE this_table ADD new_column_name VARCHAR(10);
+ALTER 
+  TABLE this_table 
+ADD 
+  new_column_name VARCHAR(10);
 ```
 
 ### Managing Users
 
 Looking up the current user using `mysql`
 
-```sql
-SELECT CURRENT_USER(); -- Show current user
-SELECT user FROM mysql.user; -- Show all users
-```
+* Show the current user:
+
+  ```sql
+  SELECT CURRENT_USER(); -- Show current user
+  ```
+
+* Show all users;
+
+  ```sql
+  SELECT 
+    user 
+  FROM 
+    mysql.user; -- Show all users
+  ```
 
 Changing a user’s password for `mysql`
 
@@ -610,7 +660,12 @@ SET PASSWORD FOR 'root'@'localhost' = 'root';
 * Supporting UTF-8 encoding
 
   ```sql
-  SELECT SCHEMA_NAME 'database', default_character_set_name 'charset', DEFAULT_COLLATION_NAME 'collation' FROM information_schema.SCHEMATA;
+  SELECT 
+    SCHEMA_NAME 'database', 
+    default_character_set_name 'charset', 
+    DEFAULT_COLLATION_NAME 'collation' 
+  FROM 
+    information_schema.SCHEMATA;
   ```
 
 {{% notice success %}}
@@ -637,7 +692,11 @@ SET PASSWORD FOR 'root'@'localhost' = 'root';
 * Allow a user to perform all database administration commands
 
   ```sql
-  GRANT ALL PRIVILEGES ON * . * TO 'jeffrey'
+  GRANT ALL PRIVILEGES 
+  ON 
+    * . * 
+  TO 
+    'jeffrey'
   -- Flushing the active permissions causes these changes to take effect
   FLUSH PRIVILEGES
   ```
@@ -646,13 +705,21 @@ SET PASSWORD FOR 'root'@'localhost' = 'root';
 
   ```sql
   -- Change tommy's password to "letmein"
-  ALTER USER 'tommy'@'127.0.0.1' IDENTIFIED BY 'letmein';
+  ALTER USER 
+    'tommy'@'127.0.0.1' 
+  IDENTIFIED BY 
+    'letmein';
   ```
 
 * Display information about all known users
 
   ```sql
-  SELECT user,host,password from mysql.user;
+  SELECT 
+    user,
+    host,
+    password 
+  FROM 
+    mysql.user;
   ```
 
 ## MySQL Configurations

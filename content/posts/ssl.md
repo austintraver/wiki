@@ -18,6 +18,20 @@ The first is called *Privacy Enhanced Mail* or **PEM** encoding, which uses a ba
 
 ## `openssl`
 
+### Configurations
+
+* Find the path to the SSL's configuration file:
+
+  ```sh
+  openssl ca
+  ```
+
+{{% notice warning %}}
+The configuration file only applies to the `ca` `req` and `x509` subcommands
+{{% /notice %}}
+
+### Certificates
+
 * Create a Certificate Signing Request using `gpgsm`
 
   ```sh

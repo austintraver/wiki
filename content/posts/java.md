@@ -5,14 +5,24 @@ date = 2020-02-04T14:52:27-08:00
 image = "java.jpg"
 +++
 
+## Getting Started
+
 * Download `java`
 
+  * on macOS
+
   ```sh
-  # macOS
   brew cask install java
-  # Debian distro
-  apt install default-jdk-headless
   ```
+
+  * on Ubuntu
+
+  ```sh
+  apt install default-jdk-headless
+  # apt install default-jre-headless
+  # ↑ this is installed as a dependency
+  ```
+
 
 ## Running Java in the Terminal
 
@@ -51,6 +61,12 @@ Within the Java file, you would access the input in the following way
 ```java
 String street = System.getProperty("street"); // "sesame"
 String network = System.getProperty("network"); // "pbs"
+```
+
+Alternatively, you could create a properties object
+
+```java
+Properties properties = new Properties(System.getProperties());
 ```
 
 ## The Classpath
@@ -1258,4 +1274,4 @@ public class Create {
 
 ## Threads
 
-In the most recent release of Java, the `Thread.suspend()` and `Thread.resume()` methods have been deprecated
+* In the most recent release of Java, the `Thread.suspend()` and `Thread.resume()` methods have been deprecated.

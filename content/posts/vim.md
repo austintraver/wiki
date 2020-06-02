@@ -1481,3 +1481,11 @@ This will make Vi quit with an error code, preventing the commit operation from 
 	```vim
 	0f[ile]
 	```
+
+### View Wordcount
+
+* View the amount of words written in the current file
+
+  ```txt
+  g <C-g>
+  ```

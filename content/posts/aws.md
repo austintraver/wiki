@@ -7,6 +7,42 @@ image = "aws.jpg"
 
 # AWS
 
+## Getting Started
+
+### Installing AWS
+
+* On macOS:
+
+  ```sh
+  curl 'https://awscli.amazonaws.com/AWSCLIV2.pkg' -o 'aws.pkg'
+  installer -pkg aws.pkg -target /
+  mv '/usr/local/aws-cli' '/usr/local/opt/aws'
+  ln -sf '/usr/local/opt/aws/aws' '/usr/local/bin/aws'
+  ```
+
+### Enabling Command Completion
+
+* On macOS:
+
+  Add the following to your `~/.zshrc`
+
+  ```sh
+  if (( ${+commands[aws]} )) {
+    autoload bashcompinit
+    bashcompinit
+    complete -C '/usr/local/opt/aws/aws_completer' 'aws'
+  }
+  ```
+
+### Uninstalling AWS
+
+* On macOS:
+
+  ```sh
+  rm '/usr/local/opt/aws'
+  rm -- /usr/local/bin/*(-@)
+  ```
+
 * IAM: Identity Access Management. Controls what users can do in their AWS environment.
 * VPC: Virtual Private Cloud. The networking hub, here is where we open ports, create subnets, etc.
 * AMI: Amazon Machine Image. An image of an operating system, the starting point for launching instances.
@@ -277,3 +313,96 @@ Types of Policies:
       }' \
     /dev/stdin
   ```
+
+## EC2
+
+* Whitelist Port `22` for IP `45.144.81.36` on the account's EC2 instances
+
+    ```sh
+    aws ec2 \
+        authorize-security-group-ingress \
+        --group-name 'aws_security_group' \
+        --protocol tcp \
+        --port 22 \
+        --cidr "45.144.81.36/32"
+    ```
+
+* Allocate an elastic public IP address
+
+    ```sh
+    aws ec2 allocate-address
+    ```
+
+* Describe elastic public IP addresses:
+
+  ```sh
+  aws ec2 describe-addresses --public-ips
+  ```
+
+* Release the IP address associated with a given allocation ID
+
+  ```sh
+  aws ec2 release-address --allocation-id 'eipalloc-0adf787bf251776d3'
+  ```
+
+## Configure
+
+[Documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/configure/set.html)
+
+* Launch the AWS CLI configuration wizard
+
+    ```sh
+    aws configure wizard
+    ```
+
+* Import credentials from a CSV file
+
+    ```sh
+    aws configure import --csv file://path/to/creds.csv
+    ```
+
+* Change the default region
+
+    ```sh
+    # Default profile
+    aws configure set default.region us-west-2
+
+    # Specific profile
+    aws configure set region us-west-1 --profile tommy
+    ```
+
+* Change the default output to YAML
+
+    ```sh
+    aws configure set default.output yaml
+    ```
+
+* Launch the SSO configuration program
+
+    ```sh
+    aws configure sso
+    ```
+
+It's worth noting that you can specify which SSO profile name to use in two different ways:
+
+    1. By passing a name to the `--profile` option, (e.g. `--profile tommy`)
+
+    2. By assigning a name to the environment variable `AWS_DEFAULT_PROFILE`
+
+* Clearing SSO credentials
+
+    ```sh
+    aws sso logout
+    ```
+
+## Cloud9
+
+AWS has an in-browser IDE called Cloud9, which you can power using an existing EC2 instance. Supposedly it supports pair programming as well.
+
+## Organizations
+
+* Create a new organization
+
+```sh
+aws organizations create-organization
+```

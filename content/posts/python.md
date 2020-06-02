@@ -644,3 +644,16 @@ def divmod(a, b, /):
     "Emulate the built in divmod() function"
     return (a // b, a % b)
 ```
+
+## Python Image Library
+
+```sh
+pip install pillow
+```
+
+* Create Blank White PNG File
+
+  ```py
+  from PIL import Image
+  Image.new('RGB', (1000,1000), (0xff, 0xff, 0xff)).save("image.png", "PNG")
+  ```

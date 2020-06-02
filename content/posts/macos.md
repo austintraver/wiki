@@ -263,7 +263,8 @@ By default, screenshots save to `.png` but you can change this setting to  `.jpg
 Set default screen capture as `.jpg`
 
 ```sh
-defaults write com.apple.screencapture type jpg && killall SystemUIServer
+defaults write com.apple.screencapture type -string 'jpg'
+killall SystemUIServer
 ```
 
 #### Change screenshot capture location
@@ -1353,4 +1354,110 @@ Drive Icons are located in `/System/Library/Extensions/IOStorageFamily.kext/Cont
 
   ```sh
   print -l /System/Library/**/*/Contents/Resources/*.icns
+  ```
+
+## Filetype Conversion for Printing
+
+
+* Convert a text file to PostScript
+
+```sh
+cupsfilter -m 'application/postscript' file.txt > file.ps
+```
+
+* Convert a text file to PDF
+
+```sh
+cupsfilter -m 'application/pdf' file.txt > file.pdf
+```
+
+## Defaults
+
+The `defaults` command can be used to configure many hidden settings available in macOS.
+
+### Finder
+
+* Display file extensions 
+
+  ```sh
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+  killall Finder
+  ```
+
+* Prevent file icons from displaying on the Desktop
+
+  ```sh
+  defaults write com.apple.finder CreateDesktop -bool FALSE
+  killall Finder
+  ```
+
+You can prohibit the modification of Finder preferences by selecting `Preferences...` in the menu bar. As to why you'd want to do this, I have no idea, but here you go:
+
+* Disable modification of Finder preferences
+
+  ```sh
+  defaults write com.apple.finder ProhibitFinderPreferences -bool true
+  killall Finder
+  ```
+
+If you're tired of `.DS_Store` files popping up in all of your directories, there's a command to disable them entirely. Before you do however, it's worth nothing that the `.DS_Store` file is one that contains useful metadata about your file system browsing preferences, such as "Whether to open a folder in 'Application View' or in 'List View'"
+
+* Disable creation of `.DS_Store` files
+
+  ```sh
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  ```
+
+* Delete dock hiding delay
+
+  ```sh
+  defaults write com.apple.dock autohide-delay -float 0
+  killall Dock
+  ```
+
+### Mail
+
+* Change minimum file size threshold for Mail Drop for macOS Mail
+
+  ```sh
+  # 1024 = 1MB
+  defaults write com.apple.mail minSizeKB 1024
+  ```
+
+### TextEdit
+
+* Use plain text as the default in TextEdit instead of rich text
+
+  ```sh
+  defaults write com.apple.TextEdit RichText -int 0
+  ```
+
+
+### Misc
+
+* Reset the DNS cache
+
+  ```sh
+  sudo discoveryutil udnsflushcaches
+  ```
+
+* Change the cursor's blink rate
+
+  ```sh
+  # Enter time in milliseconds
+  defaults write -g NSTextInsertionPointBlinkPeriodOn -float 200
+  ```
+
+* Disable the full screen animation
+
+  ```sh
+  # Disable slow animation
+  defaults write -g NSWindowResizeTime -float 0.001
+  ```
+
+* Disable filenames from including date on screenshots
+
+  ```sh
+  defaults write com.apple.screencapture 'include-date' -bool false
+  killall SystemUIServer
   ```

@@ -134,3 +134,11 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
   # Configure inbox style
   color indicator brightblue default
   ```
+
+## ImageMagick
+
+* Compress a PDF to a smaller size file
+
+  ```sh
+  convert 'input.pdf' -format 'JPG' -quality 10 'output.pdf'
+  ```
