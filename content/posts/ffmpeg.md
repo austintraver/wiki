@@ -56,14 +56,14 @@ ls *.mp3 | sort | sed 's/^/file /g' > 'files.txt'
 ffmpeg -f 'concat' -i 'files.txt' -c copy 'merged.mp3'
 ```
 
-## Convert `.aax` files to `.m4a`
+## Convert `.aax` files to `.m4b`
 
 Assuming you know the activation bytes of your file...
 
 * Convert the audiobook `input.aax` to `output.m4b`
 
   ```sh
-  ffmpeg -activation_bytes 123abc -i input.aax -c copy output.m4b
+  ffmpeg -activation_bytes '123abc' -i 'input.aax' -c copy 'output.m4b'
   ```
 
 ## Extract cover art from a media file

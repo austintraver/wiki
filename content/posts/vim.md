@@ -1,8 +1,8 @@
 +++
-title = "Vim"
+title = "Vi"
 description = "The best editor around"
 date = 2020-02-04T14:52:27-08:00
-image = "vim.jpg"
+image = "vi.jpg"
 +++
 
 # Vim
@@ -39,21 +39,24 @@ These two programs were written in C during the mid 1970s and were eventually me
 
 ## Getting Started
 
-The original Vim package has grown to include everything and the kitchen sink. You'll find the amount of files and dependencies it adds to be rather excessive, as it will force the installation of several different programming languages, along with many features you likely don't need. For this reason, many developers have begun working on NeoVim, which is more in line with the original spirit of the Vim package. For this Wiki entry, I will be assuming that you are using NeoVim, but most of these commands should work in regular Vim as well.
+The original Vim package has grown to include everything and the kitchen sink. You'll find the amount of files and dependencies it adds to be rather excessive, as it will force the installation of several different programming languages, along with many features you likely don't need. For this reason, many developers have begun working on Neovim, which is more in line with the original spirit of the Vim package. For this Wiki entry, I will be assuming that you are using Neovim, but most of these commands should work in regular Vim as well.
 
 
-* Installing Vim
+* Installing Neovim
 
   * On Ubuntu
+
   ```sh
   sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt update
   sudo apt install neovim
   ```
 
-```sh
-brew install vim --with-client-server
-```
+  * On macOS
+
+  ```sh
+  brew install neovim
+  ```
 
 ## Learning `vim`
 

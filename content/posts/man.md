@@ -145,50 +145,6 @@ man -t grep | open -f -a 'Preview'
 
 * `.TS`: Start of a table
 * `.TE`: End of a table
-
-Example:
-
-  ```groff
-  .PP
-  .TS
-  l l l.
-  Macro	Meaning	Subsection
-  .T&
-  lB l l.
-  _
-  \&.B	Bold	Font style macros
-  \&.BI	Bold, italic alternating	Font style macros
-  \&.BR	Bold, roman alternating	Font style macros
-  \&.EE	Example end	Document structure macros
-  \&.EX	Example begin	Document structure macros
-  \&.I	Italic	Font style macros
-  \&.IB	Italic, bold alternating	Font style macros
-  \&.IP	Indented paragraph	Paragraph macros
-  \&.IR	Italic, roman alternating	Font style macros
-  \&.LP	(Left) paragraph	Paragraph macros
-  \&.ME	Mail-to end	Hyperlink and email macros
-  \&.MT	Mail-to start	Hyperlink and email macros
-  \&.OP	(Command-line) option	Command synopsis macros
-  \&.P	Paragraph	Paragraph macros
-  \&.PP	Paragraph	Paragraph macros
-  \&.RB	Roman, bold alternating	Font style macros
-  \&.RE	Relative-indent end	Document structure macros
-  \&.RI	Roman, italic alternating	Font style macros
-  \&.RS	Relative-indent start	Document structure macros
-  \&.SB	Small bold	Font style macros
-  \&.SH	Section heading	Document structure macros
-  \&.SM	Small	Font style macros
-  \&.SS	Subection heading	Document structure macros
-  \&.SY	Synopsis start	Command synopsis macros
-  \&.TH	Title heading	Document structure macros
-  \&.TP	Tagged paragraph	Paragraph macros
-  \&.TQ	Tagged paragraph continuation	Paragraph macros
-  \&.UE	URL end	Hyperlink and email macros
-  \&.UR	URL start	Hyperlink and email macros
-  \&.YS	Synopsis end	Command synopsis macros
-  .TE
-  ```
-
 ## Useful macros
 
 * `\&.`: A literal "." that must start at the beginning of a line
@@ -216,3 +172,17 @@ Example:
   ```groff
 
   ```
+
+## Manpage Formatting
+
+* Optional arguments are between `[brackets]`
+
+  ```txt
+  who [am i]
+  ```
+
+* Mandatory choose-one style options are `{ inside | braces }`
+
+* `...` means including one-or-more of the preceding item is permitted
+
+

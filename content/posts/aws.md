@@ -84,6 +84,53 @@ image = "aws.jpg"
 
 EC2, Amazon's Elastic Compute Cloud, is a virtual server that can perform computations remotely. The compute capacity is easy to resize, and you only pay for the computing capacity that is used.
 
+* Create AWS EC2 RSA Private Key
+
+```sh
+aws ec2 create-key-pair > ~/.ssh/aws_key.pem \
+  --key-name 'aws' \
+  --query 'KeyMaterial' \
+  --output 'text'
+
+chmod 400 ~/.ssh/aws_key.pem
+```
+
+* Describe the existing EC2 RSA Keys
+
+```sh
+aws ec2 describe-key-pairs --key-name 'aws'
+```
+
+* Describe existing VPCs
+
+```sh
+aws ec2 describe-vpcs
+```
+
+* Describe existing VPC Subnets
+
+```sh
+aws ec2 describe-subnets
+```
+
+* Describe existing security groups
+
+```sh
+aws ec2 describe-security-groups
+```
+
+* Create an EC2 Instance
+
+```sh
+aws ec2 run-instances \
+  --count 1 \
+  --image-id 'ami-0e34e7b9ca0ace12d' \
+  --instance-type 't3.micro' \
+  --key-name 'id_aws' \
+  --security-group-ids 'sg-0efcc5d86ade500ec' \
+  --subnet-id 'subnet-13bcff58'
+```
+
 ## AWS CLI
 
 {{% notice success %}}
@@ -339,6 +386,14 @@ Types of Policies:
   aws ec2 describe-addresses --public-ips
   ```
 
+* Associate an Elastic IP
+
+  ```sh
+  aws ec2 associate-address \
+    --instance-id 'i-004183eed3bb647a9' \
+    --public-ip '34.210.111.105'
+  ```
+
 * Release the IP address associated with a given allocation ID
 
   ```sh
@@ -403,6 +458,24 @@ AWS has an in-browser IDE called Cloud9, which you can power using an existing E
 
 * Create a new organization
 
-```sh
-aws organizations create-organization
-```
+  ```sh
+  aws organizations create-organization
+  ```
+
+## API Gateway
+
+* Create a REST API called `skritter-api`:
+
+  ```sh
+  aws apigateway create-rest-api --name 'skritter-api'
+  ```
+
+  ```yaml
+  apiKeySource: HEADER
+  createdDate: '2020-06-02T21:03:52-07:00'
+  endpointConfiguration:
+    types:
+    - EDGE
+  id: b3aszbiwb7
+  name: skritter-api
+  ```

@@ -1391,12 +1391,29 @@ The `defaults` command can be used to configure many hidden settings available i
   killall Finder
   ```
 
+* Enable quit button for Finder application
+
+  ```sh
+  defaults write com.apple.finder QuitMenuItem -bool true
+  killall Finder
+  ```
+
 You can prohibit the modification of Finder preferences by selecting `Preferences...` in the menu bar. As to why you'd want to do this, I have no idea, but here you go:
+
 
 * Disable modification of Finder preferences
 
   ```sh
   defaults write com.apple.finder ProhibitFinderPreferences -bool true
+  killall Finder
+  ```
+
+Similarly, you could prohibit the `Go to folder` action in Finder as well, for whatever reason
+
+* Disable `Go to folder` action in the menu bar:
+
+  ```sh
+  defaults write com.apple.finder ProhibitGoToFolder -bool true
   killall Finder
   ```
 
@@ -1422,6 +1439,12 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
   ```sh
   # 1024 = 1MB
   defaults write com.apple.mail minSizeKB 1024
+  ```
+
+* Disable preview (by default) of files attached in mail
+
+  ```sh
+  defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
   ```
 
 ### TextEdit
@@ -1461,3 +1484,11 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
   defaults write com.apple.screencapture 'include-date' -bool false
   killall SystemUIServer
   ```
+
+* Disable power button sleeping the system
+
+  ```sh
+  defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool false
+  ```
+
+

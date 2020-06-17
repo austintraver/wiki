@@ -666,3 +666,12 @@ Name-Real: Austin Traver
 
 %commit
 ```
+
+## Query User's GPG Key
+
+```sh
+# Enterprise
+USER=atraver
+curl https://github.fighton.com/api/v3/users/${USER}/gpg_keys \
+    -H "Authorization: token ${GITHUB_TOKEN}"
+```

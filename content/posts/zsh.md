@@ -1475,6 +1475,27 @@ Sometimes you want to supply some text in a script across multiple lines. Furthe
   # => 3 leading tabs
   ```
 
+* Advanced example:
+
+  ```sh
+  # Output to "basicquery.txt" the following
+  # stripping away any leading tabs
+  <<- EOF > basicquery.txt
+    Today's date is $(date)
+    The user ${USER} is on host ${HOST}
+    This program launched on ${TTY}
+  EOF
+  # Read each line of "domains.txt" into an array
+  # where each element of the array is a "domain"
+  # Print the output of what occurs within the
+  # curly braces to "output.txt"
+  for domain in ${<(./domains.txt)}; {
+    print "Performing DNS query on ${domain}"
+    dig ${domain}
+  } > output.txt
+  ```
+
+
 ### Expanding Parameters in Files
 
 If you have a super long string of text, for instance, a SQL query, you may want to save the contents of that query in a different file. It's possible you may need to store a variable in the query, and if so, you can use the `(e)` paramater expansion flag when referencing the string. This flag causes the string to have any `${variable}` words treated as if they were a normal shell variable, and not text from the file.

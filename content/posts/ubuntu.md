@@ -1,5 +1,6 @@
 +++
 title = "Ubuntu"
+description = "A linux distro we can all agree on"
 date = 2020-04-23T10:32:49-07:00
 image = "ubuntu.jpg"
 +++
