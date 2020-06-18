@@ -1,97 +1,98 @@
 #hero {
-  background-image: linear-gradient(#000000b0, #00000040, #000000b0), var(--url);
-  display: flex;
-  background-position: center;
-  background-size: cover;
-  padding: 10vh 2vw;
-  height: auto;
-  flex-direction: column;
-  align-items: center;
-  text-align: center
+    background-image: linear-gradient(#000000b0, #00000040, #000000b0), var(--url);
+    display: flex;
+    background-position: center;
+    background-size: cover;
+    padding: 10vh 2vw;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    text-align: center
 }
 
 #hero > * {
-  color: white;
-  padding: 1vh 1vw;
-  border-radius: 5px;
-  backdrop-filter: brightness(20%);
-  -webkit-backdrop-filter: brightness(20%);
+    color: white;
+    padding: 1vh 1vw;
+    border-radius: 5px;
+    backdrop-filter: brightness(20%);
+    -webkit-backdrop-filter: brightness(20%);
 }
 
 h1#hero {
-  font-size: 10vh;
+    font-size: 10vh;
 }
 
 h2#hero {
-  font-size: 8vh;
+    font-size: 8vh;
 }
 
 h2#p {
-  color: lightgrey;
-  font-size: 5vh;
+    color: lightgrey;
+    font-size: 5vh;
 }
 
 #date {
-  font-style: italic;
+    font-style: italic;
 }
 
 #content {
-  flex: 6;
-  margin-right: 5vw;
-  overflow-x: auto;
+    flex: 6;
+    margin-right: 5vw;
+    overflow-x: auto;
 }
 
 table {
-  margin-bottom: 1em;
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 0.7em;
+    margin-bottom: 1em;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.7em;
 }
 
 thead {
-  background-color: #eeeeee;
+    background-color: #eeeeee;
 }
 
 th {
-  padding: 0.5em;
-  font-weight: bold;
-  text-align: center;
+    padding: 0.5em;
+    font-weight: bold;
+    text-align: center;
 }
 
 td {
-  padding: 0.5em;
-  border-bottom: 1px solid mix(#000, $border-color, 25%);
+    padding: 0.5em;
 }
 
 code {
-  word-break: break-all;
-  white-space: pre-wrap;
+    word-break: break-all;
+    white-space: pre-wrap;
 }
 
 li {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 /* Mobile */
 @media screen and (max-aspect-ratio: 3/5) {
-  #main {
-    margin: 2vh 3vw;
-  }
+    #main {
+        margin: 2vh 3vw;
+    }
 }
 
 /* Desktop */
 @media screen and (min-aspect-ratio: 3/5) {
-  #hero > h1 {
-    font-size: 6vh;
-  }
-  #hero > h2 {
-    font-size: 5vh;
-  }
-  #hero > p {
-    font-size: 3vh;
-  }
+    #hero > h1 {
+        font-size: 6vh;
+    }
+
+    #hero > h2 {
+        font-size: 5vh;
+    }
+
+    #hero > p {
+        font-size: 3vh;
+    }
 }
 
-@media(prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
 
 }
