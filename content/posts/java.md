@@ -79,7 +79,7 @@ On a Unix system, you can set the environment variable `CLASSPATH` like so:
 
   ```sh
   # 3 classpath locations. the user's home directory, a jar in another user's directory, and '.' the current directory
-  export CLASSPATH = ~/path/to/packages:.
+  export CLASSPATH=/path/to/packages:.
   ```
 
 {{% notice warning %}}
@@ -135,9 +135,9 @@ The `​javac`​ command lets you compile a *.java* source file into a *.class*
 
 ```sh
 # compile one file
-$ javac -d /home/austin/Desktop BigBird.java
+javac -d /home/austin/Desktop BigBird.java
 # compile 2 files
-$ javac -d /home/austin/Desktop BigBird.java CookieMonster.java
+javac -d /home/austin/Desktop BigBird.java CookieMonster.java
 ```
 
 * `-d`: force java to walk the entire tree and check every dependency (fixing this problem) but this will slow down compile time.
@@ -150,11 +150,11 @@ Some examples of ways to use the `​jar`​ command are included below.
 
 ```sh
 # create a jar file
-$ jar -cvf Practice.jar bin/Practice.class
+jar -cvf Practice.jar bin/Practice.class
 # list the contents within a jar
-$ jar -tvf Practice.jar
+jar -tvf Practice.jar
 # extract the contents of a jar
-$ jar -xvf Practice.jar
+jar -xvf Practice.jar
 ```
 
 In archive syntax, the meanings of those flags are as follows:
