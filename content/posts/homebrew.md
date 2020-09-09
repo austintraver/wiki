@@ -1,9 +1,9 @@
-+++
-title = "Homebrew"
-description = "The package manager for macOS"
-date = 2020-02-04T14:52:27-08:00
-image = "homebrew.jpg"
-+++
+---
+title: Homebrew
+description: "The package manager for macOS"
+date: 2020-02-04T14:52:27-08:00
+image: "homebrew.jpg"
+---
 
 # Homebrew
 

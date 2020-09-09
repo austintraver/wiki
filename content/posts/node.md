@@ -1,9 +1,9 @@
-+++
-title = "Node"
-description = "JavaScript meets back-end server hosting"
-date = 2020-02-04T14:52:27-08:00
-image = "node.jpg"
-+++
+---
+title: Node
+description: "JavaScript meets back-end server hosting"
+date: 2020-02-04T14:52:27-08:00
+image: "node.jpg"
+---
 
 # Node.js
 

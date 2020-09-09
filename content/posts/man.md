@@ -1,9 +1,9 @@
-+++
-title = "Man"
-description = "Manual pages from the command line"
-date = 2020-02-04T14:52:27-08:00
-image = "man.png"
-+++
+---
+title: Man
+description: "Manual pages from the command line"
+date: 2020-02-04T14:52:27-08:00
+image: "man.png"
+---
 
 # man
 

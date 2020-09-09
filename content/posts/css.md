@@ -1,17 +1,17 @@
-+++
-title = "CSS"
-description = "Coding with style(sheets)"
-date = 2020-02-23T02:15:43-08:00
-draft = false
-image = "css.jpg"
-+++
+---
+title: "CSS"
+description: "Coding with style(sheets)"
+date: 2020-02-23T02:15:43-08:00
+draft: false
+image: "css.jpg"
+---
 
 ## Font Size
 
 The `em` (pronounced as it sounds), is a unit of relative font sizing in CSS. Specifying `2em` tells an element to be twice the size of its parent element.
 
 {{% notice danger %}}
-**Be careful!** This means that if you have nested items, they will continue doubling in size. For this reason, it is best to use the `rem` (*root* `em`) unit, which is a constant value relative to that of the root `<html>` tag. In most browsers, this defaults to 16px.
+**Be careful!** This means that if you have nested items, they will continue doubling in size. For this reason, it is best to use the `rem` (*root* `em`) unit, which is a constant value relative to that of the root `<html lang="en-US">` tag. In most browsers, this defaults to 16px.
 {{% /notice %}}
 
 ## Variables

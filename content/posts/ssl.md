@@ -1,9 +1,9 @@
-+++
-title = "SSL"
-description = "the Secure Socket Layer"
-date = 2020-02-04T14:52:27-08:00
-image = "ssl.jpg"
-+++
+---
+title: SSL
+description: "the Secure Socket Layer"
+date: 2020-02-04T14:52:27-08:00
+image: "ssl.jpg"
+---
 
 # `ssl`
 

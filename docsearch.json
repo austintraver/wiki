@@ -1,0 +1,27 @@
+{
+  "index_name": "index",
+  "start_urls": [
+    "https://helpful.wiki"
+  ],
+  "sitemap_urls": [
+    "https://helpful.wiki/sitemax.xml"
+  ],
+  "stop_urls": [
+    "https://helpful.wiki/index.html"
+  ],
+  "selectors": {
+    "lvl0": "#content header h1",
+    "lvl1": "#content article h1",
+    "lvl2": "#content section h3",
+    "lvl3": "#content section h4",
+    "lvl4": "#content section h5",
+    "lvl5": "#content section h6",
+    "text": "#content header p,#content section p,#content section ol"
+  },
+  "selectors_exclude": [
+    "#sidebar",
+    "#banner",
+    "nav"
+  ],
+  "nb_hits": "OUTPUT OF THE CRAWL"
+}

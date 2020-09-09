@@ -1,9 +1,9 @@
-+++
-title = "Java"
-description = "Because you have to learn it sooner or later"
-date = 2020-02-04T14:52:27-08:00
-image = "java.jpg"
-+++
+---
+title: "Java"
+description: "Because you have to learn it sooner or later"
+date: 2020-02-04T14:52:27-08:00
+image: "java.jpg"
+---
 
 ## Getting Started
 
@@ -47,7 +47,7 @@ image = "java.jpg"
 
 ## System Properties
 
-Java’s `​System.getProperty()`​ method allows you to essentially pass in flags to the command line. Every property is a name-value string pair, and you can pass each one in with the following "-D" syntax
+Java’s `System.getProperty()` method allows you to essentially pass in flags to the command line. Every property is a name-value string pair, and you can pass each one in with the following "-D" syntax
 
 ```sh
 # passing in System Properties
@@ -107,7 +107,7 @@ Alternatively, you can use the `-cp` argument when running or compiling a progra
 
 ## javap
 
-The `​javap`​ command on bash lets you print a description of a compiled class. It will return a description if it is found in the classpath, so if the value returned isn’t expected, you know there must be a problem with your classpath
+The `javap` command on bash lets you print a description of a compiled class. It will return a description if it is found in the classpath, so if the value returned isn’t expected, you know there must be a problem with your classpath
 
 * Input
 
@@ -131,7 +131,7 @@ The `​javap`​ command on bash lets you print a description of a compiled cla
 
 ## javac
 
-The `​javac`​ command lets you compile a *.java* source file into a *.class* bytecode file. By default, it will store both files in the same directory, so it’s best to use the "-d" option to specify the directory the *.class* file should go into
+The `javac` command lets you compile a *.java* source file into a *.class* bytecode file. By default, it will store both files in the same directory, so it’s best to use the "-d" option to specify the directory the *.class* file should go into
 
 ```sh
 # compile one file
@@ -144,9 +144,9 @@ javac -d /home/austin/Desktop BigBird.java CookieMonster.java
 
 ## jar
 
-The Java Archive `​jar` utility is very similar in structure to Unix’s Tape Archive `​tar` utility.
+The Java Archive `jar` utility is very similar in structure to Unix’s Tape Archive `tar` utility.
 
-Some examples of ways to use the `​jar`​ command are included below.
+Some examples of ways to use the `jar` command are included below.
 
 ```sh
 # create a jar file
@@ -159,11 +159,11 @@ jar -xvf Practice.jar
 
 In archive syntax, the meanings of those flags are as follows:
 
-* `​-c`:​ create archive containing the specified contents
-* `-​t`​: tell us what an archive’s contents are
-* `​-x`​: extract the contents of an archive
-* `​-v`​: verbose output about file information (fileside, modificaiton time, compression ratio)
-* `​-f`​: the next input after 'f' will be a filename
+* `-c`: create archive containing the specified contents
+* `-t`: tell us what an archive’s contents are
+* `-x`: extract the contents of an archive
+* `-v`: verbose output about file information (fileside, modificaiton time, compression ratio)
+* `-f`: the next input after 'f' will be a filename
 
 {{% notice info %}}
 **Tip:** These are the same flags used in the `tar` program on your terminal! No need to remember new flags.
@@ -214,7 +214,7 @@ char[] cstring2 = jeffrey_miller.toCharArray();
 
 ### Primitive Objects -\> Strings
 
-Using the `​valueOf()`​ public static method from java.String we can actually turn primitive objects into a String pretty easily
+Using the `valueOf()` public static method from java.String we can actually turn primitive objects into a String pretty easily
 
 ```java
 String one = String.valueOf(1); // "1"
@@ -222,7 +222,7 @@ String pi = String.valueOf(3.14f); // "3.14"
 String happy = String.valueOf(true); // "true"
 ```
 
-Every Object has a built n `​.toString()`​ method, so we can also convert an object itself to a string.
+Every Object has a built n `.toString()` method, so we can also convert an object itself to a string.
 
 ```java
 Date today = new Date();
@@ -236,11 +236,11 @@ String ex3 = "" + new Date();
 
 ### Comparing Strings
 
-1. You have two methods you can call on a string object. The `​.equals()`​ method and the `​.equalsIgnoreCase()`​ method
+1. You have two methods you can call on a string object. The `.equals()` method and the `.equalsIgnoreCase()` method
 
-2. Be careful with the `​==`​ method. The code below would return "true" in C++, but "false" in Java, as the `==` operator compares identity in Java.
+2. Be careful with the `==` method. The code below would return "true" in C++, but "false" in Java, as the `==` operator compares identity in Java.
 
-3. The `​compareTo()`​ method compares the lexical value of two strings. It checks if the input is alphabetically earlier or later in the dictionary to it.
+3. The `compareTo()` method compares the lexical value of two strings. It checks if the input is alphabetically earlier or later in the dictionary to it.
 
 ```java
 // [part 1]
@@ -271,9 +271,9 @@ str3.compareTo(str3); // 0 (equal)
 Strings come with many useful methods built-in:
 
 * `startsWith()` and `endsWith()` provide an easy way to splice a string without dealing with array indeces.
-* `​indexOf()`​ lets you find the index of a substring. You can include a string, not just a char, and it will return the index of the first matching char in the substring.
-* `​charAt()`​ returns the char of the String at a given index.
-* `​contains()`​ checks if a string contains a substring
+* `indexOf()` lets you find the index of a substring. You can include a string, not just a char, and it will return the index of the first matching char in the substring.
+* `charAt()` returns the char of the String at a given index.
+* `contains()` checks if a string contains a substring
 
 ```java
 String name = "Matthew Smith";
@@ -285,11 +285,11 @@ char letter = name.charAt(4); // 'h'
 
 ### Modifying Strings
 
-* `​replace()`: replaces all substrings matching the input String
-* `​replaceAll()`​ accepts a regular expression, and replaces all matches
-* `​replaceFirst()`​ accepts a regular expression, and replaces the first match
-* `​length()`​​ returns the length of a string
-* `split()`​ returns an array of strings, given a regular expression as an input
+* `replace()`: replaces all substrings matching the input String
+* `replaceAll()` accepts a regular expression, and replaces all matches
+* `replaceFirst()` accepts a regular expression, and replaces the first match
+* `length()` returns the length of a string
+* `split()` returns an array of strings, given a regular expression as an input
 
 ```java
 String example = "aBcDe";
@@ -382,6 +382,39 @@ System.out.println(time4.format(
 // "14:30:02-08:00"
 ```
 
+### Formatting Timestamps
+
+```java
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class Timer {
+
+    public static void main(String[] args) {
+
+        /* Get the current time */
+        LocalTime localTime = LocalTime.now();
+
+        /* Specify the formatting for the timestamp string */
+        /* Read this Java documentation link to understand! */
+        /* https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html */
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss.SS");
+
+        /* Generate the formatted timestamp string */
+        String timestamp = String.format("[%s]", dateTimeFormatter.format(localTime));
+
+        /* Print the formatted timestamp string */
+        System.out.println(timestamp);
+    }
+}
+```
+
+```txt
+[23:59:01.02]
+```
+
+It is worth noting that instances of `DateTimeFormatter` create from `.ofPattern()` are immutable and thread-safe. Because of this, instead of creating a formatter every time a thread needs it, you can instead create one single static formatter object to be shared among all threads.
+
 ### DateTime
 
 ```java
@@ -410,7 +443,7 @@ System.out.println(moment4.format(
 // 2018-08-04T14:32:11-08:00
 ```
 
-A java array is an actual class, the `​Java.array`​ class, and can be created one of two ways.
+A java array is an actual class, the `Java.array` class, and can be created one of two ways.
 
 ```java
 // preferred java style
@@ -428,7 +461,7 @@ int[] ArrayTwo = new Array[size];
 int[] ArrayThree = {1, 3, 5, 7, 9};
 ```
 
-Effectively, these two statements below are the same, by default, such that each index within the arrays is set to be `​null`​
+Effectively, these two statements below are the same, by default, such that each index within the arrays is set to be `null`
 
 ```java
 int[] A = new int[3];
@@ -443,7 +476,7 @@ int[] A = {null, null, null};
   Object[] objects = {10, "ten", null};
   ```
 
-### `​.length`​
+### `.length`
 
 * Unlike in `c++`, arrays in `java` are aware of their length, just like in `python`:
 
@@ -464,12 +497,12 @@ int[] A = {null, null, null};
   ```
 
 {{% notice warning %}}
-  **Note:** you can’t modify the values of element using this syntax. Calling `​element += 1`​ would not change the values in the array
+  **Note:** you can’t modify the values of element using this syntax. Calling `element += 1` would not change the values in the array
 {{% /notice %}}
 
 ### Copying an Array
 
-Using `​System.arraycopy()`​ we can copy the values of the source array to the destination array
+Using `System.arraycopy()` we can copy the values of the source array to the destination array
 
 ```java
 String[] arrayOne = {"the", "quick", "brown", "fox"};
@@ -490,21 +523,21 @@ rgb[255][255][0] = Color.yellow;
 
 ## Scanner
 
-Contained in the library `​java.util.Scanner`​
+Contained in the library `java.util.Scanner`
 
-Throws an `​InputMismatchException`​ if it find an invalid next item when parsing.
+Throws an `InputMismatchException` if it find an invalid next item when parsing.
 
 ## Formatter
 
-Contained in the `​java.util.Formatter`​ class
+Contained in the `java.util.Formatter` class
 
-Uses the `​.format()`​ method, so `​String.format(String input)`​ will allow you to use the following syntax, similar to Python
+Uses the `.format()` method, so `String.format(String input)` will allow you to use the following syntax, similar to Python
 
-`​%s`​ refers to a String value
+`%s` refers to a String value
 
-`​%d`​ refers to an int value
+`%d` refers to an int value
 
-​Will throw `IllegalFormatConversionException`​ if the input does not match the specified value type.
+Will throw `IllegalFormatConversionException` if the input does not match the specified value type.
 
 ```java
 String name = "Austin";
@@ -517,7 +550,7 @@ String output = String.format(message, name, age);
 
 ## Streams
 
-Streams are contained in the library `​java.io.*`​. A stream is a flow of data, between a `​writer`​ and a `​reader`.
+Streams are contained in the library `java.io.*`. A stream is a flow of data, between a `writer` and a `reader`.
 
 * `InputStream` and `OutputStream`: abstract classes, so to construct one, you must construct one of the classes that instantiates it.
 
@@ -528,13 +561,13 @@ Streams are contained in the library `​java.io.*`​. A stream is a flow of da
 * `PipedInputStream` & `PipedOutputStream`
 * `ByteArrayInputStream` & `ByteArrayOutputStream`
 
-## `​I/O`
+## `I/O`
 
-Uses the `​System.in`​ and `​System.out`​ values to specify where to handle I/O on the terminal
+Uses the `System.in` and `System.out` values to specify where to handle I/O on the terminal
 
-The `​Reader`​ and `​Writer`​ classes will allow us to read in data if we are sure it is from a .txt file
+The `Reader` and `Writer` classes will allow us to read in data if we are sure it is from a .txt file
 
-We will use the inherited `BufferedReader`​ and `​BufferedWriter`​ classes to improve the runtime of each.
+We will use the inherited `BufferedReader` and `BufferedWriter` classes to improve the runtime of each.
 
 ```java
 Reader stdin = new BufferedReader(System.in); // reads in data from std::cin
@@ -542,7 +575,7 @@ Writer stdout = new BufferedWriter(System.out); // writes output to std::cout
 ```
 
 {{% notice danger %}}
-**Warning:** be sure to call the `​close()`​ method on a stream when you are done using it.
+**Warning:** be sure to call the `close()` method on a stream when you are done using it.
 {{% /notice %}}
 
 ### Customizing stdin, stdout, stderr
@@ -599,7 +632,12 @@ You can print formatted text to stdout with the following syntax
 
 ```java
 System.out.printf("The lucky number is, %d", 21);
-// prints: The lucky number is 21
+```
+
+Output
+
+```txt
+The lucky number is 21
 ```
 
 #### `java.io.File`
@@ -617,12 +655,12 @@ boolean test3 = myFile.isAbsolute(); // false
 File relativeFile = newFile(relativePathDirectory, "filename.txt");
 ```
 
-If any of these files are not found, the program will **not** throw a `​FileNotFoundException`​. You can, however, use the `​.exists()`​ method to make sure that your code structure is valid. You can also use the `​.isFile()`​ method, the `.isDirectory()`​ method, and the `​.isAbsolute()`​ method. The following attributes of the file can also be returned to you:
+If any of these files are not found, the program will **not** throw a `FileNotFoundException`. You can, however, use the `.exists()` method to make sure that your code structure is valid. You can also use the `.isFile()` method, the `.isDirectory()` method, and the `.isAbsolute()` method. The following attributes of the file can also be returned to you:
 
-* `​.getName()`​ returns a `String` for the filename, but does not include the directory information
-* `.getPath()`​ returns a `String` for the path, relative or absolute
-* `.getAbsolutePath()`​ returns a `String` representing the absolute path (a little funky when converted from a relative path)
-* `.getParent()`​ returns a `File` representing the parent directory of the `File`
+* `.getName()` returns a `String` for the filename, but does not include the directory information
+* `.getPath()` returns a `String` for the path, relative or absolute
+* `.getAbsolutePath()` returns a `String` representing the absolute path (a little funky when converted from a relative path)
+* `.getParent()` returns a `File` representing the parent directory of the `File`
 
 ```java
 File ifile = new File("../gamedata/sample.txt");
@@ -630,30 +668,30 @@ ifile.getAbsolutePath(); // /Users/austintraver/repo/src/../gamedata/sample.txt
 ifile.getPath(); // ../gamedata/sample.txt
 ```
 
-Be careful, because these will still print even if the file does not return true for `​`​the `.exists()`​ method, the `​.isFile()`​ method, etc.
+Be careful, because these will still print even if the file does not return true for the `.exists()` method, the `.isFile()` method, etc.
 
-The `​.length()`​ method will return an integer representing the size of a file (in bytes)
+The `.length()` method will return an integer representing the size of a file (in bytes)
 
-The `​.list()`​ method will return a `​String[]`​ object.
+The `.list()` method will return a `String[]` object.
 
-If you want a `​File[]`​ object, use the `​.listFiles()`​ method.
+If you want a `File[]` object, use the `.listFiles()` method.
 
 Note, this list will not be sorted.
 
 #### Creating, Deleting, Changing Directories
 
-* `​File.mkdir()`​ will create a single directory, so the intermediate path must already exist. Returns `false` if it fails to create the directory
-* `​File.mkdirs()`​ will create as many directories as it needs. Returns `false` if it fails to create the directory.
-* `File.renameTo()`​ can change the name of a file or directory
-* `​File.delete()`​ can delete a file or directory
-* `​File.canRead()`​ checks if a file is readable
-* `​File.canWrite()`​ checks if a file is writable
-* `File.​toUrl()`​ generates a URL object for the file or directory
+* `File.mkdir()` will create a single directory, so the intermediate path must already exist. Returns `false` if it fails to create the directory
+* `File.mkdirs()` will create as many directories as it needs. Returns `false` if it fails to create the directory.
+* `File.renameTo()` can change the name of a file or directory
+* `File.delete()` can delete a file or directory
+* `File.canRead()` checks if a file is readable
+* `File.canWrite()` checks if a file is writable
+* `File.toUrl()` generates a URL object for the file or directory
 
 #### Reading a File
 
-To read in from a file, you will use a `​FileReader`​ object
-To write to a file, you will use a `​FileWriter`​ object
+To read in from a file, you will use a `FileReader` object
+To write to a file, you will use a `FileWriter` object
 
 ```java
 try {
@@ -676,10 +714,10 @@ try {
 
 #### Writing a File
 
-Use the `​FileWriter`​ object, which accepts two arguments, a `​File`​ and a `​boolean`​ that specifies if we should append. The `​BufferedWriter`​ class can be used to speed up the execution of `FileWriter` methods.
+Use the `FileWriter` object, which accepts two arguments, a `File` and a `boolean` that specifies if we should append. The `BufferedWriter` class can be used to speed up the execution of `FileWriter` methods.
 
-* `​.write(String input)`​: writes the string `input` to the file
-* `​.close()`​ flushes the stream and closes the writer
+* `.write(String input)`: writes the string `input` to the file
+* `.close()` flushes the stream and closes the writer
 
 ```java
 try {
@@ -700,9 +738,9 @@ try {
 
 ### Making an ArrayList of Files
 
-The constructor for the `ArrayList` will only accept a `Collection`​ as an input.
+The constructor for the `ArrayList` will only accept a `Collection` as an input.
 
-Use the `​List`​ method `​.listFiles()`​ which returns a `​List[]`​ object, pass that into the `​Arrays`​ static method `.asList`​ which accepts an `​Array[Object]`​ as an argument.
+Use the `List` method `.listFiles()` which returns a `List[]` object, pass that into the `Arrays` static method `.asList` which accepts an `Array[Object]` as an argument.
 
 ```java
 File inputdir = new File("../gamedata");
@@ -712,7 +750,7 @@ ArrayList<File> files = new ArrayList<File>(
 
 ### Selecting a random element in a list, and then removing it
 
-Take advantage of the `​Random`​ class. You can create a `​Random`​ object and use the `​.nextInt(lo,hi)`​​ method to call it.
+Take advantage of the `Random` class. You can create a `Random` object and use the `.nextInt(lo,hi)` method to call it.
 
 ```java
 List<String> myList = Lists.newArrayList("one", "two", "three", "four");
@@ -758,34 +796,34 @@ Sun Microsystems developed JDBC, a single API for database access. JDBC allows a
   }
   ```
 
-### `​java.sql.DriverManager`
+### `java.sql.DriverManager`
 
 This is a static class that allows us to create a connection. It has two useful methods
 
-1. ​`getDrivers()`​: show what available drivers we have.
-2. `​getConnection(String url, String username, String password)`​: returns a Connection object, which represents our connection to the database. This will throw a `SQLException` if it can not find a driver that exists, or it cannot connect to the database.
+1. `getDrivers()`: show what available drivers we have.
+2. `getConnection(String url, String username, String password)`: returns a Connection object, which represents our connection to the database. This will throw a `SQLException` if it can not find a driver that exists, or it cannot connect to the database.
 
-### `​java.sql.Connection`
+### `java.sql.Connection`
 
 A connection object represents a conection to a specific database in the SQL server. We can use it to send multiple consecutive queries to the same database. A SQL connection is created from the `DriverManager` class's `getConnection()` method.
 
-### `​java.sql.Statement`
+### `java.sql.Statement`
 
-​A statement object represents a SQL statement. You can create a statement object by calling the `Connection` class's `createStatement()` method
+A statement object represents a SQL statement. You can create a statement object by calling the `Connection` class's `createStatement()` method
 
-A statement object can be used to execute a query to the server. To execute a query to be sent to the server, call the `Connection` class's `​executeQuery()`​ method. The return type of this method is a `ResultSet` object, explained below.
+A statement object can be used to execute a query to the server. To execute a query to be sent to the server, call the `Connection` class's `executeQuery()` method. The return type of this method is a `ResultSet` object, explained below.
 
-​The statement object can also be used to update data in the server. To execute a update to be sent to the server, call the `​executeUpdate()`​ method. The return type of this method is an int, which represents the number of rows affected by the `​INSERT`​ , `​UPDATE`​ , or `​DELETE`​​ call that was made.
+The statement object can also be used to update data in the server. To execute a update to be sent to the server, call the `executeUpdate()` method. The return type of this method is an int, which represents the number of rows affected by the `INSERT` , `UPDATE` , or `DELETE` call that was made.
 
-### `​java.sql.ResultSet`
+### `java.sql.ResultSet`
 
-​An object returned by calling a `​Statement`​ object’s `​executeQuery()`​`​`​ method. This object will contain the information that the SQL database returned from our `executeQuery()`​ call. We can access the data from each key-column by specifying either the key-column name or the key-column index, (starting at 1). Also, it’s important to call the `​wasNull()`​ method after calling `​executeQuery()` to see if a valid result was returned.
+An object returned by calling a `Statement` object’s `executeQuery()` method. This object will contain the information that the SQL database returned from our `executeQuery()` call. We can access the data from each key-column by specifying either the key-column name or the key-column index, (starting at 1). Also, it’s important to call the `wasNull()` method after calling `executeQuery()` to see if a valid result was returned.
 
 ```java
 import java.sql.* ;
 
 // Create a connection to the database
-​Connection connection = DriverManager.getConnection(
+Connection connection = DriverManager.getConnection(
   "jdbc:mysql://localhost/DatabaseName", "myUsername", "myPassword");
 
 // Create a statement object capable of executing queries and updates
@@ -796,10 +834,10 @@ ResultSet result = null;
 
 // Execute a query on the database
 result = statement.executeQuery(
-  "SELECT * FROM myTable WHERE userID > 10")​;
+  "SELECT * FROM myTable WHERE userID > 10");
 
 // Execute an update on the database
-​result = statement.executeUpdate(
+result = statement.executeUpdate(
   "INSERT INTO myTable VALUES ('Barack','Obama'), ('Donald', ’Trump')");
 
 // Print the result, assuming it was not null
@@ -812,7 +850,7 @@ connection.close();
 ```
 
 {{% notice info %}}
-**Tip:** a single call to a Connection object’s `​close()`​ method will implicitly call the `​close()`​ method on any existing `Statement` objects that exist. Closing those will implicitly call close on any `​ResultSet`​ objects that exist. Therefore, the only cleanup to perform at the end of a function is to call `connection.close()`
+**Tip:** a single call to a Connection object’s `close()` method will implicitly call the `close()` method on any existing `Statement` objects that exist. Closing those will implicitly call close on any `ResultSet` objects that exist. Therefore, the only cleanup to perform at the end of a function is to call `connection.close()`
 {{% /notice %}}
 
 ### Datatypes `SQL` vs. `java`
@@ -835,7 +873,7 @@ connection.close();
 
 ## Networking
 
-The `​java.net`​ package contains the classes that pertain to communications and working with networked resources.
+The `java.net` package contains the classes that pertain to communications and working with networked resources.
 
 * `Socket`
 * `ServerSocket`
@@ -843,37 +881,37 @@ The `​java.net`​ package contains the classes that pertain to communications
 
 ### Sockets
 
-​Sockets are an interface, which allows for a stream of data to be transmitted between two hosts (or two localhosts).
+Sockets are an interface, which allows for a stream of data to be transmitted between two hosts (or two localhosts).
 
-The ​`​Socket`​ classes allow to work with low-level internet protocols, as well as high level web-oriented APIs that work with "uniform resource locators" (URLs). Most forms of I/O use streams, and a Socket is no exception. It’s just another type of stream.
+The `Socket` classes allow to work with low-level internet protocols, as well as high level web-oriented APIs that work with "uniform resource locators" (URLs). Most forms of I/O use streams, and a Socket is no exception. It’s just another type of stream.
 
-Java’s most basic type of socket is the simple `​Socket`​ class, which uses a *reliable*, *lossless*, and *connection-oriented* protocol known as the **Transmission Control Protocol** (TCP). After establishing a connection, two applications can send streams of data back and forth. The connection will remain online even if no data is being transmitted from either side.
+Java’s most basic type of socket is the simple `Socket` class, which uses a *reliable*, *lossless*, and *connection-oriented* protocol known as the **Transmission Control Protocol** (TCP). After establishing a connection, two applications can send streams of data back and forth. The connection will remain online even if no data is being transmitted from either side.
 
-### ​Datagrams
+### Datagrams
 
 A datagram is a unit of transfer sent from one network to another. Unlike other protocols, datagrams are sent without a connection established between the two networks. It’s like sending mail without a return address. No way of knowing if it delivered, no backup plan if the address it is being sent to doesn’t exist.
 
-The `​DatagramSocket`​ class uses a connectionless, unreliable protocol, known as the *User Datagram Protocol* (UDP)
+The `DatagramSocket` class uses a connectionless, unreliable protocol, known as the *User Datagram Protocol* (UDP)
 
 ### ServerSocket
 
 The *client* is the one who initiates the conversation, and the *server* is the one who accepts the request.
 
-A client can create a `​Socket`​ and initiate a conversation with a server application at any time, but a server must create a `​ServerSocket`​ in advance in order to be able to listen to new requests.
+A client can create a `Socket` and initiate a conversation with a server application at any time, but a server must create a `ServerSocket` in advance in order to be able to listen to new requests.
 
-A `​ServerSocket`​ will contain multiple `​Socket`​ objects within it, one for each connection that it currently contains.
+A `ServerSocket` will contain multiple `Socket` objects within it, one for each connection that it currently contains.
 
 ### Forming a Connection
 
-Each `​Socket`​ needs a *hostname* and a *port number* in order to connect with a server. The hostname can be "usc.edu" or just the ip address "128.125.253.136"
+Each `Socket` needs a *hostname* and a *port number* in order to connect with a server. The hostname can be "usc.edu" or just the ip address "128.125.253.136"
 
 * **Port Number**: An identifier, used to differentiate between the multiple clients that are currently interacting with the same host.
 
 * **Exceptions**: Constructing a Socket can throw two exceptions:
-  1. `​UnkownHostException`​ if the server can’t be found
-  2. `​IOException`​ if it can’t connect to what it found
+  1. `UnkownHostException` if the server can’t be found
+  2. `IOException` if it can’t connect to what it found
 
-A `​Socket`​ can create the `​InputStream`​ and `​OutputStream`​ objects by calling its methods `​.getInputStream()`​ and `​.getOutputStream()`​ respectively.
+A `Socket` can create the `InputStream` and `OutputStream` objects by calling its methods `.getInputStream()` and `.getOutputStream()` respectively.
 
 These streams transfer binary data, so it’s useful to wrap them with the
 

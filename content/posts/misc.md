@@ -1,9 +1,9 @@
-+++
-title = "Misc"
-description = "I had to write it down somewhere..."
-date = 2020-02-04T14:52:27-08:00
-image = "misc.png"
-+++
+---
+title: Misc
+description: "I had to write it down somewhere..."
+date: 2020-02-04T14:52:27-08:00
+image: "misc.png"
+---
 
 # Misc
 
@@ -141,4 +141,78 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
 
   ```sh
   convert 'input.pdf' -format 'JPG' -quality 10 'output.pdf'
+  ```
+
+## Hugo
+
+* Generate bash autocompletions for Hugo
+
+  ```sh
+  sudo hugo gen autocomplete --type bash --completionfile /usr/local/etc/bash_completion.d/hugo.sh
+  ```
+
+## JetBrains
+
+Useful subcommands exist for the following IDE command-line interfaces:
+
+* [IntelliJ Idea](https://www.jetbrains.com/help/idea/working-with-the-ide-features-from-command-line.html)
+* [WebStorm](https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html#arguments)
+* [PyCharm](https://www.jetbrains.com/help/pycharm/working-with-the-ide-features-from-command-line.html#arguments)
+* [CLion](https://www.jetbrains.com/help/clion/working-with-the-ide-features-from-command-line.html#arguments)
+* [DataGrip](https://www.jetbrains.com/help/datagrip/working-with-the-ide-features-from-command-line.html#arguments)
+
+If you specify a directory with an existing project, the IDE opens this project.
+
+If you open a directory that is not a part of a project, the IDE adds the `.idea` directory to it, making it a project.
+
+* Open a project (this one) in Webstorm without showing the splash loading screen
+
+  ```sh
+  webstorm ~/.wiki --nosplash --wait
+  ```
+
+### Path Variables
+
+* [Link to JetBrains documentation](https://www.jetbrains.com/help/idea/absolute-path-variables.html)
+
+* Pre-defined path variables include `$USER_HOME$`, `$PROJECT_DIR$`, and `$MODULE_DIR$`
+
+### TinyPNG
+
+* [Link to Python SDK](https://tinypng.com/developers/reference/python)
+
+
+### REST APIs
+
+An [Application Programming Interface](https://www.twilio.com/docs/glossary/what-is-an-api) or **API** is a set of rules that lets programs talk to each other, exposing data and functionality across the internet in a consistent format.
+
+APIs accessed through HTTP typically use [Representational State Transfer](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) or **REST**. This is an architectural pattern that describes how distributed systems can expose a consistent interface. When people use the term ‘REST API,’ they are generally referring to an API accessed via HTTP protocol at a predefined set of URLs.
+
+These URLs represent various resources - any information or content accessed at that location, which can be returned as JSON, HTML, audio files, or images. Often, resources have one or more methods that can be performed on them over HTTP, like GET, POST, PUT and DELETE.
+
+* [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+
+  * Add the HTTP header `Authorization: Basic ${token}`
+
+  * Generate HTTP header for basic authentication by base64 encoding the username and password
+
+    ```sh
+    username='ttrojan'
+    password='fighton'
+    token=$(base64 -w 0 < =(<<<${username}:${password}))
+    auth="Authorization: Basic ${token}"
+    ```
+
+  * Copy it to clipboard immediately
+
+    ```sh
+    pbcopy < =(<<<"Basic $(base64 -w 0 < =(<<<${username}:${password}))")
+    ```
+
+### Twilio
+
+* How to [look up a phone number](https://www.twilio.com/docs/lookup/quickstart?code-sample=code-lookup-with-national-formatted-number&code-language=PHP&code-sdk-version=6.x#how-to-look-up-a-phone-number) using [the Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart)
+
+  ```sh
+  twilio api:lookups:v1:phone-numbers:fetch --phone-number '+16507432062' --type=carrier --type=caller-name
   ```

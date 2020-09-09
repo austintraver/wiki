@@ -1,26 +1,56 @@
 baseURL: "https://helpful.wiki/"
 title: "Helpful Wiki"
-staticDir:
-  - "static/css"
-  - "static/js"
-  - "static/img"
 languageCode: "en-us"
-publishDir: "docs"
+# rewrite all relative URLs to be relative to the
+# base directory
 relativeURLs: true
 enableInlineShortcodes: true
 enableGitInfo: true
+enableEmoji: true
 pygmentsUseClasses: true
+googleAnalytics: 'UA-175811422-1'
+sitePagesMenu: 'main'
 markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+    ordered: false
   goldmark:
     renderer:
       unsafe: true
+    parser:
+      autoHeadingID: true
+      autoHeadingIDType: github-ascii
   highlight:
     codeFences: true
     guessSyntax: false
     lineNos: false
-    tabWidth: 4
+    tabWidth: 2
     style: "dracula"
 permalinks:
-  posts: "/:title"
+  #  posts: "/:title"
+  posts: "/:filename"
 frontmatter:
-  date: [":git"]
+  date: [ ":git" ]
+deployment:
+  targets:
+  #   name: "gcp"
+  #   URL: "gs://helpful.wiki"
+#outputFormats:
+#  Algolia:
+#    #  tells the output format how to look for the Hugo layout for this output format
+#    baseName: "algolia"
+#    # tells the output format to use GoLang’s plain text parser for the layout,
+#    # preventing some automatic HTML formatting from ruining your JSON
+#    isPlainText: true
+#    # tells the output format what kind of file to output.
+#    mediaType: "application/json"
+#    # tells the output format not to be included when looping over
+#    # the .AlternativeOutputFormats page variable
+#    notAlternative: true
+#params:
+#  algolia:
+#    # sets the page variables in which you want included in your index.
+#    vars: ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
+#    # sets the custom page params in which you want included in your index.
+#    params: ["categories", "tags"]

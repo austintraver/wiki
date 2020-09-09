@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "predeploy": [
+      "deploy.sh 'before'"
+    ],
+    "postdeploy": [
+      "deploy.sh 'after'"
+    ],
+    "trailingSlash": false,
+    "appAssociation": "AUTO"
+
+  }
+}

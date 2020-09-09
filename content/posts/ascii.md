@@ -1,9 +1,9 @@
-+++
-title = "ASCII"
-description = "127 characters we can all agree upon"
-date = 2020-02-04T14:52:26-08:00
-image = "ascii.png"
-+++
+---
+title: "ASCII"
+description: "127 characters we can all agree upon"
+date: 2020-02-04T14:52:26-08:00
+image: "ascii.png"
+---
 
 # ASCII
 
@@ -17,7 +17,12 @@ Control characters refer to things a computer must process, such as an alert, a 
 
 ## Printing characters by their hex index
 
-```sh
+```
+class Afa {
+
+}
+int main
+a: 5
 # Enable interpretation of backslash escapes, disable implicit trailing newline
 print '0x41 in hex is the letter \x41'
 # => Hexademical number 0x41 is the letter A
@@ -293,9 +298,9 @@ Lastly, UTF-32 is problematic because it results in encoding many 8-bit strings 
 
 Multi-byte encodings are non-ASCII. These use 2 bytes to encode a character set of up to 2<sup>16</sup> = 64,536 unique values.
 
-Let's say you want to make a text document look less...plain. Multi-byte encodings can help you out. If you're using `vim` to write your text (as all programmers should :grin: ), you can use Vim's digraphs to help you out. If you're not sure how to Vim, head over to [this page](./vim.md).
+Let's say you want to make a text document look less...plain. Multi-byte encodings can help you out. If you're using `vi` to write your text (as all programmers should 😈), you can use Vi's digraphs to help you out. If you're not sure how to Vi, head over to [this page](./vi.md).
 
-Vim uses digraphs to encode non-ASCII characters with simple two key combos.
+Vi uses digraphs to encode non-ASCII characters with simple two key combos.
 
 For example, let's say you want to add a check mark for a to-do list:
 
@@ -378,11 +383,12 @@ Cameron's To Do List:
 
 After diving down a Wikipedia rabbit hole, I finally figured out what to call all of the punctuation used when coding. **Brace yourselves** (ha.)
 
-Everything pair can validly be described as a bracket.
+Although by default, "bracket" refers to `[these]` brackets, every type of bracket has a name, and a descriptor, as shown
+in the table below:
 
 | Spoken Name | Technical Name | Character |
 | :---: | :---: | :---: |
 | Bracket | Square bracket | `[` `]` |
-| Brace | Curly bracket `{` `}` |
+| Brace | Curly bracket | `{` `}` |
 | Parenthesis | Round bracket | `(` `)` |
 | Chevron | Angle bracket | `<` `>` |

@@ -1,10 +1,9 @@
-+++
-title = "C / C++"
-url = "/c"
-description = "Low-level programming for high-level tryhards"
-date = 2020-02-04T14:52:26-08:00
-image = "c.png"
-+++
+---
+title: "C / C++"
+description: "Low-level programming for high-level tryhards"
+date: 2020-02-04T14:52:26-08:00
+image: "c.png"
+---
 
 # C / C++
 

@@ -1,8 +1,8 @@
-+++
-title = "Wolfram"
-date = 2020-03-17T21:08:37-07:00
-draft = true
-+++
+---
+title: Wolfram
+date: 2020-03-17T21:08:37-07:00
+draft: true
+---
 
 # Wolfram Alpha
 

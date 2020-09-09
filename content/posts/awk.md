@@ -1,9 +1,9 @@
-+++
-title = "Awk"
-description = "The tabular stream editor"
-date = 2020-02-04T14:52:26-08:00
-image = "awk.jpg"
-+++
+---
+title: "Awk"
+description: "The tabular stream editor"
+date: 2020-02-04T14:52:26-08:00
+image: "awk.jpg"
+---
 
 # awk
 

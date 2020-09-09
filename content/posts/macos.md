@@ -1,12 +1,12 @@
-+++
-title = "macOS"
-description = "The best OS a parents' money can buy"
-image = "macos.jpg"
-+++
+---
+title: "macOS"
+description: "The best OS a parents' money can buy"
+image: "macos.jpg"
+---
 
 # Mac OS
 
-## Useful Shortcuts
+## [Useful Shortcuts](https://www.danrodney.com/mac/)
 
 If you find these hard to remember, there's a useful application called CheatSheet that you can use:
 
@@ -256,29 +256,6 @@ If you're ever stuck without arrow keys (it could happen!) you can take advantag
 **Tip:** You can add the control `⌃` character to your usual screenshot command, to have screenshots save directly to your clipboard.
 {{% /notice %}}
 
-#### Change screenshot capture type
-
-By default, screenshots save to `.png` but you can change this setting to  `.jpg` or `.pdf`
-
-Set default screen capture as `.jpg`
-
-```sh
-defaults write com.apple.screencapture type -string 'jpg'
-killall SystemUIServer
-```
-
-#### Change screenshot capture location
-
-By default, screenshots save to `~/Desktop`. I prefer them to be saved to `~/Downloads`. You can change the screenshot capture location by running this command.
-
-```sh
-defaults write com.apple.screencapture location /Users/austin/Downloads && killall SystemUIServer
-```
-
-{{% notice warning %}}
-**Warning:** I had a little bit of trouble with this command. I don't think it works anymore. As of Mac OS Mojave, you have to press ⌘ ⇧ 5, click `options` and then select **Other Location...** to choose a new default save location for screenshots.
-{{% /notice %}}
-
 #### Screenshot directly from terminal
 
 There's a hidden terminal command `screencapture` that you can use to capture a screenshot of your current window.
@@ -329,6 +306,22 @@ I like to put my screenshots in the `~/Downloads` directory. Luckily there's a t
 
   ```sh
   defaults write com.apple.screencapture location ~/Downloads && killall SystemUIServer
+  ```
+
+### Change default screenshot filetype
+
+By default, screenshots save to `.png` but you can change this setting to  `.jpg` or `.pdf`
+
+* Set default screen capture as `.jpg`
+
+  ```sh
+  defaults write com.apple.screencapture type -string 'jpg' && killall SystemUIServer
+  ```
+
+* Change the screen capture filename to `screenshot`
+
+  ```sh
+  defaults write com.apple.screencapture name -string 'screenshot' && killall SystemUIServer
   ```
 
 ## Audio
@@ -1434,6 +1427,9 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 ### Mail
 
+
+#### Defaults Configurations
+
 * Change minimum file size threshold for Mail Drop for macOS Mail
 
   ```sh
@@ -1491,4 +1487,349 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
   defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool false
   ```
 
+* Treat the help window (the one that shows user manuals) as a normal window
 
+  * [Link to source](https://osxdaily.com/2012/12/13/stop-the-help-viewer-window-from-hovering-over-everything-else-in-mac-os-x/)
+
+  ```sh
+  defaults write com.apple.helpviewer DevMode -bool true
+  ```
+
+* Change the format of the clock in the menu bar
+
+  * I found a great tutorial on [this page]('https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/')
+
+  ```sh
+  defaults write com.apple.menuextra.clock DateFormat 'EEE dd MMM h:mm:ss a'
+  ```
+
+## QuickLook 
+
+### Extending QuickLook Previews 
+
+* Adding previews for markdown files
+
+  ```sh
+  brew cask install qlmarkdown
+  xattr -cr ~/Library/QuickLook/QLMarkdown.qlgenerator
+  qlmanage -r
+  qlmanage -r cache
+  killall Finder
+  ```
+
+* Adding syntax highlighting to code previews
+
+  1. Download the latest release
+
+  ```txt
+  https://github.com/sbarex/SourceCodeSyntaxHighlight/releases
+  ```
+
+  1. Sign the application
+
+  ```sh
+  xattr -r -d com.apple.quarantine /Applications/Syntax\ Highlight.app
+  ```
+
+  1. Customize themes here
+
+  ```txt
+  ~/Library/Application\ Support/Syntax\ Highlight/Themes
+  ```
+
+  1. Customize CSS here
+
+  ```txt
+  ~/Library/Application\ Support/Syntax\ Highlight/Styles/global.css
+  ```
+
+### Spotlight Search
+
+#### Navigation
+
+* **⌘ ↓** Move to next category in search results
+
+* **⌘ ↑** Move to previous category in search results
+
+
+##### Boolean Operators
+
+* `AND`
+* `OR`
+* `NOT`
+
+#### Search Operators
+
+* Search for results containing `Forest` but not `Gump`
+
+  ```txt
+  kind:movie Forest -Gump
+  ```
+
+##### `:kind`
+
+  ```txt
+  kind:app
+  kind:contact
+  kind:folder
+  kind:image
+  kind:movie
+  kind:music
+  kind:audio
+  kind:jpeg
+  kind:pdf
+  kind:text
+  kind:pdf
+  kind:preferences
+  kind:bookmark
+  kind:font
+  kind:fonts
+  kind:presentation
+  kind:mail
+  kind:chat
+  kind:event
+  kind:reminder
+  ```
+
+##### `author:`
+
+* Documents written by Valerie
+
+  ```txt
+  author:Valerie
+  ```
+
+##### `date:`
+
+* Today
+
+  ```txt
+  date:today
+  ```
+
+* Yesterday
+
+  ```txt
+  date:yesterday
+  ```
+
+* Before `January 1st, 2020`
+
+  ```txt
+  date:<2020-01-01
+  ```
+
+* After `January 1st, 2020`
+
+  ```txt
+  date:>2020-01-01
+  ```
+
+* Files between `December 31st, 2019` and `February 14th, 2020`
+
+  ```txt
+  date:2019-12-31-2020-02-14
+  ```
+
+##### `created:`
+
+* Files created after `January 1st, 2019`
+
+  ```txt
+  created:>2019-01-01
+  ```
+
+##### `modified:`
+
+* Files modified on `March 1st, 2010`
+
+  ```txt
+  modified:2010-03-01
+  ```
+
+##### `weather:`
+
+* View the weather in `Cupertino`
+
+  ```txt
+  weather:cupertino
+  ```
+
+* View the definition of `wizard`
+
+  ```txt
+  define:esoteric
+  ```
+
+##### `bitrate:`
+
+* View files with a 128kbps bitrate
+
+  ```txt
+  bitrate:128
+  ```
+
+##### `iso:`
+
+* View pictures with an ISO speed higher than 400
+
+  ```txt
+  iso:>400
+  ```
+
+##### `wiki:`
+
+* View the wikipedia entry for the topic `boolean`
+
+  ```txt
+  wiki:boolean
+  ```
+
+#### Mail Spotlight Search
+
+Spotlight by default searches through mail as well, so to find a message, you can retrieve it from Spotlight, without even opening the Mail application.
+
+##### `to:`
+
+The to search operator limits the search results to email recipients.
+
+* Search for all mail sent to Tommy Trojan:
+
+  ```txt
+  to:"Tommy Trojan"
+  to:ttrojan@usc.edu
+  ```
+
+* Search for all mail received from Billy Bruin:
+
+  ```txt
+  from:"Billy Bruin"
+  to:bbruin@ucla.edu
+  ```
+
+* Search for all mail with `Secret Recipe` in the subject
+
+  ```txt
+  subject:"Secret Recipe"
+  ```
+
+* Search for all mail with the words `Secret` and `Recipe` in the subject
+
+  ```txt
+  subject:secret subject:recipe
+  ```
+
+* Seach for all mail from `2018` and earlier
+
+  ```txt
+  date:<2018
+  ```
+
+Type to:recipient@example.com to find all sent mail addressed to a specific recipient at a specific domain.
+The subject search operator limits the search results to the contents of email subject lines.
+
+Type subject:cookie in the search field to return all emails with the word "cookie" in the subject line.
+Type subject:"cookie recipe" to find all mail with the phrase "cookie recipe" in the subject line.
+Type subject:cookie subject:recipe to find all mail with both "cookie" and "recipe" in any order in the subject line.
+
+#### Spotlight Siri Knowledge
+
+Siri uses natural language processing (NLP) to identify good matches for searches that don't use search operators. Some useful examples are included below
+
+* Get the score of the Sharks vs Ducks game
+
+  ```txt
+  sharks vs ducks
+  sharks game
+  ```
+
+* View the wikipedia entries matched by `Grease`
+
+  ```txt
+  wiki Grease
+  ```
+
+* View the score of the Yankees game
+
+  ```txt
+  score Yankees
+  ```
+
+* View the schedule of the Yankees
+
+  ```txt
+  schedule Yankees
+  ```
+
+* View the schedule of the Giants (Football) team
+
+  ```txt
+  Giants football schedule
+  ```
+
+* View the conversion rate of `USD to RMB`
+
+  ```txt
+  1 USD in RMB
+  ```
+
+* Convert temperature from 58 degrees Fahrenheit to Celsius
+
+  ```txt
+  58 F to C
+  ```
+
+* Convert temperature from 58 degrees Fahrenheit to Kelvin
+
+  ```txt
+  58 F to K
+  ```
+
+* View the stock price for symbol `V`
+
+  ```txt
+  V stock
+  ```
+
+#### Disable Spotlight Index of Network Drives
+
+[Link to source](https://enterprisemac.bruienne.com/2015/09/15/disable-spotlight-indexing-of-network-volumes/)
+
+* Have Spotlight ignore every external volume
+
+  ```sh
+  sudo defaults write /Library/Preferences/com.apple.SpotlightServer.plist ExternalVolumesIgnore -bool True
+  ```
+
+* Have Spotlight ignore, by default, each new network volume it encounters, from here on out:
+
+  ```sh
+  sudo defaults write /Library/Preferences/com.apple.SpotlightServer.plist ExternalVolumesDefaultOff -bool True
+  ```
+
+## Safari Web Extensions
+
+To convert Firefox web extensions into Safari web extensions, you'll need the Xcode 12 beta release, as well as the command line tools that it comes with
+
+* Enabling the Xcode 12 command line tools
+
+  ```sh
+  sudo xcode-select --switch /Applications/Xcode-beta.app/
+  ```
+
+* Converting the extension from a Firefox extension into a Safari extension
+```sh
+xcrun safari-web-extension-converter [options] ./path/to/extension
+```
+
+## CalDAV Synchronization
+
+You can synchronize shared calendars in your Google Calendar with your iCloud calendar by going to the [Google Calendar Sync Settings page](https://calendar.google.com/calendar/syncselect)
+
+## URL Schemes
+
+* Print out all supported URL schemes
+
+  ```sh
+  /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -dump | grep -B6 'bindings:.*:'
+  ```

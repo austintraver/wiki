@@ -1,9 +1,9 @@
-+++
-title = "HTML"
-description = "Writing stuff down the hard way"
-date = 2020-02-04T14:52:27-08:00
-image = "html.png"
-+++
+---
+title: HTML
+description: "Writing stuff down the hard way"
+date: 2020-02-04T14:52:27-08:00
+image: "html.png"
+---
 
 # HTML
 

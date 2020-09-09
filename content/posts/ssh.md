@@ -1,9 +1,9 @@
-+++
-title = "SSH"
-description = "The secure shell"
-date = 2020-02-04T14:52:27-08:00
-image = "ssh.jpg"
-+++
+---
+title: SSH
+description: "The secure shell"
+date: 2020-02-04T14:52:27-08:00
+image: "ssh.jpg"
+---
 
 # SSH
 
@@ -23,10 +23,17 @@ sudo systemsetup -getremotelogin
 **Tip:** Add the `-f` flag to `--force` your `systemsetup` to disable a confirmation prompt when running your command. After all, confirmation messages are failsafes and those are only for people who make mistakes.
 {{% /notice %}}
 
-* Generating an `ssh` key on your computer
+* Generating an SSH key on your computer
 
   ```sh
-  ssh-keygen
+  # Specifying bits of entropy is optional
+  ssh-keygen -b 4096
+  ```
+
+* Removing a comment from an SSH key
+
+  ```sh
+  ssh-keygen -c -C '' -f ~/.ssh/id_rsa
   ```
 
 * Converting a private GPG authorization secret RSA subkey (RFC 4880 compliant) to a PEM-encoded private SSH PKCS #1 v2.2 authorization key (RFC 8017 compliant)

@@ -225,10 +225,10 @@ Number is less than five
 
 * Check the user
 
-```sh
-# Check if the script is being executed by the root user
-if [[ ${UID} -ne 0 ]]; then print "You are not the root user"; fi
-```
+  ```sh
+  # Check if the script is being executed by the root user
+  if [[ ${UID} -ne 0 ]]; then print "You are not the root user"; fi
+  ```
 
 ### All Conditional Flags
 
@@ -488,37 +488,45 @@ The keyword `${@}` contains the set of all arguments to a program/function
 
 ### `read`
 
-* Prompt for input, save to variable
+* Prompt for input with `Write some text: `, save to variable `variable`
 
-```sh
-print "Enter a number"
-read num
-print "You guessed $num"
-```
+  ```sh
+  read -r 'variable?Write some text: '
+  ```
+
 
 * Prompt for password, save to variable
 
-```sh
-# Save the result in the variable 'secret'
-read -rs 'secret?Password:'
-print "You entered ${secret}"
-```
+  ```sh
+  # Save the result in the variable 'secret'
+  read -rs 'secret?Password:'
+  print "You entered ${secret}"
+  ```
 
-* Pass each word from piped input into an array
+* Pass each word from piped input into array `words`
 
-```sh
-print "alpha bravo charlie" | read -A bases
-print -l ${bases}
-# alpha
-# bravo
-# charlie
-```
+  ```sh
+  print "alpha bravo charlie" | read -A words
+  print -l ${words}
+  # alpha
+  # bravo
+  # charlie
+  ```
 
-* Read input from `/dev/stdin`
+* Save contents of `/dev/stdin` to variable `text` 
 
-```sh
-read -u 0
-```
+  * Fast form (command substitution + file redirection)
+
+  ```sh
+  text=$(<&0)
+  ```
+
+  * Slow form (`read` builtin)
+
+  ```sh
+  read -u 0 -d '' text
+  ```
+
 
 ### Reading Files
 
@@ -563,6 +571,20 @@ print ${val:2:(-3)} # 23456
 # [ Print two numbers starting from the 6th-to-last number ]
 print ${val:(-6):2} # 45
 ```
+
+* Print the last 9 letters of a scalar type variable
+
+  ```sh
+  # Not real, just to be clear
+  TWILIO_ACCOUNT_SID=1f024f2f13r123456789
+  print ${TWILIO_ACCOUNT_SID[-9,$]}
+  ```
+
+  Output
+
+  ```txt
+  123456789
+  ```
 
 ## Substring Matching
 
@@ -1010,7 +1032,9 @@ Included below are some features of the extended glob option:
 
 ## Glob Qualifiers
 
-Section 14.8.7 of the manual covers all of this in greater detail.
+[Section 14.8.7 of the manual](http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers) covers all of this in greater detail.
+
+Here are some flags below:
 
 * `(:a)`: return each globbed file's absolute path.
 
@@ -1070,6 +1094,28 @@ Section 14.8.7 of the manual covers all of this in greater detail.
 
   ```txt
   ./path/to/file.txt => ./path/to
+  ```
+
+* Print the name of the file being executed
+
+  ```sh
+  filename=${${(%):-%N}:A:t}
+  print ${filename}
+  ```
+
+  ```txt
+  filename.sh
+  ```
+
+* Print the directory containing the file being executed
+
+  ```sh
+  directory=${${(%):-%N}:A:t}
+  print ${directory}
+  ```
+
+  ```txt
+  folder
   ```
 
 ## Globbing Specific Filetypes
@@ -1176,6 +1222,12 @@ Ascending Order
   # '-': modified less than '#' hours ago
   # '+': modified more than '#' hours ago
   print -l ./*(.mh-1)
+  ```
+
+* Open all files created within the last 2 days
+
+  ```sh
+  open ./path/to/dir/*(.c-2)
   ```
 
 * Add each directory to the `${folders}` array, but only if it exists
@@ -1403,11 +1455,22 @@ Ascending Order
 * Check if a variable is set
 
   ```sh
-  if [[ ${+var} -eq 1 ]]; then
+  # If variable "var" is set
+  if [[ -v var ]] {
     print "Variable is set"
-  else
+  } else {
     print "Variable is not set"
-  fi
+  }
+  ```
+
+  **Warning**: Don't expand the value of `var` (e.g. `${var}`) or the statement won't work
+
+* Check if a variable is **either** unset, or is set, but is the empty string
+
+  ```sh
+  if [[ -z ${var} ]] {
+    print "Variable 'var' is either an unset variable or is a variable whose value is set to the empty string"
+  }
   ```
 
 * C-style `for` loop
@@ -1494,6 +1557,87 @@ Sometimes you want to supply some text in a script across multiple lines. Furthe
     dig ${domain}
   } > output.txt
   ```
+
+## Here-String
+
+A `here-string` is documented exactly twice by name in the entire `zsh` manual. Writing down how it works here, so that I know for next time...
+
+* Supply the string `hello world\n` as standard input to the current command
+
+  ```sh
+  grep 'world' <<< 'hello world'
+  ```
+
+* Create the file `hello.txt` with the following contents
+
+  * Contents
+
+  ```txt
+  hello
+  world
+
+  ```
+
+  * Command
+
+  ```sh
+  <<< $'hello\nworld' > hello.txt
+  ```
+
+* Supply a multi-line string (including a trailing line feed) as standard input to the current command
+
+  * Input string:
+
+    ```txt
+    1234
+    5678
+    ```
+
+  * Command:
+
+    ```sh
+    cat <<< $'1234\n5678'
+    ```
+
+  * Output:
+
+    ```txt
+    hello world
+    its me
+    computer
+    ```
+
+* Supply a multi-line string (excluding a trailing line feed) as standard input to the current command
+
+  ```sh
+  cat =(<<<$'hello world\nits me\ncomputer')
+  ```
+
+* `here-string` with and without a trailing newline (using tmp file substitution)
+
+  * With trailing newline
+    
+    ```sh
+    # A simple string
+    cat < <(<<<hello)
+    
+    # The output of a command
+    cat < <(<<<$(print -n 'hello'))
+    ```
+
+
+  * Without trailing newline
+
+    ```sh
+    # A simple string
+    cat < =(<<<hello)
+
+    # The output of a command
+    cat < =(<<<$(print -n 'hello'))
+    ```
+
+
+
 
 
 ### Expanding Parameters in Files
@@ -1652,31 +1796,54 @@ Ternary operators are supported in Zsh, but only when they are used within an ar
   print $'2\nlines'
   ```
 
+  Output
+
   ```txt
   2
   lines
   ```
 
+* Print the character corresponding with the hex value `0x41`
+
 
   ```sh
   print $'\x41'
-  # => A
   ```
 
+  Output
 
-```sh
-print $'\u7231'
-# => 爱
-```
+  ```txt
+  A
+  ```
 
+* Print the character corresponding with the UTF-8 character code `u+7231`
+
+  ```sh
+  print $'\u7231'
+  ```
+
+  Output
+
+  ```txt
+  爱
+  ```
+
+* Print the character corresponding with the UTF-8 character code `U+1f602`
 
   ```sh
   print $'\U0001f602'
-  # => 😂
+  ```
+
+  Output
+
+  ```txt
+  😂
   ```
 
 
 ## Regular Expressions
+
+The `zsh/regex` module handles regular expressions. There's support for PCRE regular expressions, but by default regular expressions are assumed to be in Extended POSIX form.
 
 You can use the `=~` operator to test a value against a pattern
 
@@ -1703,6 +1870,29 @@ pie=good
 # No match because there's no literal '[aeoiu]d' inside the word "good"
 [[ $pie =~ "[aeiou]d" ]] || print 'No match found'
 ```
+
+The value of the match is saved to the `MATCH` variable. If you used capture 
+
+On successful match, matched portion of the string will normally be placed in the `MATCH` variable.  If there are any capturing parentheses within the regex, then the `match` array variable will contain those.  If the match is not successful, then the variables will not be altered.
+
+  ```sh
+  if [[ 'My phone number is 123-456-7890' =~ '([0-9]{3})-([0-9]{3})-([0-9]{4})' ]] {
+    typeset -p1 MATCH match
+  }
+  ```
+
+  Output
+
+  ```txt
+  typeset MATCH=123-456-7890
+  typeset -a match=( 
+    123 
+    456 
+    7890 
+  )
+  ```
+
+ 
 
 ## Arithmetic Evaluation
 
@@ -2024,18 +2214,30 @@ Attached below you will see a wrapper I wrote for the `transmission` command lin
 
 ## `typeset`
 
-* `typeset -x <var>`: declare `<var>` as an exported global variable
-* `typeset -F <var>`: declare `<var>` as a floating type variable.
-* `typeset -E <var>`: declare `<var>` as a floating type variable (scientific notation).
-* `typeset -i <var>`: declare `<var>` as an integer type variable.
-* `typeset -a <var>`: declare `<var>` as an array type variable.
-* `typeset -A <var>`: declare `<var>` as an associative array type variable.
-* `typeset -r <var>`: declare `<var>` as a read-only variable.
-* `typeset -U <var>`: declare `<var>` as a unique-element only variable (for arrays)
-* `typeset -l <var>`: convert `<var>` to lower-case whenever expanded
-* `typeset -u <var>`: convert `<var>` to upper-case whenever expanded
+### Flags to state variable type
 
-### Printing Environment Variables
+* `-F [ name[=value] ... ]`: declare variable `name` as floating point (decimal notation)
+* `-E [ name[=value] ... ]`: declare variable `name` as floating point (scientific notation)
+* `-i [ name[=value] ... ]`: declare variable `name` as an integer
+* `-a [ name[=value] ... ]`: declare variable `name` as an array
+* `-A [ name[=value] ... ]`: declare variable `name` as an associative array
+
+### Flags to state variable properties
+
+* `typeset -r [ name[=value] ... ]`: mark variable `name` as read-only
+* `typeset -x [ name[=value] ... ]`: mark variable `name` as exported
+* `typeset -g [ name[=value] ... ]`: mark variable `name` as global
+* `typeset -U [ name[=value] ... ]`: convert array-type variable `name` such that it always contains unique-elements only
+
+### Flags to modify command output
+
+* `typeset -l [ name[=value] ... ]`: print value of `name` in lower-case whenever expanded
+* `typeset -u [ name[=value] ... ]`: print value of `name` in upper-case whenever expanded
+* `typeset -H [ name[=value] ... ]`: suppress output for `typeset name` if variable `name` has already been assigned a value
+* `typeset -p [ name[=value] ... ]`: print `name` in the form of a typeset command with an assignment, regardless of other flags and options. Note: the `−H` flag will still be respected; no value will be shown for these parameters.
+
+* `typeset -p1 [ name[=value] ... ]`: print `name` in the form of a typeset command with an assignment, regardless of other flags and options. Note: arrays and associative arrays are printed with newlines between indented elements for readability.
+
 
 #### Matching a Certain Type
 
@@ -2174,6 +2376,16 @@ Use the `zle` module for binding custom keys, code written using `zle` can be so
   # in Zsh
   bindkey -M viins '\C-m' self-insert-unmeta
   ```
+
+# Completions
+
+[Useful Oreilly Resource](https://learning.oreilly.com/library/view/learning-shell-scripting/9781783282937/ch05.html)
+
+## `compsys`
+
+* The new system to use is `compsys`. It has a manpage `zshcompsys(1)` as well. 
+
+* The old system was called `compctl` and its manpage is in `zshcompctl(1)`. The first paragraph is dedicated to recommending you just head back over to the new `zshcompsys(1)` system.
 
 ## Completion Functions
 
@@ -2887,6 +3099,10 @@ However, if the executable file is located in one of the directories specified b
 ### Seeing which directories are in your $PATH
 
 ```sh
+# This one only works on zsh
+print -l ${path}
+
+# This one works on bash as well
 echo -e ${PATH//:/\\n}
 ```
 
@@ -2899,6 +3115,7 @@ Normally each directory in the path is seperated by a : not a newline, but I fin
 Sometimes you open up a file and it contains the first line, or something similar, to the one I've written below in a program called `greet` that prints `Hello world!`
 
 #### `greet`
+
 ```python
 #!/usr/local/bin/python3
 print("Hello world!")
@@ -3056,3 +3273,89 @@ say 'hello world'
 # Singing from terminal
 say -v 'good news' di di di di di di
 ```
+
+## Arithmetic Expansion
+
+* If there are between 1 and 3 arguments supplied to the function, print the number of arguments supplied to the function
+
+  ```sh
+  func() {
+    if (( 1 <= ${#} && ${#} <= 3 )) {
+      print ${#}
+    }
+  }
+  ```
+
+## Boolean Shell Builtins
+
+* `true` is a shell builtin that returns `0` when called
+
+* `false` is a shell builtin that returns `1` when called
+
+* If two commands both return status code `0`, print `success`
+
+  * Example 1
+
+      ```sh
+      # Note: the long-form syntax used for 
+      # this if statement is non-optional
+
+      if whoami && hostname; then
+        print 'success'
+      fi
+      ```
+
+    * Output
+
+      ```txt
+      ttrojan
+      challenger
+      success
+      ```
+
+  * Example 2
+
+    ```sh
+    if true && true; then
+      print 'success'
+    fi
+    ```
+
+
+
+## Operator Precedence
+
+* Proof that `||` has operator precedence over `&&`
+
+  * Example 1:
+
+    ```sh
+    if true && false || true; then
+      print 'success'
+    else
+      print 'failure'
+    fi
+    ```
+
+    * Output
+
+      ```txt
+      success
+      ```
+
+  * Example 2:
+
+    ```sh
+    if true || false && true; then
+      print 'success'
+    else
+      print 'failure'
+    fi
+    ```
+
+    * Output
+
+      ```txt
+      success
+      ```
+

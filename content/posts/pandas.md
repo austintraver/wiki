@@ -1,9 +1,9 @@
-+++
-title = "Pandas"
-description = "The big-data Python library powering literally everything"
-date = 2020-02-04T14:52:27-08:00
-image = "pandas.jpg"
-+++
+---
+title: Pandas
+description: "The big-data Python library powering literally everything"
+date: 2020-02-04T14:52:27-08:00
+image: "pandas.jpg"
+---
 
 # Pandas
 
