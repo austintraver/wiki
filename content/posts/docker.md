@@ -1,9 +1,9 @@
-+++
-title = "Docker"
-description = "How to containerize literally everything"
-date = 2020-02-04T14:52:26-08:00
-image = "docker.png"
-+++
+---
+title: "Docker"
+description: "How to containerize literally everything"
+date: 2020-02-04T14:52:26-08:00
+image: "docker.png"
+---
 
 # Docker
 

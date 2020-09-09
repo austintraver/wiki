@@ -1,13 +1,11 @@
-+++
-title = "Python"
-description = "The best programming language"
-date = 2020-02-04T14:52:27-08:00
-image = "python.png"
-+++
+---
+title: Python
+description: "The best programming language"
+date: 2020-02-04T14:52:27-08:00
+image: "python.png"
+---
 
 # Python
-
-## Getting started
 
 * Following this will default to the newest version of Python, which is version 3. For backwards compatibility reasons, `python` will refer to Python 2. However this version will be deprecated at the end of 2019.
 
@@ -63,21 +61,29 @@ A set in Python is implemented as a hash table. It has O(1) lookup and insertion
   bag = set([1, 2])
   ```
 
-Adding items to a set:
+* Adding items to a set:
 
-```py
-bag = {1, 2}
-array = [1, 2, 3, 4, 4, 5]
+  ```py
+  bag = {1, 2}
+  array = [1, 2, 3, 4, 4, 5]
 
-# Adding 1 item with add()
-set.add(3)
+  # Adding 1 item with add()
+  set.add(3)
 
-# Adding a list of items using update()
-bag.update(array)
+  # Adding a list of items using update()
+  bag.update(array)
 
-# Adding a set of items using |=
-bag |= set(array)
-```
+  # Adding a set of items using |=
+  bag |= set(array)
+  ```
+
+* Create a dictionary, using the elements of a set as the keys
+
+  ```py
+  names = set({'Tommy', 'Tina', 'Traveler'})
+  default_value = '+1 (123) 456-7890' 
+  contacts = dict({name: default_value for name in names})
+  ```
 
 * Testing for membership in dicts/sets:
 
@@ -178,7 +184,7 @@ pylint --generate-rcfile > ~/.pylintrc
 
 If `pylint` notifies you about a linting error that you don't like, add it as an entry, seperated by a comma, to `disable`. e.g.
 
-```
+```txt
 disable=missing-docstring,
         invalid-name,
         bare-except
@@ -188,7 +194,7 @@ disable=missing-docstring,
 
 ### Getting Started
 
-Plotly is a visualization tool you can install with `pip3 install plotly`. You can create an account at [plot.ly](plot.ly) and generate an API key. Once you have, edit the `~/.plotly/.credentials` and insert the following information.
+Plotly is a visualization tool you can install with `pip3 install plotly`. You can create an account at [plot.ly](https://plot.ly) and generate an API key. Once you have, edit the `~/.plotly/.credentials` and insert the following information.
 
 ```json
 {
@@ -240,39 +246,48 @@ Use the `re` library for regular expressions in python. Regular expression patte
 
 Regular Expression Flags
 
-| Flag | Function |
-| :---: | :---: |
-| `re.A` | Make the pattern match only ASCII characters |
-| `re.I` | Make the pattern case insensitive
+|  Flag  |                                                           Function                                                           |
+|:------:|:----------------------------------------------------------------------------------------------------------------------------:|
+| `re.A` |                                         Make the pattern match only ASCII characters                                         |
+| `re.I` |                                              Make the pattern case insensitive                                               |
 | `re.M` | The `^` & `$` special characters match the start/end of each line in a string, instead of the start/end of the string itself |
-| `re.S` | Allow the `.` character to match newline characters |
-| `re.X` | Ignore whitespace in the pattern definition, and allow for comments |
+| `re.S` |                                     Allow the `.` character to match newline characters                                      |
+| `re.X` |                             Ignore whitespace in the pattern definition, and allow for comments                              |
+|        |                                                                                                                              |
 
-| Special Character | Function |
-| :---: | :---: |
-|+ |Match 1 or more|
-|\* |Match 0 or more|
-|?| 0 or 1|
-|{k}| Match k consecutive occurances of the preceeding pattern |
-|{m,n}| Match from m to n consecutive occurences (inclusive) of the preceeding pattern (as many as possible) |
-|{m,n}? | Match from m to n consecutive occurrences (inclusive) of the preceeding pattern (as few as possible) |
-|. |Match any character except a newline `\n`|
-|^| Match the start of the string|
-|$| Match the end of string|
-|(| Specify the start of capture group|
-|)| Specify the end of capture group|
+[Special Characters](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
 
-| Escaped Character | Matches |
-|:---:|:---:|
-|`\t`| Horizontal tab|
-|`\v`| Vertical tab|
-|`\n`| Newline
-|`\f`| Form feed |
-|`\r`| Carriage return |
-|`\w`| `[a-zA-Z0–9_]`|
-|`\d`| `[0–9]`|
-|`\s`| `[\t\n\r\f\v]`|
-|`\b`| Specify a word boundary |
+| Special Character |                                               Function                                               |
+|:-----------------:|:----------------------------------------------------------------------------------------------------:|
+|         +         |                                           Match 1 or more                                            |
+|        \*         |                                           Match 0 or more                                            |
+|         ?         |                                                0 or 1                                                |
+|        {k}        |                       Match k consecutive occurances of the preceeding pattern                       |
+|       {m,n}       | Match from m to n consecutive occurences (inclusive) of the preceeding pattern (as many as possible) |
+|      {m,n}?       | Match from m to n consecutive occurrences (inclusive) of the preceeding pattern (as few as possible) |
+|         .         |                              Match any character except a newline `\n`                               |
+|         ^         |                                    Match the start of the string                                     |
+|         $         |                                       Match the end of string                                        |
+|         (         |                                  Specify the start of capture group                                  |
+|         )         |                                   Specify the end of capture group                                   |
+
+
+Escaped Characters
+
+
+| Escaped Character |         Matches         |
+|:-----------------:|:-----------------------:|
+|       `\t`        |     Horizontal tab      |
+|       `\v`        |      Vertical tab       |
+|       `\n`        |         Newline         |
+|       `\f`        |        Form feed        |
+|       `\r`        |     Carriage return     |
+|       `\w`        |     `[a-zA-Z0–9_]`      |
+|       `\d`        |         `[0–9]`         |
+|       `\s`        |     `[\t\n\r\f\v]`      |
+|       `\b`        | Specify a word boundary |
+
+Coding example
 
 ```py
 # Import the RegEx library
@@ -282,17 +297,31 @@ import re
 pattern = re.compile(r'http[s]?://([^/?:]+)', re.A|re.I)
 # Search for the text matching the pattern in "sample"
 text = 'https://helpful.wiki/python'
+```
 
+```py
 match = pattern.search(text)
 print(match.group(0))
+```
+
+```txt
 # => https://helpful.wiki
+```
+
+```py
 print(match.group(1))
+```
+
+```txt
 # => helpful.wiki
 ```
 
 ## Dates, Times, Timestamps
 
 ISO8601 and RFC3339 are the documents that outline how date and time should be denoted on computers. `1996-12-20T00:39:57Z` is an example of an ISO8601 timestamp. The `Z` denotes that this timestamp is in *zulu time*, the UTC timezone. The UTC timezone is *Coordinated Universal Time* and, depending on the time of year, is either 7 or 8 hours ahead of the time in California. The equivalent time in California would be represented as `1996-12-19T16:39:57-08:00`
+
+### [`strftime` and `strptime`](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
+
 
 The `datetime` library has a few packages:
 
@@ -303,103 +332,139 @@ The `datetime` library has a few packages:
 * `datetime.timezone`
 * `datetime.tzinfo`
 
-```py
-import datetime
-import time
+* Working with ISO formatted timestamp strings
 
-event = datetime.date.fromisoformat("2018-12-31")
-# -00:00 is an illegal format but Python will interpret it successfully
-event = datetime.datetime.fromisoformat("2018-12-31T12:31:58-08:00")
-# Using whitespace seperator instead of 'T' character
-event = datetime.datetime.fromisoformat("2018-12-31 04:31:58+00:00")
+  ```py
+  import datetime
+  import time
 
-# If it's currently daylight savings
-if time.daylight:
-  tz = time.altzone
-  # => 25200 (# of seconds offset from UTC)
+  event = datetime.date.fromisoformat("2018-12-31")
+  # -00:00 is an illegal format but Python will interpret it successfully
+  event = datetime.datetime.fromisoformat("2018-12-31T12:31:58-08:00")
+  # Using whitespace seperator instead of 'T' character
+  event = datetime.datetime.fromisoformat("2018-12-31 04:31:58+00:00")
+  ```
 
-else:
-  tz = time.timezone
-  # => 28800 (# of seconds offset from UTC)
+* Parsing a non-ISO date into a `datetime` object
 
-print(time.tzname)
-# => ('PST', 'PDT')
+  ```py
+  moment = datetime.strptime('05-19-2018', '%m-%d-%Y')
+  print(moment)
+  ```
 
-print(time.localtime)
-# => time.struct_time(tm_year=2019, tm_mon=7, tm_mday=17, tm_hour=11, tm_min=42, tm_sec=15, tm_wday=2, tm_yday=198, tm_isdst=1)
+  Output
 
-moment = datetime.datetime.utcnow()
+  ```txt
+  datetime.datetime(year=2018, month=5, day,19, hour=0, second=0)
+  ```
 
-print(moment.isoformat(timespec='seconds'))
-# => 2019-07-17T11:25:07
+* Parsing a non-ISO timestamp into a `datetime` object
 
-print(moment.isoformat(timespec='milliseconds'))
-# => 2019-07-31T02:21:15.125
+  ```py
+  moment = datetime.strptime('10-05-2017 05:00:00 PM', '%m-%d-%Y %I:%M:%S %p')
+  print(moment)
+  ```
 
-print(moment.isoformat(sep=' ', timespec='microseconds'))
-# => 2019-07-3102:21:15.125991
-```
+  Output
 
-Setting the timezone
+  ```txt
+  datetime.datetime(year=2017, month=10, day=5, hour=17, second=0)
+  ```
 
-* **Note**: This requires installing the `pendulum` library, as `python` does not have a built in library for time zone information.
+* Working with daylight savings
 
-```py
-import time
-import os
-os.environ['TZ'] = 'US/Eastern'
-time.tzset()
-print(time.tzname)
-# => ('EST', 'EDT')
-```
+  ```py
+  # If it's currently daylight savings
+  if time.daylight:
+    tz = time.altzone
+    # => 25200 (# of seconds offset from UTC)
 
-* Print all timezones
+  else:
+    tz = time.timezone
+    # => 28800 (# of seconds offset from UTC)
 
-```py
-from datetime import datetime
-from pendulum import timezone, timezones
+  print(time.tzname)
+  # => ('PST', 'PDT')
+  ```
 
-for zone in timezones:
-  print(zone)
-```
+* Working with local timezones
 
-* Some common timezones:
+  ```py
+  print(time.localtime)
+  # => time.struct_time(tm_year=2019, tm_mon=7, tm_mday=17, tm_hour=11, tm_min=42, tm_sec=15, tm_wday=2, tm_yday=198, tm_isdst=1)
 
-```py
-[
-  timezone("Pacific/Honolulu"), # -10:00
-  timezone("America/Juneau"), # -09:00
-  timezone("America/Los_Angeles"), # -08:00
-  timezone("America/Denver"), # -07:00
-  timezone("America/Chicago"), # -06:00
-  timezone("America/New_York"), # -05:00
-  timezone("Europe/London"), # +00:00
-  timezone("Europe/Paris"), # +01:00
-  timezone("Europe/Athens"), # +02:00
-  timezone("Europe/Moscow"), # +03:00
-  timezone("Asia/Tehran"), # +03:30
-  timezone("Asia/Dubai"), # +04:00
-  timezone("Asia/Kabul"), # +04:30 (capitol of Afghanistan)
-  timezone("Asia/Dushanbe"), # +05:00 (capitol of Tajikstan)
-  timezone("Asia/Kathmandu"), # +05:45 (capitol of Nepal)
-  timezone("Asia/Dhaka"), # +06:00 (capitol of Bangladesh)
-  timezone("Asia/Bangkok"), # +07:00
-  timezone("Asia/Shanghai"), # +08:00
-  timezone("Asia/Tokyo"), # +09:00
-  timezone("Australia/Sydney"), # +10:00
-  timezone("Asia/Noumea"), # +11:00 (capitol of New Caledonia)
-  timezone("Pacific/Fiji") # +12:00
-]
-```
+  moment = datetime.datetime.utcnow()
 
-* Other useful commands
+  print(moment.isoformat(timespec='seconds'))
+  # => 2019-07-17T11:25:07
 
-```py
-moment = datetime.now()
+  print(moment.isoformat(timespec='milliseconds'))
+  # => 2019-07-31T02:21:15.125
 
-print(moment.astimezone(zone).isoformat())
+  print(moment.isoformat(sep=' ', timespec='microseconds'))
+  # => 2019-07-3102:21:15.125991
+  ```
 
-```
+* Getting the local timezone information
+
+  ```py
+  import datetime
+  timezone = datetime.datetime.now().astimezone().tzinfo
+  ```
+
+* Setting the timezone
+
+  ```py
+  import time
+  import os
+  os.environ['TZ'] = 'US/Eastern'
+  time.tzset()
+  print(time.tzname)
+  # => ('EST', 'EDT')
+  ```
+
+* Print all timezones from the [`pendulum`](https://pendulum.eustace.io) library
+
+  ```py
+  from pendulum import timezones
+
+  for timezone in timezones:
+    print(timezone)
+  ```
+
+* A list of common timezones included below:
+
+  ```py
+  # Constructing a timezone object
+  from pendulum import timezone
+  tz = timezone('America/Los_Angeles')
+
+  # Other valid timezones included below
+  [
+    'Pacific/Honolulu', # -10:00
+    'America/Juneau', # -09:00
+    'America/Los_Angeles', # -08:00
+    'America/Denver', # -07:00
+    'America/Chicago', # -06:00
+    'America/New_York', # -05:00
+    'Europe/London', # +00:00
+    'Europe/Paris', # +01:00
+    'Europe/Athens', # +02:00
+    'Europe/Moscow', # +03:00
+    'Asia/Tehran', # +03:30
+    'Asia/Dubai', # +04:00
+    'Asia/Kabul', # +04:30 (capitol of Afghanistan)
+    'Asia/Dushanbe', # +05:00 (capitol of Tajikstan)
+    'Asia/Kathmandu', # +05:45 (capitol of Nepal)
+    'Asia/Dhaka', # +06:00 (capitol of Bangladesh)
+    'Asia/Bangkok', # +07:00
+    'Asia/Shanghai', # +08:00
+    'Asia/Tokyo', # +09:00
+    'Australia/Sydney', # +10:00
+    'Asia/Noumea', # +11:00 (capitol of New Caledonia)
+    'Pacific/Fiji' # +12:00
+  ]
+  ```
 
 ## Custom Module Locations
 
@@ -418,76 +483,74 @@ To do this, set the environment variable `PYTHONPATH` in your shell, and export 
 
 ```py
 import socket
-    # Create a TCP socket
-    mysocket = socket.socket(
-        type=socket.SOCK_STREAM
-    )
+# Create a TCP socket
+mysocket = socket.socket(
+    type=socket.SOCK_STREAM
+)
 
-    # Create an address tuple, the interface to bind to, and a port number
-    address = ('0.0.0.0', 1234)
+# Create an address tuple, the interface to bind to, and a port number
+address = ('0.0.0.0', 1234)
 
-    # Bind the socket to the address
-    mysocket.bind(address)
+# Bind the socket to the address
+mysocket.bind(address)
 
-    # Listen, allowing 1 pending connection
-    mysocket.listen(1)
+# Listen, allowing 1 pending connection
+mysocket.listen(1)
 
-    # Listen until the process is killed
+# Listen until the process is killed
+while True:
+
+    # Save the accepted connection
+    connection, address = mysocket.accept()
+
+    print(f"Accepted connection from {address}")
+
+    # Continue until the transmission has no more data
     while True:
+        data, orig_address = connection.recvfrom(4096)
 
-        # Save the accepted connection
-        connection, address = mysocket.accept()
+        # If there's no data being transmitted, exit
+        if not data:
+            break
+        else:
+            # For now, reply to the same connection, echoing the message
+            reply = f"echo \'{data.decode()}\'".encode()
+            connection.sendto(reply, address)
 
-        print(f"Accepted connection from {address}")
-
-        # Continue until the transmission has no more data
-        while True:
-            data, orig_address = connection.recvfrom(4096)
-
-            # If there's no data being transmitted, exit
-            if not data:
-                break
-            else:
-                # For now, reply to the same connection, echoing the message
-                reply = f"echo \'{data.decode()}\'".encode()
-                connection.sendto(reply, address)
-
-        # Close the connection now that the message has been replied to
-        connection.close()
-
-print("exit")
+    # Close the connection now that the message has been replied to
+    connection.close()
 ```
 
 ```py
 from socket import socket
 
-    mysocket = socket.socket()
+mysocket = socket.socket()
 
-    address = ('127.0.0.1', 1234)
+address = ('127.0.0.1', 1234)
 
-    # Connect the socket to the server
-    mysocket.connect(address)
+# Connect the socket to the server
+mysocket.connect(address)
 
-    # Send a message to the server, registering the name of the client
-    message = f'register {args.name}'
+# Send a message to the server, registering the name of the client
+message = f'register {args.name}'
 
-    # Send the message to the connection
-    mysocket.sendto(message.encode(), address)
+# Send the message to the connection
+mysocket.sendto(message.encode(), address)
 
-    # Save the reply from the response, as well as the address
-    reply, address = mysocket.recvfrom(4096)
+# Save the reply from the response, as well as the address
+reply, address = mysocket.recvfrom(4096)
 
-    # Decode the reply's binary encoding, store as UTF-8 string
-    reply = reply.decode()
+# Decode the reply's binary encoding, store as UTF-8 string
+reply = reply.decode()
 
-    print(reply)
+print(reply)
 
-    mysocket.close()
+mysocket.close()
 
-    ofile = open(args.logfile, 'w')
-    ofile.write('connected to server and registered\n')
-    ofile.write('waiting for messages...\n')
-    ofile.write('exit')
+ofile = open(args.logfile, 'w')
+ofile.write('connected to server and registered\n')
+ofile.write('waiting for messages...\n')
+ofile.write('exit')
 ```
 
 ### Pandas
@@ -656,4 +719,216 @@ pip install pillow
   ```py
   from PIL import Image
   Image.new('RGB', (1000,1000), (0xff, 0xff, 0xff)).save("image.png", "PNG")
+  ```
+
+# Comprehension
+
+## List Comprehension
+
+  ```py
+  text = "some text"
+  letters = [char for char in text if x !=" "]
+
+  print(letters)
+# => ['s', 'o', 'm', 'e', 't', 'e', 'x', 't']
+  ```
+
+## Set Comprehension
+
+* Perform set comprehension using a conditional statement:
+
+  ```py
+  cubed_even_numbers = set({value**3 for value in range(1,10) if value % 2 == 0})
+
+  print(cubed_even_numbers)
+  # => {8, 64, 512, 216}
+  ```
+
+## Iterables
+
+Iterable is a “sequence” of data, you can iterate over using a loop. 
+
+The easiest visible example of iterable can be a list of integers, such as `[1, 2, 3, 4, 5, 6, 7]`
+
+However, it’s possible to iterate over other types of data like a `str()`, `dict()`, `tuple()`, `set()`, etc.
+
+* Verify an object is iterable by checking that it has defined the `iter()` method
+
+```py
+print(hasattr(str, '__iter__'))
+# => "True"
+
+print(hasattr(bool, '__iter__'))
+# => "False"
+```
+
+## Parsing Arguments
+
+Attached below is a program I made to import CSV data exported from my Apple Card into the budgeting software YNAB
+
+```py
+import webbrowser
+from datetime import datetime
+from sys import exit
+from json import load, dumps
+from os import getenv
+from sys import stdin, stdout, stderr, argv
+from csv import DictReader, DictWriter
+from urllib.request import Request, urlopen
+
+from argparse import ArgumentParser, FileType
+
+parser = ArgumentParser(
+    prog='ynab',
+    usage='%(prog)s [CSV_FILE]',
+    description='%(prog)s: a data pipeline'
+)
+parser.add_argument(
+    '-v',
+    "--verbose",
+    dest='verbose',
+    action='store_true',
+    help='option to print CSV to stdout'
+)
+options = parser.parse_args()
+
+endpoint = 'https://api.youneedabudget.com/v1/budgets/last-used'
+
+
+def get_account_id():
+    account_request = Request(
+        url=f'{endpoint}/accounts'
+    )
+
+    account_request.add_header('Authorization', f'Bearer {api_token}')
+
+    account_response = urlopen(account_request)
+    accounts = load(account_response)['data']['accounts']
+
+    ynab_account_id = None
+
+    for account in accounts:
+        if account['name'] == 'Apple Card':
+            ynab_account_id = account['id']
+
+    if ynab_account_id is None:
+        raise (ValueError('ynab: unable to find account "Apple Card"\n'))
+
+    return ynab_account_id
+
+
+if (api_token := getenv('YNAB_TOKEN')) is None:
+    exit('ynab: expected environment variable ${YNAB_TOKEN}')
+
+# Force input to be provided via file redirection
+if stdin.isatty():
+    if len(argv) == 1:
+        stderr.writelines([
+            'ynab: please supply the CSV file via standard input\n',
+            '\tusage: `ynab < ./Downloads/apple.csv > ~/ynab.csv`\n'
+        ])
+        exit(2)
+
+apple_csv = DictReader(
+    f=stdin,  # The file to read from (standard input)
+    fieldnames=None,  # Assume the CSV file's first row contains the field names
+    dialect='unix',  # Specify the encoding method for the CSV file
+)
+
+expected_fields = [
+    'Transaction Date',
+    'Clearing Date',
+    'Description',
+    'Merchant',
+    'Category',
+    'Type',
+    'Amount (USD)'
+]
+
+if apple_csv.fieldnames != expected_fields:
+    stderr.writelines([
+        'ynab: problem reading CSV header row\n',
+        f'\texpected:\t{expected_fields}\n',
+        f'\treceived:\t{apple_csv.fieldnames}\n'
+    ])
+    exit(1)
+
+ynab_csv = DictWriter(
+    f=stdout,  # The file to write to (standard output)
+    fieldnames=['Date', 'Payee', 'Memo', 'Amount'],  # Specify the field names
+    dialect='unix',  # Specify the encoding method for the CSV file
+)
+
+csv_transactions = list()
+
+api_transactions = list()
+
+account_id = get_account_id()
+
+# Create a list of api_transactions
+for row in apple_csv:
+
+    # Format the date from 2020/01/13 to 2020-01-13
+    date = datetime.strptime(
+        row['Transaction Date'], '%m/%d/%Y'
+    ).date().isoformat()
+
+    # Write an entry to the CSV file
+    csv_transactions.append({
+        'Date': date,
+        'Payee': row['Merchant'],
+        'Amount': '{:.2f}'.format(float(row['Amount (USD)']) * -1),
+        'Memo': ''
+    })
+
+    # Store the next transaction as a dictionary, append it to the list
+    api_transactions.append({
+        'account_id': account_id,
+        'date': date,
+        'payee_name': row['Merchant'],
+        'cleared': 'cleared',
+        'approved': False,
+        'amount': int(float(row['Amount (USD)']) * -1_000)
+    })
+
+
+if options.verbose:
+    # Write the header row to the CSV file (the field names)
+    ynab_csv.writeheader()
+    # Write each transaction in the list to a row in the CSV file
+    ynab_csv.writerows(csv_transactions)
+
+data = {
+    'transactions': api_transactions
+}
+
+transaction_request = Request(
+    headers={
+        'Authorization': f'Bearer {api_token}',
+        "Content-Type": 'application/json',
+    },
+    url=f'{endpoint}/transactions',
+    data=dumps(data).encode('utf-8')
+)
+
+transaction_response = urlopen(transaction_request)
+# print(f'ynab: successfully imported {len(api_transactions)} into YNAB')
+
+# Open YNAB for the user on their default web browser
+webbrowser.open('https://app.youneedabudget.com')
+```
+
+## Sockets
+
+* Find the IPv4 address for hostname `google.com`
+
+  ```sh
+  import socket
+  print(socket.gethostbyname('google.com'))
+  ```
+
+  Output
+
+  ```txt
+  172.217.5.110
   ```

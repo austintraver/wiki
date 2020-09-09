@@ -1,9 +1,9 @@
-+++
-title = "FFmpeg"
-description = "Encoding video/audio straight from the command line"
-date = 2020-02-04T14:52:27-08:00
-image = "ffmpeg.png"
-+++
+---
+title: FFmpeg
+description: "Encoding video/audio straight from the command line"
+date: 2020-02-04T14:52:27-08:00
+image: "ffmpeg.png"
+---
 
 # FFmpeg
 
@@ -63,7 +63,7 @@ Assuming you know the activation bytes of your file...
 * Convert the audiobook `input.aax` to `output.m4b`
 
   ```sh
-  ffmpeg -activation_bytes '123abc' -i 'input.aax' -c copy 'output.m4b'
+  ffmpeg -activation_bytes ${ACTIVATION_BYTES} -i 'book.aax' -c copy 'book.m4b'
   ```
 
 ## Extract cover art from a media file
@@ -113,3 +113,7 @@ Assuming you know the activation bytes of your file...
     ffmpeg -i ${audiobook} -c:a aac -c:v copy ${audiobook:r}.m4b;
   done
   ```
+
+## Reduce the quality of an image
+
+Scaling down quality of an image/video can be done with the `-q:v X` option, where `X` is a number between 2 and 31, specifying the intensity of the quality reduction.

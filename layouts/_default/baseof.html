@@ -1,24 +1,92 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}} | {{.Site.Title}}</title>
-    <link rel="stylesheet" href={{ "baseof.css" | relURL }} />
-    {{ if isset .Params "image" }}
-        <meta property="og:image" content='{{ .Param "image" | absURL }}'>
-    {{ end }}
-    {{ template "_internal/opengraph.html" . }}
-    {{ block "head" . }}
+  <!-- ============================================ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Title}} | {{.Site.Title}}</title>
+  <link rel="stylesheet" href="/css/baseof.css"/>
 
-    {{ end }}
+  <!-- Algolia -->
+  <!-- Before the closing </head> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.css"/>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+  <script>
+    /* https://github.com/typekit/webfontloader */
+    WebFont.load({
+      google: {
+        families: ['Noto Sans']
+      }
+    })
+  </script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script defer src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/7.19.1/firebase-performance.js"></script>
+
+  <script>
+    // Firebase project's web app configurations
+    let firebaseConfig = {
+      apiKey: 'AIzaSyA6yXOZiz-jLt_1grsd4v6c0_LCU1g_6bY',
+      authDomain: 'helpfulwiki.firebaseapp.com',
+      databaseURL: 'https://helpfulwiki.firebaseio.com',
+      projectId: 'helpfulwiki',
+      storageBucket: 'helpfulwiki.appspot.com',
+      messagingSenderId: '8053910868',
+      appId: '1:8053910868:web:ab9802b00a864294022cc1'
+    }
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig)
+    let performer = firebase.performance()
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
+  <script>
+    // Initialize Firebase SDK for Google Analytics
+    window.dataLayer = window.dataLayer || []
+    function gtag() {dataLayer.push(arguments)}
+    let analyst = firebase.analytics()
+    gtag('js', new Date())
+
+  </script>
+
+  <script
+  type = 'text/javascript' > !function(n, e) {
+    // Enable First Input Delay polyfill library
+    var t, o, i, c = [], f = {passive: !0, capture: !0}, r = new Date, a = 'pointerup', u = 'pointercancel'
+    function p(n, c) {t || (t = c, o = n, i = new Date, w(e), s())}
+    function s() {o >= 0 && o < i - r && (c.forEach(function(n) {n(o, t)}), c = [])}
+    function l(t) {
+      if (t.cancelable) {
+        let o = (t.timeStamp > 1e12 ? new Date : performance.now()) - t.timeStamp
+        'pointerdown' == t.type ? function(t, o) {
+          function i() {p(t, o), r()}
+          function c() {r()}
+          function r() {e(a, i, f), e(u, c, f)}
+          n(a, i, f), n(u, c, f)
+        }(o, t) : p(o, t)
+      }
+    }
+    function w(n) {['click', 'mousedown', 'keydown', 'touchstart', 'pointerdown'].forEach(function(e) {n(e, l, f)})}
+    w(n), self.perfMetrics = self.perfMetrics || {}, self.perfMetrics.onFirstInputDelay = function(n) {c.push(n), s()}
+  }(addEventListener, removeEventListener)</script>
+
+
+  {{ if isset .Params "image" }}
+  <meta property="og:image" content='{{ index (.Resources.Match "hero.*") 0 }}'/>
+  {{ end }}
+  {{ template "_internal/opengraph.html" . }} {{ block "head" . }} {{ end }}
 </head>
 
 <body>
-    {{ partial "navbar" . }}
-    {{ block "main" . }}
+  <nav>
+    <a href="/">Helpful Wiki</a>
+  </nav>
+  {{ block "main" . }} {{ end }}
 
-    {{ end }}
-    {{ partial "footer" . }}
 </body>
+
 
 </html>

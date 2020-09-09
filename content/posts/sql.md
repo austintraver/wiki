@@ -1,9 +1,9 @@
-+++
-title = "SQL"
-description = "The structured query language"
-date = 2020-02-04T14:52:27-08:00
-image = "sql.png"
-+++
+---
+title: SQL
+description: "The structured query language"
+date: 2020-02-04T14:52:27-08:00
+image: "sql.png"
+---
 
 # SQL
 
@@ -87,7 +87,9 @@ The keyword `AS` lets you alias, or define names for the values returned from a 
 SELECT COUNT(*) AS rows FROM db.name
 ```
 
-## `DISTINCT`
+### [`ARRAYUNIQUE`](https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions)
+
+### `DISTINCT`
 
 * You can use the `DISTINCT` keyword to get the number of unique values for a key-column.
 
@@ -248,7 +250,7 @@ HAVING
   sum_number > 1000000
 ```
 
-## Aggregate Functions
+## [Aggregate Functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions)
 
 Grouping is useful for more than just taking the `SUM()` of a group, the syntax can also be applied to `MAX()` and `MIN()`
 
@@ -743,4 +745,69 @@ bind-address = 0.0.0.0
 
 # Comment out the line below if you want a database that does not accept remote connections
 # skip-networking
+```
+
+## Date Comparisons
+
+* Select all entries scanned after `2020-01-01`:
+
+  ```sql
+  SELECT * FROM `database.ip_addresses`
+  WHERE 'public_ip' IS NOT NULL
+  AND 'scan_date' < '2020-01-01'
+  ```
+
+## ARRAY_AGG
+
+* Get the list of each doctor's patients
+
+  ```sql
+  SELECT 
+    doctor,
+    ARRAY_AGG(patient) as patients
+  FROM
+    hospital-dataset.patient-info
+  GROUP BY
+    doctor
+  ```
+
+  Output
+
+  ```json
+  [
+    {
+      "doctor": "John",
+      "patients": [
+        "Crosby", 
+        "Stills", 
+        "Nash"
+      ]
+    },
+    {
+      "doctor": "Kelly",
+      "patients": [
+        "Young"
+      ]
+    },
+    {
+      "doctor": "Austin",
+      "patients": [
+        "Simon", 
+        "Garfunkel"
+      ]
+    }
+  ]
+  ```
+
+## `DATE_SUB`
+
+* Filter out partitions that are more than 5 days old
+
+```sql
+SELECT
+  *
+FROM
+  mydataset.mytable
+WHERE
+    DATE(_PARTITIONTIME) > DATE_SUB(CURRENT_DATE(), INTERVAL 5 DAY)
 ```

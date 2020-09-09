@@ -1,6 +1,6 @@
 <div class='notice {{ .Get 0 }}'>
   <div id="header" class='notice {{ .Get 0 }}'>
-    <img src='{{ path.Join "/figure" (.Get 0) }}.svg'>
+    <img src='{{ path.Join "/img/figure" (.Get 0) }}.svg'>
     <p> {{- .Get 0 -}} </p>
   </div>
   <p id="details" class='notice {{ .Get 0}}'>{{ markdownify .Inner }}</p>

@@ -1,9 +1,9 @@
-+++
-title = "printf"
-description = "Printing formatted strings in literally every programming language"
-date = 2020-02-04T14:52:27-08:00
-image = "printf.png"
-+++
+---
+title: printf
+description: "Printing formatted strings in literally every programming language"
+date: 2020-02-04T14:52:27-08:00
+image: "printf.png"
+---
 
 # `printf()`
 

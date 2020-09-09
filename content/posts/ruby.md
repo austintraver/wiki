@@ -1,9 +1,9 @@
-+++
-title = "Ruby"
-description = "Write it fast, run it slow"
-date = 2020-02-04T14:52:27-08:00
-image = "ruby.jpg"
-+++
+---
+title: Ruby
+description: "Write it fast, run it slow"
+date: 2020-02-04T14:52:27-08:00
+image: "ruby.jpg"
+---
 
 # Ruby
 
@@ -223,7 +223,7 @@ Since Ruby 2.3, the `<<~` heredoc strips leading whitespace
 # Use `<<~` to strip leading whitespace
 def make_doc(body)
   <<~EOF
-  <html>
+  <html lang="en-US">
     <body>
       #{body}
     </body>

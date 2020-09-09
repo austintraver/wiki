@@ -1,9 +1,9 @@
-+++
-title = "Markdown"
-description = "A lazy solution to writing less HTML"
-date = 2020-02-04T14:52:27-08:00
-image = "markdown.png"
-+++
+---
+title: Markdown
+description: "A lazy solution to writing less HTML"
+date: 2020-02-04T14:52:27-08:00
+image: "markdown.png"
+---
 
 # Markdown
 

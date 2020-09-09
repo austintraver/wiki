@@ -1,4 +1,0 @@
-[submodule "pages"]
-	path = docs
-	url = git@github.com:austintraver/pages.git
-	branch = master

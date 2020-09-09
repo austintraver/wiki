@@ -1,9 +1,9 @@
-+++
-title = "Vi"
-description = "The best editor around"
-date = 2020-02-04T14:52:27-08:00
-image = "vi.jpg"
-+++
+---
+title: Vi
+description: "The best editor around"
+date: 2020-02-04T14:52:27-08:00
+image: "vi.jpg"
+---
 
 # Vim
 
@@ -828,13 +828,13 @@ On your terminal, the `vim` command has a `-d` flag which you can use to activat
 
 To test any of these out, you can type `echo expand('%:p')`
 
-* `%:.` the filepath relative to the current directory `vim.md`
+* `%:.` the filepath relative to the current directory `vi.md`
 
-* `%:~` the filepath relative to the home directory `~/notes/_pages/vim.md`
+* `%:~` the filepath relative to the home directory `~/content/posts/vi.md`
 
-* `%:p` the absolute filepath `/Users/atraver/notes/_pages/vim.md`
+* `%:p` the absolute filepath `/Users/atraver/content/postsp/vi.md`
 
-* `%:r` the filename root, without the extension `vim`
+* `%:r` the filename root, without the extension `vi`
 
 * `%:e` the filename extension, without the root `md`
 

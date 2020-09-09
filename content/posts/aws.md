@@ -1,9 +1,9 @@
-+++
-title = "AWS"
-description = "Amazon Web Services"
-date = 2020-02-04T14:52:26-08:00
-image = "aws.jpg"
-+++
+---
+title: AWS
+description: "Amazon Web Services"
+date: 2020-02-04T14:52:26-08:00
+image: "aws.jpg"
+---
 
 # AWS
 
@@ -43,15 +43,6 @@ image = "aws.jpg"
   rm -- /usr/local/bin/*(-@)
   ```
 
-* IAM: Identity Access Management. Controls what users can do in their AWS environment.
-* VPC: Virtual Private Cloud. The networking hub, here is where we open ports, create subnets, etc.
-* AMI: Amazon Machine Image. An image of an operating system, the starting point for launching instances.
-* EC2: Elastic Compute Cloud. Virtual servers running in the cloud.
-* EBS: Elastic Block Store. Storing data on virtual drives.
-* EFS: Elastic File Service.
-* S3: Simple Storage Service.
-* RDS: Relational Database Service.
-
 ## AWS Services
 
 1. Computing
@@ -72,6 +63,18 @@ image = "aws.jpg"
 4. Security
   - IAM
   - KMS
+  
+
+### Common Acronyms
+
+* IAM: Identity Access Management. Controls what users can do in their AWS environment.
+* VPC: Virtual Private Cloud. The networking hub, here is where we open ports, create subnets, etc.
+* AMI: Amazon Machine Image. An image of an operating system, the starting point for launching instances.
+* EC2: Elastic Compute Cloud. Virtual servers running in the cloud.
+* EBS: Elastic Block Store. Storing data on virtual drives.
+* EFS: Elastic File Service.
+* S3: Simple Storage Service.
+* RDS: Relational Database Service.
 
 
 ## AWS Global Infrastructure
@@ -79,6 +82,84 @@ image = "aws.jpg"
 
 * Region: A collection of AZs.
 * AZ: Availability Zone. Multiple data centers clustered in a region.
+
+
+* Cloud computing allows *on-demand delivery* of computing resources on a *pay as you go* model
+
+* AWS, GCP, and Microsoft Azure are part of the *public cloud*
+  * Worth noting that companies like Rackspace offer *private cloud* services
+
+* Five characteristics of cloud computing:
+  1. On-demand self-service: provision resources without human interaction
+  1. Broad network access: access resources from anywhere in the world through the internet
+  1. Multi-tenancy and resource pooling
+  1. Rapid elasticity and scalability
+  1. High availability
+
+* Cloud computing lets you trade capital expenses (or *CAPEX*) with operational expenses (or *OPEX*)
+  * Reduces the total cost of ownership (or *TCO*)
+
+## Types of Cloud Computing
+
+* Infrastructure as a Service (IaaS)
+  * Provides networking, computers, data storage, space
+  * Example: *AWS EC2*
+
+* Platform as a Service (PaaS)
+  * Provides a platform that allows developers to build, run, and manage applciations
+  * Example: *Heroku*, *Elastic Beanstalk*, *Google App Engine*
+
+* Software as a Service (SaaS)
+  * Complete product that is run and managed by a service provider
+  * Example: *Calendly*, *Gmail*, *Zoom*
+
+---
+
+* In 2019, AWS had $35.02B in annual revenue, and accounts for 47% of the cloud computing market (Microsoft in 2nd with 22%)
+
+* [Cool website](https://infrastructure.aws)
+
+## Regions
+
+* Some AWS services are global-scoped
+  * Identity and Access Management (IAM)
+  * Route 53 (DNS Service)
+  * CloudFront (Content Delivery Network)
+  * WAF (Web Application Firewall)
+
+* Most AWS services are region-scoped
+  * EC2
+  * Lambda
+
+* A region is a cluster of data centers
+
+* Each region has between 2 and 6 availability zones, usually 3
+  * `us-west-2a`
+  * `us-west-2b`
+  * `us-west-2c`
+
+* Each availability zone is one or more discrete data centers with redundant power, networking, and connectivity
+
+* You can view the *AWS Region Table* to see if a service is available in a region.
+
+### AWS Points of Presence (Edge Locations)
+
+* AWS has over 200 edge locations, over 10 regional caches, located in 80+ cities across 20+ countries
+* These *edge locations* and *regional caches* combine to form Amazon's *points of presence*
+
+## AWS IAM
+
+* Identity and Access Management (IAM)
+
+* Users are people within your organization, and can be grouped
+
+* Groups cannot contain other groups inside of them
+
+* Users can belong to multiple groups, or no groups at all
+
+* Users and Groups are assigned *policies*, which is a JSON document
+
+* The *least privilege principle*, don't give a user more permissions than he needs
 
 ## EC2
 
@@ -262,7 +343,7 @@ bucket.delete()
 ```
 
 {{% notice warning %}}
-**Note:** You won't be able to delete a bucket until all of the objects within it have been deleted as well.
+**Note:** You won't be able to delete a bucket until all the objects within it have been deleted as well.
 {{% /notice %}}
 
 ## IAM
@@ -288,6 +369,21 @@ Types of Policies:
 - AWS Identity Access Management
 - AWS Security Token Service (STS)
 - Virual Private Cloud (VPC) Endpoints
+
+### IAM on the Command-Line
+
+* Create an IAM group `admin`:
+
+  ```sh
+  aws iam create-group --group-name 'admin'
+  ```
+
+* List existing IAM groups:
+
+  ```sh
+  aws iam list-groups
+  ```
+
 
 ## AWS S3
 

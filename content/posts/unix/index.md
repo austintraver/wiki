@@ -1,9 +1,9 @@
-+++
-title = "Unix"
-description = "Where it all started"
-date = 2020-02-04T14:52:27-08:00
-image = "unix.jpg"
-+++
+---
+title: Unix
+description: "Where it all started"
+date: 2020-02-04T14:52:27-08:00
+image: "unix.jpg"
+---
 
 # Unix
 
@@ -929,7 +929,10 @@ The `dns-sd` diagnostic tool is useful for network scanning. If you are trying t
 	du -chs
 	```
 
-## Binary Files
+
+## Encoding / Decoding Text
+
+### Binary Files
 
 * `uuencode`: Encode binary files
 

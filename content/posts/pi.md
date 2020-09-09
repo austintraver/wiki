@@ -1,10 +1,9 @@
-+++
-title = "Rasberry Pi"
-url = "/pi"
-description = "What was once brought to you by a supercomputer, can now be achieved with a $20 bill"
-date = 2020-02-04T14:52:27-08:00
-image = "pi.jpg"
-+++
+---
+title: "Rasberry Pi"
+description: "What was once brought to you by a supercomputer, can now be achieved with a $20 bill"
+date: 2020-02-04T14:52:27-08:00
+image: "pi.jpg"
+---
 
 # Raspberry Pi
 

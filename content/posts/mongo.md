@@ -1,9 +1,9 @@
-+++
-title = "Mongo"
-description = "The database for you and me"
-date = 2020-02-04T14:52:27-08:00
-image = "mongo.png"
-+++
+---
+title: Mongo
+description: "The database for you and me"
+date: 2020-02-04T14:52:27-08:00
+image: "mongo.png"
+---
 
 # MongoDB
 

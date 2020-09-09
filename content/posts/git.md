@@ -1,9 +1,9 @@
-+++
-title = "Git"
-description = "Version control for the stuff-messer-upper in all of us"
-date = 2020-02-04T14:52:27-08:00
-image = "git.png"
-+++
+---
+title: Git
+description: "Version control for the stuff-messer-upper in all of us"
+date: 2020-02-04T14:52:27-08:00
+image: "git.png"
+---
 
 # git
 
@@ -205,8 +205,23 @@ After you have made your changes, you can *merge* the changes back into the orig
   git rm --cached -r *
   ```
 
-## Modifying Commit History
+## Commits
 
+* The structure of a commit message
+
+  * **Note:** the first line, the subject, (first line) must be *at most* 50 columns
+
+  * **Note:** the lines of the body must be *at most* 72 columns
+
+  * Example commit message following these rules:
+
+    ```txt
+    Create instances of objects
+
+    * Made a list of numbers in the main method
+    * Added a set of values
+    * Changed the structure of the binary search tree
+    ```
 
 ## Commiting Even Faster
 

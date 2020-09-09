@@ -1,10 +1,10 @@
-+++
-title = "Go"
-description = "The latest language"
-date = 2020-02-16T05:59:50-08:00
-image = "go.jpg"
-draft = false
-+++
+---
+title: Go
+description: "The latest language"
+date: 2020-02-16T05:59:50-08:00
+image: "go.jpg"
+draft: false
+---
 
 ## Getting Started
 

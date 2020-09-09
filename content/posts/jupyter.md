@@ -1,9 +1,9 @@
-+++
-title = "Jupyter"
-description = "A notebook for your Python scripts"
-date = 2020-02-04T14:52:27-08:00
-image = "jupyter.jpg"
-+++
+---
+title: Jupyter
+description: "A notebook for your Python scripts"
+date: 2020-02-04T14:52:27-08:00
+image: "jupyter.jpg"
+---
 
 # jupyter
 

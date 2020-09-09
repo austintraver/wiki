@@ -1,9 +1,9 @@
-+++
-title = "Yarn"
-description = "A softer introduction to NodeJS package management"
-date = 2020-02-04T14:52:27-08:00
-image = "yarn.jpg"
-+++
+---
+title: Yarn
+description: "A softer introduction to NodeJS package management"
+date: 2020-02-04T14:52:27-08:00
+image: "yarn.jpg"
+---
 
 # `yarn`
 
