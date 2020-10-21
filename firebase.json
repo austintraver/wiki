@@ -7,10 +7,10 @@
       "**/node_modules/**"
     ],
     "predeploy": [
-      "deploy.sh 'before'"
+      "./deploy.sh 'before'"
     ],
     "postdeploy": [
-      "deploy.sh 'after'"
+      "./deploy.sh 'after'"
     ],
     "trailingSlash": false,
     "appAssociation": "AUTO"
