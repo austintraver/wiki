@@ -1,39 +1,67 @@
 baseURL: "https://helpful.wiki/"
 title: "Helpful Wiki"
 languageCode: "en-us"
-# rewrite all relative URLs to be relative to the
-# base directory
+# rewrite all relative URLs to be relative to the base directory
+# in order to make the built page viewable from a local filesystem
+# using the file:// URL scheme
 relativeURLs: true
+refLinksErrorLevel: ERROR
 enableInlineShortcodes: true
-enableGitInfo: true
-enableEmoji: true
+# enableGitInfo: true
 pygmentsUseClasses: true
 googleAnalytics: 'UA-175811422-1'
 sitePagesMenu: 'main'
+newContentEditor: 'vi'
+disableKinds:
+  - taxonomy
+  - term
 markup:
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: false
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: github-ascii
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xhtml: false
   tableOfContents:
     startLevel: 2
     endLevel: 4
     ordered: false
-  goldmark:
-    renderer:
-      unsafe: true
-    parser:
-      autoHeadingID: true
-      autoHeadingIDType: github-ascii
   highlight:
+    anchorLineNos: false
     codeFences: true
     guessSyntax: false
     lineNos: false
+    lineNoStart: 1
     tabWidth: 2
+    lineNumbersInTable: false
+    noClasses: true
     style: "dracula"
+    tabwidth: 4
+staticDir:
+  - "static"
+  - "static/favicon"
 permalinks:
   #  posts: "/:title"
   posts: "/:filename"
 frontmatter:
-  date: [ ":git" ]
+  date: [ "date", ":git", ":default" ]
+  lastmod: [ ":fileModTime", ":default" ]
 deployment:
   targets:
+params:
+  mainSections:
+    - "posts"
   #   name: "gcp"
   #   URL: "gs://helpful.wiki"
 #outputFormats:
