@@ -2,7 +2,7 @@
 title: "Google BigQuery"
 description: "Fully managed, highly scalable data warehousing"
 date: 2020-07-22T17:43:22-07:00
-image: "gcp.jpg"
+draft: true
 ---
 
 BigQuery is a serverless, scalable, multi-cloud data warehouse.

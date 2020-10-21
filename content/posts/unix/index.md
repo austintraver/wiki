@@ -2,14 +2,14 @@
 title: Unix
 description: "Where it all started"
 date: 2020-02-04T14:52:27-08:00
-image: "unix.jpg"
+draft: false
 ---
 
 # Unix
 
-## User Management
+## Basic User Management
 
-* Enable the root account
+* Enabling the root account
 
   ```sh
   sudo passwd
@@ -21,16 +21,16 @@ image: "unix.jpg"
   sudo passwd -l root
   ```
 
-{{% notice danger %}}
+{{% aside danger %}}
 **Warning:** Although this account disables root login via password entry, it does not disable root login via SSH keys. To disable SSH access to the root account, set `PermitRootLogin no` in `/etc/ssh/sshd_config`
-{{% /notice %}}
+{{% /aside %}}
 
 
 ## Using `coreutils` on macOS
 
-{{% notice warning %}}
+{{% aside warning %}}
 **Note:** If you're using these snippets make sure you've installed `coreutils`
-{{% /notice %}}
+{{% /aside %}}
 
 * Installing `coreutils` on macOS
 
@@ -146,9 +146,9 @@ The `du` command stands for *disk usage*. It can tell you information about how 
   du -sBT ~/Desktop
   ```
 
-{{% notice warning %}}
+{{% aside warning %}}
   **Note:** For file sizes, `du` rounds up to the nearest block. If there is a file that is less than 1TB in size, `du` will still report the size as `1T` when the flag `-BT` is specified.
-{{% /notice %}}
+{{% /aside %}}
 
 You can also set the environment variable `DU_BLOCK_SIZE` to have a default setting for the size of blocks reported by `du`
 
@@ -160,7 +160,7 @@ You can also set the environment variable `DU_BLOCK_SIZE` to have a default sett
 
 # `lsof`
 
-The `lsof` command stands for *list open files*. On the surface, this doesn't seem useful, you'd know what files are open on your computer. However, `UNIX` thinks of everything as a file. This includes *sockets*, *ports*, etc.
+The `lsof` command stands for *list open files*. On the surface, this doesn't seem useful, you'd know what files are open on your computer. However, Unix thinks of everything as a file. This includes *sockets*, *ports*, etc.
 
 * Check which program is running on a given port with the command below:
 
@@ -301,7 +301,7 @@ Although more people are familiar with the `.zip` extention written by microsoft
 
 # `dig`
 
-The UNIX `dig` command, which stands for "Domain Information Groper" is a program used to query DNS servers for the records held by domain names.
+The Unix `dig` command, which stands for "Domain Information Groper" is a program used to query DNS servers for the records held by domain names.
 
 ```sh
 dig @1.1.1.1 helpful.wiki A +short
@@ -382,9 +382,9 @@ Examples
   tar --dir /Users/tommy --create example --file archive.tgz -a
   ```
 
-{{% notice info %}}
+{{% aside info %}}
   **Tip:** `tar` can automatically determine which compression algorithm to use based on the specified style extension when using the `-a` flag
-{{% /notice %}}
+{{% /aside %}}
 
 * Append a file to an archive
 
@@ -503,9 +503,9 @@ brew install tree
   # => 3
   ```
 
-{{% notice warning %}}
+{{% aside warning %}}
   **Note:** Herestrings implicitly append a trailing `\n` newline, which is why `wc` returns three characters.
-{{% /notice %}}
+{{% /aside %}}
 
 * Count the occurences of a single char `/` from stdin
 
@@ -583,9 +583,9 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
 
 * Adding a symlink for an executable file
 
-{{% notice success %}}
+{{% aside success %}}
 **Tip:** This is a vague title, but when you do `sudo apt install yarnpkg` you can't use the command `yarn`, instead you have to use `yarnpkg` which is unfamiliar. In order to restore it to its normal state, you can run the following command:
-{{% /notice %}}
+{{% /aside %}}
 
   ```sh
   sudo update-alternatives /usr/bin/yarn yarn /usr/bin/yarnpkg 1
@@ -610,7 +610,7 @@ You can also do the same for `python3`
 
 ## POSIX
 
-* POSIX stands for "Portable Operating System Interface for (UNIX)"
+* POSIX stands for "Portable Operating System Interface for Unix"
 
 ## File Systems
 
@@ -919,15 +919,15 @@ The `dns-sd` diagnostic tool is useful for network scanning. If you are trying t
 
 * Get a report of the last recorded amount of memory available in storage
 
-	```sh
-	df -kh
-	```
+    ```sh
+    df -kh
+    ```
 
 * Begin recording a new entry for the last recorded amount of memory available in storage
 
-	```sh
-	du -chs
-	```
+    ```sh
+    du -ch
+    ```
 
 
 ## Encoding / Decoding Text
