@@ -1,7 +1,7 @@
 ---
 title: Firebase
 date: 2020-08-18T16:42:27-07:00
-draft: false
+draft: true
 ---
 
 # Command Line

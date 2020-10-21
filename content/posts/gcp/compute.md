@@ -1,6 +1,7 @@
 ---
 title: Compute Engine
 date: 2020-08-22T04:19:26
+draft: true
 ---
 
 ## Imported VM from `.ova` File
