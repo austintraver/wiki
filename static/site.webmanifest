@@ -1,0 +1,13 @@
+{
+  "name": "Helpful Wiki",
+  "short_name": "Helpful Wiki",
+  "description": "A place to learn something new",
+  "start_url": "/",
+  "display": "browser",
+  "scope": "/",
+  "icons": [{
+    "src": "img/icon.svg",
+    "sizes": "48x48 96x96 180x180 192x192",
+    "type": "image/svg+xml"
+  }]
+}
