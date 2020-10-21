@@ -1,39 +1,22 @@
-{{ define "head" }}{{ if isset .Params "image" }}
-<meta property="og:image" content='{{ path.Join "img" (.Param "image") }}'>{{ end }}
-<link rel="stylesheet" href="/css/index.css">{{ end }}
+{{ define "head" }}
+<!--suppress ALL -->
+<meta property="og:image" content="https://helpful.wiki/img/preview.webp">
+<meta name="description" content="{{ .Description }}">
+<link rel="stylesheet" href="css/index.css">
+{{ end }}
 
 {{ define "main" }}
-<div id="banner" style='--url: url("/img/books.jpg")'>
-  <link rel="stylesheet" href="/css/banner.css">
-  <h1>{{ .Title }}</h1>{{- .Content -}}
-</div>
-<div id="main">
-  <div id="sidebar">
-    <link rel="stylesheet" href="/css/sidebar.css">
-    <img id="headshot" src="/img/headshot.jpg" alt="headshot">
-    <p id="author"> Austin Traver </p>
-    <p id="tagline"> Teaching to avoid learning... </p>
-    <ul id="plugs">
-      <li>
-        <a href="mailto:atraver@usc.edu">Email</a>
-      </li>
-      <li>
-        <a href="https://helpful.wiki">Website</a>
-      </li>
-      <li>
-        <a href="https://github.com/austintraver">GitHub</a>
-      </li>
-    </ul>
-  </div>
-
-  <div id="grid">
-    {{ range where .Site.RegularPages "Section" "posts" }} {{ if fileExists (path.Join "static" "img" (.Param "image"))
-    }}
-    <a id="pagelink" href="{{ .File.ContentBaseName }}">
-      <img id="teaser" src='{{ path.Join "img" (.Param "image") }}'/>
-      <h1>{{.Title}}</h1>
-      <h2>{{.Description}}</h2>
+  {{ .Content }}
+  <section>
+    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    {{ range sort $pages ".FuzzyWordCount" "desc" }}
+    <a class="card" href="{{ .File.ContentBaseName }}">
+      <picture>
+        <source type="image/webp" srcset="{{ .RelPermalink }}{{ .Resources.GetMatch `preview.webp`}}">
+        <img alt="" class="preview" src="{{ .RelPermalink }}{{ .Resources.GetMatch `preview.png` }}">
+      </picture>
+      <p>{{ .Title }}</p>
     </a>
-    {{ end }} {{ end }}
-  </div>
-</div>{{ end }}
+    {{ end }}
+  </section>
+{{ end }}
