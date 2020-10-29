@@ -1,15 +1,9 @@
 main {
   align-items: center;
-  background-color: var(--arcana-concrete);
+  background-color: var(--concrete);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-article {
-  background-color: white;
-  padding: 20px 40px;
-  width: 100%;
 }
 
 img {
@@ -17,16 +11,15 @@ img {
 }
 
 footer {
-  color: var(--arcana-ash);
+  color: var(--ash);
   font-size: max(12pt, 0.8rem);
   text-align: right;
 }
 
 blockquote {
   border: 4px;
-  border-left: 4px solid var(--arcana-concrete);
-  box-sizing: border-box;
-  color: var(--arcana-ash);
+  border-left: 4px solid var(--concrete);
+  color: var(--ash);
   margin: 0;
   padding: 0 15px;
 }
@@ -39,7 +32,6 @@ aside {
 aside > p {
   border-left: 4px solid;
   border-radius: 4px;
-  box-sizing: border-box;
   color: #3c3c3c;
   margin: 0;
   padding: 1em;
@@ -69,51 +61,48 @@ aside.success > p {
   color: #155724;
 }
 
+aside.tldr > p {
+  background-color: var(--concrete);
+  border-color: var(--ash);
+  color: var(--charcoal);
+}
+
 table {
-  border-bottom: 1px var(--arcana-concrete);
+  border-bottom: 1px var(--concrete);
   border-collapse: collapse;
-  box-sizing: border-box;
-  color: var(--arcana-charcoal);
+  color: var(--charcoal);
   display: table;
-  font-size: 14px;
-  margin: 16px 0px;
+  margin: 0px 0px 16px;
+  overflow: auto;
   width: 100%;
+  table-layout: fixed;
 }
 
 thead {
-  border: 2px solid var(--arcana-concrete);
+  border: 2px solid var(--concrete);
 }
 
 th {
-  background-color: #e9ecef;
-  border-bottom: 2px solid var(--arcana-concrete);
-  border-color: var(--arcana-concrete);
-  color: var(--arcana-charcoal);
+  border-bottom: 2px solid var(--concrete);
+  border-color: var(--concrete);
   font-weight: bold;
-  padding: 0.75rem;
-  vertical-align: bottom;
 }
 
 th,
 td {
-  border-top: 1px solid var(--arcana-concrete);
-  font-size: 1rem;
-  line-height: 1.5;
-  padding: 0.75rem;
-}
-
-td {
-
+  border-top: 1px solid var(--concrete);
+  padding: 8px 16px;
 }
 
 tr {
-  border-bottom: 1px solid var(--arcana-concrete);
+  border-bottom: 1px solid var(--concrete);
   height: 36px;
-  text-align: left;
 }
 
 article {
   border-radius: 8px;
+  background-color: white;
+  padding: 20px 40px;
   box-shadow: #3c40434d 0px 1px 2px 0px, #3c404326 0px 1px 3px 1px;
   margin-top: min(calc(100% - 940px), 40px);
   margin-bottom: min(calc(100% - 940px), 40px);
@@ -121,7 +110,7 @@ article {
 }
 
 html {
-  scroll-padding-top: 98px;
+  scroll-padding-top: 64px;
 }
 
 

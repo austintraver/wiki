@@ -1,0 +1,5 @@
+# https://gohugo.io/getting-started/configuration/
+buildDrafts: false
+buildExpired: false
+buildFuture: false
+enableRobotsTXT: true

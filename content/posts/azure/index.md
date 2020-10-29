@@ -11,21 +11,6 @@ draft: false
 
 I'd recommend taking a look at Microsoft's [tour of Azure services](https://docs.microsoft.com/en-us/learn/modules/welcome-to-azure/3-tour-of-azure-services)
 
-* Azure Virtual Machines
-
-* Azure Functions
-
-* Azure Virtual Network
-* Azure VPN Gateway
-* Azure DNS
-* Azure CDN
-* Azure Firewall
-* Azure Virtual WAN
-* Azure File Storage (supports SMB)
-* Azure Table Storage (noSQL database)
-* Azure SQL Database
-
-
 # Azure Command-Line Interface (CLI)
 
 The [Azure Command-Line Interface documentation](https://docs.microsoft.com/en-us/cli/azure/) is pretty solid, definitely check it out. They keep a list of [Azure services the Azure CLI can manage](https://docs.microsoft.com/en-us/cli/azure/azure-services-the-azure-cli-can-manage), a handy reference to be aware of. I'm going to follow along in the docs, and write notes here. Goal number one, time to [get started with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/).
@@ -100,8 +85,9 @@ Azure's CLI, `az`, is a great way to turn repetitive tasks into a one-liner from
 
 ## Provisioning Storage
 
-[CLI Documentation Link](https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-example-storage)
-[SDK Documentation Link](https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-example-storage)
+You can provision storage using either 
+[the `az` CLI](https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-example-storage?tabs=bash#for-reference-equivalent-azure-cli-commands)
+or [the python SDK](https://docs.microsoft.com/en-us/azure/developer/python/azure-sdk-example-storage)
 
 * Python SDK:
 
@@ -132,9 +118,13 @@ Interestingly, you can't create a subscription from the command line. You'll hav
     az account list --output table
     ```
 
-* [Set the active subscription](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create) to use for the Azure CLI:
+* Set the default subscription to use in the Azure CLI:
 
     ```sh
+    # Short form
+    az account set -s {{< var SUBSCRIPTION_NAME >}}
+
+    # Long form
     az account set --subscription {{< var SUBSCRIPTION_NAME >}}
     ```
 
@@ -145,24 +135,35 @@ Configurations Locations
 * View a list of all current defaults
 
     ```sh
+    # Short form
+    az configure -l
+
+    # Long form
     az configure --list-defaults
     ```
 
-* [Set the default location](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create) to {{< var LOCATION >}}, (e.g. `westus`)
+* [Set the default location](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create)
+to {{< var LOCATION >}}, (e.g. `westus`)
 
     ```sh
+    # Short form
+    az configure -d
+
+    # Long form
     az configure --defaults location={{< var LOCATION >}}
     ```
 
 ### Resource Groups
 
-* [Create an Azure resource group](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create) in {{< var LOCATION >}}, (e.g. `westus`)
+* [Create an Azure resource group](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create) 
+in {{< var LOCATION >}}, (e.g. `westus`)
 
     ```sh
-    az group create --name {{< var GROUP_NAME >}} --location {{< var LOCATION >}}
+    az group create --name {{< var GROUP_NAME >}} [--location {{< var LOCATION >}}]
     ```
 
-* Set the default Azure resource group to {{< var GROUP_NAME >}}
+* [Set the default Azure resource group](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az_configure-examples) 
+to {{< var GROUP_NAME >}}
 
     ```sh
     az configure --defaults group={{< var GROUP_NAME >}}
@@ -257,7 +258,7 @@ A single App Service plan can host multiple App Service apps.
     az appservice plan list --output table
     ```
 
-* [Create a new app service](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create) {{< var SERVICE_NAME >}}
+* [Create a new app service](https://docs.microsoft.com/en-us/cli/azure/appservice/plan?view=azure-cli-latest#az_appservice_plan_create) {{< var SERVICE_NAME >}}
 
     ```sh
     az appservice plan create \
@@ -281,6 +282,12 @@ A single App Service plan can host multiple App Service apps.
         --name {{< var APP_NAME >}} \
         --resource-group {{< var GROUP >}} \
         --plan {{< var SERVICE_NAME >}}
+    ```
+
+* Set the default web application to {{< var APP_NAME >}}
+
+    ```sh
+    az configure --defaults web={{< var APP_NAME >}}
     ```
 
 * Configure continuous deployment from GitHub repository {{< var REPO >}} (`https://github.com/ttrojan/helloworld`)
@@ -341,12 +348,15 @@ Microsoft's documentation has a great article about the steps to [configure a No
 {{% /aside %}}
 
 
-### Azure Cognitive Search
+### Cognitive Search
 
-* List the available kinds of Cognitive Services
+* Create a Cognitive Search service
 
     ```sh
-    az cognitiveservices account list-kinds
+    az search service create \
+        -n {{< var SERVICE_NAME >}} \
+        -g {{< var RESOURCE_GROUP >}} \
+        --sku 'Free'
     ```
 
-
+You won't be able to do much else using the command-line interface past this point. Follow along in the Azure documentation to learn how to [create a search index](https://docs.microsoft.com/en-us/azure/search/search-get-started-portal)

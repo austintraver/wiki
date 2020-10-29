@@ -333,137 +333,136 @@ The `datetime` library has a few packages:
 
 * Working with ISO formatted timestamp strings
 
-  ```py
-  import datetime
-  import time
+    ```py
+    import datetime
+    import time
 
-  event = datetime.date.fromisoformat("2018-12-31")
-  # -00:00 is an illegal format but Python will interpret it successfully
-  event = datetime.datetime.fromisoformat("2018-12-31T12:31:58-08:00")
-  # Using whitespace seperator instead of 'T' character
-  event = datetime.datetime.fromisoformat("2018-12-31 04:31:58+00:00")
-  ```
+    event = datetime.date.fromisoformat("2018-12-31")
+    # -00:00 is an illegal format but Python will interpret it successfully
+    event = datetime.datetime.fromisoformat("2018-12-31T12:31:58-08:00")
+    # Using whitespace seperator instead of 'T' character
+    event = datetime.datetime.fromisoformat("2018-12-31 04:31:58+00:00")
+    ```
 
 * Parsing a non-ISO date into a `datetime` object
 
-  ```py
-  moment = datetime.strptime('05-19-2018', '%m-%d-%Y')
-  print(moment)
-  ```
+    ```py
+    moment = datetime.strptime('05-19-2018', '%m-%d-%Y')
+    print(moment)
+    ```
 
-  Output
+    <samp>
+    datetime.datetime(year=2018, month=5, day,19, hour=0, second=0)
+    </samp>
+    
 
-  ```txt
-  datetime.datetime(year=2018, month=5, day,19, hour=0, second=0)
-  ```
+Parsing a non-ISO timestamp into a `datetime` object
 
-* Parsing a non-ISO timestamp into a `datetime` object
+```py
+moment = datetime.strptime('10-05-2017 05:00:00 PM', '%m-%d-%Y %I:%M:%S %p')
+print(moment)
+```
 
-  ```py
-  moment = datetime.strptime('10-05-2017 05:00:00 PM', '%m-%d-%Y %I:%M:%S %p')
-  print(moment)
-  ```
+Output
 
-  Output
+```txt
+datetime.datetime(year=2017, month=10, day=5, hour=17, second=0)
+```
 
-  ```txt
-  datetime.datetime(year=2017, month=10, day=5, hour=17, second=0)
-  ```
+Working with daylight savings
 
-* Working with daylight savings
+```py
+# If it's currently daylight savings
+if time.daylight:
+tz = time.altzone
+# => 25200 (# of seconds offset from UTC)
 
-  ```py
-  # If it's currently daylight savings
-  if time.daylight:
-    tz = time.altzone
-    # => 25200 (# of seconds offset from UTC)
+else:
+tz = time.timezone
+# => 28800 (# of seconds offset from UTC)
 
-  else:
-    tz = time.timezone
-    # => 28800 (# of seconds offset from UTC)
+print(time.tzname)
+# => ('PST', 'PDT')
+```
 
-  print(time.tzname)
-  # => ('PST', 'PDT')
-  ```
+Working with local timezones
 
-* Working with local timezones
+```py
+print(time.localtime)
+# => time.struct_time(tm_year=2019, tm_mon=7, tm_mday=17, tm_hour=11, tm_min=42, tm_sec=15, tm_wday=2, tm_yday=198, tm_isdst=1)
 
-  ```py
-  print(time.localtime)
-  # => time.struct_time(tm_year=2019, tm_mon=7, tm_mday=17, tm_hour=11, tm_min=42, tm_sec=15, tm_wday=2, tm_yday=198, tm_isdst=1)
+moment = datetime.datetime.utcnow()
 
-  moment = datetime.datetime.utcnow()
+print(moment.isoformat(timespec='seconds'))
+# => 2019-07-17T11:25:07
 
-  print(moment.isoformat(timespec='seconds'))
-  # => 2019-07-17T11:25:07
+print(moment.isoformat(timespec='milliseconds'))
+# => 2019-07-31T02:21:15.125
 
-  print(moment.isoformat(timespec='milliseconds'))
-  # => 2019-07-31T02:21:15.125
+print(moment.isoformat(sep=' ', timespec='microseconds'))
+# => 2019-07-3102:21:15.125991
+```
 
-  print(moment.isoformat(sep=' ', timespec='microseconds'))
-  # => 2019-07-3102:21:15.125991
-  ```
+Getting the local timezone information
 
-* Getting the local timezone information
+```py
+import datetime
+timezone = datetime.datetime.now().astimezone().tzinfo
+```
 
-  ```py
-  import datetime
-  timezone = datetime.datetime.now().astimezone().tzinfo
-  ```
+Setting the timezone
 
-* Setting the timezone
+```py
+import time
+import os
+os.environ['TZ'] = 'US/Eastern'
+time.tzset()
+print(time.tzname)
+# => ('EST', 'EDT')
+```
 
-  ```py
-  import time
-  import os
-  os.environ['TZ'] = 'US/Eastern'
-  time.tzset()
-  print(time.tzname)
-  # => ('EST', 'EDT')
-  ```
+Printing out all available timezones
 
-* Print all timezones from the [`pendulum`](https://pendulum.eustace.io) library
+    ```py
+    from zoneinfo import ZoneInfo
+    from pathlib import Path
+    for area in ['America', 'Europe', 'Asia', 'Africa', 'Australia', 'Antarctica', 'Etc']:
+        print(area)
+        for zone in Path('/usr/share/zoneinfo').glob(f'{area}/*'):
+            print(f'\t/{zone.name}')
+    ```
 
-  ```py
-  from pendulum import timezones
+Some common timezones have been included below:
 
-  for timezone in timezones:
-    print(timezone)
-  ```
+    ```py
+    from zoneinfo import ZoneInfo
+    # Constructing a timezone object
+    tz = timezone('America/Los_Angeles')
 
-* A list of common timezones included below:
-
-  ```py
-  # Constructing a timezone object
-  from pendulum import timezone
-  tz = timezone('America/Los_Angeles')
-
-  # Other valid timezones included below
-  [
-    'Pacific/Honolulu', # -10:00
-    'America/Juneau', # -09:00
-    'America/Los_Angeles', # -08:00
-    'America/Denver', # -07:00
-    'America/Chicago', # -06:00
-    'America/New_York', # -05:00
-    'Europe/London', # +00:00
-    'Europe/Paris', # +01:00
-    'Europe/Athens', # +02:00
-    'Europe/Moscow', # +03:00
-    'Asia/Tehran', # +03:30
-    'Asia/Dubai', # +04:00
-    'Asia/Kabul', # +04:30 (capitol of Afghanistan)
-    'Asia/Dushanbe', # +05:00 (capitol of Tajikstan)
-    'Asia/Kathmandu', # +05:45 (capitol of Nepal)
-    'Asia/Dhaka', # +06:00 (capitol of Bangladesh)
-    'Asia/Bangkok', # +07:00
-    'Asia/Shanghai', # +08:00
-    'Asia/Tokyo', # +09:00
-    'Australia/Sydney', # +10:00
-    'Asia/Noumea', # +11:00 (capitol of New Caledonia)
-    'Pacific/Fiji' # +12:00
-  ]
-  ```
+    # Other valid timezones included below
+    ZoneInfo('Pacific/Honolulu') # -10:00
+    ZoneInfo('America/Juneau') # -09:00
+    ZoneInfo('America/Los_Angeles') # -08:00
+    ZoneInfo('America/Denver') # -07:00
+    ZoneInfo('America/Chicago') # -06:00
+    ZoneInfo('America/New_York') # -05:00
+    ZoneInfo('Europe/London') # +00:00
+    ZoneInfo('Europe/Paris') # +01:00
+    ZoneInfo('Europe/Athens') # +02:00
+    ZoneInfo('Europe/Moscow') # +03:00
+    ZoneInfo('Asia/Tehran') # +03:30
+    ZoneInfo('Asia/Dubai') # +04:00
+    ZoneInfo('Asia/Kabul') # +04:30 (capitol of Afghanistan)
+    ZoneInfo('Asia/Dushanbe') # +05:00 (capitol of Tajikstan)
+    ZoneInfo('Asia/Kathmandu') # +05:45 (capitol of Nepal)
+    ZoneInfo('Asia/Dhaka') # +06:00 (capitol of Bangladesh)
+    ZoneInfo('Asia/Bangkok') # +07:00
+    ZoneInfo('Asia/Shanghai') # +08:00
+    ZoneInfo('Asia/Tokyo') # +09:00
+    ZoneInfo('Australia/Sydney') # +10:00
+    ZoneInfo('Asia/Noumea') # +11:00 (capitol of New Caledonia)
+    ZoneInfo('Pacific/Fiji') # +12:00
+    ```
 
 ## Custom Module Locations
 

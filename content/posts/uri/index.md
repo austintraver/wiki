@@ -298,31 +298,33 @@ You can specify FaceTime links explicitly in both web and native iOS apps using 
 ### The `mailto:` URL scheme
 
 
-* Create a link to `ttrojan@usc.edu` where, when they click on it, the subject and body are pre-populated
+You can create a link to a user where, when they click on it, the subject and body are pre-populated
 
-  ```txt
-  mailto:ttrojan@usc.edu?subject=The%20Subject&body=Hello%20World
-  ```
+```txt
+mailto:{{< var RECIPIENT >}}?subject={{< var SUBJECT >}}&body={{< var BODY >}}
+```
+
+Replace the following, being sure to [percent encoded](https://en.wikipedia.org/wiki/Percent-encoding) values as necessary
+
+* {{< var RECIPIENT >}}: `ttrojan@usc.edu`
+* {{< var SUBJECT >}}: `Breaking%20news`
+* {{< var BODY >}}: `You%20are%20a%20hacker`
 
 ### The `message:` URL scheme { #message }
 
-* Creating a link to email in your mailbox:
+#### Linking to existing emails
 
-    * In the macOS Mail app, go to Preferences -> Viewing -> Show message headers
+In the macOS Mail app, go to **Preferences -> Viewing -> Show message headers -> Custom...** and add a new entry: `Message-ID`. Now, whenever you view an email, you'll see the message ID below the typical *To:*, *From:*, etc. displayed below the message subject. 
 
-    * Select `Custom...` and add a new entry: `Message-ID`
+To create a link to a message, right click the message ID, select **Copy**, open up Terminal, and run the following command:
 
-    * If you view an email, you can now right click the message ID, and copy it to your clipboard.
+```sh
+email="message:%3c$(pbpaste)%3e"
+print ${email}
+pbcopy < =(<<<${email})
+```
 
-    * To add the angle brackets that surround the `<` message ID `>`, you'll have to add the URL encoded strings `%3c` and `%3e` to the beginning and ending of the path respectively. In your terminal, you could do so using the following command:
-
-    ```sh
-    # Example Message ID
-    message_id='607fcacf-f093-4380-9773-3e6bede3aa79@az.westcentralus.production.microsoft.com'
-
-    # Printing the URL to access the message
-    print "message://%3c${message_id}%3e"
-    ```
+The commands above URL encode the angle brackets that must surround a message ID. This is an arbitrary specification of the `message:` URL scheme. To add the angle brackets that surround the `<` message ID `>`, you'll have to add the URL encoded strings `%3c` and `%3e` to the beginning and ending of the path respectively. In your terminal, you could do so using the following command:
 
 ## REST APIs
 

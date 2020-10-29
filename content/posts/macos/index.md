@@ -1570,6 +1570,7 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
     kind:fonts
     kind:presentation
     kind:mail
+    kind:markdown
     kind:chat
     kind:event
     kind:reminder
@@ -2043,4 +2044,19 @@ You can change the Launchpad icon grid layout, but it requires some `defaults wr
     defaults delete com.apple.dock springboard-rows
     defaults delete com.apple.dock springboard-columns
     killall Dock
+    ```
+
+## Feedback Assistant
+
+The Feedback app is available on all iOS devices, even if they aren't running a beta. devices.
+
+To get to it, open up Safari and navigate to the URL `applefeedback://`
+
+
+## xattr
+
+* Remove the `Where from` field from `video.mp4`, which was downloaded using `curl`
+
+    ```shell script
+    xattr -d 'com.apple.metadata:kMDItemWhereFroms' video.mp4
     ```

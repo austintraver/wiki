@@ -455,12 +455,10 @@ func() {
     func 2>&-
     ```
 
-    <pre>
     <samp>
     Standard Output
     func:2: 2: bad file descriptor
     </samp>
-    </pre>
 
 ## Shell Arguments, Options, Flags
 

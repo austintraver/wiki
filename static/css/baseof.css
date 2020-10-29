@@ -1,21 +1,21 @@
 :root {
+  --ash: #5f6368;
   --background: var(--black);
   --black: #171c26;
   --blue: #89c4ff;
+  --charcoal: #202124;
+  --concrete: #e8eaed;
   --cyan: #bcfff9;
   --green: #70e09b;
   --magenta: #afafff;
   --red: #ff7f7f;
+  --snow: #e8f0fe;
   --text: var(--white);
   --white: #ffffff;
   --yellow: #ffdd99;
-  --arcana-ash: #5f6368;
-  --arcana-blue: #1a73e8;
-  --arcana-charcoal: #202124;
-  --arcana-concrete: #e8eaed;
+  --dark-blue: #1a73e8;
   --dark-gray: #565f72;
   --light-gray: #acb7cc;
-  --arcana-snow: #e8f0fe;
 }
 
 /*
@@ -32,28 +32,43 @@ Medium devices (tablets, 768px and up)
 @media (min-width: 1200px) { ... }
 
  */
-
 * {
   box-sizing: border-box;
 }
 
-
 body {
   font-family: "Roboto", -apple-system, sans-serif;
   margin: 0;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--arcana-charcoal);
+@media screen and (min-width: 576px) {
+  body {
+    margin-top: 96px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header {
+  color: var(--charcoal);
   font-family: "Arcana Sans", "Roboto", sans-serif;
 }
-
 
 h1 {
   font-size: 26px;
   margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 32px;
+  }
 }
 
 h2 {
@@ -61,40 +76,51 @@ h2 {
   margin-bottom: 24px;
 }
 
+@media (min-width: 768px) {
+  h2 {
+    font-size: 24px;
+  }
+}
+
 h3 {
   font-size: 18px;
   margin-bottom: 16px;
   margin-top: 32px;
 }
-h4 {
-  font-size: 16px;
-  margin-top: 32px;
-  margin-bottom: 16px;
-}
-h5 {
-  font-size: 14px;
-}
-h6 {
-  font-size: 12px;
-}
+
 @media (min-width: 768px) {
-  h1 {
-    font-size: 32px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
   h3 {
     font-size: 20px;
   }
+}
+
+h4 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+@media (min-width: 768px) {
   h4 {
     font-size: 16px;
   }
+}
+
+h5 {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
   h5 {
     font-size: 14px;
   }
+}
+
+h6 {
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
   h6 {
     font-size: 12px;
   }
@@ -105,9 +131,9 @@ strong {
 }
 
 code {
+  background-color: #f1f3f4;
   border-radius: 4px;
   font-size: inherit;
-  background-color: #f1f3f4;
   white-space: pre-wrap;
   word-break: break-all;
 }
@@ -132,14 +158,14 @@ samp {
 }
 
 pre {
-  background-color: var(--arcana-concrete);
+  background-color: var(--concrete);
   border-radius: 10px;
   padding: 0px 0px;
   text-align: left;
   /*overflow: clip;*/
 }
 
-pre > samp {
+samp {
   font-weight: 700;
 }
 
@@ -148,24 +174,21 @@ ul {
 }
 
 li {
+  font-size: inherit;
   margin-bottom: 5px;
 }
 
-ul > li,
-ul > li > * {
-  font-size: inherit;
-}
-
-a:any-link {
+a {
+  color: var(--blue);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--arcana-ash);
+  color: var(--ash);
 }
 
 a:link, a:visited {
-  color: var(--arcana-blue);
+  color: var(--dark-blue);
   transition-delay: 0s;
   transition-duration: 0.6s;
   transition-property: color;
@@ -176,16 +199,15 @@ nav {
   display: none;
 }
 
-@media screen and (min-width: 500px) {
-  body {
-    margin-top: 96px;
+@media screen and (min-width: 576px) {
+  html {
+    scroll-padding-top: 128px;
   }
 
   nav {
     align-items: center;
     background-color: white;
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
-    color: var(--arcana-charcoal);
     display: flex;
     font-weight: 500;
     height: 96px;
@@ -196,12 +218,12 @@ nav {
     top: 0;
     width: 100%;
   }
+
   nav img {
     height: 64px;
     object-fit: cover;
     width: 64px;
   }
-
 
   nav > a#sitename {
     align-items: center;
@@ -217,9 +239,9 @@ nav {
   }
 
   nav > a#author {
-    background-color: var(--arcana-charcoal);
+    background-color: var(--charcoal);
     border-radius: 8px;
-    color: var(--arcana-snow);
+    color: var(--snow);
     display: flex;
     justify-content: space-between;
     margin: 0;
@@ -244,14 +266,14 @@ nav {
   }
 
   nav a#author > div > p#name {
-    color: var(--arcana-snow);
+    color: var(--snow);
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
     text-align: left;
   }
 
   nav a#author > div > p#catchphrase {
-    color: var(--arcana-concrete);
+    color: var(--concrete);
     font-size: 0.7rem;
     font-style: italic;
   }

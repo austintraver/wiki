@@ -74,17 +74,20 @@ that the user has a GitHub account with the username `tommy`
 * Creating a remote GitHub repository
 
     ```sh
-    # v.3: Create a public GitHub repository of this existing git repo
+    # v3: Create a public GitHub repository of this existing git repo
     git create
 
-    # v.4: Create a private GitHub repository of this existing git repo
+    # v4: Create a private GitHub repository of this existing git repo
     git create -p
     git create --private
 
-    # v.5: Create a GitHub repository of the current directory,
+    # v5: Create a GitHub repository of the current directory,
     # but name the repo "idea" and add the description "My new idea"
     git create idea -d "My new idea"
     git create idea --description "My new idae"
+
+    # v6
+    gh repo create {{< var REPO_NAME >}} [-d {{< var DESCRIPTION >}} ] {--private | --public} [--enable-wiki --enable-issues ...]
     ```
 
 * Adding a remote repository as a branch to track
@@ -93,6 +96,12 @@ that the user has a GitHub account with the username `tommy`
     # Add a remote repository named "origin"
     git remote add origin
     # => git remote add ssh://git@github.com/tommy/project
+    ```
+
+* Updating the URL of a remote repository
+
+    ```sh
+    git remote set-url origin 'git@github.com:/user/repo.git'
     ```
 
 * Pushing commits to a remote repository

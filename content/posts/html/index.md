@@ -179,10 +179,18 @@ I've heard [Backlinko's guide to SEO](https://backlinko.com/on-page-seo) is the 
 
 Taking some notes on the [Google developer documentation style guide](https://developers.google.com/style/code-syntax#required-items), leaving them here.
 
-* Required item: {{< var VARIABLE_NAME >}}
+Their section on [Command-line terminology](https://developers.google.com/style/code-syntax#command-line-terminology) shows a great example of how to write a command
 
-* Optional item: \[{{< var OPTIONAL_ITEM >}}\]
+* Required item: `{{< var VARIABLE_NAME >}}`
 
-* Mutually exlusive items: \{{{< var ALPHA >}} | {{< var BRAVO >}}\}
+* Optional item: `[{{<var OPTIONAL_ITEM >}}]`
+
+* Mutually exlusive items: `{{{< var ALPHA >}} | {{< var BRAVO >}}}`
 
 * Non-mandatory option with parameter: `[--option={{<var PARAMETER >}}]`
+
+* Use an ellipsis (...) to indicate that the user can specify multiple values for the argument
+
+    * e.g. `gcloud dns {{< var GROUP >}} [{{< var GLOBAL_FLAG >}} ...]`
+
+Google wrote [a great example](https://developers.google.com/style/code-syntax#gcloud-commands) of how to format the usage of a command in documentation, check it out.
