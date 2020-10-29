@@ -7,4 +7,6 @@
 *.otf
 *.woff
 *.woff2
-/.firebase
+/.firebase/
+/.idea/
+img/fa/r

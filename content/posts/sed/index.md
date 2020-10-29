@@ -16,23 +16,28 @@ Type this below to install the GNU `sed` known as `sed` onto your computer.
 Next, add `/usr/local/opt/gnu-sed/libexec/gnubin/sed` to your `${PATH}`
 
 ```sh
+# Install GNU sed
 brew install gnu-sed
-```
 
-## Using Sed
-
-### Making changes to a file
-
-The `-i` flag is used to tell `sed` to directly overwrite the file. It requires a string placed after it, which specifies the filename appended to the old version.
-
-```sh
-sed -i '.old' 's/original/replacement/' myfile.txt
-# myfile.txt.old will contain the original string
+# Add GNU sed to the front of the path variable
+cat <<< 'path=(/usr/local/opt/gnu-sed/libexec/gnubin/sed ${path})' >> ~/.zshrc
 ```
 
 {{% aside warning %}}
-**Note:** When it comes to substitution commands, both the input and the replacement must be nested inside of `/` chars `s/like/this/`
+**Note:** When it comes to substitution commands, both the input and the
+replacement must be nested inside of `/` chars `s/like/this/`
 {{% /aside %}}
+
+
+### Making changes to a file
+
+Include the `-i` flag have `sed` perform the substitution *in-place*
+
+* In-place replacement, with a backup of `file.txt` written to `file.txt.old`
+
+```sh
+sed -i '.old' 's/old/new/' file.txt
+```
 
 ### Replacing text in a file
 

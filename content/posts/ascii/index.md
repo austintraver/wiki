@@ -65,7 +65,7 @@ Here are some of the most useful codes:
 
 |Escape Code|Function|
 |:---:|:---:|
-|`\x1b[0m` | reset all fonts, formats, colors, etc.  |
+| `\x1b[0m` | reset all fonts, formats, colors, etc. |
 | `\x1b[1m` | enable bold font |
 | `\x1b[2m` | enable faded font |
 | `\x1b[3m` | enable italic font |
@@ -110,8 +110,61 @@ Here are some of the most useful codes:
 | `\E[48;5;<0-255>` | select 256-color background |
 | `\E[49m` | default background |
 
+### The 256 colors of xterm
 
-### Cursor/Screen Color
+The first 16 colors have RGB tuples predetermined by ANSI that don't follow the
+same formula as the others
+
+```sh
+typeset -A rgb256
+
+let index=0
+# First two rows, colors [0..15]
+for ((row = 0; row <= 1; row += 1)); do
+    for ((blue = 0; blue <= 1; blue += 1)); do
+        for ((green = 0; green <= 1; green += 1)); do
+            for ((red = 0; red <= 1; red += 1)); do
+                
+            done
+        done
+    done
+done
+# Second row, colors [8..15]
+```
+
+predeter
+
+```sh
+XColorTable() {
+  i=16
+  for ((r = 0; r <= 255; r+=40)); do
+    for ((g = 0; g <= 255; g+=40)); do
+      for ((b = 0; b <= 255; b+=40)); do
+        echo "Color$((i++)) = (${r}, ${g}, ${b})"
+        if ((b == 0)); then
+            b=55; 
+        fi
+      done
+      if ((b == 0)); then
+        g=55; 
+      fi
+    done
+    if ((r == 0)); then
+        r=55; 
+    fi
+  done
+  for ((m = 8; m <= 238; m+=10)); do # Do Monochrome
+    echo "Color$((i++)) = (${m}, ${m}, ${m})"
+  done
+}
+```
+
+
+
+
+### SGR Cursor Movements
+
+#### Cursor/Screen Color
 
 |Escape Code|Function|
 |:---:|:---:|
