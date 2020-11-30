@@ -1,0 +1,1178 @@
+ITP 125 Notes
+
+What you’re really trying to pickle, is the dictionary. So you need a way to save every word to a single object, and store that object as a file. This means you need an “object of objects”
+
+the “pickle” module is very useful. Pickling allows one to store a Python object structure.
+to save a file in a pickle, use pickle.dump(object,filename[2])
+to load a file from a picle, use pickle.load(filename)
+-  
+
+Automate the Boring Stuff Chapter 5: Dictionaries and Structuring Data
+- key: the value used to index the components of the dictionary
+- values: the various data stored within each key
+
+Automate the Boring Stuff Chapter 12: Working with Excel Spreadsheets
+- the name of the module is openpyxl
+- you need to load your workbook as a workbook class object in python, by typing the following e.g.: wb = openpyxl.load_workbook(‘example.xlsx’)
+- to get a list of all sheet names in the workbook, use the .get_sheet_names() method e.g.: wb.get_sheet_names() will return a list of sheets n the operation.
+- to assign a sheet object to the current active sheet, type wb.active ! don’t use the () after your method… for some reason
+- to get the value of a cell in a sheet, type sheet[‘A1’].value
+- alternatively, to get the value without using the name of the cell (that gets tricky after ‘AA, AB, etc’) you can type by using the .cell() method, which accepts 2 arguments, the row number, and the column number. ! remember, unlike arrays, which start at 0, in excel, the first cell in the sheet is actually at row=1, column=1 e.g.: sheet.cell(row=1, column=2).value
+- to write a value to a cell, just skip the .value part e.g. “sheet.cell(row=1, column=2)=‘hentai’
+- any changes you make in your code will not apply to the spreadsheet unless the .save() method is utilized e.g. wb.save(‘example1.xlsx’)
+
+
+
+Automate the Boring Stuff Chapter 18: GUI Automation
+- to exit an automation gone rogue, type Command-Shift-Q
+- to pause the program after every run, use the “pyautogui.PAUSE” variable e.g.: “pyautogui.PAUSE = 2.5” (wait 2.5 seconds before re-executing the function)
+- the flag thrown when you need to crash the program “pyautogui.FailSafeException” is triggerred by dragging your mouse to the top-left as fast as you can
+    - this flag can be disabled by coding in “pyautogui.FAILSAFE = True”
+Clicking:
+- pyautogui.click(123,456) is the same thing as pyautogui.mouseDown(123,456) followed by puautogui.mouseUp(123,456)
+- the optional third argument for clicks is “button=‘left’” or “button=‘right’” or “button=‘middle’)
+- you can also use pyautogui.doubleClick(), pyautogui.rightClick() and pyautogui.middleClick()
+Dragging:
+- to drag something, use dragTo() and dragRel(), which are similar to moveTo() and moveRel(). the To takes it to an absolute coordinate, and the Rel takes it to a relative coordinate.
+Scrolling:
+- pyautogui.scroll(200) but you can also use negative numbers to scroll up
+Send String to be Typed Out:
+- pyautogui.typewrite(‘Hello world!’)
+Keypress on Keyboard:
+- pyautogui.keyDown() and pyautogui.keyUp() are great if you need to do a multiple key command
+- otherwise you can just use pyautogui.press() e.g. pyautogui.keyDown(‘command’); pyautogui.keyDown(‘c’); pyautogui.keyUp(’command’,’c’)
+- but for hotkeys, there’s actually a simpler solution which is e.g. pyautogui.hotkey(‘command’,’c’)
+
+Review of the PyAutoGUI Functions
+Since this chapter covered many different functions, here is a quick summary reference:
+* moveTo(x, y). Moves the mouse cursor to the given x and y coordinates.
+* moveRel(xOffset, yOffset). Moves the mouse cursor relative to its current position.
+* dragTo(x, y). Moves the mouse cursor while the left button is held down.
+* dragRel(xOffset, yOffset). Moves the mouse cursor relative to its current position while the left button is held down.
+* click(x, y, button). Simulates a click (left button by default).
+* rightClick(). Simulates a right-button click.
+* middleClick(). Simulates a middle-button click.
+* doubleClick(). Simulates a double left-button click.
+* mouseDown(x, y, button). Simulates pressing down the given button at the position x, y.
+* mouseUp(x, y, button). Simulates releasing the given button at the position x, y.
+* scroll(units). Simulates the scroll wheel. A positive argument scrolls up; a negative argument scrolls down.
+* typewrite(message). Types the characters in the given message string.
+* typewrite([key1, key2, key3]). Types the given keyboard key strings.
+* press(key). Presses the given keyboard key string.
+* keyDown(key). Simulates pressing down the given keyboard key.
+* keyUp(key). Simulates releasing the given keyboard key.
+* hotkey([key1, key2, key3]). Simulates pressing the given keyboard key strings down in order and then releasing them in reverse order.
+* screenshot(). Returns a screenshot as an Image object. (See Chapter 17 for information on Image objects.) 
+
+
+
+Automate the Boring Stuff Chapter 4: Lists
+
+- use the .append() method to add a value to the end of a list, inserting the argument inside of the parenthesis e.g. myList.append(‘moose’), would put ‘moose’ as the new last item in the list.
+- use the .index() method to find the index of an item that is in the list. e.g. myList.index(‘moose’) would return a number that is equal to len(myList)-1
+- use the .insert() method to add an item to a specific part of the list. it takes two arguments, the location in the list, and the value to insert. e.g. myList.insert(4, ‘moose’) would put ‘moose’ as the 5th item in the list.
+- use the .remove() method to remove any instances of an item in the list. it takes one argument, the item trying to be removed.
+- e.g. myList.remove(‘moose’) would get rid of all those mooses that we have been adding to the list.
+- use the .sort() method to order the list in ascending order. ! use the .sort(reverse=True) method to order the list in descending order.
+
+Automate the Boring Stuff Chapter 6: Manipulating Strings
+
+Removing junk from strings:
+- the .lstrip() .rstrip() and .strip() methods remove whitespace from the string.
+- however, these methods also allow you to specify an argument for what to strip out of the sides of the string. e.g.: myString.strip(‘,’) # remove the ‘,’ character from each side of the content of the string (but nothing in the middle!)
+
+Splitting strings into lists:
+- use the .join() method to merge a list of strings into one large string. It takes the splitting character as the operative part, such as ‘, ‘ and inside the parenthesis you insert the list in question as the argument e.g. ‘, ‘.join(myList) would join the string, putting a comma and a space in between each string in the list
+- use the .split() method to split a string into a list of strings. It takes the string as the operative part, and the inputted argument is the character (or series of characters) that you want to split the string from. e.g. myString.split(‘, ‘) would split the string every time a comma followed by a space was reached.
+
+Automate the Boring Stuff Chapter 7: Regular Expressions
+
+- Regular expressions are nicknamed ‘regexes’
+- ‘\d’ stands for digital character, like, a digit, like 0 through 9
+- so you could type ‘\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d’ to search for a phone number.
+- that’s still pretty inefficient though, it would be better if you could tell the program how many times to repeat the \d.
+- you can actually do this by surrounding a number in curly brackets, so the previous line above is now ‘\\d{3}-\\d{3}-\\d{4}’
+- regex objections require you to import the ‘re’ library, so if you’re using regexes, make sure to start the code with “import re”
+- recall that \ triggers the use of an escape character, and since you also use \ in regex expressions, you’re going to need to specify to the computer that you’re actually trying to include those backslashes. yes, you could type \\d but that gets redundant. remember how raw strings can also be typed by preceding the string with r’stringtext’
+- so now, the code is even simpler, and you type r’\d{3}-\d{3}-\d{4}’
+- so your code to find a phone number would be written as follows below
+line 1: phoneNumRegex = re.compile(r’\d{3}-\d{3}-\d{4}’) #passes the desired pattern to re.compile() and store the result in phoneNumRegex
+line 2: mo = phoneNumRegex.search(‘input string goes here’) #call the search function on phoneNumRegex inserting the string within the parenthesis
+line 3: print mo.group() #calls group on mo to return the matched value if any (otherwise it will return None)
+- don’t freak out about the ‘mo’ variable, it’s just a common variable name for Match objects
+- so we didn’t really address earlier what that .group() method was. you can group chunks of your regex, like say, separating the area code from the phone number.
+- to separate groups in a regex object, surround those chunks with parenthesis.
+- so now the code we had earlier is re.compile(r’(\d{3})-(\{3}-\d{4})’
+- you can call mo.group() or mo.group(0) to call the entire regex, or mo.group(1) to call the area code, and mo.group(2) to call the rest of the phone number.
+- there’s also the .groups() method, which calls all the groups at once. so calling mo.groups() would return (‘area code string’, ‘personal # string’)
+- so if you want to be super efficient, you could write the following line of code below
+areaCode, mainNumber = mo.groups()
+^ boom. you just assigned two variables in one line of code. #efficiency!
+- okay, but we all know that phone numbers aren’t really 650-730-3237, they’re (650)730-3237, so how do we deal with parenthesis within the string? with that lovely escape character \
+- so now, if the phone number to parse is (650)730-3237, the line of code is listed below
+phoneNumRegex = re.compile(r’\(\d{3}\)-\d{3}-d{4}’)
+- as you know, the | character is the pipe character. you can use it in place of and, but it has many other uses too.
+- when you’re using the .group() method, you can type re.compile(r’Batman|Tina Fey’) and it will assign whatever match is first found to the RegEx variable.
+- you can use the ? question mark to give an optional additional part of the RegEx expression to search from,  e.g.: batRegex = re.compile(r’Bat(wo)?man’)
+- but wait, that’s really useful, because people don’t always enter their area code. so now you can code your RegEx way better.
+- now, you can pull three seperate values. 650-730-3237, (650)730-3237, and 730-3237
+e.g.: phoneNumRegex = re.compile(r’(\(\d{3}\)|\d{3}-)?\d{3}-\d{4})
+mo = phoneRegex.search(‘input string here’)
+print mo.group()
+- there isn’t just the ? for regex, you can also use the * character, which means ‘zero or more instances of’
+- so if you had the string ‘batwowowowoman’ you could regex it with `r’bat(wo)*man’`
+- but you don’t always want zero instances of something, you may want ‘one or more instances of something’
+- in that case, use the + character, which means ‘one or more instances of’
+- the number inside those curly brackets can also be a range, so you can type \d{3,5} if you want to pull between 3 and 5 digits
+- but wait! there’s more! you can also type {3,} to signify 3 or more, and {,5} to signify 5 or less (including zero!)
+- greedy vs. non greedy: by default, python will be greedy and pull the largest string it can. so if you had \d{3,5} it would prefer an instance of \d{5} over \d{3}. hence greedy. to make the expression non greedy, follow the curly brackets with a ? character. (totally unrelated from the other ? mark addressed earlier, which follows a parenthesis)
+- so far, we have just been using the .search() method, but there’s also a .findall() method. .findall() is different because while .search() returns a Match object or None, .findall() returns the string of every match it finds in the string that was parsed through.
+- if .findall() finds groups in your string, .findall() will return a list of tuples of strings
+- other shorthand character classes (such as \d earlier) are listed below  1. \d “any character that is a numeric digit
+2. \D “any character that is NOT a numeric digit aka anything but “0-9”
+3. \w “any letter, numeric digit, or _ character”
+4. \W “anything except for what’s included in \w”
+5. \s “any space, tab, or newline character”
+6. \S “anything, except for what’s included in \s”
+
+- you can also make your own character class. to do so, surround the class with brackets  e.g. vowelRegex = re.compile(r’[aeiouAEIOU]’) # searches for all vowels. e.g.2 vowelRegex = re.compile(r’[a-zA-Z0-9]) # letters & numbers
+- you can use the ^ character to make a negative character class. in a negative character class, it’s a “everything but these characters” class. e.g. noVowelsRegex = re.compile(r’[^aeiouAEIOU]’) # searches for anything but vowels
+- you can use the ^ character a second way as well. by putting it before the string being searched, it means “only return a result if this string value is found at the beginning of the input string being searched e.g. helloRegex = re.compile(r’^Hello’) #searches for Hello but only returns the result of the search if Hello is at the beginning of the string
+- the reverse of the ^ character is the $ character, which you put at the end of the string to signify “only return a result if this is string value is found at the end of the input string being searched e.g. digitEndRegex = re.compile(r’\d$’) makes sure it ends
+- you can combine the ^ and the $ characters using the + character we talked about earlier (remember?) e.g. startsEndsDigitRegex= re.compile(r’^\d+$’)
+- the . character, also known as the ‘wildcard character’, will match any character that isn’t a newline.
+- combine `.*` to signify “anything and everything” because you’re essentially saying “zero or more instances of anything except for a new line” e.g. `nameRegex = re.compile(r’First Name: (.*) Last Name: (.*)’)`
+- sometimes you are going to want to do case-insensitive matching. to do this, end the Regex with “‘stringtext’ , re.I” (that’s a capital I) e.g. testSearch = re.compile(r’test’, re.I)
+- you don’t have to pull string values either, if you’re trying to replace a string that comes up within a file over and over, you can do it by utilizing the .sub() method
+- to use the sub method, you create your regex with your usual criteria (e.g. namesRegex = re.compile(r’Samuel’)) and then on the following line, type namesRegex.sub(‘Sam’, ‘Samuel should be changed to Sam in this input string’)
+    - you can also substitute only in certain groups, but you’d have to look up how to do that in Chapter 7 because it was tricky and I got intimidated.
+- Verbose mode, called by typing re.VERBOSE (as the 2nd argument within the re.compile() argument, is useful because regexes inevitably get very convoluted, which is why you’re going to want to spread them over multiple lines, adding a comment for each piece.
+- So instead of typing something shitty like
+
+
+```py
+phoneRegex = re.compile(r'((\d{3}|\(\d{3}\))?(\s|-|\.)?\d{3}(\s|-|\.)\d{4}(\s*(ext|x|ext.)\s*\d{2,5})?)') you would do this phoneRegex = re.compile(r'''(
+(\d{3}|\(\d{3}\))? # area code
+(\s|-|\.)? # separator
+\d{3} # first 3 digits
+(\s|-|\.) # separator
+\d{4} # last 4 digits
+(\s*(ext|x|ext.)\s*\d{2,5})? # extension
+)''', re.VERBOSE)
+```
+
+- if you need to use re.VERBOSE as well as re.IGNORECASE (hell, throw in re.DOTALL too), you have to use the pipe character to allow all of them to be the third argument in your syntax. e.g. someRegexValue = re.compile('foo', re.IGNORECASE | re.DOTALL | re.VERBOSE)
+
+Automate the Boring Stuff Chapter 8: Reading and Writing Files
+
+(yay!)
+Files and File Paths
+* there are 3 properties of a file
+    * the filename
+    * the path (within the user directories)
+    * the extension (e.g. .py, .docx, .7z)
+* the original directory is known as the root directory
+* navigating through paths is done so using the / character
+The Present Working Directory
+* every program that runs on a computer has a present working directory
+* filenames that don’t begin with the root directory are assumed to be under the present working directory
+* to check the current working directory, type os.getcwd()
+* to change the current working directory, type os.chdir()
+Absolute vs. Relative Paths
+* there are two ways to specify a file path:
+    * 1. absolute path, which begins at the root directory
+    * 2. relative path, which begins at the present working directory
+    * the . character is shorthand for “this directory”
+    * typing two dots “..” specifies the “parent directory”
+Creating New Directory
+* to create a new directory within your program, use the os.makedirs() function
+    * e.g.: os.makedirs(austintraver/Desktop/porn/hentai)
+    * that won’t just create the porn directory, it will also create the hentai directory within it. how convenient!
+Functions to Handle Paths
+* the function os.path.abspath(path) converts a relative path to an absolute path, you can use
+* the function os.path.isabs(path) which will return a boolean depending on the type of path
+* the function os.path.relpath(path, start) will return a string from the starting path to the path argument entered
+* the function os.path.dirname(path) will return everything to the right of the filename (and the / before it)
+* the function os.path.basename(path) will return everything else (but not the / before it)
+* the function os.path.getsize(path) will return the size of the file in question
+* the function os.path.exists(path) will return True if the file actually exists, or if the path ends at a directory
+    * this one is particularly important because a program will crash if it tries to access a file that doesn’t exist
+* the function os.path.isfile(path) will return True if the file exists, but not if the path ends at a directory
+* the function os.path.isdir(path) will return True if the path ends at a directory, but not if it ends at a file 
+
+The File Reading/Writing Process
+* the reading and writing commands we’re learning about only work for plaintext files, such as .py or .txt
+* all other file types that aren’t plaintext files are known as “binary files”
+* there are 3 steps to reading or writing a file in Python:
+    * 1. the open() function, which is not a method, when used will to return a File object. you must assign something to this return value. e.g. myFile = open(‘/user/desktop/hello.txt’, r) if you’re only going to read the file e.g. myFile = open(‘/user/desktop/hello.txt’, w) if you’re going to write to the file (start from scratch) e.g. myFile = open(‘/user/desktop/hello.txt’, a) if you’re going to append the file (add stuff but not remove the old stuff)
+    * 2. the .read() or .write() method, which can be used on the File object
+    * 3. the .close() method, which is used at the end to close the File again
+* use the .readlines() method if you want to pull strings line by line, instead of all at once. this will return a list of strings, instead of one big string. every other string will be ’\n’ to specify the newline character.
+* use the .write(‘string goes here’) method to write new data to the file.
+    * warning! the .write() method does not automatically include ‘\n’ newlines, so be sure to add those yourself manually.
+
+Saving Variables with the Shelve Module
+* using the shelve module, you can store variable’s data on your hard drive, and restore it at another time
+* to use this feature however, be sure to “import shelve” module, and you have to call shelve.open() instead of open()
+* treat stored shelf values as if they were dictionaries, the syntax is the same.
+    * like… you can still even use the .keys() and .values() methods as well!
+    * warning! they don’t return lists though when you use them in shelves, so surround it with list(shelfName.keys()) to be safe!
+    * alternatively, you can also use the pprint module (be sure to import it!) and can save your dictionary using pprint.pformat(shelfName)
+    * this is really useful though, so don’t overlook it! after you saved the shelf values to a database, you could totally go “import myDatabaseName” in a future Python program!
+* fair warning though, you will be left with a shelfName.db file which stores those values in case you need them in the future
+
+
+
+Automate the Boring Stuff Chapter 9: “Organizing Files”
+
+Organizing Files:
+- programs aren’t just used to read and write files, you can also move them around, or change their names, etc.
+- to do operations like these, you will need to “import shutil” which stands for ‘shell utilities’
+
+Copying Files and Directories:
+- the function shutil.copy(‘source’, ‘destination’) will leave a copy of the source file at the destination (duh)
+    - also, this function does have a return value, which is a string of the absolute directory path of the new object
+- the function shutil.copytree(‘source’, ‘destination’) will copy a directory, as well as everything in the directories below it
+    - this function also returns the string of the absolute directory path of the new object
+- the function shutil.move(‘source’, ‘destination’) will remove the file or directory from its current location, and place it in the new destination.
+    - this function also returns the string of the absolute directory path of the new object
+- if you’re copying files, and you want to specify a new name for the file, don’t just write ‘user/Desktop’ as the destination, write ‘user/Desktop/spam.txt’
+- if there is already a file of the same name within the destination directory, that file will be replaced, so take caution not to overwrite old data accidentally
+- be careful to make sure that you spell your directory names correctly, because if you don’t, the program will name your file the directory you were attempting to place it in
+- if the destination directory (or one of the parent directories) does not exist, Python will give you a compiler error, so make sure you’re doing your due diligence!
+
+Permanently Deleting Files and Directories:
+- the function os.unlink(‘path’) will delete the file located at ‘path’
+- the function os.rmdir(‘path’) will delete the directory located at ‘path’
+    - warning! this function only works if the directory is currently empty
+- the function shutil.rmtree(‘path’) will delete the directory at ‘path’ as well as the contents inside of it
+    - this function will not work without “import shutil” otherwise known as the ‘shell utility’ module
+- the function filename.endswith(‘.whatever’) will return files that end with that extension
+    - warning! you have to iterate through the directory in a for loop to get the desired effect
+
+Walking a Directory Tree:
+- the function os.walk(‘path’) can be used to walk through a directory tree, which is explained below e.g.: for dirName, subDirs, fileNames in os.walk(‘user/Desktop’):
+print (‘the current folder is: ‘, dirName
+for subDir in subDirs:
+print ‘subdirectory of: ‘, dirName, ‘:’, subDir  for fileName in fileNames
+print ‘file inside: ‘, dirName, ‘:’, fileName
+- unlike range(), which returns a list, the .walk() method returns three values:
+    - 1. a string of the current directory name
+    - 2. a list of strings, which are the directories within that directory
+    - 3. a list of strings, which are the files within that directory
+- however, it’s worth noting that although os.walk() goes through your files, it never actually changes your present working directory
+
+Compressing Files:
+- the module “import zipfile” will allow you to compress files into .zip, otherwise known as an ‘archive file’
+- you will create a ‘ZipFile’ (case sensitive) object, which is different than a ‘File’ object (which is what we were working with earlier)
+- the function zipfile.ZipFile(‘example.zip’) will return a ZipFile object, so you assign this to a variable in your code
+    - if you’re going to create your own zip file, pass ‘w’ as a 2nd argument to zipfile.ZipFile, so it knows to be in write mode.
+    - warning! write mode erases previous content, so be really careful when you’re using this!
+- the .namelist() method will return a list of strings of directories & files within your ZipList object.
+- the `.file_size()` method will return the actual size of the files within it
+- the `.compress_size()` method will return the size of the zip file
+- the `.extractall()` method will open up the zip, and dump the files into the current working directory.
+    - if you want the files to be extracted to a different location, you can pass a path as an argument within the method
+    - if there isn’t a found directory with that name, you will not get an error, a directory of that name will instead be created at that location
+    - but remember, extracting a zip returns a directory (remember WoW addons?) , so don’t make a new directory just to have another directory inside of it… you know?
+- the .extract(‘myZip.zip’, ‘path’) method will extract a single file from the .zip, not all of its contents
+    - if you don’t specify a path, it will dump it in the present working directory
+
+Creating and Adding to Zip Files:
+- as i mentioned earlier, if you’re going to create your own zip file, pass ‘w’ as a 2nd argument to zipfile.ZipFile, so it knows to be in write mode.
+    - warning! write mode erases previous content, so be really careful when you’re using this!
+- the `.write(‘spam.txt’, compress_type=zipfile.ZIP_DEFLATED)` method compresses the file (assuming it’s in the pwd, otherwise specify the path) and add it into the ZIP
+    - you sort of just have to remember that second argument, it specifies what compression algorithm to use (#SiliconValley)
+    - warning! also, be sure to follow up with newZip.close() once you’re done writing files to the .zip
+    - this was all a little intimidating, so here’s an example
+
+```py
+myZip = zipfile.ZipFile(‘storage.zip’, ‘w’)`
+myZip.write(‘spam.txt’, compress_type=zipfile.ZIP_DEFLATED)  myZip.close()
+```
+
+- warning! the way the example was phrased, if the zip had previous data in it, it would have been lost.
+    - if you’re trying to append what’s in the zip, be sure to pass ‘a’ as the 2nd argument instead of ‘w’
+    - also, you would type .append() instead of .write()
+
+
+Codecademy Unit 10: Advanced Topics in Python
+
+List Comprehension
+- when iterating through dictionaries, you can use the “for i in dictName” for loop. calling i will return the key, and calling dictName[i] will return that key’s value.
+- “list comprehension” allows you to get away with including a lot more within the same line of code in Python. check out the syntax example below: e.g.:
+
+```py
+evenSquaresList = [i**2 for i in range(1,11) if i%2==0] # prints out even number’s squares for numbers 1 through 10]
+```
+
+- you can parse specific parts of a list using the syntax [start:end:stride]
+- for stride, negative numbers will iterate through the list from the end to the beginning
+Functional Programming
+- python allows for “functional programming”
+- single use functions are denoted as ‘lambda’ which as an “anonymous function”
+    - use lambda when you need a quick function to do something for you, but only once
+    - otherwise, it makes more sense to define a function
+- the filter() function takes two arguments
+    - the value you are trying to keep
+    - the list you are applying the filter to e.g.: filter(lambda x: x==‘Python’, myList) will filter out any item in the list that is not ‘Python’
+Bitwise Operators
+- in python, denote that a number is represented in bitwise notation by preceding the number with 0b e.g.: print 0b111 will print ‘7’
+- alternatively, you can print a number in bitwise form using the bit() function, entering in a base 10 number as the argument
+    - there is also the hex() and oct() functions which accomplish similar goals
+- the int() function we have used earlier, that converts numbers into an integer, has an optional second argument, the current base of the number.
+    - so to convert a bitwise number into a normal number, you can type int(‘1101’, 2)
+    - i’m not sure why, but the first argument always has to be a string
+- left shift (denoted as <<) and right shift (denoted as >>) will shift all the binary digits one space to the left or right respectively.
+    - warning! if there’s no binary space left (eg 0b101 >> 4) then it will return (0b000)
+- the bitwise & (AND) operator will take two binary numbers, and return a 1 for any digit there were matching 1s e.g. 110110 & 100011 returns 100010, since those were the two places that they both had a 1
+- the bitwise | (OR) operator will take two binary numbers, and return a 1 for any digit where 1 or both numbers had a 1 e.g. 110000 | 100011 will returns, 110011, since those were the four places where there was a 1 digit in one or more numbers.
+- the bitwise ^ (XOR) operator will take two binary numbers, and return a 1 for any digit where ONLY one of them had a 1. if neither have 1, or both have 1, it will return 0 e.g. 111110 | 011111 will return 100001
+- the bitwise ~ (NOT) operator takes a number ’n’, and returns that -(n+1). more in this later…
+- a bitmask is a variable that can be used to assess if certain bits are turned on or off
+    - if you wanted to turn a certain bit off (if it was on), you would create the bitmask, and then use the & to apply that control
+    - if you wanted to turn a certain bit on (if it was off), you would create the bitmask, and then sue the | to apply that control
+    - if you wanted to flip all the bits, create a mask with all bits turned on, and then use the ^ (XOR) operator. it will flip all the bits of the input number.
+
+Codecademy Unit 11: Introduction to Classes
+
+- the syntax to create a class is as follows: e.g.: class Animal(object): #creates the Animal class, inheriting its properties from the object class
+- when creating a class, the first line below it will always be def __init__(self, arg1, arg2): because we need a function to initializes the objects that are created by the class
+- we access the attributes of our object using dot notation. so for arg1 and arg2, you can assign the answers to them using the syntax self.arg1 = arg1 (the input, or whatever you want really)
+- global variables are variables that are always accessible in the Python code
+- member variables are variables that are only accessible to members of that particular class
+    - to make a member variable not an instance variable, assign its value outside of the __init__ constructor, but within the scope of the class
+- instance variables are variables that are only accessible to that particular instance of this particular class
+- methods, otherwise known as “functions for a class”
+- for inheritance, if you want a new class that you are defining to inherit its characteristics (member variables and whatnot) from a preexisting class, replace the “self” with the name of that class.
+- if you don’t want the new class to inherit certain characteristics, you can “override” those. to do so, reuse the same function name (or member variable name) and change it however you want.
+- you don’t have to do the def __init__(self, arg1): if your class is inherited from a previous class.
+- a derived class is often known as a “subclass”, and a parent class is often known as a “super class”
+- the syntax here gets confusing, so here is a picture of what we have so far
+- the __repr__() method, known as representation, controls how your object is displayed when it prints.
+
+Codecademy Unit 12: File I/O Input Output
+
+- if you need to read and write to a file, pass ‘r+’ as the second argument in open()
+- the reason you always have to make sure to close the file when you’re done, is because it’s only at that moment that it’s pushed from the memory to the file and stored in the hard drive
+- there is a workaround though, using special syntax. you don’t have to type my_file.close() if you phrase your initial code like below: e.g.
+
+```py
+with open(‘text.txt’, ‘w’) as my_file:  my_file.write(‘boobs’)
+```
+
+- to check if a file is open or closed, you can use type myFile.closed, no parenthesis, and it will return a boolean of whether or not the file is closed.
+
+Codecademy Git: Unit 1
+- type ‘git init’ in terminal to initialize the toolbox for Git
+- a git project has three parts:
+    - 1. the working directory, where you create, edit, delete, and organize files
+    - 2. the staging area, where you list changes made to the working directory
+    - 3. the repository, where git permanently stores any changes made as different versions of the project
+- type ‘git status’ in terminal to check the status of the changes that you have made to the directory
+- type ‘git add filename.txt’ to add that file to the staging area
+- type ‘git diff filename.txt’ to check the differences between the working directory and the staging area
+- type ‘git commit -m “Message to the GitHub viewers goes here!”
+    - should be brief, and in present test
+- type ‘git log’ to pull the information from the most recent git commit
+- type ‘git push’ to publish your local commit
+
+
+Notes on Command Line
+
+Vocabulary:
+
+The ‘>’ command takes the output of what is on the left, and redirects that output to the file on the right
+e.g.: $ python myscipt.py > output.txt
+
+The ‘>>’ command takes the output of what is on the left, and appends it to the file on the right.
+e.g. $ python myscript.py >> output.txt
+
+The ‘<’ command takes the input from the file on the right, and inputs it into the file on the left
+e.g. $ cat < lakes.txt
+
+The ‘|’ command (pipe command) takes the output of the command on the left, and pipes it as input to the command on the right.
+- this is also called ‘command to command redirection’
+
+The ‘$’ character is known as the “shell prompt.” it appears when the terminal is ready to accept a command.
+
+The ‘ls’ “list directories” command will list out the files in the present working directory.
+
+The ‘pwd’ or “present working directory” command will return the present working directory that you are in.
+
+The ‘cd’ or “change directory” command will open up a subdirectory within the present working directory.
+
+The ‘mkdir’ or “make directory” command will create a new directory within the present working directory.
+
+The ‘touch’ command will create a file with the name of the input following that command
+e.g. ‘touch myfile.txt’ will create myfile.txt in your directory
+
+The ‘-a’ option lists all content, including any hidden files. Files that are hidden are files that start with the ‘.’ character.
+
+The ‘-t’ option orders files and directories by the time they were last modified
+
+The ‘-l’ option lists all content in long format, outlining more details of the file than simply the name. In fact, it outlines 7 columns, each explained below
+1. the access rights, or the actions that are permitted on that file or directory
+2. the number of hard links, including child directories, files, the link to the parent directory ‘ .. ‘ , and the link to the current directory ‘ . ‘
+3. the username of the owner of the file
+4. the name of the group that owns the file
+5. the size of the file in bytes
+6. the date and time that the file was most recently modified
+7. the name of the file or directory
+
+The ‘cp’ command copies files or directories. so to copy the contents of one file into another, type the following:
+e.g. $ cp mytextinput.txt mytextoutput.txt (note that you don’t need to use the | pipe
+
+The ‘*’ wildcard selects all files in the working directory, and has special applications
+- for instance, to copy all .txt files that start with the letter m and move them to the itp125 directory, type $ cp *m.txt ../../itp125
+
+The ‘mv’ command moves a file from the present working directory to the destination directory
+e.g.: $ mv mytext.txt myothertext.txt ../../itp125 would move both of these files into the itp125 directory
+
+The ‘rm’ command deletes a file or directory from the present working directory.
+
+The ‘-r’ option, which stands for “recursive option” includes any child directories below the directory being acted upon.
+e.g.: $ rm -r itp125 will remove all child directories below the itp125 directory as well as itp125
+
+The ‘echo’ command accepts a string as input (must be surrounded by quotations) and returns that string as output.
+e.g. $ echo “Hello world.” will output ‘Hello world.” back to the terminal.
+
+The ‘stdin’ or standard input is the information input through the keyboard to the terminal.
+
+The ‘stdout’ or standard output is the information outputted back to the user in text through the terminal.
+
+The ‘stderr’ or standard error is a message that the user will receive in terminal if a process failed.
+
+Redirection can be used to redirect the stdin, stdout, or stderr of actions taken on the command line.
+
+The ‘cat’ command outputs the contents of a file to the terminal.
+e.g. $ cat ‘hello.txt’ would output Hello world! to the terminal.
+
+The ‘wc’ or “word count” command will output the number of lines, words, and characters of the file it is performed upon.
+
+The ‘uniq’ or “unique” command will filter out adjacent, duplicate lines in a file. So, if you wanted to filter out repeat values, you would sort the list, and then call the uniq function.
+e.g. $ sort deserts.txt | uniq > deserts.txt
+
+The ‘grep’ or “global regular expression print” command searches files for lines that match a pattern, and returns the result.
+e.g. $ cat < grep Mount mountains.txt would output the
+- grep can also be used on directories, not just files. If used on a directory, it will return any files within that directory that contain the requested word.
+
+The ‘-i’ option or “insensitive” option allows a command to be case insensitive.
+e.g. $ grep -i Mount mountains.txt will return any line with mount, MOUNT, Mount, etc. to the command line.
+
+
+Python Programming Notes:
+
+Common exceptions in Python:
+* Accessing a non-existent dictionary key will raise a KeyError exception.
+* Searching a list for a non-existent value will raise a ValueError exception.
+* Calling a non-existent method will raise an AttributeError exception.
+* Referencing a non-existent variable will raise a NameError exception.
+* Mixing datatypes without coercion will raise a TypeError exception.
+
+
+The 3 Way Handshake
+
+First, the user sends an SYN to the server,
+- says” hey, can I connect to you?
+
+Then, the server sends back an SYN, ACK (acknowledgement)
+- says “yes, I acknowledge that you are trying to connect to me, okay you can connect”
+
+Then, the client sends back an ACK
+- says “yes, I acknowledge that you have acknowledged my request to connect.
+
+Now that this is done, the two are connected.
+
+Encryption and GPG Notes
+
+Symmetric Encryption:
+- uses a single key, which is shared by the receiver and the sender
+- since there is only one key, if anyone had access to it, the secrecy of the communication is compromised
+Asymmetric Encryption:
+- newer, and more popular
+- creates a public and private key (mathematically related to each other, but different)
+- the private key is used to encrypt the data, and the public key is used to decrypt the data
+Public Key Cryptography:
+- you can create a key-ring, and assign different public keys to different individuals (one for each user)
+GnuPG (GPG) Encryption
+- open source, public/private key software
+- no GUI, run from the terminal
+
+Using GPG:
+step 1: create your public/private keys with gpg —gen-key
+step 2: create the revocation certificate gpg —gen-revoke
+- this stores hard copies of your keys and certificates
+step 3: type gpg in terminal
+- this will create secring.gpg (your private key) and pubring.gpg (your public key)
+
+
+
+to encrypt a file, type gpg -e -r youremail filename.txt
+
+
+
+
+Notes on Networks
+
+How to determine the number of IP subnets and hosts:
+
+octet:
+- so a byte is just 8 binary digits or ‘bits’, e.g. 10011011
+- but you don’t have to represent it as that, you can calculate its value in a 256 scale
+- `1+1*2+0*4+1*16` etc…
+
+so an IPv4 address has 32 bits. since there are 8 bits in a byte, we can split the IP into 4 bytes, each separated by a dot.
+e.g. 128.0.0.1
+one part of the IP is host bits, and one part of the IP is the subnet bits
+
+you split a subnet into smaller subnets by borrowing bits from the host range and adding them to the subnetting bits (more on this later)
+e.g. you can split 255.255.255.0 into 4 subnets with the subnet mask of 255.255.255.192
+- this is because you’re really typing 1{8}.1{8}.1{8}.1{2}0{6}. notice how there’s four permutations of 1 and 0 possible among the two bits you changed in the last octet.
+    - if you’re stupid, those combos were .11, .10, .01, and .00
+    - if n is the # of host bits that you borrowed for your subnet, 2^n is the amount of subnets that you can create.
+    - if n is the # of host bits that you borrowed for your subnet, 2^(8-n) is the amount of IPs that can have 2^n subnets.
+    - WAIT! don’t forget that every IP needs a network address and a broadcast address, so you really have 2^(8-n)-2 possible hosts.
+
+we use the network address to identify what network we are on, and the broadcast address to send messages to devices on the subnet
+the network address is always the very first IP address of a subnet, and the broadcast address is always the very last IP address of a subnet
+- clarification: last address means most 1 bits (255), and first means most 0 bits (0). lower score = earlier preference
+
+
+
+CIDR (Classless Inter-Domain Routing)
+- notation: IP address written as prefix, with a suffix following to indicate how many bits are in the address
+  - e.g.: for 192.0.1.0/24, the prefix is 192.0.1.0 and the total number of bits in the address is 24
+    - 01100000.00000000.00000001.00000000/24
+    - the maximum allowable amount of bits in the prefix is 32 bits, or 4 byes (wait duh…)
+    - addresses with identical prefixes and the same amount of bits belong to the same block
+  - e.g. 255.255.255.0 only has 1 subnet “known as subnet zero (because zero bits are allocated to the subnet”, since there are no permutable 1 bits in the subnet range, there is only one subnet.
+  - but because of this, there are (2^32)-2 possible hosts that can have this subnet, making it the most common
+  - e.g.: 192.168.4.0/30 will refer to the four addresses
+      - 192.168.4.0
+      - 192.168.4.1
+      - 192.168.4.2
+      - 192.168.4.3
+
+there are 32 bits in an IP address, you divide them among host bits and subnet bits
+- for every n bits you have among the host bits, you have `(2^n)-2*` possible hosts
+    - *WAIT!* don’t forget that you need to subtract two possible hosts because you need a network address and a broadcast address so subtract 2 hosts
+- this is where that CIDR /n notation comes into play.
+    - 255.255.255.0/n there are 2^(32 - /n) possible hosts for the subnet using this notation
+
+VLSM (Variable Length Subnet Masking)
+
+the subnet bits show what network a device is on, and the host bits define the individual device
+- an analogy to the subnet bits would be an area code. everyone on the network shares the same subnet bits, but they have different host bits
+
+1. use the first octet () to determine if the class of the address A, B, or C
+    1. figure out address class later then…
+2. use the class of the address to determine which byte is available
+3. look at the host byte in the subnet masks, using a
+
+
+
+
+okay so we have the network
+
+172.30.0.0,
+
+which is 10101100.0001110.00000000.00000000
+
+Classes:
+Class A (large network):
+- first octet has a decimal notation range of (1 to 126)
+- hint: first bit of the first octet is 0
+- first octet denotes the network address, and the other 3 denote the host address
+- note: 0 is reserved as part of the default address and 127 is reserved for internal loopback testing
+Class B (medium network):
+- first octet has a decimal notation range of (128 to 191)
+- hint: first bit of the first octet is 1
+- first 2 octets denote the network address, and the other 2 octets denote the host address
+Class C (small network):
+- first octet has a decimal notation range of (192 to 223)
+- hint: first 2 bits of the first octet is 1
+- first 3 octets denote the network address, and the other 1 octet denotes the host address
+Class D (special):
+- reserved for multi-cast
+- first octet has a decimal range of (224 to 239)
+Class E (special):
+- reserved for future use
+- first octet has a decimal range of (240 to 255)
+
+special exceptions: some subnets are pre-defined as being for special purposes. (eg IPs starting 10.x.x.x  and 192.168.x.x) are used in local area networks and deemed 'private' addresses
+- private addresses are translated back to public addresses using NAT translation
+
+ITP 125 Notes
+
+What you’re really trying to pickle, is the dictionary. So you need a way to save every word to a single object, and store that object as a file. This means you need an “object of objects”
+
+the “pickle” module is very useful. Pickling allows one to store a Python object structure.
+to save a file in a pickle, use pickle.dump(object,filename[2])
+to load a file from a picle, use pickle.load(filename)
+-  
+
+Automate the Boring Stuff Chapter 5: Dictionaries and Structuring Data
+- key: the value used to index the components of the dictionary
+- values: the various data stored within each key
+
+Automate the Boring Stuff Chapter 12: Working with Excel Spreadsheets
+- the name of the module is openpyxl
+- you need to load your workbook as a workbook class object in python, by typing the following e.g.: wb = openpyxl.load_workbook(‘example.xlsx’)
+- to get a list of all sheet names in the workbook, use the .get_sheet_names() method e.g.: wb.get_sheet_names() will return a list of sheets n the operation.
+- to assign a sheet object to the current active sheet, type wb.active ! don’t use the () after your method… for some reason
+- to get the value of a cell in a sheet, type sheet[‘A1’].value
+- alternatively, to get the value without using the name of the cell (that gets tricky after ‘AA, AB, etc’) you can type by using the .cell() method, which accepts 2 arguments, the row number, and the column number. ! remember, unlike arrays, which start at 0, in excel, the first cell in the sheet is actually at row=1, column=1 e.g.: sheet.cell(row=1, column=2).value
+- to write a value to a cell, just skip the .value part e.g. “sheet.cell(row=1, column=2)=‘hentai’
+- any changes you make in your code will not apply to the spreadsheet unless the .save() method is utilized e.g. wb.save(‘example1.xlsx’)
+
+
+
+Automate the Boring Stuff Chapter 18: GUI Automation
+- to exit an automation gone rogue, type Command-Shift-Q
+- to pause the program after every run, use the “pyautogui.PAUSE” variable e.g.: “pyautogui.PAUSE = 2.5” (wait 2.5 seconds before re-executing the function)
+- the flag thrown when you need to crash the program “pyautogui.FailSafeException” is triggerred by dragging your mouse to the top-left as fast as you can
+    - this flag can be disabled by coding in “pyautogui.FAILSAFE = True”
+Clicking:
+- pyautogui.click(123,456) is the same thing as pyautogui.mouseDown(123,456) followed by puautogui.mouseUp(123,456)
+- the optional third argument for clicks is “button=‘left’” or “button=‘right’” or “button=‘middle’)
+- you can also use pyautogui.doubleClick(), pyautogui.rightClick() and pyautogui.middleClick()
+Dragging:
+- to drag something, use dragTo() and dragRel(), which are similar to moveTo() and moveRel(). the To takes it to an absolute coordinate, and the Rel takes it to a relative coordinate.
+Scrolling:
+- pyautogui.scroll(200) but you can also use negative numbers to scroll up
+Send String to be Typed Out:
+- pyautogui.typewrite(‘Hello world!’)
+Keypress on Keyboard:
+- pyautogui.keyDown() and pyautogui.keyUp() are great if you need to do a multiple key command
+- otherwise you can just use pyautogui.press() e.g. pyautogui.keyDown(‘command’); pyautogui.keyDown(‘c’); pyautogui.keyUp(’command’,’c’)
+- but for hotkeys, there’s actually a simpler solution which is e.g. pyautogui.hotkey(‘command’,’c’)
+
+Review of the PyAutoGUI Functions
+Since this chapter covered many different functions, here is a quick summary reference:
+* moveTo(x, y). Moves the mouse cursor to the given x and y coordinates.
+* moveRel(xOffset, yOffset). Moves the mouse cursor relative to its current position.
+* dragTo(x, y). Moves the mouse cursor while the left button is held down.
+* dragRel(xOffset, yOffset). Moves the mouse cursor relative to its current position while the left button is held down.
+* click(x, y, button). Simulates a click (left button by default).
+* rightClick(). Simulates a right-button click.
+* middleClick(). Simulates a middle-button click.
+* doubleClick(). Simulates a double left-button click.
+* mouseDown(x, y, button). Simulates pressing down the given button at the position x, y.
+* mouseUp(x, y, button). Simulates releasing the given button at the position x, y.
+* scroll(units). Simulates the scroll wheel. A positive argument scrolls up; a negative argument scrolls down.
+* typewrite(message). Types the characters in the given message string.
+* typewrite([key1, key2, key3]). Types the given keyboard key strings.
+* press(key). Presses the given keyboard key string.
+* keyDown(key). Simulates pressing down the given keyboard key.
+* keyUp(key). Simulates releasing the given keyboard key.
+* hotkey([key1, key2, key3]). Simulates pressing the given keyboard key strings down in order and then releasing them in reverse order.
+* screenshot(). Returns a screenshot as an Image object. (See Chapter 17 for information on Image objects.) 
+
+
+
+Automate the Boring Stuff Chapter 4: Lists
+
+- use the .append() method to add a value to the end of a list, inserting the argument inside of the parenthesis e.g. myList.append(‘moose’), would put ‘moose’ as the new last item in the list.
+- use the .index() method to find the index of an item that is in the list. e.g. myList.index(‘moose’) would return a number that is equal to len(myList)-1
+- use the .insert() method to add an item to a specific part of the list. it takes two arguments, the location in the list, and the value to insert. e.g. myList.insert(4, ‘moose’) would put ‘moose’ as the 5th item in the list.
+- use the .remove() method to remove any instances of an item in the list. it takes one argument, the item trying to be removed.
+- e.g. myList.remove(‘moose’) would get rid of all those mooses that we have been adding to the list.
+- use the .sort() method to order the list in ascending order. ! use the .sort(reverse=True) method to order the list in descending order.
+
+Automate the Boring Stuff Chapter 6: Manipulating Strings
+
+Removing junk from strings:
+- the .lstrip() .rstrip() and .strip() methods remove whitespace from the string.
+- however, these methods also allow you to specify an argument for what to strip out of the sides of the string. e.g.: myString.strip(‘,’) # remove the ‘,’ character from each side of the content of the string (but nothing in the middle!)
+
+Splitting strings into lists:
+- use the .join() method to merge a list of strings into one large string. It takes the splitting character as the operative part, such as ‘, ‘ and inside the parenthesis you insert the list in question as the argument e.g. ‘, ‘.join(myList) would join the string, putting a comma and a space in between each string in the list
+- use the .split() method to split a string into a list of strings. It takes the string as the operative part, and the inputted argument is the character (or series of characters) that you want to split the string from. e.g. myString.split(‘, ‘) would split the string every time a comma followed by a space was reached.
+
+Automate the Boring Stuff Chapter 7: Regular Expressions
+
+- Regular expressions are nicknamed ‘regexes’
+- ‘\d’ stands for digital character, like, a digit, like 0 through 9
+- so you could type ‘\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d’ to search for a phone number.
+- that’s still pretty inefficient though, it would be better if you could tell the program how many times to repeat the \d.
+- you can actually do this by surrounding a number in curly brackets, so the previous line above is now ‘\\d{3}-\\d{3}-\\d{4}’
+- regex objections require you to import the ‘re’ library, so if you’re using regexes, make sure to start the code with “import re”
+- recall that \ triggers the use of an escape character, and since you also use \ in regex expressions, you’re going to need to specify to the computer that you’re actually trying to include those backslashes. yes, you could type \\d but that gets redundant. remember how raw strings can also be typed by preceding the string with r’stringtext’
+- so now, the code is even simpler, and you type r’\d{3}-\d{3}-\d{4}’
+- so your code to find a phone number would be written as follows below
+line 1: phoneNumRegex = re.compile(r’\d{3}-\d{3}-\d{4}’) #passes the desired pattern to re.compile() and store the result in phoneNumRegex
+line 2: mo = phoneNumRegex.search(‘input string goes here’) #call the search function on phoneNumRegex inserting the string within the parenthesis
+line 3: print mo.group() #calls group on mo to return the matched value if any (otherwise it will return None)
+- don’t freak out about the ‘mo’ variable, it’s just a common variable name for Match objects
+- so we didn’t really address earlier what that .group() method was. you can group chunks of your regex, like say, separating the area code from the phone number.
+- to separate groups in a regex object, surround those chunks with parenthesis.
+- so now the code we had earlier is re.compile(r’(\d{3})-(\{3}-\d{4})’
+- you can call mo.group() or mo.group(0) to call the entire regex, or mo.group(1) to call the area code, and mo.group(2) to call the rest of the phone number.
+- there’s also the .groups() method, which calls all the groups at once. so calling mo.groups() would return (‘area code string’, ‘personal # string’)
+- so if you want to be super efficient, you could write the following line of code below
+areaCode, mainNumber = mo.groups()
+^ boom. you just assigned two variables in one line of code. #efficiency!
+- okay, but we all know that phone numbers aren’t really 650-730-3237, they’re (650)730-3237, so how do we deal with parenthesis within the string? with that lovely escape character \
+- so now, if the phone number to parse is (650)730-3237, the line of code is listed below
+phoneNumRegex = re.compile(r’\(\d{3}\)-\d{3}-d{4}’)
+- as you know, the | character is the pipe character. you can use it in place of and, but it has many other uses too.
+- when you’re using the .group() method, you can type re.compile(r’Batman|Tina Fey’) and it will assign whatever match is first found to the RegEx variable.
+- you can use the ? question mark to give an optional additional part of the RegEx expression to search from,  e.g.: batRegex = re.compile(r’Bat(wo)?man’)
+- but wait, that’s really useful, because people don’t always enter their area code. so now you can code your RegEx way better.
+- now, you can pull three seperate values. 650-730-3237, (650)730-3237, and 730-3237
+e.g.: phoneNumRegex = re.compile(r’(\(\d{3}\)|\d{3}-)?\d{3}-\d{4})
+mo = phoneRegex.search(‘input string here’)
+print mo.group()
+- there isn’t just the ? for regex, you can also use the * character, which means ‘zero or more instances of’
+- so if you had the string ‘batwowowowoman’ you could regex it with `r’bat(wo)*man’`
+- but you don’t always want zero instances of something, you may want ‘one or more instances of something’
+- in that case, use the + character, which means ‘one or more instances of’
+- the number inside those curly brackets can also be a range, so you can type \d{3,5} if you want to pull between 3 and 5 digits
+- but wait! there’s more! you can also type {3,} to signify 3 or more, and {,5} to signify 5 or less (including zero!)
+- greedy vs. non greedy: by default, python will be greedy and pull the largest string it can. so if you had \d{3,5} it would prefer an instance of \d{5} over \d{3}. hence greedy. to make the expression non greedy, follow the curly brackets with a ? character. (totally unrelated from the other ? mark addressed earlier, which follows a parenthesis)
+- so far, we have just been using the .search() method, but there’s also a .findall() method. .findall() is different because while .search() returns a Match object or None, .findall() returns the string of every match it finds in the string that was parsed through.
+- if .findall() finds groups in your string, .findall() will return a list of tuples of strings
+- other shorthand character classes (such as \d earlier) are listed below  1. \d “any character that is a numeric digit
+2. \D “any character that is NOT a numeric digit aka anything but “0-9”
+3. \w “any letter, numeric digit, or _ character”
+4. \W “anything except for what’s included in \w”
+5. \s “any space, tab, or newline character”
+6. \S “anything, except for what’s included in \s”
+
+- you can also make your own character class. to do so, surround the class with brackets  e.g. vowelRegex = re.compile(r’[aeiouAEIOU]’) # searches for all vowels. e.g.2 vowelRegex = re.compile(r’[a-zA-Z0-9]) # letters & numbers
+- you can use the ^ character to make a negative character class. in a negative character class, it’s a “everything but these characters” class. e.g. noVowelsRegex = re.compile(r’[^aeiouAEIOU]’) # searches for anything but vowels
+- you can use the ^ character a second way as well. by putting it before the string being searched, it means “only return a result if this string value is found at the beginning of the input string being searched e.g. helloRegex = re.compile(r’^Hello’) #searches for Hello but only returns the result of the search if Hello is at the beginning of the string
+- the reverse of the ^ character is the $ character, which you put at the end of the string to signify “only return a result if this is string value is found at the end of the input string being searched e.g. digitEndRegex = re.compile(r’\d$’) makes sure it ends
+- you can combine the ^ and the $ characters using the + character we talked about earlier (remember?) e.g. startsEndsDigitRegex= re.compile(r’^\d+$’)
+- the . character, also known as the ‘wildcard character’, will match any character that isn’t a newline.
+- combine `.*` to signify “anything and everything” because you’re essentially saying “zero or more instances of anything except for a new line” e.g. `nameRegex = re.compile(r’First Name: (.*) Last Name: (.*)’)`
+- sometimes you are going to want to do case-insensitive matching. to do this, end the Regex with “‘stringtext’ , re.I” (that’s a capital I) e.g. testSearch = re.compile(r’test’, re.I)
+- you don’t have to pull string values either, if you’re trying to replace a string that comes up within a file over and over, you can do it by utilizing the .sub() method
+- to use the sub method, you create your regex with your usual criteria (e.g. namesRegex = re.compile(r’Samuel’)) and then on the following line, type namesRegex.sub(‘Sam’, ‘Samuel should be changed to Sam in this input string’)
+    - you can also substitute only in certain groups, but you’d have to look up how to do that in Chapter 7 because it was tricky and I got intimidated.
+- Verbose mode, called by typing re.VERBOSE (as the 2nd argument within the re.compile() argument, is useful because regexes inevitably get very convoluted, which is why you’re going to want to spread them over multiple lines, adding a comment for each piece.
+- So instead of typing something shitty like
+
+
+```py
+phoneRegex = re.compile(r'((\d{3}|\(\d{3}\))?(\s|-|\.)?\d{3}(\s|-|\.)\d{4}(\s*(ext|x|ext.)\s*\d{2,5})?)') you would do this phoneRegex = re.compile(r'''(
+(\d{3}|\(\d{3}\))? # area code
+(\s|-|\.)? # separator
+\d{3} # first 3 digits
+(\s|-|\.) # separator
+\d{4} # last 4 digits
+(\s*(ext|x|ext.)\s*\d{2,5})? # extension
+)''', re.VERBOSE)
+```
+
+- if you need to use re.VERBOSE as well as re.IGNORECASE (hell, throw in re.DOTALL too), you have to use the pipe character to allow all of them to be the third argument in your syntax. e.g. someRegexValue = re.compile('foo', re.IGNORECASE | re.DOTALL | re.VERBOSE)
+
+Automate the Boring Stuff Chapter 8: Reading and Writing Files
+
+(yay!)
+Files and File Paths
+* there are 3 properties of a file
+    * the filename
+    * the path (within the user directories)
+    * the extension (e.g. .py, .docx, .7z)
+* the original directory is known as the root directory
+* navigating through paths is done so using the / character
+The Present Working Directory
+* every program that runs on a computer has a present working directory
+* filenames that don’t begin with the root directory are assumed to be under the present working directory
+* to check the current working directory, type os.getcwd()
+* to change the current working directory, type os.chdir()
+Absolute vs. Relative Paths
+* there are two ways to specify a file path:
+    * 1. absolute path, which begins at the root directory
+    * 2. relative path, which begins at the present working directory
+    * the . character is shorthand for “this directory”
+    * typing two dots “..” specifies the “parent directory”
+Creating New Directory
+* to create a new directory within your program, use the os.makedirs() function
+    * e.g.: os.makedirs(austintraver/Desktop/porn/hentai)
+    * that won’t just create the porn directory, it will also create the hentai directory within it. how convenient!
+Functions to Handle Paths
+* the function os.path.abspath(path) converts a relative path to an absolute path, you can use
+* the function os.path.isabs(path) which will return a boolean depending on the type of path
+* the function os.path.relpath(path, start) will return a string from the starting path to the path argument entered
+* the function os.path.dirname(path) will return everything to the right of the filename (and the / before it)
+* the function os.path.basename(path) will return everything else (but not the / before it)
+* the function os.path.getsize(path) will return the size of the file in question
+* the function os.path.exists(path) will return True if the file actually exists, or if the path ends at a directory
+    * this one is particularly important because a program will crash if it tries to access a file that doesn’t exist
+* the function os.path.isfile(path) will return True if the file exists, but not if the path ends at a directory
+* the function os.path.isdir(path) will return True if the path ends at a directory, but not if it ends at a file 
+
+The File Reading/Writing Process
+* the reading and writing commands we’re learning about only work for plaintext files, such as .py or .txt
+* all other file types that aren’t plaintext files are known as “binary files”
+* there are 3 steps to reading or writing a file in Python:
+    * 1. the open() function, which is not a method, when used will to return a File object. you must assign something to this return value. e.g. myFile = open(‘/user/desktop/hello.txt’, r) if you’re only going to read the file e.g. myFile = open(‘/user/desktop/hello.txt’, w) if you’re going to write to the file (start from scratch) e.g. myFile = open(‘/user/desktop/hello.txt’, a) if you’re going to append the file (add stuff but not remove the old stuff)
+    * 2. the .read() or .write() method, which can be used on the File object
+    * 3. the .close() method, which is used at the end to close the File again
+* use the .readlines() method if you want to pull strings line by line, instead of all at once. this will return a list of strings, instead of one big string. every other string will be ’\n’ to specify the newline character.
+* use the .write(‘string goes here’) method to write new data to the file.
+    * warning! the .write() method does not automatically include ‘\n’ newlines, so be sure to add those yourself manually.
+
+Saving Variables with the Shelve Module
+* using the shelve module, you can store variable’s data on your hard drive, and restore it at another time
+* to use this feature however, be sure to “import shelve” module, and you have to call shelve.open() instead of open()
+* treat stored shelf values as if they were dictionaries, the syntax is the same.
+    * like… you can still even use the .keys() and .values() methods as well!
+    * warning! they don’t return lists though when you use them in shelves, so surround it with list(shelfName.keys()) to be safe!
+    * alternatively, you can also use the pprint module (be sure to import it!) and can save your dictionary using pprint.pformat(shelfName)
+    * this is really useful though, so don’t overlook it! after you saved the shelf values to a database, you could totally go “import myDatabaseName” in a future Python program!
+* fair warning though, you will be left with a shelfName.db file which stores those values in case you need them in the future
+
+
+
+Automate the Boring Stuff Chapter 9: “Organizing Files”
+
+Organizing Files:
+- programs aren’t just used to read and write files, you can also move them around, or change their names, etc.
+- to do operations like these, you will need to “import shutil” which stands for ‘shell utilities’
+
+Copying Files and Directories:
+- the function shutil.copy(‘source’, ‘destination’) will leave a copy of the source file at the destination (duh)
+    - also, this function does have a return value, which is a string of the absolute directory path of the new object
+- the function shutil.copytree(‘source’, ‘destination’) will copy a directory, as well as everything in the directories below it
+    - this function also returns the string of the absolute directory path of the new object
+- the function shutil.move(‘source’, ‘destination’) will remove the file or directory from its current location, and place it in the new destination.
+    - this function also returns the string of the absolute directory path of the new object
+- if you’re copying files, and you want to specify a new name for the file, don’t just write ‘user/Desktop’ as the destination, write ‘user/Desktop/spam.txt’
+- if there is already a file of the same name within the destination directory, that file will be replaced, so take caution not to overwrite old data accidentally
+- be careful to make sure that you spell your directory names correctly, because if you don’t, the program will name your file the directory you were attempting to place it in
+- if the destination directory (or one of the parent directories) does not exist, Python will give you a compiler error, so make sure you’re doing your due diligence!
+
+Permanently Deleting Files and Directories:
+- the function os.unlink(‘path’) will delete the file located at ‘path’
+- the function os.rmdir(‘path’) will delete the directory located at ‘path’
+    - warning! this function only works if the directory is currently empty
+- the function shutil.rmtree(‘path’) will delete the directory at ‘path’ as well as the contents inside of it
+    - this function will not work without “import shutil” otherwise known as the ‘shell utility’ module
+- the function filename.endswith(‘.whatever’) will return files that end with that extension
+    - warning! you have to iterate through the directory in a for loop to get the desired effect
+
+Walking a Directory Tree:
+- the function os.walk(‘path’) can be used to walk through a directory tree, which is explained below e.g.: for dirName, subDirs, fileNames in os.walk(‘user/Desktop’):
+print (‘the current folder is: ‘, dirName
+for subDir in subDirs:
+print ‘subdirectory of: ‘, dirName, ‘:’, subDir  for fileName in fileNames
+print ‘file inside: ‘, dirName, ‘:’, fileName
+- unlike range(), which returns a list, the .walk() method returns three values:
+    - 1. a string of the current directory name
+    - 2. a list of strings, which are the directories within that directory
+    - 3. a list of strings, which are the files within that directory
+- however, it’s worth noting that although os.walk() goes through your files, it never actually changes your present working directory
+
+Compressing Files:
+- the module “import zipfile” will allow you to compress files into .zip, otherwise known as an ‘archive file’
+- you will create a ‘ZipFile’ (case sensitive) object, which is different than a ‘File’ object (which is what we were working with earlier)
+- the function zipfile.ZipFile(‘example.zip’) will return a ZipFile object, so you assign this to a variable in your code
+    - if you’re going to create your own zip file, pass ‘w’ as a 2nd argument to zipfile.ZipFile, so it knows to be in write mode.
+    - warning! write mode erases previous content, so be really careful when you’re using this!
+- the .namelist() method will return a list of strings of directories & files within your ZipList object.
+- the `.file_size()` method will return the actual size of the files within it
+- the `.compress_size()` method will return the size of the zip file
+- the `.extractall()` method will open up the zip, and dump the files into the current working directory.
+    - if you want the files to be extracted to a different location, you can pass a path as an argument within the method
+    - if there isn’t a found directory with that name, you will not get an error, a directory of that name will instead be created at that location
+    - but remember, extracting a zip returns a directory (remember WoW addons?) , so don’t make a new directory just to have another directory inside of it… you know?
+- the .extract(‘myZip.zip’, ‘path’) method will extract a single file from the .zip, not all of its contents
+    - if you don’t specify a path, it will dump it in the present working directory
+
+Creating and Adding to Zip Files:
+- as i mentioned earlier, if you’re going to create your own zip file, pass ‘w’ as a 2nd argument to zipfile.ZipFile, so it knows to be in write mode.
+    - warning! write mode erases previous content, so be really careful when you’re using this!
+- the `.write(‘spam.txt’, compress_type=zipfile.ZIP_DEFLATED)` method compresses the file (assuming it’s in the pwd, otherwise specify the path) and add it into the ZIP
+    - you sort of just have to remember that second argument, it specifies what compression algorithm to use (#SiliconValley)
+    - warning! also, be sure to follow up with newZip.close() once you’re done writing files to the .zip
+    - this was all a little intimidating, so here’s an example
+
+```py
+myZip = zipfile.ZipFile(‘storage.zip’, ‘w’)`
+myZip.write(‘spam.txt’, compress_type=zipfile.ZIP_DEFLATED)  myZip.close()
+```
+
+- warning! the way the example was phrased, if the zip had previous data in it, it would have been lost.
+    - if you’re trying to append what’s in the zip, be sure to pass ‘a’ as the 2nd argument instead of ‘w’
+    - also, you would type .append() instead of .write()
+
+
+Codecademy Unit 10: Advanced Topics in Python
+
+List Comprehension
+- when iterating through dictionaries, you can use the “for i in dictName” for loop. calling i will return the key, and calling dictName[i] will return that key’s value.
+- “list comprehension” allows you to get away with including a lot more within the same line of code in Python. check out the syntax example below: e.g.:
+
+```py
+evenSquaresList = [i**2 for i in range(1,11) if i%2==0] # prints out even number’s squares for numbers 1 through 10]
+```
+
+- you can parse specific parts of a list using the syntax [start:end:stride]
+- for stride, negative numbers will iterate through the list from the end to the beginning
+Functional Programming
+- python allows for “functional programming”
+- single use functions are denoted as ‘lambda’ which as an “anonymous function”
+    - use lambda when you need a quick function to do something for you, but only once
+    - otherwise, it makes more sense to define a function
+- the filter() function takes two arguments
+    - the value you are trying to keep
+    - the list you are applying the filter to e.g.: filter(lambda x: x==‘Python’, myList) will filter out any item in the list that is not ‘Python’
+Bitwise Operators
+- in python, denote that a number is represented in bitwise notation by preceding the number with 0b e.g.: print 0b111 will print ‘7’
+- alternatively, you can print a number in bitwise form using the bit() function, entering in a base 10 number as the argument
+    - there is also the hex() and oct() functions which accomplish similar goals
+- the int() function we have used earlier, that converts numbers into an integer, has an optional second argument, the current base of the number.
+    - so to convert a bitwise number into a normal number, you can type int(‘1101’, 2)
+    - i’m not sure why, but the first argument always has to be a string
+- left shift (denoted as <<) and right shift (denoted as >>) will shift all the binary digits one space to the left or right respectively.
+    - warning! if there’s no binary space left (eg 0b101 >> 4) then it will return (0b000)
+- the bitwise & (AND) operator will take two binary numbers, and return a 1 for any digit there were matching 1s e.g. 110110 & 100011 returns 100010, since those were the two places that they both had a 1
+- the bitwise | (OR) operator will take two binary numbers, and return a 1 for any digit where 1 or both numbers had a 1 e.g. 110000 | 100011 will returns, 110011, since those were the four places where there was a 1 digit in one or more numbers.
+- the bitwise ^ (XOR) operator will take two binary numbers, and return a 1 for any digit where ONLY one of them had a 1. if neither have 1, or both have 1, it will return 0 e.g. 111110 | 011111 will return 100001
+- the bitwise ~ (NOT) operator takes a number ’n’, and returns that -(n+1). more in this later…
+- a bitmask is a variable that can be used to assess if certain bits are turned on or off
+    - if you wanted to turn a certain bit off (if it was on), you would create the bitmask, and then use the & to apply that control
+    - if you wanted to turn a certain bit on (if it was off), you would create the bitmask, and then sue the | to apply that control
+    - if you wanted to flip all the bits, create a mask with all bits turned on, and then use the ^ (XOR) operator. it will flip all the bits of the input number.
+
+Codecademy Unit 11: Introduction to Classes
+
+- the syntax to create a class is as follows:  e.g.: class Animal(object): #creates the Animal class, inheriting its properties from the object class
+- when creating a class, the first line below it will always be def __init__(self, arg1, arg2): because we need a function to initializes the objects that are created by the class
+- we access the attributes of our object using dot notation. so for arg1 and arg2, you can assign the answers to them using the syntax self.arg1 = arg1 (the input, or whatever you want really)
+- global variables are variables that are always accessible in the Python code
+- member variables are variables that are only accessible to members of that particular class
+    - to make a member variable not an instance variable, assign its value outside of the __init__ constructor, but within the scope of the class
+- instance variables are variables that are only accessible to that particular instance of this particular class
+- methods, otherwise known as “functions for a class”
+- for inheritance, if you want a new class that you are defining to inherit its characteristics (member variables and whatnot) from a preexisting class, replace the “self” with the name of that class.
+- if you don’t want the new class to inherit certain characteristics, you can “override” those. to do so, reuse the same function name (or member variable name) and change it however you want.
+- you don’t have to do the def __init__(self, arg1): if your class is inherited from a previous class.
+- a derived class is often known as a “subclass”, and a parent class is often known as a “super class”
+- the syntax here gets confusing, so here is a picture of what we have so far
+- the __repr__() method, known as representation, controls how your object is displayed when it prints.
+
+Codecademy Unit 12: File I/O Input Output
+
+- if you need to read and write to a file, pass ‘r+’ as the second argument in open()
+- the reason you always have to make sure to close the file when you’re done, is because it’s only at that moment that it’s pushed from the memory to the file and stored in the hard drive
+- there is a workaround though, using special syntax. you don’t have to type my_file.close() if you phrase your initial code like below: e.g.
+
+```py
+with open(‘text.txt’, ‘w’) as my_file:  my_file.write(‘boobs’)
+```
+
+- to check if a file is open or closed, you can use type myFile.closed, no parenthesis, and it will return a boolean of whether or not the file is closed.
+
+Codecademy Git: Unit 1
+- type ‘git init’ in terminal to initialize the toolbox for Git
+- a git project has three parts:
+    - 1. the working directory, where you create, edit, delete, and organize files
+    - 2. the staging area, where you list changes made to the working directory
+    - 3. the repository, where git permanently stores any changes made as different versions of the project
+- type ‘git status’ in terminal to check the status of the changes that you have made to the directory
+- type ‘git add filename.txt’ to add that file to the staging area
+- type ‘git diff filename.txt’ to check the differences between the working directory and the staging area
+- type ‘git commit -m “Message to the GitHub viewers goes here!”
+    - should be brief, and in present test
+- type ‘git log’ to pull the information from the most recent git commit
+- type ‘git push’ to publish your local commit
+
+
+Notes on Command Line
+
+Vocabulary:
+
+The ‘>’ command takes the output of what is on the left, and redirects that output to the file on the right
+e.g.: $ python myscipt.py > output.txt
+
+The ‘>>’ command takes the output of what is on the left, and appends it to the file on the right.
+e.g. $ python myscript.py >> output.txt
+
+The ‘<’ command takes the input from the file on the right, and inputs it into the file on the left
+e.g. $ cat < lakes.txt
+
+The ‘|’ command (pipe command) takes the output of the command on the left, and pipes it as input to the command on the right.
+- this is also called ‘command to command redirection’
+
+The ‘$’ character is known as the “shell prompt.” it appears when the terminal is ready to accept a command.
+
+The ‘ls’ “list directories” command will list out the files in the present working directory.
+
+The ‘pwd’ or “present working directory” command will return the present working directory that you are in.
+
+The ‘cd’ or “change directory” command will open up a subdirectory within the present working directory.
+
+The ‘mkdir’ or “make directory” command will create a new directory within the present working directory.
+
+The ‘touch’ command will create a file with the name of the input following that command
+e.g. ‘touch myfile.txt’ will create myfile.txt in your directory
+
+The ‘-a’ option lists all content, including any hidden files. Files that are hidden are files that start with the ‘.’ character.
+
+The ‘-t’ option orders files and directories by the time they were last modified
+
+The ‘-l’ option lists all content in long format, outlining more details of the file than simply the name. In fact, it outlines 7 columns, each explained below
+1. the access rights, or the actions that are permitted on that file or directory
+2. the number of hard links, including child directories, files, the link to the parent directory ‘ .. ‘ , and the link to the current directory ‘ . ‘
+3. the username of the owner of the file
+4. the name of the group that owns the file
+5. the size of the file in bytes
+6. the date and time that the file was most recently modified
+7. the name of the file or directory
+
+The ‘cp’ command copies files or directories. so to copy the contents of one file into another, type the following:
+e.g. $ cp mytextinput.txt mytextoutput.txt (note that you don’t need to use the | pipe
+
+The ‘*’ wildcard selects all files in the working directory, and has special applications
+- for instance, to copy all .txt files that start with the letter m and move them to the itp125 directory, type $ cp *m.txt ../../itp125
+
+The ‘mv’ command moves a file from the present working directory to the destination directory
+e.g.: $ mv mytext.txt myothertext.txt ../../itp125 would move both of these files into the itp125 directory
+
+The ‘rm’ command deletes a file or directory from the present working directory.
+
+The ‘-r’ option, which stands for “recursive option” includes any child directories below the directory being acted upon.
+e.g.: $ rm -r itp125 will remove all child directories below the itp125 directory as well as itp125
+
+The ‘echo’ command accepts a string as input (must be surrounded by quotations) and returns that string as output.
+e.g. $ echo “Hello world.” will output ‘Hello world.” back to the terminal.
+
+The ‘stdin’ or standard input is the information input through the keyboard to the terminal.
+
+The ‘stdout’ or standard output is the information outputted back to the user in text through the terminal.
+
+The ‘stderr’ or standard error is a message that the user will receive in terminal if a process failed.
+
+Redirection can be used to redirect the stdin, stdout, or stderr of actions taken on the command line.
+
+The ‘cat’ command outputs the contents of a file to the terminal.
+e.g. $ cat ‘hello.txt’ would output Hello world! to the terminal.
+
+The ‘wc’ or “word count” command will output the number of lines, words, and characters of the file it is performed upon.
+
+The ‘uniq’ or “unique” command will filter out adjacent, duplicate lines in a file. So, if you wanted to filter out repeat values, you would sort the list, and then call the uniq function.
+e.g. $ sort deserts.txt | uniq > deserts.txt
+
+The ‘grep’ or “global regular expression print” command searches files for lines that match a pattern, and returns the result.
+e.g. $ cat < grep Mount mountains.txt would output the
+- grep can also be used on directories, not just files. If used on a directory, it will return any files within that directory that contain the requested word.
+
+The ‘-i’ option or “insensitive” option allows a command to be case insensitive.
+e.g. $ grep -i Mount mountains.txt will return any line with mount, MOUNT, Mount, etc. to the command line.
+
+
+Python Programming Notes:
+
+Common exceptions in Python:
+* Accessing a non-existent dictionary key will raise a KeyError exception.
+* Searching a list for a non-existent value will raise a ValueError exception.
+* Calling a non-existent method will raise an AttributeError exception.
+* Referencing a non-existent variable will raise a NameError exception.
+* Mixing datatypes without coercion will raise a TypeError exception.
+
+
+The 3 Way Handshake
+
+First, the user sends an SYN to the server,
+- says” hey, can I connect to you?
+
+Then, the server sends back an SYN, ACK (acknowledgement)
+- says “yes, I acknowledge that you are trying to connect to me, okay you can connect”
+
+Then, the client sends back an ACK
+- says “yes, I acknowledge that you have acknowledged my request to connect.
+
+Now that this is done, the two are connected.
+
+Encryption and GPG Notes
+
+Symmetric Encryption:
+- uses a single key, which is shared by the receiver and the sender
+- since there is only one key, if anyone had access to it, the secrecy of the communication is compromised
+Asymmetric Encryption:
+- newer, and more popular
+- creates a public and private key (mathematically related to each other, but different)
+- the private key is used to encrypt the data, and the public key is used to decrypt the data
+Public Key Cryptography:
+- you can create a key-ring, and assign different public keys to different individuals (one for each user)
+GnuPG (GPG) Encryption
+- open source, public/private key software
+- no GUI, run from the terminal
+
+Using GPG:
+step 1: create your public/private keys with gpg —gen-key
+step 2: create the revocation certificate gpg —gen-revoke
+- this stores hard copies of your keys and certificates
+step 3: type gpg in terminal
+- this will create secring.gpg (your private key) and pubring.gpg (your public key)
+
+
+
+to encrypt a file, type gpg -e -r youremail filename.txt
+
+
+
+
+Notes on Networks
+
+How to determine the number of IP subnets and hosts:
+
+octet:
+- so a byte is just 8 binary digits or ‘bits’, e.g. 10011011
+- but you don’t have to represent it as that, you can calculate its value in a 256 scale
+- `1+1*2+0*4+1*16` etc…
+
+so an IPv4 address has 32 bits. since there are 8 bits in a byte, we can split the IP into 4 bytes, each separated by a dot.
+e.g. 128.0.0.1
+one part of the IP is host bits, and one part of the IP is the subnet bits
+
+you split a subnet into smaller subnets by borrowing bits from the host range and adding them to the subnetting bits (more on this later)
+e.g. you can split 255.255.255.0 into 4 subnets with the subnet mask of 255.255.255.192
+- this is because you’re really typing 1{8}.1{8}.1{8}.1{2}0{6}. notice how there’s four permutations of 1 and 0 possible among the two bits you changed in the last octet.
+    - if you’re stupid, those combos were .11, .10, .01, and .00
+    - if n is the # of host bits that you borrowed for your subnet, 2^n is the amount of subnets that you can create.
+    - if n is the # of host bits that you borrowed for your subnet, 2^(8-n) is the amount of IPs that can have 2^n subnets.
+    - WAIT! don’t forget that every IP needs a network address and a broadcast address, so you really have 2^(8-n)-2 possible hosts.
+
+we use the network address to identify what network we are on, and the broadcast address to send messages to devices on the subnet
+the network address is always the very first IP address of a subnet, and the broadcast address is always the very last IP address of a subnet
+- clarification: last address means most 1 bits (255), and first means most 0 bits (0). lower score = earlier preference
+
+
+
+CIDR (Classless Inter-Domain Routing)
+- notation: IP address written as prefix, with a suffix following to indicate how many bits are in the address
+  - e.g.: for 192.0.1.0/24, the prefix is 192.0.1.0 and the total number of bits in the address is 24
+    - 01100000.00000000.00000001.00000000/24
+    - the maximum allowable amount of bits in the prefix is 32 bits, or 4 byes (wait duh…)
+    - addresses with identical prefixes and the same amount of bits belong to the same block
+  - e.g. 255.255.255.0 only has 1 subnet “known as subnet zero (because zero bits are allocated to the subnet”, since there are no permutable 1 bits in the subnet range, there is only one subnet.
+  - but because of this, there are (2^32)-2 possible hosts that can have this subnet, making it the most common
+  - e.g.: 192.168.4.0/30 will refer to the four addresses
+      - 192.168.4.0
+      - 192.168.4.1
+      - 192.168.4.2
+      - 192.168.4.3
+
+there are 32 bits in an IP address, you divide them among host bits and subnet bits
+- for every n bits you have among the host bits, you have `(2^n)-2*` possible hosts
+    - *WAIT!* don’t forget that you need to subtract two possible hosts because you need a network address and a broadcast address so subtract 2 hosts
+- this is where that CIDR /n notation comes into play.
+    - 255.255.255.0/n there are 2^(32 - /n) possible hosts for the subnet using this notation
+
+VLSM (Variable Length Subnet Masking)
+
+the subnet bits show what network a device is on, and the host bits define the individual device
+- an analogy to the subnet bits would be an area code. everyone on the network shares the same subnet bits, but they have different host bits
+
+1. use the first octet () to determine if the class of the address A, B, or C
+    1. figure out address class later then…
+2. use the class of the address to determine which byte is available
+3. look at the host byte in the subnet masks, using a
+
+
