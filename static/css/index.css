@@ -38,10 +38,45 @@ section#cards {
   }
 }
 
+section#intro {
+  max-width: 800px;
+  margin: 50px auto;
+}
 
-main > h1 {
-  font-size: 3rem;
-  font-weight: 500;
+section#intro summary {
+  text-indent: 0ch;
+  font-size: 1.5rem;
+  max-width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 576px) {
+  section#intro summary {
+    font-size: 2rem;
+  }
+}
+
+section#intro > details {
+  text-indent: 4ch;
+  max-width: 80ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section#intro > details > p {
+  font-family: serif;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  section#intro > details {
+    max-width: 68ch;
+  }
+  section#intro > details > p {
+    font-size: 20px;
+    line-height: 32px;
+  }
 }
 
 main > h2 {
