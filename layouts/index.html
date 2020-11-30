@@ -1,19 +1,19 @@
 {{ define "head" }}
-<!--suppress ALL -->
-<meta property="og:image" content="https://helpful.wiki/img/preview.webp">
+<meta property="og:image" content="{{ .Site.BaseURL }}img/preview.webp">
 <meta name="description" content="{{ .Description }}">
-<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="/css/index.css">
 {{ end }}
 
 {{ define "main" }}
-  {{ .Content }}
-  <section>
-    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
-    {{ range sort $pages ".FuzzyWordCount" "desc" }}
-    <a class="card" href="{{ .File.ContentBaseName }}">
+  <section id="intro">
+    {{ .Summary }}
+  </section>
+  <section id="cards">
+    {{ range sort .Pages ".FuzzyWordCount" "desc" }}
+    <a class="card" href="{{ .RelPermalink }}">
       <picture>
-        <source type="image/webp" srcset="{{ .RelPermalink }}{{ .Resources.GetMatch `preview.webp`}}">
-        <img alt="" class="preview" src="{{ .RelPermalink }}{{ .Resources.GetMatch `preview.png` }}">
+        <source type="image/webp" srcset="{{ .RelPermalink }}preview.webp">
+        <img alt="" class="preview" src="{{ .RelPermalink }}preview.png">
       </picture>
       <p>{{ .Title }}</p>
     </a>

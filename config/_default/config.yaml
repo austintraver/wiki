@@ -1,23 +1,22 @@
 title: 'Helpful Wiki'
 baseURL: 'https://helpful.wiki/'
 languageCode: 'en-US'
-theme: 'doctober'
 watch: true
-googleAnalytics: 'UA-175811422-1'
+googleAnalytics: 'G-D9NWWK7881'
 sitePagesMenu: 'main'
 newContentEditor: 'nvim'
 relativeURLs: true
 enableInlineShortcodes: true
 enableGitInfo: false
 pygmentsUseClasses: true
+pluralizeLinkTitles: false
 minify:
   minifyOutput: false
 staticDir:
   - 'static'
   - 'static/favicon'
 permalinks:
-  #  posts: '/:title'
-  posts: '/:filename'
+  'posts': '/blog'
 frontmatter:
   date: [ 'date', ':default' ]
   lastmod: [ ':fileModTime', ':default' ]
@@ -63,8 +62,6 @@ markup:
     noClasses: true
     style: 'dracula'
     tabwidth: 4
-  #   name: 'gcp'
-  #   URL: 'gs://helpful.wiki'
 #outputFormats:
 #  Algolia:
 #    #  tells the output format how to look for the Hugo layout for this output format
