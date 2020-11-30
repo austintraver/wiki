@@ -10,6 +10,17 @@ img {
   width: 100%;
 }
 
+img.clone {
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  bottom: 10px;
+  cursor: pointer;
+  right: 10px;
+  transition-duration: 500ms;
+  opacity: 0.2;
+}
+
 footer {
   color: var(--ash);
   font-size: max(12pt, 0.8rem);
