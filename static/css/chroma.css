@@ -326,11 +326,6 @@
   text-decoration: underline;
 }
 
-.chroma {
-  line-height: 150%;
-  padding: 10px;
-}
-
 .chroma code {
   background-color: inherit;
 }

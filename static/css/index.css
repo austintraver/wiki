@@ -3,12 +3,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-@media screen and (min-width: 576px) {
-  body {
-    padding: 1vh 3vw;
-  }
-}
-
 main {
   align-items: center;
   background-color: white;
@@ -19,7 +13,13 @@ main {
   width: min(100%, 1600px);
 }
 
-section {
+@media screen and (min-width: 576px) {
+  main {
+    padding: 1vh 3vw;
+  }
+}
+
+section#cards {
   column-gap: 48px;
   display: grid;
   grid-auto-rows: 300px;
@@ -28,12 +28,12 @@ section {
 }
 
 @media screen and (min-width: 576px) {
-  section {
+  section#cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media screen and (min-width: 992px) {
-  section {
+  section#cards {
     grid-template-columns: repeat(3, 1fr);
   }
 }

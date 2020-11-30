@@ -5,4 +5,6 @@ buildExpired: true
 buildFuture: true
 disableHugoGeneratorInject: true
 disableKinds: ['RSS', 'robotsTXT', '404']
-disableFastRender: true
+disableFastRender: false
+disableLiveReload: false
+baseURL: 'http://heike.local:1313'

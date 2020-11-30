@@ -44,8 +44,14 @@ body {
 }
 
 @media screen and (min-width: 576px) {
-  body {
-    margin-top: 96px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header {
+    scroll-margin-top: 40px;
   }
 }
 
@@ -131,17 +137,11 @@ strong {
 }
 
 code {
-  background-color: #f1f3f4;
+  background-color: var(--concrete);
   border-radius: 4px;
   font-size: inherit;
   white-space: pre-wrap;
   word-break: break-all;
-}
-
-var {
-  color: #ff6666;
-  font-style: italic;
-  font-weight: 700;
 }
 
 p {
@@ -165,7 +165,25 @@ pre {
   /*overflow: clip;*/
 }
 
+pre,samp {
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 150%;
+  display: block;
+}
+
 samp {
+  white-space: pre-line;
+  font-weight: 700;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--background);
+  /*margin-left: 4em;*/
+}
+
+var {
+  color: var(--red);
+  font-style: italic;
   font-weight: 700;
 }
 
@@ -200,9 +218,11 @@ nav {
 }
 
 @media screen and (min-width: 576px) {
+  /*
   html {
     scroll-padding-top: 128px;
   }
+   */
 
   nav {
     align-items: center;
@@ -214,9 +234,10 @@ nav {
     justify-content: space-between;
     margin: 0;
     padding: 0px 32px;
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
+    z-index: 1;
   }
 
   nav img {
@@ -228,14 +249,21 @@ nav {
   nav > a#sitename {
     align-items: center;
     display: flex;
+  }
+
+  nav > a#sitename > p {
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
     overflow-wrap: normal;
+    font-family: "Arcana Mono", monospace;
   }
 
   nav img#icon {
     margin-right: 1em;
     object-fit: scale-down;
+  }
+
+  iframe#sponsor {
   }
 
   nav > a#author {
@@ -246,7 +274,7 @@ nav {
     justify-content: space-between;
     margin: 0;
     padding: 8px 16px;
-    width: 240px;
+    width: 300px;
   }
 
   nav > a#author > div {
@@ -268,14 +296,14 @@ nav {
   nav a#author > div > p#name {
     color: var(--snow);
     font-size: 1.2rem;
-    letter-spacing: 0.1rem;
     text-align: left;
   }
 
   nav a#author > div > p#catchphrase {
-    color: var(--concrete);
-    font-size: 0.7rem;
+    color: var(--light-gray);
+    font-size: 0.9rem;
     font-style: italic;
   }
+
 }
 

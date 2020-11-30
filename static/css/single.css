@@ -74,8 +74,8 @@ table {
   display: table;
   margin: 0px 0px 16px;
   overflow: auto;
-  width: 100%;
   table-layout: fixed;
+  width: 100%;
 }
 
 thead {
@@ -100,28 +100,133 @@ tr {
 }
 
 article {
-  border-radius: 8px;
   background-color: white;
-  padding: 20px 40px;
   box-shadow: #3c40434d 0px 1px 2px 0px, #3c404326 0px 1px 3px 1px;
-  margin-top: min(calc(100% - 940px), 40px);
-  margin-bottom: min(calc(100% - 940px), 40px);
-  width: min(940px, 100%);
+  width: 100%;
+  padding: 20px 40px;
+}
+
+@media screen and (min-width: 992px) {
+  article {
+    border-radius: 8px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    width: 940px;
+  }
 }
 
 html {
   scroll-padding-top: 64px;
 }
 
+kbd {
+  background-color: var(--concrete);
+  border: 1px solid var(--light-gray);
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+  color: var(--ash);
+  display: inline-block;
+  font-size: .85em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
+img.fragment {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin-right: 16px;
+  margin-top: 0.1em;
+  opacity: 20%;
+  transition-duration: 500ms;
+  width: 1em;
+  height: 1em;
+  /*
+  box-sizing: border-box;
+  border-image-width: 0;
+  line-height: 1;
+  margin-left: 8px;
+  min-width: 36px;
+  outline: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+   */
+}
+
+img.fragment:hover {
+  opacity: 100%;
+}
+
+#toast {
+  background-color: var(--background);
+  color: var(--white);
+  border-radius: 8px;
+  bottom: 5vh;
+  right: 5vw;
+  padding: 16px;
+  position: fixed;
+  text-align: center;
+  visibility: hidden;
+  z-index: 1;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 5vh;
+    opacity: 1;
+  }
+
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 5vh;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
 
 /*
-h2::before {
-  content: '';
-  display: block;
-  height:      108px;
-  margin-top: -108px;
-  visibility: hidden;
-  position: relative;
-  z-index: -1;
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  content: "\f0c1";
+  margin-right: 8px;
 }
+
+h1:hover:before,
+h2:hover:before,
+h3:hover:before,
+h4:hover:before,
+h5:hover:before,
+h6:hover:before {
+  color: var(--dark-blue);
+  opacity: 100%;
+}
+
  */

@@ -1,0 +1,23 @@
+{{ define "head" }}
+<meta
+    content="https://helpful.wiki{{ .RelPermalink }}preview.webp"
+    property="og:image"
+>
+<meta content="{{ .Description }}" name="description">
+<link href="/css/chroma.css" rel="stylesheet" type="text/css">
+<link href="/css/single.css" rel="stylesheet" type="text/css">
+<script defer src="/js/single.js"></script>
+<script defer src="/js/fragment.js"></script>
+{{ end }}
+
+{{ define "main" }}
+<article>
+  {{- .Content -}}
+  <footer>
+    <hr>
+    <p>Created <strong>{{ .Date.Format "Jan 2, 2006" }}</strong></p>
+    <p>Modified <strong>{{ .Lastmod.Format "Jan 2, 2006" }}</strong></p>
+  </footer>
+</article>
+<div id="toast"></div>
+{{ end }}
