@@ -1,0 +1,183 @@
+---
+title: "Rasberry Pi"
+description: "What was once brought to you by a supercomputer, can now be achieved with a $20 bill"
+date: 2020-02-04T14:52:27-08:00
+---
+
+# Raspberry Pi
+
+## Headless Installation
+
+* Configure the WiFi 
+
+  ```shell script
+  # WiFi Name
+  ssid="My WiFi"
+
+  # WiFi Password
+  psk="getoffmyLAN"
+
+  # The 2-letter ISO 3166-1 country code
+  # https://en.wikipedia.org/wiki/ISO_3166-1
+  country="US"
+
+  # Create the WiFi configuration file
+  <<-EOF > /Volumes/boot/wpa_supplicant.conf
+  country=${country}
+  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+  network={
+      ssid=${ssid}
+      psk=${psk}
+      key_mgmt=WPA-PSK
+  }
+  EOF
+  ```
+
+  * **Reason:** When the Raspberry Pi boots from this SD card, Raspberry Pi OS will move the contents of this file into `/etc/wpa_supplicant/`
+
+* You'll need to enable SSH access, which is as easy as adding a file named `ssh` to the root directory of the OS
+
+  ```shell script
+  touch /Volumes/boot/ssh
+  ```
+
+* More useful information about headless access can be found [here](https://www.raspberrypi.org/documentation/remote-access/ip-address.md)
+
+Now you can access the Raspberry Pi with the following credentials
+
+* Username: `pi`
+* Password: `raspberry`
+* Hostname: `raspberrypi`
+
+## Configurations
+
+* Link to [documentation on configurations](https://www.raspberrypi.org/documentation/configuration/)
+
+### `config.txt`
+
+* Link to [documentation on `config.txt`](https://www.raspberrypi.org/documentation/configuration/config-txt/)
+
+### Display Resolution
+
+* Link to [documentation](https://www.raspberrypi.org/documentation/configuration/config-txt/video.md)
+
+If you're using a 1920 x 1080 display for your raspberry pi, the text may appear too small. If you want to leverage pixel doubling to increase the UI scale (rendering each pixel as a 2x2 matrix), then add the following lines to your `/boot/config.txt`
+
+```txt
+hdmi_group=1
+hdmi_mode=15
+```
+
+## VNC
+
+Documentation on Virtual Network Computing (VNC) implementation can be found [here](https://www.raspberrypi.org/documentation/remote-access/vnc/README.md)
+
+## SMB
+
+Documentation on the Server Message Block (SMB) implementation can be found [here](https://www.raspberrypi.org/documentation/remote-access/samba.md)
+
+## Useful Tricks
+
+* Measure temperature of Raspberry Pi
+
+```shell script
+vcgencmd measure_temp
+# temp=51.0'C
+```
+
+* Print the MAC address of the ethernet and WiFi connections
+
+  ```shell script
+  cat /sys/class/net/eth0/address
+  cat /sys/class/net/wlan0/address
+  ```
+
+* Alter the MAC address of a network device
+
+  ```shell script
+  # Bring the network interface "eth0" offline
+  ip link set dev eth0 down
+  # Alter the address of the network interface "eth0"
+  ip link set dev eth0 address a2:b4:c6:d8:e0:1d:2e
+  # Bring the network interface "eth0" online
+  ip link set dev eth0 up
+  # Check the address
+  ip link show eth0
+  ```
+
+* Make the changed MAC address permanent
+
+  ```shell script
+  - to make it permanent, within /etc/network/interfaces, add the following stanza to the eth0 block: "pre-up ip link set dev eth0 address 02:03:04:05:06:07"
+
+# `wall`
+
+You can use `wall` to write a message to all open terminals.
+
+* Write `hello world` to every terminal:
+
+  ```shell script
+  wall "hello world"
+  ```
+
+# `mesg`
+
+Message is a command line messaging tool
+
+* Enable receiving messages
+
+  ```shell script
+  mesg y
+  ```
+
+* Send a message to the user `tommy` on `tty1`
+
+  ```shell script
+  ls | write tommy tty1
+  ```
+
+## `date`
+
+Change the current time on the computer
+
+  ```shell script
+  # Totally not when this was written...
+  sudo date -s '30 Nov 2019 04:38'
+  ```
+
+## `systemctl`
+
+* Enable booting to the command-line
+
+  ```shell script
+  sudo systemctl set-default multi-user.target
+  ```
+
+## `cec-utils`
+
+Consumer Electronics Control (CEC) is supported by most displays, including Samsung TVs. If your Raspberry Pi is connected to a Samsung TV via HDMI, you can use these commands.
+
+* Getting Started
+
+  ```shell script
+  sudo apt install cec-utils
+  ```
+
+* Make the raspberry pi's console the active source for input
+
+  ```shell script
+  cec-client -s -d 1 <<< "as"
+  ```
+
+* Turn the TV off (standby mode)
+
+  ```shell script
+  cec-client -s -d 1 <<< "standby 0"
+  ```
+
+* Check the current TV status (on or off)
+
+  ```shell script
+  cec-client -s -d 1 <<< "pow 0"
+  ```
+

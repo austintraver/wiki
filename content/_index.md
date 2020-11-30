@@ -4,13 +4,64 @@ description: "A place to learn something new"
 date: 2020-04-01T02:49:30-08:00
 ---
 
+# Welcome to my notebook
 
-# Welcome 👋🏻
+When I arrived at college, I didn't know how to program. I hadn't written a
+single line of code. During my first semester, I enrolled in a course called
+"Introduction to Programming" I arrived at the lecture hall the first day of
+class, made my way to the only empty seat still remaining. I introduced myself
+to the students sitting next to me, and asked them if they were beginners too.
+It turns out I was the only one among them who hadn't already been introduced to
+programming. I was in disbelief, "but this is 'Introduction to Programming', how
+come I'm the odd man out?" and frowned, playfully. "Yeah it's weird... USC
+students are introduced to programming in a different class: 'Fundamentals of
+Computation. If you're new at this you should probably take it first."
 
-## Check out my notebook! ⭐️{#my-notebook}
+I opened my laptop and reached the registration page. To my dismay, I found that
+every section offering the course had already filled up. My shoulders sank into
+my chair defeated, "What am I getting myself into?" I thought to myself. The
+professor entered the lecture hall, turned on the projector, and the roar of a
+lecture hall filled with 200 students fell to hush murmur.
 
-My years in college have resulted in quite a vast exploration. The articles below contains years of my notes, everything I've ever jotted down, dutifully maintained over the course of countless code-marathons. I built this website for a certain kind of [forgetful developer](https://www.linkedin.com/in/austintraver), the type that always forgets how to code write the solution, but always remembers where the solution was once written down.
+Our first assignment was to write a program in C, a language that some may
+consider a bit hostile for beginners trying to write their first program. For
+better or worse though, I had nothing to compare it against. In the evening, I
+made my way to the library, opened up my laptop, and started walking through the
+instructions for our first assignment. When I opened up the terminal, I froze.
+I'd never used a command line interface. I sat there, staring at the cursor, as
+it blinked at me, almost mockingly. Panic began setting in. I was in way over my
+head.
 
-So by all means, dive right in! Explore to your heart's content.
+The student sitting next to me taps my shoulder, and introduces himself. It
+turns out he's finishing up his major in computer science, and came to the
+library to work on a programming assignment of his own. He smiled, glanced my
+laptop, saw the empty terminal, the blinking cursor, and turned to me. With one
+eyebrow raised, he ventured a guess: "You've never done this before, have you?"
+
+It must have been clear to the guy that I had absolutely no idea what I was
+doing. I'm sure it was why introduced himself in the first place. I looked down,
+and nodded sheepishly. "Yeah, first time. Thanks for stepping in."
+
+"No worries, I've written `hello world` before. I'll coach you through it!" And
+that's exactly what he did, with great patience, no less. Step by step, he
+guided me across the assignment until we reached the finish line. I enter one
+last command into the terminal. The program starts up, and two words appear
+beside my cursor: `hello world`. Replaying the process in my head, it still felt
+so daunting. I turned to him, and sighed. <q>Do they expect me to remember how
+to do all of this? It's so many steps!</q> He laughed, he definitely had an
+answer he was ready to give, but he stopped himself. He paused, he looked back
+down at the laptop, thought about it, and shrugged his shoulders. <q>You don't
+really have to remember how to do it. <em>You just have to remember where you
+wrote it down.</em></q> and shrugged his shoulders.
+
+I stuck with it, and with each passing semester, I climbed one rung higher on
+the ladder of computer science. A couple years into the major, I land a job
+assisting the professor teaching software development. He had me direct labs,
+facilitate projects, and hold office hours for his students. They'd come to
+office hours for help on their labs, projects, assignments. I never really
+thought the day would come, but here it is: it's my turn to be coach.
+
+I give them the same advice: <q><em>You just have to remember where you wrote it
+down</em></q> This is where I wrote it down, and everything I've ever learned since. Welcome to my notebook.
 
 ---
