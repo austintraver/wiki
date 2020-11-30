@@ -6,7 +6,7 @@
 
 {{ define "main" }}
   <section id="intro">
-    {{ .Summary }}
+    {{ .Content }}
   </section>
   <section id="cards">
     {{ range sort .Pages ".FuzzyWordCount" "desc" }}

@@ -4,18 +4,23 @@ description: "A place to learn something new"
 date: 2020-04-01T02:49:30-08:00
 ---
 
-# Welcome to my notebook
+<details>
+<summary>Welcome to my notebook</summary>
 
-When I arrived at college, I didn't know how to program. I hadn't written a
-single line of code. During my first semester, I enrolled in a course called
+When I first arrived at college, I didn't know how to program. I'd never written
+a single line of code. During my first semester, I enrolled in a course called
 "Introduction to Programming" I arrived at the lecture hall the first day of
 class, made my way to the only empty seat still remaining. I introduced myself
 to the students sitting next to me, and asked them if they were beginners too.
 It turns out I was the only one among them who hadn't already been introduced to
-programming. I was in disbelief, "but this is 'Introduction to Programming', how
-come I'm the odd man out?" and frowned, playfully. "Yeah it's weird... USC
-students are introduced to programming in a different class: 'Fundamentals of
-Computation. If you're new at this you should probably take it first."
+programming. I was in disbelief.
+
+<q>But this is 'Introduction to Programming'!</q> I began, <q>How come I'm the
+odd man out?</q>
+
+<q>Yeah it's weird...</q> sympathized another student, <q>USC students are
+introduced to programming in a different class: 'Fundamentals of Computation. If
+you're new at this you should probably take it first.</q>
 
 I opened my laptop and reached the registration page. To my dismay, I found that
 every section offering the course had already filled up. My shoulders sank into
@@ -35,24 +40,38 @@ head.
 The student sitting next to me taps my shoulder, and introduces himself. It
 turns out he's finishing up his major in computer science, and came to the
 library to work on a programming assignment of his own. He smiled, glanced my
-laptop, saw the empty terminal, the blinking cursor, and turned to me. With one
-eyebrow raised, he ventured a guess: "You've never done this before, have you?"
+laptop, saw the empty terminal, the blinking cursor, and turned to me.
+
+With one eyebrow raised, he ventured a guess:
+
+<q>You've never done this before, have you?</q>
 
 It must have been clear to the guy that I had absolutely no idea what I was
-doing. I'm sure it was why introduced himself in the first place. I looked down,
-and nodded sheepishly. "Yeah, first time. Thanks for stepping in."
+doing. I'm sure it was why introduced himself in the first place.
 
-"No worries, I've written `hello world` before. I'll coach you through it!" And
-that's exactly what he did, with great patience, no less. Step by step, he
-guided me across the assignment until we reached the finish line. I enter one
-last command into the terminal. The program starts up, and two words appear
-beside my cursor: `hello world`. Replaying the process in my head, it still felt
-so daunting. I turned to him, and sighed. <q>Do they expect me to remember how
-to do all of this? It's so many steps!</q> He laughed, he definitely had an
-answer he was ready to give, but he stopped himself. He paused, he looked back
-down at the laptop, thought about it, and shrugged his shoulders. <q>You don't
-really have to remember how to do it. <em>You just have to remember where you
-wrote it down.</em></q> and shrugged his shoulders.
+<q>Yeah, first time..." I nodded, and looked down, sheepishly. "Thanks for
+stepping in.</q>
+
+<q>No worries, I remember writing this program, I'll coach you through it!</q>
+he assured me.
+
+I was unsure if he meant it, but step by step, he guided me across the
+assignment until we reached the finish line. I enter one last command into the
+terminal. The program starts up, and two words appear beside my cursor:
+
+<samp>hello world</samp>
+
+Replaying the process in my head, it still felt so daunting. I turned to him,
+and sighed.
+
+<q>Do they expect me to remember how to do all of this? It's so many steps!</q>
+
+He laughed, he definitely had an answer he was ready to give, but he
+stopped himself. He paused, he looked back down at the laptop, and thought about
+it for a moment.
+
+<q>You don't really have to remember how to do it.</q> he said, and shrugged his
+shoulders. <q><em>You just have to remember where you wrote it down.</em></q>
 
 I stuck with it, and with each passing semester, I climbed one rung higher on
 the ladder of computer science. A couple years into the major, I land a job
@@ -62,6 +81,9 @@ office hours for help on their labs, projects, assignments. I never really
 thought the day would come, but here it is: it's my turn to be coach.
 
 I give them the same advice: <q><em>You just have to remember where you wrote it
-down</em></q> This is where I wrote it down, and everything I've ever learned since. Welcome to my notebook.
+down.</em></q>
 
----
+This is where I wrote it down, and everything I've ever learned since. Welcome
+to my notebook.
+
+</details>
