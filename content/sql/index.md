@@ -231,21 +231,15 @@ SELECT lower(name) FROM my_table WHERE name='austin'
 
 ### `TIMESTAMP`
 
-The `TIMESTAMP` value-type is used to save time in SQL.
+The
+[`TIMESTAMP()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_timestamp)
+function can be used to manipulate datetimes. This isn't the only function,
+either. There's a handful you can use to manipulate datetimes and extract its
+components, such as
+[`MONTH()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_month)
 
-```sql
-SELECT
-  cast(time_of_event as DATE) as date_of_event,
-  extract(year FROM year_of_event) as year_of_event,
-  extract(month FROM year_of_event) as month_of_event,
-  extract(week FROM year_of_event) as week_of_event,
-  extract(day FROM year_of_event) as day_of_event
-  extract(hour FROM year_of_event) as hour_of_event,
-  extract(minute FROM year_of_event) as minute_of_event,
-  extract(second FROM year_of_event) as second_of_event
-```
-
-The `extract()` function is part of `MySQL` but the support works in many languages.
+The `extract()` function is part of `MySQL` but the support works in many
+languages.
 
 ### `GROUP BY`
 
