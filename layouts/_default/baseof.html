@@ -9,19 +9,20 @@
   <meta property="og:site_name" content="Helpful Wiki">
 
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/svg+xml" href="/img/icon.svg">
-  <link rel="apple-touch-icon" href="/img/icon.png">
-  <link rel="stylesheet" type="text/css" href="/css/baseof.css">
-  <link rel="stylesheet" type="text/css" href="/css/fonts.css">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <link rel="stylesheet" type="text/css" href="/doctober.css">
+  <link rel="stylesheet" type="text/css" href="/baseof.css">
+  <link rel="stylesheet" type="text/css" href="/fonts.css">
   <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
   >
-  <script defer src="/__/firebase/8.0.2/firebase-app.js"></script>
-  <script defer src="/__/firebase/8.0.2/firebase-analytics.js"></script>
-  <script defer src="/__/firebase/8.0.2/firebase-performance.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-app.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-analytics.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-performance.js"></script>
   <script defer src="/__/firebase/init.js"></script>
-  <script defer src="/js/init.js"></script>
+  <script defer src="/init.js"></script>
 
   {{ block "head" . }}
   {{ end }}
@@ -31,15 +32,18 @@
 <body>
   <nav>
     <a id="sitename" href="/">
-      <img id="icon" alt="" src="/img/icon.svg"/>
+      <img id="icon" height=64 width=64 alt="" src="/icon.svg"/>
       <p>helpful.wiki</p>
     </a>
-    <a id="author" href="https://github.com/austintraver">
+    <a id="author" href="https://github.com/sponsors/austintraver">
       <div>
         <p id="name">Austin Traver</p>
         <p id="catchphrase">Teaching to avoid learning...</p>
       </div>
-      <img id="headshot" alt="" src="/img/headshot.webp">
+      <picture>
+        <source type="image/webp" srcset="/headshot.webp">
+        <img alt="" height=64 width=64 class="preview" src="/headshot.jpeg">
+      </picture>
     </a>
   </nav>
   <main>

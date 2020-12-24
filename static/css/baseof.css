@@ -32,15 +32,10 @@ Medium devices (tablets, 768px and up)
 @media (min-width: 1200px) { ... }
 
  */
-* {
-  box-sizing: border-box;
-}
 
 body {
   font-family: "Roboto", -apple-system, sans-serif;
-  margin: 0;
-  overflow-x: hidden;
-  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 576px) {
@@ -66,82 +61,8 @@ header {
   font-family: "Arcana Sans", "Roboto", sans-serif;
 }
 
-h1 {
-  font-size: 26px;
-  margin-bottom: 24px;
-}
-
-@media (min-width: 768px) {
-  h1 {
-    font-size: 32px;
-  }
-}
-
-h2 {
-  font-size: 22px;
-  margin-bottom: 24px;
-}
-
-@media (min-width: 768px) {
-  h2 {
-    font-size: 24px;
-  }
-}
-
-h3 {
-  font-size: 18px;
-  margin-bottom: 16px;
-  margin-top: 32px;
-}
-
-@media (min-width: 768px) {
-  h3 {
-    font-size: 20px;
-  }
-}
-
-h4 {
-  font-size: 16px;
-  margin-bottom: 16px;
-  margin-top: 32px;
-}
-
-@media (min-width: 768px) {
-  h4 {
-    font-size: 16px;
-  }
-}
-
-h5 {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  h5 {
-    font-size: 14px;
-  }
-}
-
-h6 {
-  font-size: 12px;
-}
-
-@media (min-width: 768px) {
-  h6 {
-    font-size: 12px;
-  }
-}
-
-strong {
-  font-weight: 700;
-}
-
 code {
   background-color: var(--concrete);
-  border-radius: 4px;
-  font-size: inherit;
-  white-space: pre-wrap;
-  word-break: break-all;
 }
 
 p {
@@ -160,24 +81,12 @@ samp {
 pre {
   background-color: var(--concrete);
   border-radius: 10px;
-  padding: 0px 0px;
   text-align: left;
   position: relative;
   /*overflow: clip;*/
 }
 
-pre,samp {
-  border-radius: 10px;
-  padding: 10px;
-  line-height: 150%;
-  display: block;
-}
-
 samp {
-  white-space: pre-line;
-  font-weight: 700;
-  border-style: solid;
-  border-width: 2px;
   border-color: var(--background);
   /*margin-left: 4em;*/
 }
@@ -219,11 +128,11 @@ nav {
 }
 
 @media screen and (min-width: 576px) {
-  /*
+
   html {
-    scroll-padding-top: 128px;
+    /* Adjust offset for the height of the <nav> element */
+    scroll-padding-top: 64px;
   }
-   */
 
   nav {
     align-items: center;
@@ -243,8 +152,12 @@ nav {
 
   nav img {
     height: 64px;
-    object-fit: cover;
     width: 64px;
+  }
+
+  nav img#icon {
+    margin-right: 1em;
+    object-fit: scale-down;
   }
 
   nav > a#sitename {
@@ -257,11 +170,6 @@ nav {
     letter-spacing: 0.1rem;
     overflow-wrap: normal;
     font-family: "Arcana Mono", monospace;
-  }
-
-  nav img#icon {
-    margin-right: 1em;
-    object-fit: scale-down;
   }
 
   iframe#sponsor {
