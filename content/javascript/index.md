@@ -68,6 +68,15 @@ By default, if your iterator variable's mutability is not assigned with the `con
   3
   ```
 
+## String Manipulation
+
+The [substring()][] method returns the part of the string between the start and
+end indexes, or to the end of the string. Following is a simple example
+demonstrating usage of `substring()` to get last `n` characters from the string.
+
+[substring()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring
+
+
 ## Date & Time
 
 * Construct a date from a string
@@ -468,3 +477,21 @@ NPM
 ```shell script
 npm install --global typescript
 ```
+
+* Creating a TypeScript project
+
+```shell script
+mkdir project
+cd project
+
+npm init
+
+npm install --save-dev typescript
+
+tsc --init
+```
+
+
+The last command creates `tsconfig.json`, [the TypeScript configuration file][oreilly-tsconfig]
+
+[oreilly-tsconfig]: https://learning.oreilly.com/library/view/programming-typescript/9781492037644/ch02.html#tsconfig.json

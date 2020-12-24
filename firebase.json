@@ -1,9 +1,34 @@
 {
   "hosting": {
     "public": "public",
+    "trailingSlash": false,
+    "cleanUrls": true,
     "ignore": [
       "firebase.json",
-      "**/.*"
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/vim",
+        "destination": "/vi",
+        "type": 301
+      },
+      {
+        "source": "/mac",
+        "destination": "/macos",
+        "type": 301
+      },
+      {
+        "source": "/homebrew",
+        "destination": "/brew",
+        "type": 301
+      },
+      {
+        "source": "/cpp",
+        "destination": "/c",
+        "type": 301
+      }
     ]
   }
 }

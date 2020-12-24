@@ -59,7 +59,9 @@ I was unsure if he meant it, but step by step, he guided me across the
 assignment until we reached the finish line. I enter one last command into the
 terminal. The program starts up, and two words appear beside my cursor:
 
-<samp>hello world</samp>
+{{% samp %}}
+hello world
+{{% /samp %}}
 
 Replaying the process in my head, it still felt so daunting. I turned to him,
 and sighed.

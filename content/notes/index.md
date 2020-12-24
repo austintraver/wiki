@@ -234,7 +234,10 @@ publisher:"O’Reilly Media Inc"
 
 # Waterproof devices
 
-Waterproof is not a regulated term. The technical term is the *Ingress Protection Rating*, or *IPXX rating*. The two `X` components each have a numerical score attached to them. The first X is dust resistance, from 0 to 6. The second X is water resistance, from 0 to 9
+Waterproof is not a regulated term. The technical term is the *Ingress
+Protection Rating*, or *IPXX rating*. The two `X` components each have a
+numerical score attached to them. The first X is dust resistance, from 0 to 6.
+The second X is water resistance, from 0 to 9
 
 For example, a product with IP67 certification will tolerate being submerged in up to 1.5 meters of water for up to 30 minutes.
 
@@ -339,3 +342,46 @@ AAC has been standardized by [ISO][] and [IEC][] as part of the [MPEG-2][] and
 
 AAC was the default audio format for the Blackberry, Playstation 3, Nintendo
 Wii, iTunes, and the iPod.
+
+
+
+---
+
+# SEO
+
+SEO Notes
+
+[How search works](https://web.dev/how-search-works/)
+Audit your site with Lighthouse and check the SEO results to see how well search engines can surface your content.
+
+[Google search tools](https://web.dev/google-search-tools/)
+
+Googlebot uses robots.txt to decide if it can fetch resources from the network, while web browsers and Lighthouse do not
+
+The Google Search Console [URL Inspection Tool][] can also give you detailed information about the status of a page.
+
+[URL Inspection Tool]: https://support.google.com/webmasters/answer/9012289
+
+
+Avoid using fragment identifiers for content, such as `example.com/#home`
+
+Prefer traditional URLs, here are two examples:
+
+* `example.com/traditional-url/`
+* `example.com/page#subsection`
+
+Google recommends using JavaScript's history API to serve "normal URLs"
+
+
+Provide clear URL preferences
+<link rel="canonical" href="https://example.com/cats/">
+- Tells Googlebot "hey this is the page I'd prefer you look for when you're indexing"
+
+Content of a search result
+* Title
+* URL
+* Description
+
+
+Rich results are from JSON-LD markup that you can add to the top of your pages
+

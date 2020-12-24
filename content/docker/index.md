@@ -22,7 +22,9 @@ the first installment of Docker's "Docker 101" series on YouTube.
     brew cask install docker
     ```
 
-* Optionally, [add command completion for the shell](https://docs.docker.com/compose/completion/)
+* Optionally, add the [docker completion script] for [zsh][zsh completion]
+
+[docker completion script]: https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 Open the application in the menu bar to have Docker run its initial configurations, and then log in to the docker hub. From here, you're all set up and can proceed to use Docker from the command line.
 
@@ -73,7 +75,7 @@ Open the application in the menu bar to have Docker run its initial configuratio
 * Start running the container in interactive mode, establishing a connection to the container with a console
 
     ```shell script
-    docker run -it ubuntu /bin/zsh
+    docker run -it ubuntu /bin/bash
     ```
 
 * Start a docker container, specifying a name for the container
@@ -141,3 +143,5 @@ Open the application in the menu bar to have Docker run its initial configuratio
 **Tip:** You can also specify the first 2 characters of its container ID if the name associated with the docker container is too verbose to type out in its entirety. You can't, however, type just part of the containers name. This shortcut only applies to the container ID.
 
 {{% /aside %}}
+
+[zsh completion]: https://zsh.fyi/completion-system.html#completion-system

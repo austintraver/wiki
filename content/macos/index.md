@@ -755,77 +755,6 @@ You can also check if a given file, directory, or volume is excluded
 
 It's pretty hard to reliably exclude things using the native CLI tools. I've heard that [`asimov`](https://github.com/stevegrunwell/asimov) is a great tool to reduce the size of time machine backups.
 
-## `launchctl`
-
-macOS has a more robust alternative to `cron` which allows daemon processes to be triggered on a systematic fashion. Using the `launchctl` (launch control) command, you can create daemon processes that will automatically run by the system.
-
-These files take the form of plist files and are found in several system directories:
-
-* /Library/LaunchAgents
-* /Library/LaunchDaemons
-* /System/Library/LaunchAgents
-* /System/Library/LaunchDaemons
-* ${HOME}/Library/LaunchAgents
-
-If you write or install personal plist files, they will ideally go in the home directory. A good example file to begin understanding the syntax can be located in `/System/Library/LaunchDaemons/ssh.plist`, which is the file used to launch the `ssh` daemon server that listens for incoming `ssh` connections.
-
-If you're setting up processes in `/Library/LaunchDaemons`, which are run as the `root` user, then make sure to set the file permissions appropriately using `chown root:wheel <file>` and `chmod 644 <file>`
-
-* View `launchctl` information about a daemon process by its `PID`:
-
-    ```shell script
-    sudo launchctl profinfo <PID>
-    ```
-
-* View information about all services pertaining to a user's `UID`:
-
-    ```shell script
-    launchctl print user/$UID
-    ```
-
-* View information about a particular *running* service under a user's `UID`:
-
-    ```shell script
-    # ~/Library/LaunchAgents/com.tommy.foo.plist
-    launchctl print com.tommy.foo
-    launchctl print com.tommy.foo
-    ```
-
-* For all daemon processes owned by the current user, print `true` if they are disabled
-
-    ```shell script
-    launchctl print-disabled user/$UID
-    ```
-
-{{% aside warning %}}
-
-**Note:** `launchtl` keeps an un-erasable record of disabled/enabled launch daemons. If you make a typo when adding daemon, and disable it, there is no way to erase it as an entry.
-
-{{% /aside %}}
-
-* Enable a daemon service
-
-    ```shell script
-    launchctl enable user/$UID/com.tommy.foo
-    ```
-
-* Disable a daemon service
-
-    ```shell script
-    launchctl disable user/$UID/com.tommy.foo
-    ```
-
-* Launch a daemon service
-
-    ```shell script
-    launchctl kickstart
-    ```
-
-* Launch any executable file with arguments as a launchctl
-
-    ```shell script
-    launchctl submit -l -- /path/to/executable 'arg1' 'arg2' 'arg3'
-    ```
 
 ## Create User from Command Line
 
@@ -2177,4 +2106,137 @@ the command as a separate image, use the `-o {{< var OUTPUT_FILE >}}` option.
 
     ```shell script
     sips -Z {{< var DIMENSION >}} 'image.png'
+    ```
+
+* Get the dimensions (width and height) of an image
+
+    ```shell script
+    sips -g pixelWidth -g pixelHeight {{< var IMAGE >}}
+    ```
+
+## Daemons, Agents, and Automation
+
+[daemon][Wikipedia daemon]
+   : A computer program that runs as a background process.
+
+[agent][Wikipedia software agent]
+   : A program that acts on behalf of another program, or on behalf of another
+   user.
+
+[user agent][Wikipedia user agent]
+   : a daemon specific to a logged-in user that only executes while that user
+   is logged in.
+
+[process identifier][Wikipedia process identifier]
+   : a number used by most [operating system][] [kernels][Wikipedia kernel] to
+   uniquely identify an active [process][Wikipedia process].
+
+[Wikipedia kernel]: https://en.wikipedia.org/wiki/Kernel_(operating_system) 'Kernel (operating system)'
+[process]: https://en.wikipedia.org/wiki/Process_(computing) 'Process (computing)'
+[operating system]: https://en.wikipedia.org/wiki/Operating_system 'Operating system'
+
+The original daemon is `init`, which has [process identifier][Wikipedia process identifier] #1 because it is the first process
+started during the booting of the computer system.
+
+[Wikipedia process]: https://en.wikipedia.org/wiki/Process_(computing)
+[Wikipedia process identifier]: https://en.wikipedia.org/wiki/Process_identifier
+[Wikipedia init]: https://en.wikipedia.org/wiki/Init
+[Wikipedia Maxwell's demon]: https://en.wikipedia.org/wiki/Maxwell%27s_demon
+[Wikipedia daemon]: https://en.wikipedia.org/wiki/Daemon_(computing)
+[Wikipedia user agent]: https://en.wikipedia.org/wiki/User_agent
+[Wikipedia software agent]: https://en.wikipedia.org/wiki/Software_agent
+
+macOS has a more robust alternative to `cron` which allows daemon processes to
+be triggered on a systematic fashion. Using the `launchctl` (launch control)
+command, you can create daemon processes that will automatically run by the
+system.
+
+These files take the form of plist files and are found in several system
+directories:
+
+* /Library/LaunchAgents
+* /Library/LaunchDaemons
+* /System/Library/LaunchAgents
+* /System/Library/LaunchDaemons
+* ${HOME}/Library/LaunchAgents
+
+If you write or install personal plist files, they will ideally go in the home
+directory. A good example file to begin understanding the syntax can be located
+in `/System/Library/LaunchDaemons/ssh.plist`, which is the file used to launch
+the `ssh` daemon server that listens for incoming `ssh` connections.
+
+Specifying privacy-sensitive files and folders in a launchd property list might
+not work as expected and prevent the service from running. Having `Program` or
+`Program Arguments` pointing to an executable in a privacy sensitive location is
+currently allowed, but may be restricted in a future release.
+
+To comply with the new privacy protections, resources for a launchd service must
+be stored in locations that aren't privacy sensitive. If necessary, the app can
+set up resources during its execution rather than using launchd property list
+keys, making it possible to grant the app access using System Preferences >
+Security & Privacy > Privacy. The following launchd property list keys are
+affected: `Keep Alive`, `Path State`, `Queue Directories`, `Sockets`, `Sock Path
+Name`, `Standard Error``Path`, `Standard In Path`, `Standard Out Path`, and
+`Watch Paths`.
+
+
+If you're setting up processes in `/Library/LaunchDaemons`, which are run as the
+`root` user, then make sure to set the file permissions appropriately using
+`chown root:wheel <file>` and `chmod 644 <file>`
+
+* View `launchctl` information about a daemon process by its `PID`:
+
+    ```shell script
+    sudo launchctl profinfo <PID>
+    ```
+
+* View information about all services pertaining to a user's `UID`:
+
+    ```shell script
+    launchctl print user/$UID
+    ```
+
+* View information about a particular *running* service under a user's `UID`:
+
+    ```shell script
+    # ~/Library/LaunchAgents/com.tommy.foo.plist
+    launchctl print com.tommy.foo
+    ```
+
+* For all daemon processes owned by the current user, print `true` if they are disabled
+
+    ```shell script
+    launchctl print-disabled user/$UID
+    ```
+
+{{% aside warning %}}
+
+**Note:** `launchtl` keeps an un-erasable record of disabled/enabled launch
+daemons. If you make a typo when adding daemon, and disable it, *there is no way
+to erase the entry.*
+
+{{% /aside %}}
+
+* Enable a daemon service
+
+    ```shell script
+    launchctl enable user/$UID/com.tommy.foo
+    ```
+
+* Disable a daemon service
+
+    ```shell script
+    launchctl disable user/$UID/com.tommy.foo
+    ```
+
+* Launch a daemon service
+
+    ```shell script
+    launchctl kickstart
+    ```
+
+* Launch any executable file with arguments as a launchctl
+
+    ```shell script
+    launchctl submit -l -- /path/to/executable 'arg1' 'arg2' 'arg3'
     ```

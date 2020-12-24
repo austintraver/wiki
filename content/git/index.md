@@ -390,19 +390,24 @@ it does not have any special properties.
 
 ## Configurations
 
-Your configuration file is stored in a few places.
+Your configuration file is stored in a few places, and will be searched for in the following order:
 
-1. `/usr/local/etc/gitconfig` **System** configuration file, for all users.
+**System** configurations
+:   Configurations that apply to **all users** of this system
+    * File is located at `/usr/local/etc/gitconfig`.
+    * Can be edited with `git config --system --edit`
 
-* Can be edited with `git config --system --edit`
+**Global** configurations
+:   Configurations that apply to **all projects** of this user
+    * File location is searched for in-order at the following locations:
+        1. `$XDG_CONFIG_HOME/git/config`
+        1. `~/.config/git/config`
+        1. `~/.gitconfig`
 
-1. `$XDG_CONFIG_HOME/git/config` **Global** configuration file
-
-* If that is not found, it is set to `~/.config/git/config`
-
-* If that is not found, it is set to `~/.gitconfig`
-
-* Can be edited with `git config --global --edit`
+**Local** configurations
+:   Configurations apply to **this project** only.
+    * File is located at `$GIT_DIR/config`
+    * Can be edited with `git config --global --edit`
 
 1. `$GIT_DIR/config`
 
@@ -434,12 +439,6 @@ locally or globally, by going to
 
 ## Abandoning Changes
 
-Abandon all unstaged changes for every file, so that it matches the current head
-
-The Repository, and Committing
-
-The git repository
-
 If you committed something you weren't supposed to, and would like to undo your
 changes, use one of these commands
 
@@ -468,10 +467,10 @@ as you would like, you just type in ~3, ~4 etc.
     git reset --hard HEAD
     ```
 
-Abandoning all unstaged changes for a specific file
+* Abandoning all unstaged changes made in {{< var FILE >}}
 
     ```shell script
-    git checkout file.txt
+    git checkout {{< var FILE >}}
     ```
 
 ## `hub`
@@ -810,6 +809,14 @@ repository, as you won't be the one making/reversing those edits. Thankfully the
     git log --format="format:%ci" --name-only --diff-filter=A
     ```
 
+## The `clone` Subcommand
+
+* Create a [partial clone](https://git-scm.com/docs/partial-clone) of a remote repository
+
+    ```shell script
+    git clone --shallow --depth 1 {{< var REPO >}}
+    ```
+
 ## GitHub Notes
 
 You can now use `@me` as a filter when performing a search on GitHub. For
@@ -825,4 +832,5 @@ would any other code base.
     ```shell script
     git clone 'https://github.com/ttrojan/fighton.wiki.git'
     ```
+
 

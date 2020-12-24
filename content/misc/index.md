@@ -14,9 +14,9 @@ A section dedicated to other applications and tools worth getting to know.
 
 * Getting Started
 
-  ```shell script
-  brew cask install keka kekadefaultapp
-  ```
+    ```shell script
+    brew cask install keka kekadefaultapp
+    ```
 
 Then, open `keka`, configure your preferences, and set keka to be your default app. Now you can compress and decompress any file on your computer by pressing ⌃ ⇧ K
 
@@ -28,37 +28,38 @@ Then, open `keka`, configure your preferences, and set keka to be your default a
 
 ### Examples
 
-input file :arrow_right: terminal
-```shell script
-figlet -p < ifile.txt
-```
+* Convert a string to ASCII art
 
-terminal :arrow_right: terminal
-```shell script
-figlet Hello World
-```
+    ```shell script
+    figlet 'Hello World'
+    ```
 
-terminal :arrow_right: output file
-```shell script
-figlet -p < ifile.txt > ofile.txt
-```
+    {{% samp %}}
 
-file :arrow_right: file
-```shell script
-figlet Hello World > ofile.txt
-```
+     _          _ _                            _     _
+    | |__   ___| | | ___   __      _____  _ __| | __| |
+    | '_ \ / _ \ | |/ _ \  \ \ /\ / / _ \| '__| |/ _` |
+    | | | |  __/ | | (_) |  \ V  V / (_) | |  | | (_| |
+    |_| |_|\___|_|_|\___/    \_/\_/ \___/|_|  |_|\__,_|
 
-# `spectacle`
+{{% /samp %}}
 
-This is a great app that my friend Russel showed me. If you work on a laptop, managing your screen space is important. Unfortunately there aren't many built-in keybindings to resize and maximize applications. Although the gesture-based resizing is graceful and pretty, they aren't very useful because the animations are so slow.
+---
 
-* Getting Started
+# Window Management Applications
 
-  ```shell script
-  brew cask install spectacle
-  ```
+This is a great app that my friend [Russel Wakugawa][] showed me. If you work on
+a laptop, managing your screen space is important. Unfortunately there aren't
+many built-in keybindings to resize and maximize applications. Although the
+gesture-based resizing is graceful and pretty, they aren't very useful because
+the animations are so slow.
 
-Open up `spectacle` in the finder, and then enable accessibility access on your computer. You're all set up to use shortcuts to resize windows on your computer.
+[Russel Wakugawa]: https://github.com/razugo
+
+An important update: Spectacle is no longer maintained. I encourage you to use
+[Moom] as an alternative instead. I've found it to be even better than Spectacle
+
+[Moom]: https://manytricks.com/moom/
 
 # `lsyncd`
 
@@ -72,7 +73,10 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
   # Debian distro
   apt install lsyncd
   ```
-# `mutt`
+
+---
+
+# Mutt
 
 * Installing `mutt`
 
@@ -219,7 +223,7 @@ These URLs represent various resources - any information or content accessed at 
 * How to [look up a phone number](https://www.twilio.com/docs/lookup/quickstart?code-sample=code-lookup-with-national-formatted-number&code-language=PHP&code-sdk-version=6.x#how-to-look-up-a-phone-number) using [the Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart)
 
   ```shell script
-  twilio api:lookups:v1:phone-numbers:fetch --phone-number '+16507432062' --type=carrier --type=caller-name
+  twilio api:lookups:v1:phone-numbers:fetch --phone-number '+15551234567' --type=carrier --type=caller-name
   ```
 
 ### GitHub
@@ -532,15 +536,15 @@ popd
 
 When using the address bar to search, you can [filter the results suggested](https://support.mozilla.org/en-US/kb/address-bar-autocomplete-firefox#w_changing-results-on-the-fly) using a set of special characters separated by spaces
 
-| Character | Searches for results |
-| :--- | :--- |
-| ^ | within browsing history
-| * | within bookmarks
-| + | within bookmarks with matching tags
-| % | within currently open tabs
-| # | containing the provided title or tag
-| $ | containing the provided keyword in its URL
-| ? | in search suggestions
+| Operator | Searches for results in... |
+| :---: | :---: |
+| `^` | browsing history |
+| `*` | bookmarks |
+| `+` | bookmarks with matching tags |
+| `%` | currently open tabs |
+| `$` | in the URL |
+| `?` | in search suggestions |
+| `#` | with *every* term matching title/tag |
 
 {{% aside info %}}
 

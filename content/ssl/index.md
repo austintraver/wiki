@@ -104,8 +104,8 @@ After you've done this, you'll receive three files
 
 Go ahead and delete the first two, you'll only need `0001_chain.pem`, which is a simple concenation of the previous two files. It's the combination of the server certificate and the intermediate certificate, which when used together, allow you to verify your identity
 
-    ```shell script
-    rm 0000_cert.pem 0000_chain.pem
-    mv 0001_chain.pem fullchain.crt
-    ```
+```shell script
+rm 0000_cert.pem 0000_chain.pem
+mv 0001_chain.pem fullchain.crt
+```
 

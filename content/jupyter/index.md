@@ -6,21 +6,29 @@ date: 2019-07-14T09:48:23-08:00
 
 # Jupyter Notebook
 
-## Getting Started
+To get started, you'll need to install some packages
 
 ```shell script
 pip install notebook ipywidgets
 ```
 
-## Changing Password
+By default, when you launch a Jupyter notebook, it will be hosted at `127.0.0.1` on port `8888`
 
-* The proper way
+* Launching a Jupyter notebook without opening a browser window:
+
+    ```shell script
+    jupyter notebook --no-browser
+    ```
+
+## Passwords
+
+* Changing a notebook's password the **proper** way
 
     1. First, enter a Python shell
 
-      ```shell script
-      python
-      ```
+        ```shell script
+        python
+        ```
 
     1. Run the `passwd()` function in the notebook library
 
@@ -39,7 +47,7 @@ pip install notebook ipywidgets
         c.NotebookApp.password = 'sha1:0827b2390e3d:b54ee3e38895aaccc182705ad174bfb3c6e86a10'
         ```
 
-* The lazy way
+* Changing a notebook's password the **lazy** way
 
     1. Edit your `jupyter_notebook_config.py` file
 
@@ -48,12 +56,6 @@ pip install notebook ipywidgets
       c.NotebookApp.password = passwd('lol_nobody_will_see_this')
       ```
 
-
-* Launching a Jupyter notebook at `127.0.0.1` on port `8888`
-
-    ```shell script
-    jupyter notebook --no-browser
-    ```
 
 ## Plotly
 
