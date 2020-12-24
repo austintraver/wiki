@@ -10,11 +10,19 @@ enableInlineShortcodes: true
 enableGitInfo: false
 pygmentsUseClasses: true
 pluralizeLinkTitles: false
+module:
+  imports:
+    # ${HUGO_MODULE_REPLACEMENTS} set in .zshrc determines the
+    # local path to this module's repo on the file system
+    path: 'github.com/austintraver/doctober'
 minify:
   minifyOutput: false
 staticDir:
   - 'static'
   - 'static/favicon'
+  - 'static/css'
+  - 'static/js'
+  - 'static/img'
 permalinks:
   'posts': '/blog'
 frontmatter:
@@ -48,7 +56,7 @@ markup:
       unsafe: true
       xhtml: false
   tableOfContents:
-    startLevel: 2
+    startLevel: 1
     endLevel: 4
     ordered: false
   highlight:

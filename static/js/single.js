@@ -1,4 +1,3 @@
-
 let toast = document.querySelector('div#toast')
 
 /* Display a toast to the user */
@@ -105,5 +104,18 @@ const createSnippetLinks = async () => {
   }
 }
 
+const trimSnippets = () => {
+  /* Trim any leading or trailing whitespace from
+   the text content of any HTML sample elements */
+  for (let node of document.querySelectorAll('samp')) {
+    // node.textContent = node.textContent.trim()
+    let front = /^\s*\n/
+    let back = /\n\s*$/
+    node.textContent = node.textContent.replace(front, '')
+    node.textContent = node.textContent.replace(back, '')
+  }
+}
+
+document.addEventListener('DOMContentLoaded', trimSnippets)
 document.addEventListener('DOMContentLoaded', createAnchorLinks)
 document.addEventListener('DOMContentLoaded', createSnippetLinks)
