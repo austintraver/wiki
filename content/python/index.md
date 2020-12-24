@@ -355,9 +355,11 @@ The `datetime` library has a few packages:
     print(moment)
     ```
 
-    <samp>
+    {{% samp %}}
+
     datetime.datetime(year=2018, month=5, day,19, hour=0, second=0)
-    </samp>
+
+{{% /samp %}}
     
 
 Parsing a non-ISO timestamp into a `datetime` object

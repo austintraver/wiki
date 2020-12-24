@@ -540,7 +540,7 @@ imap d D
 imap D wat
 ```
 
-`d` :arrow_right: `D` :arrow_right: `wat`
+`d` <kbd>→</kbd> `D` <kbd>→</kbd> `wat`
 
 For this reason, it's good to also have non-recursive mappings.
 
@@ -554,7 +554,9 @@ For this reason, it's good to also have non-recursive mappings.
 
 ### Regular Expressions
 
-The syntax for vim regular expressions is slightly different than those used in POSIX Extended regular expressions, the ones that are used in `egrep`
+The syntax for vim regular expressions is slightly different than those used in
+POSIX regular expressions, the ones that are used by applications like `grep`
+and `sed`
 
 #### Metacharacters
 

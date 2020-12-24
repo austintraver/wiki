@@ -166,23 +166,35 @@ esac
 
 ## Command Substitution
 
-For more information, see the `COMMAND SUBSTITUTION` section of `man zshexpn`
+{{% aside success %}}
+
+**Tip:** You can learn more about [command substitution](https://zsh.fyi/expansion#Command-Substitution) by visiting [zsh.fyi](https://zsh.fyi)
+
+{{% /aside %}}
+
+[command substitution]: https://zsh.fyi/expansion#Command-Substitution
 
 Sometimes you're in a situation where you'd like to run a command, but you don't know what the input value should be yet. Yes, you could save a variable, but that wouldn't be the properly lazy way of doing things. You can treat a substitute the output of a function by placing it inside `$(here)`
 
-* Examples of command substitution:
+Using command substitution allows us to take the output from a command, and use at as the input for a different command. In the following example, the output of the command `whoami` is substituted as input for the command `print`:
 
-    ```shell script
-    print "My name is $(whoami)"
-    ```
+```shell script
+print "My name is $(whoami)"
+```
 
-    <samp>
-    My name is austin
-    </samp>
+{{% samp %}}
+
+My name is ttrojan
+
+{{% /samp %}}
 
 ## Parameter Expansion
 
-To learn more, see the `PARAMETER EXPANSION` section of `man zshexpn`
+{{% aside success %}}
+
+**Tip:** You can learn more about [parameter expansion](https://zsh.fyi/expansion#Parameter-Expansion) by visiting [zsh.fyi](https://zsh.fyi)
+
+{{% /aside %}}
 
 * Example of parameter expansion
 
@@ -191,9 +203,45 @@ To learn more, see the `PARAMETER EXPANSION` section of `man zshexpn`
     print My name is ${name}
     ```
 
-    <samp>
+    {{% samp %}}
+
     My name is Austin
-    </samp>
+
+    {{% /samp %}}
+
+
+### Expansion Modifiers
+
+* `${parameter:-word}`
+  * If parameter is unset or null, the expansion of word is substituted. Otherwise, the value of parameter is substituted.
+
+* `${parameter:=word}`
+  * If parameter is unset or null, the expansion of word is assigned to parameter. The value of parameter is then substituted. Positional parameters and special parameters may not be assigned to in this way.
+
+* `${parameter:?word}`
+  * If parameter is null or unset, the expansion of word (or a message to that effect if word is not present) is written to the standard error and the shell, if it is not interactive, exits. Otherwise, the value of parameter is substituted.
+
+* `${parameter:+word}`
+  * If parameter is null or unset, nothing is substituted, otherwise the expansion of word is substituted.
+
+* `${(P)parameter}`
+
+    * Normally, `${parameter}` will expand to become the value of the variable whose identifier is `parameter`. By prepending the `(P)` *parameter expansion flag*, the shell will instead perform two dereferences. The value returned will be the value of the identifier whose name is stored in `${parameter}`.
+
+        ```shell script
+        for parameter in XDG_{DATA,CONFIG,CACHE}_HOME; {
+            print "${parameter} -> ${(P)parameter}"
+        }
+        ```
+
+        {{% samp %}}
+
+        XDG_DATA_HOME -> ~/.local/share
+        XDG_CONFIG_HOME -> ~/.config
+        XDG_CACHE_HOME -> ~/.cache
+
+        {{% /samp %}}
+
 
 ## Conditional Expressions
 
@@ -262,9 +310,11 @@ fi
 
 Output
 
-<samp>
+{{% samp %}}
+
 Number is less than five
-</samp>
+
+{{% /samp %}}
 
 In order to perform arithmetic operations, surround variable names, integers, and operators in a `((...))` double quotations, like this:
 
@@ -276,9 +326,11 @@ In order to perform arithmetic operations, surround variable names, integers, an
     print ${value}
     ```
 
-    <samp>
+    {{% samp %}}
+
     3
-    </samp>
+
+    {{% /samp %}}
 
 If you don't do that, the variable is interpreted as a string, and the number will be *appended* to the variable's current value.
 
@@ -293,9 +345,11 @@ If you don't do that, the variable is interpreted as a string, and the number wi
 
     Output
 
-    <samp>
+    {{% samp %}}
+
     12
-    </samp>
+
+    {{% /samp %}}
 
 ### `ls`
 
@@ -365,9 +419,11 @@ Some characters are special, but only some of the time, such as `,`, for example
 print cod{e,er,ing}
 ```
 
-<samp>
+{{% samp %}}
+
 code coder coding
-</samp>
+
+{{% /samp %}}
 
 
 ## Single Quotes
@@ -446,10 +502,12 @@ func() {
     func
     ```
 
-    <samp>
+    {{% samp %}}
+
     Standard Error
     Standard Output
-    </samp>
+
+    {{% /samp %}}
 
 * Execute `func` with both standard output closed
 
@@ -457,10 +515,12 @@ func() {
     func 1>&-
     ```
 
-    <samp>
+    {{% samp %}}
+
     func:1: 1: bad file descriptor
     Standard Error
-    </samp>
+
+    {{% /samp %}}
 
 * Execute `func` with both standard error closed
 
@@ -468,10 +528,12 @@ func() {
     func 2>&-
     ```
 
-    <samp>
+    {{% samp %}}
+
     Standard Output
     func:2: 2: bad file descriptor
-    </samp>
+
+    {{% /samp %}}
 
 ## Shell Arguments, Options, Flags
 
@@ -497,11 +559,13 @@ The keyword `${@}` contains the set of all arguments to a program/function
     func 'one' 'two' 'three'
     ```
 
-    <samp>
+    {{% samp %}}
+
     Argument: one
     Argument: two
     Argument: three
-    </samp>
+
+    {{% /samp %}}
 
 ### Reading I/O
 
@@ -591,9 +655,11 @@ the syntax `${string:position:length}`
     print ${val:0:3}
     ```
 
-    <samp>
+    {{% samp %}}
+
     012
-    </samp>
+
+    {{% /samp %}}
 
 
 * Print every number after index 5
@@ -604,9 +670,11 @@ the syntax `${string:position:length}`
     print ${val:5} # 56789
     ```
 
-    <samp>
+    {{% samp %}}
+
     56789
-    </samp>
+
+    {{% /samp %}}
 
 * Print the last 3 numbers
 
@@ -616,9 +684,11 @@ the syntax `${string:position:length}`
     print ${val:(-3)}
     ```
 
-    <samp>
+    {{% samp %}}
+
     789
-    </samp>
+
+    {{% /samp %}}
 
 * Print everything except the first 2 numbers and last 3 numbers
 
@@ -628,9 +698,11 @@ the syntax `${string:position:length}`
     print ${val:2:(-3)}
     ```
 
-    <samp>
+    {{% samp %}}
+
     23456
-    </samp>
+
+    {{% /samp %}}
 
 * Print two numbers starting from the 6th-to-last number
 
@@ -640,9 +712,11 @@ the syntax `${string:position:length}`
     print ${val:(-6):2}
     ```
 
-    <samp>
+    {{% samp %}}
+
     45
-    </samp>
+
+    {{% /samp %}}
 
 * Print the last 9 letters of a scalar type variable
 
@@ -652,9 +726,11 @@ the syntax `${string:position:length}`
     print ${TWILIO_ACCOUNT_SID[-9,$]}
     ```
 
-    <samp>
+    {{% samp %}}
+
     123456789
-    </samp>
+
+    {{% /samp %}}
 
 ## Substring Matching
 
@@ -698,9 +774,11 @@ Using the parameter expansion flag `(S)`, you can actually specify for the patte
     print ${(S)string#two}
     ```
 
-    <samp>
+    {{% samp %}}
+
     one//three/two/one
-    </samp>
+
+    {{% /samp %}}
 
 * Remove the (S)ubstring `two` on the right
 
@@ -709,9 +787,11 @@ Using the parameter expansion flag `(S)`, you can actually specify for the patte
     print ${(S)string%two}
     ```
 
-    <samp>
+    {{% samp %}}
+
     one/two/three//one
-    </samp>
+
+    {{% /samp %}}
 
 * Extract the (M)atching (S)ubstring in the middle
 
@@ -720,9 +800,11 @@ Using the parameter expansion flag `(S)`, you can actually specify for the patte
     print ${(MS)string#/t*o/}
     ```
 
-    <samp>
+    {{% samp %}}
+
     /two/three/two/
-    </samp>
+
+    {{% /samp %}}
 
 * Non-greedy match starting from the left
 
@@ -731,9 +813,11 @@ Using the parameter expansion flag `(S)`, you can actually specify for the patte
     print ${(MS)string#q*o}
     ```
 
-    <samp>
+    {{% samp %}}
+
     quick bro
-    </samp>
+
+    {{% /samp %}}
 
 * Greedy match starting from the left
 
@@ -742,9 +826,11 @@ Using the parameter expansion flag `(S)`, you can actually specify for the patte
     print ${(MS)string##q*o}
     ```
 
-    <samp>
+    {{% samp %}}
+
     quick brown fox
-    </samp>
+
+    {{% /samp %}}
 
 
 ## Splitting Strings
@@ -756,27 +842,33 @@ var='This sentence   has  inconsistent spaces'
 print ${var[(w)5]}
 ```
 
-<samp>
+{{% samp %}}
+
 spaces
-</samp>
+
+{{% /samp %}}
 
 ```shell script
 var='Sentence one. Sentence two.'
 print ${var[(w)4]}
 ```
 
-<samp>
+{{% samp %}}
+
 two.
-</samp>
+
+{{% /samp %}}
 
 ```shell script
 var='You can even get the word that comes last'
 print ${var[(w)-1]}
 ```
 
-<samp>
+{{% samp %}}
+
 last
-</samp>
+
+{{% /samp %}}
 
 ## Referencing Command History
 
@@ -856,10 +948,12 @@ Next, attached below are expansions for arguments outside the context of command
     print !:2
     ```
 
-    <samp>
+    {{% samp %}}
+
     `print 'second'`
     second
-    </samp>
+
+    {{% /samp %}}
 
 * Reference all arguments of previous command, excluding the last argument
 
@@ -888,9 +982,11 @@ Next, attached below are expansions for arguments outside the context of command
 ^brown^blue
 ```
 
-<samp>
+{{% samp %}}
+
 print the quick blue fox
-</samp>
+
+{{% /samp %}}
 
 Global Substitution:
 
@@ -903,9 +999,11 @@ Using the previous syntax, you will only replace the first instance matched. If 
     print ${attitude:s/is/be}
     ```
 
-    <samp>
+    {{% samp %}}
+
     it be what it is
-    </samp>
+
+    {{% /samp %}}
 
 * Replace all matches to a pattern
 
@@ -914,9 +1012,11 @@ Using the previous syntax, you will only replace the first instance matched. If 
     print ${attitude:gs/is/be}
     ```
 
-    <samp>
+    {{% samp %}}
+
     it be what it be
-    </samp>
+
+    {{% /samp %}}
 
 {{% aside info %}}
 
@@ -926,36 +1026,6 @@ character, `:`, used to declare substitutions, that usually follows the `!!`
 character,
 
 {{% /aside %}}
-
-## Parameter Expansion
-
-* `${parameter:-word}`
-  * If parameter is unset or null, the expansion of word is substituted. Otherwise, the value of parameter is substituted.
-
-* `${parameter:=word}`
-  * If parameter is unset or null, the expansion of word is assigned to parameter. The value of parameter is then substituted. Positional parameters and special parameters may not be assigned to in this way.
-
-* `${parameter:?word}`
-  * If parameter is null or unset, the expansion of word (or a message to that effect if word is not present) is written to the standard error and the shell, if it is not interactive, exits. Otherwise, the value of parameter is substituted.
-
-* `${parameter:+word}`
-  * If parameter is null or unset, nothing is substituted, otherwise the expansion of word is substituted.
-
-* `${(P)parameter}`
-
-    * Normally, `${parameter}` will expand to become the value of the variable whose identifier is `parameter`. By prepending the `(P)` *parameter expansion flag*, the shell will instead perform two dereferences. The value returned will be the value of the identifier whose name is stored in `${parameter}`.
-
-        ```shell script
-        for parameter in XDG_{DATA,CONFIG,CACHE}_HOME; {
-            print "${parameter} -> ${(P)parameter}"
-        }
-        ```
-
-        <samp>
-        XDG_DATA_HOME -> ~/.local/share
-        XDG_CONFIG_HOME -> ~/.config
-        XDG_CACHE_HOME -> ~/.cache
-        </samp>
 
 
 ## Directory Expansion
@@ -1008,10 +1078,12 @@ print "\x1b[E"
     print ${words}
     ```
 
-    <samp>
+    {{% samp %}}
+
     There are 10 words
     the day is sunny and the sky is blue 
-    </samp>
+
+    {{% /samp %}}
 
 ## Sending Signals With Kill
 
@@ -1099,9 +1171,11 @@ If `name` is an associative array, the expression `${(k)name}` will expand to th
     print ${(k)dict}
     ```
 
-    <samp>
+    {{% samp %}}
+
     a b c
-    </samp>
+
+    {{% /samp %}}
 
 * `(s)` Split a string into an array, separating array entries on the occurance of a delimiter, which is removed from the elements. The delimiter can be specified by placing it within any of the following matching pairs: `(...)`, `{...}`, `[...]`, or `<...>`
 
@@ -1110,11 +1184,13 @@ If `name` is an associative array, the expression `${(k)name}` will expand to th
     print -l ${(s<:>)string}
     ```
 
-    <samp>
+    {{% samp %}}
+
     one
     two
     three
-    </samp>
+
+    {{% /samp %}}
 
 * `(j)` Join an array into a string, uniting each entry with a delimiter, which is inserted between the elements in the string. The delimiter can be specified by placing it within any of the following matching pairs:  `(...)`, `{...}`, `[...]`, or `<...>`
 
@@ -1123,9 +1199,11 @@ If `name` is an associative array, the expression `${(k)name}` will expand to th
     print ${(j<, >)list}
     ```
 
-    <samp>
+    {{% samp %}}
+
     one, two, three
-    </samp>
+
+    {{% /samp %}}
 
 * `(w)`: With `${#name}`, count words in arrays or strings, optionally using the `(s<...>)` flag to specify word delimiter
 
@@ -1134,9 +1212,11 @@ If `name` is an associative array, the expression `${(k)name}` will expand to th
     print ${(s<,>w)#string}
     ```
 
-    <samp>
+    {{% samp %}}
+
     4
-    </samp>
+
+    {{% /samp %}}
 
 * `(W)`: Same as `(w)`, but where empty words between repeated delimiters are also counted 
 
@@ -1161,7 +1241,8 @@ Included below are some features of the extended glob option:
 
 ## Glob Qualifiers
 
-[Section 14.8.7 of the manual](http://zsh.sourceforge.net/Doc/Release/Expansion.html#Glob-Qualifiers) covers all of this in greater detail.
+This topic is covered in greater detail on
+[the `zsh.fyi` article about expansion](https://zsh.fyi/expansion)
 
 Here are some flags below:
 
@@ -1233,9 +1314,11 @@ Here are some flags below:
     print ${filename}
     ```
 
-    <samp>
+    {{% samp %}}
+
     filename.sh
-    </samp>
+
+    {{% /samp %}}
 
 * Print the absolute path to the directory containing the file being executed
 
@@ -1373,10 +1456,12 @@ ascending order
     print -l ${folders}
     ```
 
-    <samp>
+    {{% samp %}}
+
     /usr
     /bin
-    </samp>
+
+    {{% /samp %}}
 
 * Select all files that aren't named `tmp`
 
@@ -1388,23 +1473,33 @@ ascending order
 
 ## Checking if a Command Exists
 
-* Using *equals expansion*
+### Using [equals expansion][]
 
-    ```shell script
-    # [ Wrong way, see below ]
-    if [[ =brew ]]; then
-      print "Command exists"
-    else
-      print "Command not found"
-    fi
+[equals expansion]: https://zsh.fyi/options#Expansion-and-Globbing
+
+A simple way to perform a check is by using [equals expansion][] (e.g. {{< var =FILENAME >}}), which will search the directories in <var>path</var> for an executable file named {{< var FILENAME >}}
+
+```shell script
+if [[ =brew ]]; then
+    print "Command is an executable file"
+else
+    print "Command not found"
+fi
+```
+
+
+### Using [parameter expansion][]
+
+[parameter expansion]: https://zsh.fyi/expansion#Parameter-Expansion
   
-    # [ Right way, note the (( parentheses )) ]
-    if (( ${+commands[brew]} )); then
-      print "Command exists"
-    else
-      print "Command not found"
-    fi
-    ```
+```shell script
+# [ Right way, note the (( parentheses )) ]
+if (( ${+commands[brew]} )); then
+    print "Command exists"
+else
+    print "Command not found"
+fi
+```
 
 {{% aside warning %}}
 
@@ -1413,6 +1508,7 @@ definition instead of the path to the executable file. Furthermore, if the
 command is not found, `zsh` will write to `stderr` to let you know.
 
 {{% /aside %}}
+
 
 
 ## Count the Number of Words in a String
@@ -1455,9 +1551,11 @@ the sunny is is
     print ${words[@]}
     ```
 
-    <samp>
+    {{% samp %}}
+
     the day is sunny the the the sunny is is
-    </samp>
+
+    {{% /samp %}}
 
 
 * Printing the unique words
@@ -1466,9 +1564,11 @@ the sunny is is
     print ${(u)words[@]}
     ```
 
-    <samp>
+    {{% samp %}}
+
     the day is sunny
-    </samp>
+
+    {{% /samp %}}
 
 * Printing the count of each word occuring in `words.txt` in descending order
 
@@ -1694,11 +1794,13 @@ Sometimes you want to supply some text in a script across multiple lines. Furthe
     print -- ${ {{< var VARIABLE >}} }
     ```
 
-    <samp>
+    {{% samp %}}
+
     the first line
     the second line
     the third line
-    </samp>
+
+    {{% /samp %}}
 
 * Printing the contents of `file.txt`:
 
@@ -1869,33 +1971,41 @@ If you have a super long string of text, for instance, a SQL query, you may want
     print {01..10}
     ```
 
-    <samp>
+    {{% samp %}}
+
     01 02 03 04 05 06 07 08 09 10
-    </samp>
+
+    {{% /samp %}}
 
     ```shell script
     print {01..10..3}
     ```
 
-    <samp>
+    {{% samp %}}
+
     01 04 07 10
-    </samp>
+
+    {{% /samp %}}
 
     ```shell script
     print {a..z}
     ```
 
-    <samp>
+    {{% samp %}}
+
     a b c d e f g h i j k l m n o p q r s t u v w x y z
-    </samp>
+
+    {{% /samp %}}
 
     ```shell script
     print {a..z..3}
     ```
 
-    <samp>
+    {{% samp %}}
+
     a d g j m p s v y
-    </samp>
+
+    {{% /samp %}}
 
     ```shell script
     left=1
@@ -1903,9 +2013,11 @@ If you have a super long string of text, for instance, a SQL query, you may want
     print {${left}..${right}}
     ```
 
-    <samp>
+    {{% samp %}}
+
     1 2 3 4 5 6 7 8 9
-    </samp>
+
+    {{% /samp %}}
 
 Brace expansion can be used in powerful ways, namely to be lazy, the most powerful force in the universe.
 
@@ -1921,9 +2033,11 @@ Brace expansion can be used in powerful ways, namely to be lazy, the most powerf
     unzip {,-d\ }./{{< var FILENAME>}}
     ```
 
-    <samp>
+    {{% samp %}}
+
     unzip ./{{<var FILENAME>}} -d ./{{<var FILENAME>}}
-    </samp>
+
+    {{% /samp %}}
 
 ## The ternary operator
 
@@ -1936,9 +2050,11 @@ max=$(( a > b ? a : b ))
 print "The max is ${max}"
 ```
 
-<samp>
+{{% samp %}}
+
 The max is 6
-</samp>
+
+{{% /samp %}}
 
 {{% aside info %}}
 
@@ -1974,10 +2090,12 @@ by the second statement
 [[ 1 -eq 1 ]] && asdf || print "Not true"
 ```
 
-<samp>
+{{% samp %}}
+
 bash: asdf: command not found
 Not true
-</samp>
+
+{{% /samp %}}
 
 {{% aside info %}}
 
@@ -1993,9 +2111,11 @@ statements returned `true`
 [[ 1 == 1 ]] && { asdf ;:; } || print "Not true"
 ```
 
-<samp>
+{{% samp %}}
+
 "bash: asdf: command not found"
-</samp>
+
+{{% /samp %}}
 
 # ANSI C Quotations { #ansi-c }
 
@@ -2086,14 +2206,16 @@ if [[ 'My phone number is 123-456-7890' =~ '([0-9]{3})-([0-9]{3})-([0-9]{4})' ]]
 }
 ```
 
-<samp>
+{{% samp %}}
+
 typeset MATCH=123-456-7890
 typeset -a match=( 
     123 
     456 
     7890 
 )
-</samp>
+
+{{% /samp %}}
 
  
 
@@ -2119,9 +2241,11 @@ message="I don't want to brag, but I have like $(( a + 1 )) friends."
 print $message
 ```
 
-<samp>
+{{% samp %}}
+
 I don't want to brag, but I have like 3 friends.
-</samp>
+
+{{% /samp %}}
 
 {{% aside info %}}
 
@@ -2134,17 +2258,21 @@ decimals when evaluating division
 print "6 / 8 = $(( 6 / 8 ))"
 ```
 
-<samp>
+{{% samp %}}
+
 6 / 8 = 0
-</samp>
+
+{{% /samp %}}
 
 ```shell script
 print "6 / 8 = $(( 6 / 8.0 ))"
 ```
 
-<samp>
+{{% samp %}}
+
 6 / 8 = 0.75
-</samp>
+
+{{% /samp %}}
 
 ## File Descriptors
 
@@ -2472,11 +2600,13 @@ esac
 typeset +m 'foo*'
 ```
 
-<samp>
+{{% samp %}}
+
 foo
 foo_fighters
 food
-</samp>
+
+{{% /samp %}}
 
 * Print variable and its corresponding value for environment variables whose names match the pattern
 
@@ -2484,11 +2614,13 @@ food
 typeset -m 'foo*'
 ```
 
-<samp>
+{{% samp %}}
+
 foo=bar
 foo_fighters=awesome
 food=(my life)
-</samp>
+
+{{% /samp %}}
 
 * Print variables' `typeset` options, its name, and its assigned value, for each matching the pattern:
 
@@ -2496,11 +2628,13 @@ food=(my life)
 typeset -p -m 'foo*'
 ```
 
-<samp>
+{{% samp %}}
+
 typeset foo=bar
 typeset foo_fighters=awesome
 typeset -a food=( my life )
-</samp>
+
+{{% /samp %}}
 
 * Print all keys in an associative array that **don't** start with `foo`
 
@@ -2560,9 +2694,11 @@ text="Hello world"
     print -P "%F{1}${text}%f"
     ```
 
-    <samp style="color: #990000; font-weight: 400;">
+    {{% samp %}}
+
     Hello world
-    </samp>
+
+    {{% /samp %}}
 
 * Set the bac<u><b>k</b></u>ground color of `text` to blue
 
@@ -2570,9 +2706,11 @@ text="Hello world"
     print -P "%K{blue}${text}%k"
     ```
 
-    <samp style="color: #ffffff; background-color: #0000B2; font-weight: 400;">
+    {{% samp %}}
+
     Hello world
-    </samp>
+
+    {{% /samp %}}
 
 * Format `text` to be <u><b>u</b></u>nderlined
 
@@ -2580,9 +2718,11 @@ text="Hello world"
     print -P "%U${text}%u"
     ```
 
-    <samp style="font-weight: normal; text-decoration: underline;">
+    {{% samp %}}
+
     Hello world
-    </samp>
+
+    {{% /samp %}}
 
 * Format `text` to be <u><b>b</u></b>olded
 
@@ -2590,9 +2730,11 @@ text="Hello world"
     print -P "%B${text}%b"
     ```
 
-    <samp style="font-weight: bold;">
+    {{% samp %}}
+
     Hello world
-    </samp>
+
+    {{% /samp %}}
 
 Additionally, you can use `%S` for <u><b>s</b></u>tandout formatting, which
 swaps the foreground and background colors.
@@ -2951,27 +3093,32 @@ zmodload zsh/zprof
 zprof
 ```
 
-<samp>
-num  calls            time                       self            name
--------------------------------------------------------------------------------
- 1)    2      22.18    11.09   45.03%     22.18    11.09   45.03%  compaudit
- 2)    1      32.66    32.66   66.29%     10.48    10.48   21.27%  compinit
- 3)    1       9.37     9.37   19.02%      9.20     9.20   18.67%  _zsh_highlight_load
- 4)    1       5.59     5.59   11.34%      5.59     5.59   11.34%  _zsh_highlight_bind
- 5)    5       0.77     0.15    1.56%      0.77     0.15    1.56%  add-zsh-hook
- 6)    1       0.45     0.45    0.90%      0.45     0.45    0.90%  bashcompinit
- 7)    1       0.28     0.28    0.56%      0.28     0.28    0.56%  is-at-least
- 8)    1       0.15     0.15    0.31%      0.15     0.15    0.31%  (anon)
- 9)    1       0.09     0.09    0.19%      0.09     0.09    0.19%  compdef
-10)    1       0.18     0.18    0.37%      0.09     0.09    0.18%  complete
-</samp>
+{{% samp %}}
+
+  calls         time             self                    name
+--------------------------------------------------------------------
+1)  2  22.18    11.09   45.03%  22.18   11.09   45.03%  compaudit
+2)  1  32.66    32.66   66.29%  10.48   10.48   21.27%  compinit
+3)  5   0.77     0.15    1.56%   0.77    0.15    1.56%  add-zsh-hook
+4)  1   0.45     0.45    0.90%   0.45    0.45    0.90%  bashcompinit
+5)  1   0.28     0.28    0.56%   0.28    0.28    0.56%  is-at-least
+6)  1   0.15     0.15    0.31%   0.15    0.15    0.31%  (anon)
+7)  1   0.09     0.09    0.19%   0.09    0.09    0.19%  compdef
+8)  1   0.18     0.18    0.37%   0.09    0.09    0.18%  complete
+
+{{% /samp %}}
 
 ## Zsh Completion Audit
 
 To fix any ownership problems experienced during zsh completion, you can run the script below
 
 ```shell script
-sudo chown ${UID}:${GID} $(compaudit)
+for line in $(compaudit &>1); do
+    if [[ -e ${line} ]]; then
+        sudo chown ${UID}:${GID} ${line}
+        sudo chmod -v 755 ${line}
+    fi
+end
 ```
 
 ## Pretty-Printing Associative Array
@@ -2982,13 +3129,15 @@ sudo chown ${UID}:${GID} $(compaudit)
     typeset -p1 my_pairs
     ```
 
-    <samp>
+    {{% samp %}}
+
     typeset -A my_pairs=(
       key1=val1
       key2=val2
       key3=val3
     )
-    </samp>
+
+    {{% /samp %}}
 
 
 ## Zsh Hashed Commands
@@ -3573,11 +3722,13 @@ if whoami && hostname; then
 fi
 ```
 
-<samp>
+{{% samp %}}
+
 ttrojan
 challenger
 success
-</samp>
+
+{{% /samp %}}
 
 
 You don't have to use real commands, you could use the shell builtin `true`,
@@ -3590,9 +3741,11 @@ if true && true; then
 fi
 ```
 
-<samp>
+{{% samp %}}
+
 success
-</samp>
+
+{{% /samp %}}
 
 
 ## Operator Precedence
@@ -3609,9 +3762,11 @@ Proof that `||` has operator precedence over `&&`
     fi
     ```
 
-    <samp>
+    {{% samp %}}
+
     success
-    </samp>
+
+    {{% /samp %}}
 
 * Example 2:
 
@@ -3623,7 +3778,9 @@ Proof that `||` has operator precedence over `&&`
     fi
     ```
 
-    <samp>
+    {{% samp %}}
+
     success
-    </samp>
+
+    {{% /samp %}}
 

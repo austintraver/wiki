@@ -214,9 +214,11 @@ $sql = "SELECT * FROM temporary_table;";
 $results = $mysqli->query($sql);
 // -------------------------
 // Print the query results
-echo "<samp>";
+echo "{{% samp %}}
+";
 var_dump($results);
-echo "</samp>";
+echo "
+{{% /samp %}}";
 // -------------------------
 // Return one result (row) as an associative array
 while ($row = $results->fetch_object()) {

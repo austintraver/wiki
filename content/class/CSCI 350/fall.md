@@ -694,25 +694,84 @@ Common Criteria
 
 ---
 
+# xv6
 
-Notes from setting up xv6
+## Setup
 
-From
-[Running RISC-V Linux on QEMU](https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html)
-
-* Installing pre-requisite libraries
+* Install QEMU
 
     ```shell script
-    brew install python3 gawk gnu-sed gmp mpfr libmpc isl zlib expat
+    brew install qemu
     ```
 
-* Installing required sources
+* Install the GCC compiler toolchain for x86 ELF
 
     ```shell script
-    git clone --depth 1 --single-branch https://github.com/torvalds/linux
-    git clone --depth 1 --single-branch https://github.com/qemu/qemu
-    git clone --depth 1 --single-branch https://git.busybox.net/busybox
+    brew install x86_64-elf-gcc
     ```
+
+* Clone the [mit-pdos/xv6] repository
+
+    ```shell script
+    git clone git://github.com/mit-pdos/xv6-riscv.git
+    ```
+
+* Enter the directory containing `x86`
+
+    ```shell script
+    cd x86
+    ```
+
+* Update the value of the `TOOLPREFIX` environment variable to `x86_64-elf-` in
+  the `Makefile` (near line 30)
+
+  ```Makefile
+  TOOLPREFIX = x86_64-elf-
+  ```
+
+* Update the value of the `QEMU` environment variable to `qemu-system-x86_64` in
+  the Makefile
+
+  ```Makefile
+  QEMU = qemu-system-x86_64
+  ```
+
+* Build the `qemu` project, (launches xv6 via QEMU)
+
+    ```shell script
+    make qemu
+    ```
+
+If you experience any bugs, try to clean the directory with `make clean`.
+
+If you'd like to exit out from QEMU's emulation of xv6, press <kbd>⌃A</kbd> <kbd>X</kbd>
+
+[mit-pdos/xv6]: https://github.com/mit-pdos/xv6-public
+
+The Makefile provided with xv6 has several [phony targets][] for running the
+system:
+
+`make qemu`
+:   Build everything and run xv6 with QEMU, with a VGA console in a new window
+    and the serial console in the terminal where you typed this command. Close
+    the VGA window or press Ctrl-C or Ctrl-A X to stop.
+
+`make qemu-nox`
+:   Run xv6 without the VGA console.
+
+`make qemu-gdb`
+:   Run xv6 with GDB port open. Refer to the [GDB section][].
+
+`make qemu-nox-gdb`
+:   Run xv6 with GDB port open, without the VGA console.
+
+[GDB section]: http://www.cs.columbia.edu/~junfeng/13fa-w4118/tools.html#gdb
+[phony targets]: http://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
+
+
+If you get stuck in a boot-loop, you can [Remove BYTE directives from kernel
+linker script to fix triple fault on boot](https://github.com/mit-pdos/xv6-public/pull/115/files#diff-55d14b8f75c28e552594dabebe4d7d09f913bf53121a8b5f008a7f0b36e5dfec)
+
 
 
 ---

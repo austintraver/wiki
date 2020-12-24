@@ -855,20 +855,24 @@ update here.
     console.log(digest256)
     ```
 
-    <samp>
+    {{% samp %}}
+
     b7a875fc1ea228b9061041b7cec4bd3c52ab3ce3
     1c8bfe8f801d79745c4631d09fff36c82aa37fc4cce4fc946683d7b336b63032
-    </samp>
+
+    {{% /samp %}}
 
     ```shell script
     shasum -a 1 < =(<<<'letmein')
     shasum -a 256 < =(<<<'letmein')
     ```
 
-    <samp>
+    {{% samp %}}
+
     b7a875fc1ea228b9061041b7cec4bd3c52ab3ce3
     1c8bfe8f801d79745c4631d09fff36c82aa37fc4cce4fc946683d7b336b63032
-    </samp>
+
+{{% /samp %}}
 
 * [Getting a list of all available ciphers](https://nodejs.org/api/crypto.html#crypto_crypto_getciphers)
 
@@ -889,3 +893,35 @@ well as the methods below:
 * `crypto.publicDecrypt()`
 * `crypto.publicEncrypt()`
 * `crypto.randomInt()`
+
+## Subcommands
+
+### [`prefix`](https://docs.npmjs.com/cli/v6/commands/npm-prefix)
+
+Print the local prefix
+
+```shell script
+npm prefix
+```
+
+{{% samp %}}
+
+/Users/tommy/Developer/project
+
+{{% /samp %}}
+
+* Print the global prefix
+
+    ```shell script
+    npm prefix -g
+    ```
+
+    {{% samp %}}
+
+    /usr/local
+
+{{% /samp %}}
+
+You can use `npm prefix -g` to print the local prefix to standard out.
+
+Source: [The official npm documentation](https://docs.npmjs.com/cli/v6/commands/npm-prefix)

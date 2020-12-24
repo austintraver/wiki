@@ -514,9 +514,11 @@ XColorTable() {
     print -N '1234567890' '\E[2b'
     ```
 
-    <samp>
+    {{% samp %}}
+
     123456789000
-    </samp>
+
+{{% /samp %}}
 
 * Replace a character
 
@@ -524,9 +526,11 @@ XColorTable() {
     print -N {9..1} '\E[3D' '_' '\E[2C'
     ```
 
-    <samp>
+    {{% samp %}}
+
     1_3456789
-    </samp>
+
+{{% /samp %}}
 
 * Total black magic since I forgot what the instruction set was
 
@@ -534,9 +538,11 @@ XColorTable() {
     print -N '#####' $'\E7\E[2G1\E82'
     ```
 
-    <samp>
+    {{% samp %}}
+
     #1###2
-    </samp>
+
+{{% /samp %}}
 
 * Go to the 2nd row, add a 1, return, add a 2
 
@@ -544,9 +550,11 @@ XColorTable() {
     print -N '#####' '\E7' '\E[2G' '1' '\E8' '2'
     ```
 
-    <samp>
+    {{% samp %}}
+
     #1###2
-    </samp>
+
+{{% /samp %}}
 
 * Go back 2 columns, up 1 row, add a '0', return
 
@@ -560,9 +568,11 @@ XColorTable() {
     print -N 'hello' '\E[3D' '\E[2X'
     ```
 
-    <samp>
+    {{% samp %}}
+
     he o
-    </samp>
+
+{{% /samp %}}
 
 * Go back three columns, and remove two characters
 
@@ -570,9 +580,11 @@ XColorTable() {
     print -N 'hello '\E[3D '\E[2P'
     ```
 
-    <samp>
+    {{% samp %}}
+
     heo
-    </samp>
+
+{{% /samp %}}
 
 * Replace the '+' in the 1st column, 2nd-to-last row with '-'
 
@@ -580,13 +592,15 @@ XColorTable() {
     print -N +{5..1}$'\n' '\E7' '\E[2A' '-' '\E8'
     ```
 
-    <samp>
+    {{% samp %}}
+
     +5
     +4
     +3
     -2
     +1
-    </samp>
+
+{{% /samp %}}
 
 * Add two blank lines
 
@@ -594,7 +608,8 @@ XColorTable() {
     print -N +{5..1}$'\n' '\E[3A' '\E[2L' '\E[2B' '\E[3B'
     ```
 
-    <samp>
+    {{% samp %}}
+
     +5
     +4
 
@@ -602,7 +617,8 @@ XColorTable() {
     +3
     +2
     +1
-    </samp>
+
+{{% /samp %}}
 
 {{% aside warning %}}
 

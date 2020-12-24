@@ -52,9 +52,11 @@ go get golang.org/x/tour
     go run hello.go
     ```
 
-    <samp>
+    {{% samp %}}
+
     Hello world
-    <samp>
+
+    {{% /samp %}}
 
 * If you'd like to separate the compilation and execution steps, use the `build` subcommand
 
@@ -64,9 +66,11 @@ go get golang.org/x/tour
     ./hello.go
     ```
 
-    <samp>
+    {{% samp %}}
+
     Hello world
-    <samp>
+
+    {{% /samp %}}
 
 
 A heads up, oddly enough, the type comes *after* the variable name [article on Go's declaration syntax](https://blog.golang.org/declaration-syntax)
