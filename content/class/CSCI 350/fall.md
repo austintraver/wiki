@@ -2,71 +2,31 @@
 title: CSCI 350
 description: "Operating Systems"
 date: 2020-08-17
+draft: true
 ---
 
 # Lecture 1
 
 Date: 2020-08-17
 
-* No curve
-* Exams have cheatsheet
-* We're using GitHub Classroom
-
-## Class Participation
-
-* Must answer 80% of all questions asked to get 5%
-* We will use Google forms to collect responses for in-lecture question
-* You will be submitting the same form 6 times
-  * Press submit after each answer
-  * 1-5 minutes to answer the question
-* Response submission link for each lecture will be posted on Piazza
-
-## Projects
-
-* Due on the date, 11:59PM PST
-* 5 grace days, you need to fill a form on Piazza to use them
-
-## Fellow Students
-
-* Andrew Chen
-* Cathleen Yang
-* Samuel Atcheson
-* Jessica Au
-* San Kim
-* Angel Flores
-* Jack Xu
-* Ayushi Singh
-* Andrew Hutchison
-* Charlie Pyle
-* Madhuri Deo
-* Swapnil Patel
-
-## Notes
+There are 5 project grace days, which are classic CS style grace days
 
 * The stack is faster to access than the heap
 
 * The heap and stack grow in different directions
 
 
-* Class participation questions
-  * Must answer 80% of all questions to get 5%
-    * It's not graded for correctness at all (just relevance)
-
-* There are 5 project grace days
-  * classic CS style grace days
-
-
 ## [AT&T Archives: The UNIX Operating System](https://www.youtube.com/watch?v=tc4ROCJYbm0)
 
 * Novel ideas from UNIX
-  * If I type the name of a file, have the shell treat it as a command
-  * I/O redirection allows you to create a pipeline of commands, one into another 
-    * "input/output redirection is handled not by the program, but by the shell"
-    * "peripherals like the printer and disk drive are treated as files"
-    * `sort | uniq`
-    * `command > out.txt`
-    * `command < in.txt`
-  * A file is just a location in memory, and a size in bytes
+    * If I type the name of a file, have the shell treat it as a command
+    * I/O redirection allows you to create a pipeline of commands, one into another
+        * "input/output redirection is handled not by the program, but by the shell"
+        * "peripherals like the printer and disk drive are treated as files"
+        * `sort | uniq`
+        * `command > out.txt`
+        * `command < in.txt`
+    * A file is just a location in memory, and a size in bytes
 
 ## OS Challenges
 
@@ -74,11 +34,11 @@ Date: 2020-08-17
 * Availability
 * Security
 * Performance
-  * Latency
-  * Throughput
-  * Overhead
-  * Fairness
-  * Predictability
+    * Latency
+    * Throughput
+    * Overhead
+    * Fairness
+    * Predictability
 * Portability
 
 ## Process
@@ -159,7 +119,7 @@ Date: 2020-08-17
 * Host: the underlying hardware system or OS
 * Hypervisor: manages the resources of the underlying hardware and provides an abstraction of one or more virtual machines
 * Guest: the software running within the OS
-  * All guest software (including the guest OS) run in user mode
+    * All guest software (including the guest OS) run in user mode
 
 * Network Interface Controller NIC: a computer hardware component that connects a computer to a computer network. Early network interface controllers were commonly implemented on expansion cards that plugged into a computer bus
 
@@ -169,8 +129,8 @@ Date: 2020-08-17
 # Hardware Interrupts
 
 * NMI, Non-Mask Interrupt: can't be blocked
-  * No other interrupts can interrupt it.
-  * Must complete the handler, even another NMI can't interrupt the NMI handler.
+    * No other interrupts can interrupt it.
+    * Must complete the handler, even another NMI can't interrupt the NMI handler.
 * Hardware interrupts, peripheral device sends a signal through a specified pin to the processor
 
 * Have an interrupt table, stores the code for that happens during a specified interrupt.
@@ -251,6 +211,7 @@ Date: 2020-08-17
 2020-09-29
 
 * Midterm 1 regrades are due 7 days after the grade is posted
+
   * Initiate a request as a private post on Piazza
 
 # Multiprocessing
@@ -326,7 +287,6 @@ We can avoid deadlocks by using Dijkstra's [Banker algorithm](https://en.wikiped
 ## Memory Management
 
 
-
 ## Address Translation# Lecture 8
 
 Topic: File Systems
@@ -343,13 +303,10 @@ You will not be tested on anything that isn't covered **after today**
 * Both are techniques for non-contiguous memory allocation
 
 Contiguous memory allocation
+
 * Dinosaur Book **Chapter 8.3**
+
     * *Operating System Concepts* (Silbershatz, Galvin, Gagne)
-
-Q1 what is worst casw 2 pag2 taable?
-this is on midterm
-
-GO BACK TO THIS BEFORE MIDTERM
 
 ## Solid State Disks (SSDs)
 
@@ -370,19 +327,20 @@ The controller maintains a pool of empty blocks by coalescing the used pages (re
 
 Heavily used blocks wear out pretty quickly.
 
+## FTL
 
-## n
-
-FTL maps logival block adddress to physical address     
+FTL maps logival block adddress to physical address
 
 ## FAT
 
 Advantages:
+
 * Simple
 * Easy to find free blocks
 * Easy to append to a file
 
 Disadvantages
+
 * Poor locality
 * Random access is pretty slow
 * Fragmentation
@@ -393,14 +351,16 @@ Disadvantages
 * No support for reliability, hard links
 * Max file size is 4GB
 
-## FFS Fast File System
-inodes
+## Fast File System (FFS) { #ffs }
 
 Advantages
+
 * Efficient storage for lookup for random access in large files 
 * Locality for large files
 * Locality for large metadata and data
+
 Disadvantages
+
 * Inefficient for tiny files, since files with barely any data still need an inode and a data block
 * Inefficient encoding when file is mostly contiguous on disk
 * Need to reserve some free space to prevent fragmentation 
@@ -490,16 +450,19 @@ mistakes in operational.
 * Security policies are enforced by a *security mechanism*
 
 Forms of *prevention*:
+
 * Firewalls
 * Encryption
 * Access control
 
 Forms of *detection*:
+
 * Intrusion
 * Auditing
 * Watermarking
 
 Forms of *reaction*:
+
 * Automated response
 * Forensics
 * Restoration from backups
@@ -640,12 +603,10 @@ the user's confidence.
 [Common Criteria]: https://en.wikipedia.org/wiki/Common_Criteria
 
 Common Criteria
-* Part 1:
-  [Introduction and General Model](https://www.commoncriteriaportal.org/files/ccfiles/CCPART1V3.1R5.pdf)
-* Part 2:
-  [Security Functional Components](https://www.commoncriteriaportal.org/files/ccfiles/CCPART2V3.1R5.pdf)
-* Part 3:
-  [Security Assurance Components](https://www.commoncriteriaportal.org/files/ccfiles/CCPART3V3.1R5.pdf)
+
+* Part 1: [Introduction and General Model](https://www.commoncriteriaportal.org/files/ccfiles/CCPART1V3.1R5.pdf)
+* Part 2: [Security Functional Components](https://www.commoncriteriaportal.org/files/ccfiles/CCPART2V3.1R5.pdf)
+* Part 3: [Security Assurance Components](https://www.commoncriteriaportal.org/files/ccfiles/CCPART3V3.1R5.pdf)
 * [Common Methodology](https://www.commoncriteriaportal.org/files/ccfiles/CEMV3.1R5.pdf)
 * [Cheatsheet](https://www.jtsec.es/common-criteria-cheatsheet.pdf)
 * [Reference Card](http://www.school-of-technology.de/resources/ccQRC.pdf)
@@ -661,7 +622,7 @@ Common Criteria
 * Security kernel is the only known verifiable protection technology
 
 
-### Questions
+### Lecture 10 Questions
 
 1. How could a future OS look like?
 
@@ -768,7 +729,8 @@ HFS+ was the system built by Apple for macOS devices
 
 
 NTFS: "New Technology File System"
-- Has been used by Windows since 1993
+
+* Has been used by Windows since 1993
 
 They released a newer one,
 [Resilient File System (ReFS)](https://docs.microsoft.com/en-us/windows-server/storage/refs/refs-overview)
