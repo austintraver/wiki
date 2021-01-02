@@ -1,3 +1,4 @@
+baseURL: 'https://helpful.wiki/'
 # https://gohugo.io/getting-started/configuration/
 buildDrafts: false
 buildExpired: false

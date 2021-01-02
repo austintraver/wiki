@@ -579,3 +579,13 @@ To disable the usage of `/` by Firefox
 1. Go to `about:config`
 1. Search for `accessibility.typeaheadfind.manual` 
 1. Set its value to `false`
+
+# `youtube-dl`
+
+* Custom config file location
+
+    ```shell script
+    youtube-dl --config-location {{< var FILE >}}
+    ```
+
+Audio can be extracted using the `-x` or `--extract-audio` option

@@ -385,3 +385,61 @@ Content of a search result
 
 Rich results are from JSON-LD markup that you can add to the top of your pages
 
+# `undock`
+
+I was trying to teach my mom how to use Spotlight, but I found that she
+struggled to not use the dock. To help her train her Spotlight skills,
+I created a command that would make the dock more difficult to use, and undo
+any attempts by a user to make the dock easier to use. The software would
+prevent apps from being added to the dock. It would make the dock appear
+incredibly slowly. It would hide itself, and if the user told it not to,
+it would resume hiding itself an hour later. The code for this has been
+included below.
+
+The shell script `undock` is located in `/usr/local/bin/undock`, and runs
+whenever it is executed.
+
+```shell script
+# Cause the dock to automatically hide
+defaults write com.apple.dock autohide -bool true
+# Cause the hide to begin after a long delay
+defaults write com.apple.dock autohide-delay -float -0.8
+# Cause the dock to hide and appear, but very slowly
+defaults write com.apple.dock autohide-time-modifier -float 4.9
+# Cause the dock to only show applications that are currently in use
+defaults write com.apple.dock static-only -bool true
+# Delete all existing applications from the dock
+defaults write com.apple.dock persistent-apps -array
+# Cause docks to be minimized into their application icon
+defaults write com.apple.dock minimize-to-application -bool true
+# Prevent application icons from bouncing
+defaults write com.apple.dock launchanim -bool false
+# Prevent the contents of the dock from being modified
+defaults write com.apple.dock contents-immutable -bool true
+# Reload the dock, instantiating the changes outlined in the commands above
+killall Dock
+```
+
+The property list file `com.example.undock` is placed in `${HOME}/Library/LaunchAgents`. 
+It is loaded by `launchd` whenever the computer boots up.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.example.undock</string>
+	<key>ProgramArguments</key>
+	<array>
+    <string>/usr/local/bin/undock</string>
+	</array>
+  <key>StartInterval</key>
+  <integer>3600</integer>
+  <key>StandardErrorPath</key>
+  <string>/dev/null</string>
+  <key>StandardOutPath</key>
+  <string>/dev/null</string>
+</dict>
+</plist>
+```

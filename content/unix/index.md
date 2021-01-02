@@ -845,6 +845,18 @@ SHELL=/usr/local/bin/zsh
   # Darwin
   ```
 
+# `arch`
+
+* Print [the current architecture](https://stackoverflow.com/questions/12763296/os-x-arch-command-incorrect/12763379#12763379), either `i386` for Intel architectures capable of running Intel's 32-bit.
+
+```shell script
+arch
+```
+
+{{% samp %}}
+i386
+{{% /samp %}}
+
 # `tr`
 
 * Translate the character `\n` to `,` for the contents of `/dev/stdin`

@@ -8,7 +8,7 @@ date: 2020-02-04T14:52:27-08:00
 
 In Git, we use version control to create discrete saved states, known as
 *commits*, of our project. Each of these commits is part of a broader repository
-for a project. A *remote repository* refers to a non-locally stored copy of the
+for a project. A [*remote repository*](https://docs.github.com/en/free-pro-team@latest/github/using-git/managing-remote-repositories) refers to a non-locally stored copy of the
 repository. This remote contains all the data in the project since the last time
 anyone *pushed* the *commits* they've made to this remote repository. By
 default, we name this *remote repository* "origin."
@@ -104,7 +104,7 @@ that the user has a GitHub account with the username `tommy`
     git remote set-url origin 'git@github.com:/user/repo.git'
     ```
 
-* Pushing commits to a remote repository
+* [Pushing commits](https://docs.github.com/en/free-pro-team@latest/github/using-git/pushing-commits-to-a-remote-repository) to a remote repository
 
     ```shell script
     # Implicit push of current branch "master" to default remote "origin"
@@ -172,6 +172,12 @@ The HEAD ref refers to the current branch that the user is working on.
 
     ```shell script
     git branch -m <oldname> <newname>
+    ```
+
+* [Changing a remote's URL](https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url)
+
+    ```shell script
+    git remote set-url origin git@github.com:{{< var USERNAME >}}/{{< var REPOSITORY >}}.git
     ```
 
 * Adding a local branch that tracks a remote branch

@@ -8,6 +8,7 @@ date: 2020-02-04T14:52:27-08:00
 
 Node.js provides server-side functionality in familiar Javascript syntax and an asynchronous model.  To be clear, Node.js is not a programming language. It adds features to Javascript that allow developers to write server-side code in familiar front-end language.
 
+If you've already learned some Node in the past, GitHub's Learning Lab [Intermediate NodeJS Course](https://lab.github.com/everydeveloper/intermediate-nodejs-course) might be worth a try.
 
 ## How It Works
 
@@ -326,7 +327,9 @@ The `.pipe(<stream>)` is used to send the ouput of one stream to another.
   process.stdin.pipe(process.stdout)
   ```
 
-### Reading streams with `readline`
+### Reading and Writing
+
+Node's documentation has a great article about [reading files](https://nodejs.dev/learn/reading-files-with-nodejs)
 
 The readline module allows the reading of standard I/O streams line by line during program execution. When the programmer is done reading a stream, they must be closed. The REPL is implemented by piping your terminal input `stdin`, executing Javascript commands and piping `stdout` back to your terminal.
 
@@ -700,6 +703,10 @@ Add the following to your package's `package.json`
   ```
 
 ## Express
+
+The base place to learn Express is the GitHub Learning Lab [Introduction to Node with Express][]
+
+[Introduction to Node with Express]: https://lab.github.com/everydeveloper/introduction-to-node-with-express
 
 * Example of an Express server
 

@@ -25,6 +25,12 @@ programming language.
 
 This guide uses `zsh` as the shell language of choice, so your mileage may vary if you try to use these commands in another shell scripting language. The reason `zsh` is chosen is because it's the default shell on the macOS operating system, but more importantly, because it is my favorite shell
 
+## Key Concepts
+
+This guide is more of a reference than a tutorial, so expect the sections to jump around a fair bit.
+
+People often forget the [distinction between argument, option, and parameter](https://stackoverflow.com/questions/36495669/difference-between-terms-option-argument-and-parameter)
+
 ## I/O
 
 ### `read`

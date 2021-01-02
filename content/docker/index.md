@@ -14,6 +14,12 @@ Michael Irwin's talk at DockerCon 2019,
 ["Containers for Beginners"](https://www.youtube.com/watch?v=6gJs0F8V3tM&list=PLkA60AVN3hh8hNjc0fQ5_uJYIrS7s1JLW)
 the first installment of Docker's "Docker 101" series on YouTube.
 
+Liz Rice's talk on [creating Docker containers from scratch](https://youtu.be/8fi7uSYlOdc)
+
+## Conceptual Notes
+
+
+
 ## Getting Started
 
 * Installing Docker on macOS
@@ -24,9 +30,9 @@ the first installment of Docker's "Docker 101" series on YouTube.
 
 * Optionally, add the [docker completion script] for [zsh][zsh completion]
 
-[docker completion script]: https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
-
 Open the application in the menu bar to have Docker run its initial configurations, and then log in to the docker hub. From here, you're all set up and can proceed to use Docker from the command line.
+
+## Command Line Operations
 
 * Logging into Docker
 
@@ -144,4 +150,8 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 {{% /aside %}}
 
+## Misc
+
 [zsh completion]: https://zsh.fyi/completion-system.html#completion-system
+[docker completion script]: https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+

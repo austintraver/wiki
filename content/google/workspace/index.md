@@ -137,3 +137,7 @@ I've compiled a list of valid types to search for, included below:
 The hidden
 [syncselect](https://calendar.google.com/syncselect) page lets you configure
 which calendars should appear and sync across your devices
+
+## Google Accounts
+
+A user's profile picture can be deleted, but the page to [add or remove a profile picture](https://myaccount.google.com/profile/photo/edit) is well hidden, so I've kept it here to make it easier to find next time.

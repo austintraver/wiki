@@ -1,21 +1,16 @@
 {{ define "head" }}
-<meta property="og:image"
-    content="https://helpful.wiki{{ .Permalink }}{{ .Resources.GetMatch `preview.*` }}">
-<meta name="description" content="{{ .Description }}">
-<link rel="stylesheet" type="text/css" href="/chroma.css">
-<link rel="stylesheet" type="text/css" href="/list.css">
 {{ end }}
 
 {{ define "main" }}
 
-{{ .Content }}
+  {{ .Content }}
 
-<ol>
-  {{ range .Pages.ByWeight }}
-  <li>
-    <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
-  </li>
-  {{ end }}
-</ol>
+  <ol>
+    {{ range .Pages.ByWeight }}
+    <li>
+      <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ol>
 
 {{ end }}

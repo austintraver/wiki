@@ -1,8 +1,18 @@
 title: 'Helpful Wiki'
-baseURL: 'https://helpful.wiki/'
+googleAnalytics: 'G-D9NWWK7881'
+module:
+  imports:
+    # ${HUGO_MODULE_REPLACEMENTS} set in .zshrc determines the
+    # local path to this module's repo on the file system
+    path: 'github.com/austintraver/doctober'
+staticDir:
+  - 'static/favicon'
+  - 'static/css'
+  - 'static/js'
+  - 'static/img'
+  - 'static'
 languageCode: 'en-US'
 watch: true
-googleAnalytics: 'G-D9NWWK7881'
 sitePagesMenu: 'main'
 newContentEditor: 'nvim'
 relativeURLs: true
@@ -10,21 +20,11 @@ enableInlineShortcodes: true
 enableGitInfo: false
 pygmentsUseClasses: true
 pluralizeLinkTitles: false
-module:
-  imports:
-    # ${HUGO_MODULE_REPLACEMENTS} set in .zshrc determines the
-    # local path to this module's repo on the file system
-    path: 'github.com/austintraver/doctober'
+uglyurls: false
 minify:
   minifyOutput: false
-staticDir:
-  - 'static'
-  - 'static/favicon'
-  - 'static/css'
-  - 'static/js'
-  - 'static/img'
 permalinks:
-  'posts': '/blog'
+  /: '/:section/:filename'
 frontmatter:
   date: [ 'date', ':default' ]
   lastmod: [ ':fileModTime', ':default' ]
@@ -38,6 +38,16 @@ disableKinds:
   - 'term'
   - 'RSS'
 markup:
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    lineNos: false
+    lineNoStart: 1
+    tabWidth: 2
+    lineNumbersInTable: false
+    tabwidth: 4
+    noClasses: false
   goldmark:
     extensions:
       definitionList: true
@@ -56,35 +66,6 @@ markup:
       unsafe: true
       xhtml: false
   tableOfContents:
-    startLevel: 1
+    startLevel: 2
     endLevel: 4
     ordered: false
-  highlight:
-    anchorLineNos: false
-    codeFences: true
-    guessSyntax: false
-    lineNos: false
-    lineNoStart: 1
-    tabWidth: 2
-    lineNumbersInTable: false
-    noClasses: true
-    style: 'dracula'
-    tabwidth: 4
-#outputFormats:
-#  Algolia:
-#    #  tells the output format how to look for the Hugo layout for this output format
-#    baseName: 'algolia'
-#    # tells the output format to use GoLang’s plain text parser for the layout,
-#    # preventing some automatic HTML formatting from ruining your JSON
-#    isPlainText: true
-#    # tells the output format what kind of file to output.
-#    mediaType: 'application/json'
-#    # tells the output format not to be included when looping over
-#    # the .AlternativeOutputFormats page variable
-#    notAlternative: true
-#params:
-#  algolia:
-#    # sets the page variables in which you want included in your index.
-#    vars: ['title', 'summary', 'date', 'publishdate', 'expirydate', 'permalink']
-#    # sets the custom page params in which you want included in your index.
-#    params: ['categories', 'tags']
