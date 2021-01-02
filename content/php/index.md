@@ -7,8 +7,11 @@ draft: false
 
 # PHP
 
-Welcome to the page on PHP. First things first, you'll need to [install PHP][php
-installation].
+If you're completely new to PHP, GitHub's Learning Lab [Introduction to PHP][] is a good place to build a solid foundation.
+
+[Introduction to PHP]: 
+
+First things first, you'll need to [install PHP][]
 
 ## PHP and Docker
 
@@ -33,7 +36,7 @@ like your `php.ini` file to be located.
 [php.ini]: https://www.php.net/manual/en/configuration.file.php
 [PhpStorm xdebug]: https://www.jetbrains.com/help/phpstorm/2020.2/configuring-xdebug.html?#downloadAndInstall
 [xdebug install]: https://xdebug.org/docs/install
-[php installation]: https://www.php.net/manual/en/install.php
+[install PHP]: https://www.php.net/manual/en/install.php
 
 * Setting a custom location for `php.ini`
 

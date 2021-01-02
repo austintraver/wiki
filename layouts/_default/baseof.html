@@ -2,47 +2,28 @@
 <html lang="en-US">
 <head>
   <!--suppress HtmlUnknownTarget -->
-  <title>{{.Title}} | {{.Site.Title}}</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {{ template "_internal/opengraph.html" . }}
-  <meta property="og:site_name" content="Helpful Wiki">
 
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/svg+xml" href="/icon.svg">
-  <link rel="apple-touch-icon" href="/icon.png">
-  <link rel="stylesheet" type="text/css" href="/doctober.css">
-  <link rel="stylesheet" type="text/css" href="/baseof.css">
-  <link rel="stylesheet" type="text/css" href="/fonts.css">
-  <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-  >
-  <script defer src="/__/firebase/8.1.1/firebase-app.js"></script>
-  <script defer src="/__/firebase/8.1.1/firebase-analytics.js"></script>
-  <script defer src="/__/firebase/8.1.1/firebase-performance.js"></script>
-  <script defer src="/__/firebase/init.js"></script>
-  <script defer src="/init.js"></script>
+  {{ partial "hydra" . }}
 
   {{ block "head" . }}
+    {{ partial "firebase" . }}
   {{ end }}
-
 
 </head>
 <body>
   <nav>
-    <a id="sitename" href="/">
-      <img id="icon" height=64 width=64 alt="" src="/icon.svg"/>
-      <p>helpful.wiki</p>
+    <a class="logo" href="/">
+      <img class="logo" alt="" src="/img/logo.svg">
+      <p>{{ .Site.Title }}</p>
     </a>
-    <a id="author" href="https://github.com/sponsors/austintraver">
+    <a class="author" href="https://github.com/sponsors/austintraver">
       <div>
-        <p id="name">Austin Traver</p>
-        <p id="catchphrase">Teaching to avoid learning...</p>
+        <p class="author">Austin Traver</p>
+        <q>Teaching to avoid learning...</q>
       </div>
       <picture>
-        <source type="image/webp" srcset="/headshot.webp">
-        <img alt="" height=64 width=64 class="preview" src="/headshot.jpeg">
+        <source type="image/webp" srcset="/img/headshot.webp">
+        <img alt="" height=64 width=64 class="preview" src="/img/headshot.jpeg">
       </picture>
     </a>
   </nav>

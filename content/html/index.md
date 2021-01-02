@@ -8,6 +8,10 @@ date: 2020-02-04T14:52:27-08:00
 
 ## Getting Started
 
+If you've never learned HTML before, I'd suggest getting started by taking GitHub's Learning Lab [Introduction to HTML][]
+
+[Introduction to HTML]: https://lab.github.com/githubtraining/introduction-to-html
+
 * A basic HTML page about bears
 
 ```html

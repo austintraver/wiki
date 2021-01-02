@@ -5,6 +5,16 @@ date: 2020-02-04T14:52:27-08:00
 draft: false
 ---
 
+# Java
+
+If you're completely new to Java, GitHub's Learning Lab [Introduction to Java][] is a good place to build a solid foundation.
+
+[Introduction to Java]: https://lab.github.com/everydeveloper/introduction-to-java
+
+If you've already learned some Java in the past, GitHub's Learning Lab [Intermediate NodeJS Course][] might be worth a try.
+
+[Intermediate NodeJS Course]: https://lab.github.com/everydeveloper/intermediate-nodejs-course
+
 ## Getting Started
 
 * Download `java`

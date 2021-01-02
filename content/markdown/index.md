@@ -10,9 +10,20 @@ date: 2020-02-04T14:52:27-08:00
 
 Markdown is a lightweight markup language used by Github. It’s designed to be easy to convert to HTML and simulate rich-text in a plain-text environment.
 
-Markdown is useful because it's supported by GitHub and Quiver. For instance, you can write *italic* or **bold** text.
+Markdown is useful to know because you'll soon find you can use it in many
+places you might not expect to be able to. What you write on [GitHub][GitHub markdown] and
+[StackOverflow][StackOverflow markdown](https://stackoverflow.com/help/formatting). For instance, you
+can write *italic* or **bold** text.
 
-Other places have documented this stuff better than I have, so I'd look elsewhere if you're interested in [mastering markdown](https://guides.github.com/features/mastering-markdown/)
+[StackOverflow markdown]: https://stackoverflow.com/help/formatting
+[GitHub markdown]: https://docs.github.com/en/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax
+
+Other places have documented Markdown, so I'd look elsewhere if you're interested in [mastering Markdown][]. Consider this page more of a place to "reference" Markdown, rather than learn it. 
+
+To learn Markdown, check out these resources:
+
+* [Communicating using Markdown](https://lab.github.com/githubtraining/communicating-using-markdown)
+* [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 
 * Creating an ordered list
 

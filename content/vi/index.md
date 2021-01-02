@@ -7,6 +7,10 @@ draft: false
 
 # Vi
 
+I'm a huge fan of Vi. Maybe you've never heard of it. Maybe you've never used it. This page won't teach the basics, as those have been covered better in the following places:
+
+* [MIT "The Missing Semester"](https://youtu.be/a6Q8Na575qc)
+
 ## The history of Vi
 
 ### `ed`
