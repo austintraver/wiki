@@ -115,39 +115,16 @@ main {
   box-sizing: border-box;
   display: block;
   flex-direction: column;
-  padding: max(2%, 1em);
+  padding-left: 16px;
+  padding-right: 16px;
   width: 100vw;
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 567px) {
   main {
-    padding: 1vh 3vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
-}
-
-section#cards {
-  column-gap: 48px;
-  display: grid;
-  grid-auto-rows: 290px;
-  row-gap: 48px;
-  grid-template-columns: repeat(1, 1fr);
-}
-
-@media screen and (min-width: 576px) {
-  section#cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 992px) {
-  section#cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-section#intro {
-  max-width: 800px;
-  margin: 50px auto;
 }
 
 section#intro summary {
@@ -156,12 +133,6 @@ section#intro summary {
   max-width: max-content;
   margin-left: auto;
   margin-right: auto;
-}
-
-@media screen and (min-width: 576px) {
-  section#intro summary {
-    font-size: 2rem;
-  }
 }
 
 section#intro > details {
@@ -201,39 +172,38 @@ hr {
   margin-bottom: 2em;
 }
 
+.collection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* Individual elements of the grid */
-section > a.card {
-  background-color: var(--charcoal);
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 350px;
   border-radius: 16px;
-  box-shadow: 1px 1px 12px -3px black;
-  color: white;
-  filter: opacity(80%);
   font-weight: normal;
-  height: 100%;
   text-decoration: none;
-  transition: 0.3s;
+  margin: 16tpx;
 }
 
-section > a.card:hover {
-  filter: opacity(100%);
-}
-
-section > a.card img {
+.card img,
+.card picture {
   border-radius: 16px 16px 0 0;
   object-fit: cover;
-  width: 100%;
-  height: 240px;
-}
-
-section > a.card > picture {
   overflow-x: hidden;
   overflow-y: hidden;
+  height: 100%;
+  width: 100%;
 }
 
-section > a.card > p {
+.card header {
   font-size: 22px;
   letter-spacing: 0.05rem;
   margin: 0;
-  padding: 8px 8px 8px 8px;
+  padding: 16px;
   text-align: center;
 }
