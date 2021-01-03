@@ -1,8 +1,3 @@
-{{ define "head" }}
-<meta property="og:image" content="{{ .Site.BaseURL }}img/preview.webp">
-<script src="/js/firedocs.js"></script>
-{{ end }}
-
 {{ define "main" }}
   <section id="intro">
     {{ .Content }}
@@ -17,7 +12,7 @@
                       {{ $img }}-2x.webp 2x,
                       {{ $img }}-3x.webp 3x"
           >
-          <img alt="" loading=lazy class="preview" src="{{ .RelPermalink }}preview.png">
+          <img alt="" loading=lazy class="preview" src="{{ $img }}.png">
         </picture>
         <header>{{ .Title }}</header>
       </a>

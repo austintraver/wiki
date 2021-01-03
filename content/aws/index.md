@@ -193,7 +193,7 @@ EC2, Amazon's Elastic Compute Cloud, is a virtual server that can perform comput
     aws ec2 describe-security-groups
     ```
 
-* Create an EC2 Instance
+* Create an EC2 instance
 
     ```shell script
     aws ec2 run-instances \
@@ -204,6 +204,22 @@ EC2, Amazon's Elastic Compute Cloud, is a virtual server that can perform comput
       --security-group-ids 'sg-0efcc5d86ade500ec' \
       --subnet-id 'subnet-13bcff58'
     ```
+
+Recently, AWS announced [support for Mac EC2 instances](https://aws.amazon.com/blogs/aws/new-use-mac-instances-to-build-test-macos-ios-ipados-tvos-and-watchos-apps/). What's more, these instances aren't limited to using the computer exclusively through the console. You can even [connect to your instance using VNC](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#mac-instance-vnc).
+
+* Create an [EC2 instance running macOS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#mac-instance-launch)
+
+    ```shell script
+    aws ec2 allocate-hosts --instance-type mac1.metal \
+    --availability-zone us-east-1a --auto-placement on \
+    --quantity 1 --region us-east-1
+    ```
+
+{{% aside warning %}}
+
+Warning: This is very expensive! These instances require a 24-hour minimum, and [cost $25] last I checked.
+
+{{% /aside %}}
 
 ## AWS CLI
 
