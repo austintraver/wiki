@@ -7,20 +7,20 @@
   <section id="intro">
     {{ .Content }}
   </section>
-  <section id="cards">
+  <section class="collection">
     {{ range sort .Pages ".FuzzyWordCount" "desc" }}
-    {{ $img := path.Join .RelPermalink "preview" }}
-    <a class="card" href="{{ .RelPermalink }}">
-      <picture>
-        <source type="image/webp"
-            srcset="{{ $img }}-1x.webp 1x,
-                    {{ $img }}-2x.webp 2x,
-                    {{ $img }}-3x.webp 3x"
-        >
-        <img alt="" loading=lazy class="preview" src="{{ .RelPermalink }}preview.png">
-      </picture>
-      <p>{{ .Title }}</p>
-    </a>
+      {{ $img := path.Join .RelPermalink "preview" }}
+      <a class="card" href="{{ .RelPermalink }}">
+        <picture>
+          <source type="image/webp"
+              srcset="{{ $img }}-1x.webp 1x,
+                      {{ $img }}-2x.webp 2x,
+                      {{ $img }}-3x.webp 3x"
+          >
+          <img alt="" loading=lazy class="preview" src="{{ .RelPermalink }}preview.png">
+        </picture>
+        <header>{{ .Title }}</header>
+      </a>
     {{ end }}
   </section>
 {{ end }}

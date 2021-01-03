@@ -2209,6 +2209,46 @@ If you're setting up processes in `/Library/LaunchDaemons`, which are run as the
     launchctl print-disabled user/$UID
     ```
 
+`launchctl` has changed for the better in 10.11.4
+
+Type the command without arguments to get the help. You'll see new domains to search and new commands.
+
+* Printing the system root
+
+    ```shell script
+    launchctl print system
+    ```
+
+* Printing details about a particular service within the root domain
+
+    ```shell script
+    launchctl print system/{{< var com.example.service >}}
+    ```
+
+For your processes: if it's not in the system domain it's probably in the domain of that particular user.
+
+* Checking the domain of a particular user
+
+    ```shell script
+    launchctl print user/<uid>/
+    launchctl print user/<uid>/{{< var com.example.useragent >}}
+    ```
+
+However, since you'll be logged into the GUI, you might want to check the domain of the GUI, which is kept separate.
+
+* Checking the domain of the GUI
+
+    ```shell script
+    launchctl print gui/<uid>
+    launchctl print gui/<uid>/{{< var com.example.service >}}
+    ```
+
+* *GUI domains* are for processes that apply to a **user interface**.
+* *User domains* are for processes that invoke daemons that only apply to a **particular logged-in user**.
+* *System domains* are for system daemon processes, and apply to **all users** within that system.
+
+To learn more, read `man launchctl` or read Apple's article about [Creating Launch Daemons and Agents](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html)
+
 {{% aside warning %}}
 
 **Note:** `launchtl` keeps an un-erasable record of disabled/enabled launch
