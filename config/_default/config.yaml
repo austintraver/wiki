@@ -5,6 +5,7 @@ module:
     # ${HUGO_MODULE_REPLACEMENTS} set in .zshrc determines the
     # local path to this module's repo on the file system
     path: 'github.com/austintraver/doctober'
+    ignoreConfig: false
 staticDir:
   - 'static/favicon'
   - 'static/css'

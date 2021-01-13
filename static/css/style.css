@@ -6,7 +6,7 @@
   h5,
   h6,
   header {
-    scroll-margin-top: 40px;
+    scroll-margin-top: 8px;
   }
 }
 
@@ -82,33 +82,27 @@ body {
 }
 
 
-section#intro summary {
+section.intro summary {
   text-indent: 0ch;
   font-size: 1.5rem;
   max-width: max-content;
   margin: 20px auto;
 }
 
-section#intro > details {
-  max-width: 80ch;
+section.intro details {
+  max-width: min(90%, 80ch);
   margin-left: auto;
   margin-right: auto;
 }
 
-@media screen and (min-width: 768px) {
-  section#intro > details {
-    max-width: 68ch;
-  }
-}
-
-section#intro > details > p {
+section.intro details p {
   text-indent: 4ch;
   font-family: serif;
   font-size: 18px;
 }
 
 @media screen and (min-width: 768px) {
-  section#intro > details > p {
+  section.intro details p {
     font-size: 20px;
     line-height: 32px;
   }
