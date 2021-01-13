@@ -1,36 +1,31 @@
-title: 'helpful.wiki'
-googleAnalytics: 'G-D9NWWK7881'
 module:
   imports:
     # ${HUGO_MODULE_REPLACEMENTS} set in .zshrc determines the
     # local path to this module's repo on the file system
     path: 'github.com/austintraver/doctober'
     ignoreConfig: false
-staticDir:
-  - 'static/favicon'
-  - 'static/css'
-  - 'static/js'
-  - 'static/img'
-  - 'static'
-languageCode: 'en-US'
-watch: true
-sitePagesMenu: 'main'
-newContentEditor: 'nvim'
-relativeURLs: true
-enableInlineShortcodes: true
-enableGitInfo: false
-pygmentsUseClasses: true
+# ------------------------------------------------------------------------------
+# doctober config.yaml
 pluralizeLinkTitles: false
-uglyurls: false
+pygmentsUseClasses: true
+enableGitInfo: false
+enableInlineShortcodes: true
+watch: true
+newContentEditor: 'nvim'
+sitePagesMenu: 'main'
+relativeURLs: true
+languageCode: 'en-US'
 minify:
   minifyOutput: false
-permalinks:
-  /: '/:section/:filename'
+staticDir:
+  - 'static'
 frontmatter:
-  date: [ 'date', ':default' ]
-  lastmod: [ ':fileModTime', ':default' ]
-deployment:
-  targets:
+  date:
+    - 'date'
+    - ':default'
+  lastmod:
+    - ':fileModTime'
+    - ':default'
 params:
   mainSections:
     - 'posts'
@@ -70,3 +65,9 @@ markup:
     startLevel: 2
     endLevel: 4
     ordered: false
+# ------------------------------------------------------------------------------
+# wiki config.yaml
+title: 'helpful.wiki'
+uglyurls: false
+googleAnalytics: 'G-D9NWWK7881'
+# ------------------------------------------------------------------------------
