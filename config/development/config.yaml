@@ -1,10 +1,13 @@
+# ------------------------------------------------------------------------------
+# doctober config.yaml
 # https://gohugo.io/getting-started/configuration/
 watch: true
 buildDrafts: true
 buildExpired: true
 buildFuture: true
-disableHugoGeneratorInject: true
-disableKinds: ['RSS', 'robotsTXT', '404']
 disableFastRender: true
 disableLiveReload: false
+disableHugoGeneratorInject: true
+# ------------------------------------------------------------------------------
+# wiki config.yaml
 baseURL: 'http://heike.local:1313'
