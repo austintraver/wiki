@@ -500,37 +500,17 @@ Slack supports URL Schemes, which they document on their [developer API site](ht
     woff2_decompress 'font.woff2'
     ```
 
-Google's `Product Sans` font is gorgeous, but the font face falls under a restricted license. For this reason, I'm not able to use it. With that being said, here's how someone *could* use it. Even though it isn't advertised, the font is accessible via an API call to the `fonts.googleapis.com` host. From here, you can pull the relevant CSS, revealing the resource URLs, and request the original TTF files.
-
-* Download the font family `Product Sans`
-
-```shell script
-# usage: `zsh ./fontastic.sh 'Open Sans'`
-
-font_family=${1/ /+}
-font_weights=({1..9}00{,b,i,bi})
-base_url='https://fonts.googleapis.com/css'
-query_string="family=${font_family}:${(j<,>)font_weights}"
-endpoint="${base_url}?${query_string}"
-fonts=($(curl -s ${endpoint} | grep -o 'https://.*\.ttf' ))
-names=(${(f)"$(curl -s ${endpoint} | grep '^  src' | sed "s/^.*src: local('\([^']\+\)').*$/\1/")"})
-if (( ${#fonts} > 0 )) {
-	mkdir -v ${1}
-	pushd ${1}
-	for ((i=1;i<=${#fonts};i+=1)); {
-		/usr/bin/curl -s ${fonts[$i]} -o "${names[$i]}.ttf"
-	}
-	popd
-	print "font files have been saved to ${1:A}"
-	exit 0
-} else {
-	print "error: no results found for font family ${1}" >&1
-	exit 1
-}
-popd
-```
-
 # Firefox
+
+## Hidden Keyboard Shortcuts
+
+To copy the location behind a hyperlink, do the following:
+
+1. Hover the cursor over the link
+1. Right click (or <kbd>⌃</kbd> Left-Click)
+1. Type <kbd>a</kbd>
+
+If you're curious <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=423905">why <kbd>a</kbd> was chosen</a>, I found the discussion on their website worth reading.
 
 ## Search Operators
 
