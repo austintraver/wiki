@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "wiki101",
     "public": "public",
     "trailingSlash": false,
     "cleanUrls": true,
@@ -9,6 +10,11 @@
       "**/node_modules/**"
     ],
     "redirects": [
+      { 
+        "source": "/uri",
+        "destination": "/url",
+        "type": 301
+      },
       {
         "source": "/vim",
         "destination": "/vi",
