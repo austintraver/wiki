@@ -324,5 +324,13 @@ Google wrote a great article about [starting, stopping, and restarting instances
     gcloud sql instances restart 'myinstance'
     ```
 
+* Opening up port 445 (SMB protocol) to all addresses
+
+    ```shell script
+    gcloud compute firewall-rules create {{< var RULE_NAME >}} \
+        --priority 1000 \
+        --allow 'tcp:445' \
+        --source-ranges '0.0.0.0/0'
+    ```
 
 ---

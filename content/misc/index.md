@@ -26,21 +26,22 @@ Then, open `keka`, configure your preferences, and set keka to be your default a
 
 ## `figlet` I/O
 
-### Examples
+You can use `figlet` to convert any string into a lovely piece of ASCII art.
 
-* Convert a string to ASCII art
+```shell script
+figlet 'Hello World'
+```
 
-    ```shell script
-    figlet 'Hello World'
-    ```
+{{% samp %}}
 
-    {{% samp %}}
+```txt
+ _          _ _                            _     _
+| |__   ___| | | ___   __      _____  _ __| | __| |
+| '_ \ / _ \ | |/ _ \  \ \ /\ / / _ \| '__| |/ _` |
+| | | |  __/ | | (_) |  \ V  V / (_) | |  | | (_| |
+|_| |_|\___|_|_|\___/    \_/\_/ \___/|_|  |_|\__,_|
 
-     _          _ _                            _     _
-    | |__   ___| | | ___   __      _____  _ __| | __| |
-    | '_ \ / _ \ | |/ _ \  \ \ /\ / / _ \| '__| |/ _` |
-    | | | |  __/ | | (_) |  \ V  V / (_) | |  | | (_| |
-    |_| |_|\___|_|_|\___/    \_/\_/ \___/|_|  |_|\__,_|
+```
 
 {{% /samp %}}
 
@@ -206,11 +207,17 @@ These URLs represent various resources - any information or content accessed at 
   * Generate HTTP header for basic authentication by base64 encoding the username and password
 
     ```shell script
-    username='ttrojan'
-    password='fighton'
+    username='Alladin'
+    password='open sesame'
     token=$(base64 -w 0 < =(<<<${username}:${password}))
     auth="Authorization: Basic ${token}"
     ```
+
+    {{< samp >}}
+
+    Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+
+    {{< /samp >}}
 
   * Copy it to clipboard immediately
 
@@ -373,9 +380,11 @@ learn how to build this library from source, and have included the instructions
 below for others to follow along with.
 
 {{% aside warning %}}
+
 **Note:** This is assuming a user-level prefix
 `~/.local` is an acceptable place to install C-style packages, so if you're
 setting this up in a different location, results may vary.
+
 {{% /aside %}}
 
 * Install latest version of `libwebp`:
@@ -432,9 +441,11 @@ setting this up in a different location, results may vary.
     ```
 
 {{% aside info %}}
+
 **Clarification:** A lot of those settings aren't required, but this was the 
 set of configurations I found does the best job at reducing the filesize 
 without causing a noticable change in quality between the two image files
+
 {{% /aside %}}
 
 * Crop a `500x1000` photo so that `10px` are cut off from all four sides

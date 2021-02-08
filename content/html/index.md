@@ -198,3 +198,15 @@ Their section on [Command-line terminology](https://developers.google.com/style/
     * e.g. `gcloud dns {{< var GROUP >}} [{{< var GLOBAL_FLAG >}} ...]`
 
 Google wrote [a great example](https://developers.google.com/style/code-syntax#gcloud-commands) of how to format the usage of a command in documentation, check it out.
+
+## Responsive Design
+
+Responsively designed sites are those that respond to the needs and capabilities of the device they are viewed on. 
+
+Google wrote a great article about the [basics of responsive web design](https://web.dev/responsive-web-design-basics/)
+
+In order to properly [set the viewport](https://web.dev/responsive-web-design-basics/#viewport), you'll need to prevent mobile browsers from rendering the page at a desktop screen width. To do so, add this `<meta>` tag to the HTML header
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```

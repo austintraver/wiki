@@ -11,34 +11,34 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 
 * Upgrading to the latest Ubuntu distro:
 
-  0. Sign in to the `root` user
+0. Sign in to the `root` user
 
-  ```shell script
-  sudo -i
-  ```
+    ```shell script
+    sudo -i
+    ```
 
-  1. Update the `/etc/apt/sources.list`, replace any entries of `bionic` or `eoal` with `focal`
+1. Update the `/etc/apt/sources.list`, replace any entries of `bionic` or `eoal` with `focal`
 
-  ```shell script
-  sed -i 's/bionic/focal/g' /etc/apt/sources.list
-  ```
+    ```shell script
+    sed -i 's/bionic/focal/g' /etc/apt/sources.list
+    ```
 
-  2. Run the `apt` commands below
+2. Run the `apt` commands below
 
-  ```shell script
-  apt update
-  apt upgrade
-  apt full-upgrade
-  apt install update-manager-core
-  reboot
-  do-release-upgrade -d
-  ```
+    ```shell script
+    apt update
+    apt upgrade
+    apt full-upgrade
+    apt install update-manager-core
+    reboot
+    do-release-upgrade -d
+    ```
 
-  3. Verify successful upgrade by checking the current distribution number
+3. Verify successful upgrade by checking the current distribution number
 
-  ```shell script
-  lsb_release -a
-  ```
+    ```shell script
+    lsb_release -a
+    ```
 
 ## Users & Groups
 
@@ -118,6 +118,20 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
   groups <user>
   ```
 
+## Apt
+
+* Install the development tools package
+
+    ```shell script
+    sudo apt update
+    sudo apt install build-essential
+    ```
+
+* Install the manual pages about using GNU/Linux for development:
+
+    ```shell script
+    apt-get install manpages-dev
+    ```
 
 ## Snap
 
@@ -132,3 +146,154 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
     ```shell script
     sudo snap install cmake --channel=3.17/stable --classic
     ```
+
+## SMB
+
+Installing SMB server on Ubuntu
+
+* Install the `samba` package from `apt`
+
+    ```shell script
+    sudo apt update
+    sudo apt install samba
+    ```
+
+    ```txt
+    [sambashare]
+    path = /home/{{< var USER >}}/{{< var DIR >}}
+    read only = no
+    browsable = yes
+    comment = hello world
+    ```
+
+    ```shell script
+    sudo service smbd restart
+    sudo ufw allow samba
+    sudo smbpasswd -a {{< var USERNAME >}}
+    ```
+
+## Update alternatives for common commands
+
+Ubuntu keeps track of the default programs by maintaining a list of symbolic links, under /etc/alternatives directory. Each entry here is a shortcut points to the actual program, which may have more than one option (i.e. alternatives).
+
+* List all existing entries of known alternatives
+
+    ```shell script
+    update-alternatives --get-selections
+    ```
+
+    {{% samp %}}
+    ...
+    java      auto     /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+    javac     auto     /usr/lib/jvm/java-11-openjdk-amd64/bin/javac
+    ...
+    {{% /samp %}}
+
+* List all possible alternatives of a existing entries
+
+
+    ```shell script
+    update-alternatives --list java
+    ```
+
+    {{% samp %}}
+    /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+    {{% /samp %}}
+
+* Add an unlisted entry to the set of possible alternatives
+
+    ```shell script
+    # Note: you'll still need to specify an entry using '--set'/'--config'
+    update-alternatives --install /usr/bin/editor editor /usr/bin/vi 80
+    ```
+
+* Interactivelly set a particular entry as the alternative
+
+    ```shell script
+    update-alternatives --config java
+    ```
+
+* Programmatically set a particular entry as the alternative
+
+    ```shell script
+    update-alternatives --set editor /usr/bin/nvim
+    ```
+
+
+## C/C++
+
+* Install GCC `v7` through `v10`
+
+    ```shell script
+    sudo apt install g{cc,++}-{7..10}
+    ```
+
+    ```shell script
+    for v in {7..10}; do
+        sudo update-alternatives \
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${v} $((v*10)) \
+        --slave /usr/bin/g++ g++ /usr/bin/g++-${v} $((v*10)) \
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${v} $((v*10))
+    done
+    ```
+
+# Java
+
+* Installing the [openJDK](https://snapcraft.io/openjdk) implementation of Java SE:
+
+    ```shell script
+    sudo snap install openjdk --candidate
+    ```
+
+# Go
+
+* Installing the [Go](https://snapcraft.io/go) programming language
+
+    ```shell script
+    sudo snap install go --classic
+    ```
+
+# Python
+
+* Installing the [Python]() programming language
+
+    ```shell script
+    sudo apt install software-properties-common
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt install python3.9
+    ```
+
+# GitHub
+
+* Installing [the GitHub CLI](https://cli.github.com/manual/)
+
+    * Using Snap
+
+        ```shell script
+        sudo snap install --edge gh
+        snap connect gh:ssh-keys
+        ```
+
+    * Using APT
+
+        ```shell script
+        sudo apt-key adv --keyserver 'keyserver.ubuntu.com' --recv-key 'C99B11DEB97541F0'
+        sudo apt-add-repository 'https://cli.github.com/packages'
+        sudo apt update
+        sudo apt install gh
+        ```
+
+# Installing Ubuntu the hard way
+
+* On macOS:
+
+```shell script
+hdiutil convert ~/Downloads/ubuntu.iso -format UDRW -o ~/Downloads/ubuntu.img
+mv ~/Downloads/ubuntu.img.dmg ~/Downloads/ubuntu.img
+diskutil list
+diskutil unmount /dev/disk2
+sudo dd if=${HOME}/Downloads/ubuntu.img of=/dev/disk2 bs=1m
+diskutil eject /dev/disk2
+```
+

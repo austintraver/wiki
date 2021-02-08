@@ -630,6 +630,12 @@ The keyword `${@}` contains the set of all arguments to a program/function
     print -l ./dir/*(.)
     ```
 
+* Print the names of subdirectories found within packages installed to `/usr/local/opt`:
+
+    ```shell script
+    print -l /usr/local/opt/*/*(/:t) | sort | uniq
+    ```
+
 # While loops
 
 ```shell script
@@ -1097,10 +1103,6 @@ The builtin command `kill` is used to send signals to a process.
 
 You can specify the signal by its number, or by its name.
 
-```shell script
-
-```
-
 ## Handling Signals With Trap
 
 ```shell script
@@ -1162,6 +1164,33 @@ For all of these `TRAP[NAL]()` functions, if the final command is `return 0` (or
     # `(.)` select files, but not directories
     # (ad+1) access time, >1 (d)ays from the present moment
     ```
+
+* Select all files in the current directory ending in a number, *no matter how many digits!* 🤯
+
+    ```shell script
+    print -l ./*-<->
+    ```
+
+    {{% samp %}}
+    ./file0
+    ./file12
+    ./file001
+    {{% /samp %}}
+
+Note that this is **not sorted numerically**. *However*, it is possible to specify this.
+To do so, specify the glob qualifier `n` in your filename generation pattern, such as in the example below.
+
+* Sort files numerically
+
+    ```shell script
+    print -l ./*-<->(n)
+    ```
+
+    {{% samp %}}
+    ./file0
+    ./file001
+    ./file12
+    {{% /samp %}}
 
 ## Operator Expansion
 
@@ -1313,7 +1342,7 @@ Here are some flags below:
     ./path/to/file.txt => ./path/to
     ```
 
-* Print the absolute path to the file being executed
+* Print the absolute path to the file currently being sourced/executed
 
     ```shell script
     filename=${${(%):-%N}:A}
@@ -1326,7 +1355,7 @@ Here are some flags below:
 
     {{% /samp %}}
 
-* Print the absolute path to the directory containing the file being executed
+* Print the absolute path to the directory containing the file currently being sourced/executed
 
     ```shell script
     filepath=${${(%):-%N}:A:h}
@@ -2465,23 +2494,52 @@ using the `${array:|filter}` syntax. It's documented in "Parameter Expansion" of
     filter=(bravo charlie)
   
     # Remove from 'array' any element contained in the array 'filter'
-    excluded=${array:|filter}
+    excluded=(${array:|filter})
     # (alpha delta)
   
     # Remove from 'array' any element *not* contained in the array 'filter'
-    included=${array:*filter}
+    included=(${array:*filter})
     # (bravo charlie)
-  
-    # Remove from 'array' any element matching the pattern 'charlie'
-    group=${array:#charlie}
-    # (alpha bravo delta)
-  
-    # Remove from 'array' any element not matching the pattern 'CIDR*'
-    ${(M)array:#CIDR*}
-  
-    # Remove any line from 'whois' that doesn't start with 'CIDR'
-    ${(M)${(@)${(f)${"$(whois 52.52.124.230)"}}}:#CIDR*}
     ```
+  
+
+You can also remove elements from an array based on patterns. This filter takes on the syntax 
+`${array:#{{< var PATTERN >}}}` where {{< var PATTERN >}} is the same as the form used in
+[filename generation][].
+
+[filename generation]: https://zsh.fyi/expansion#filename-generation
+
+* Remove from `array` any element that *matches* the pattern:
+
+    ```shell script
+    # *r*: strings containing the letter 'r'
+    array=('number one' two three)
+    output=(${array:#*w*})
+    typeset -p output
+    ```
+
+    {{< samp >}}typeset -a output=( 'number one' three ){{< /samp >}}
+  
+* Remove from 'array' any element that *does not match* the pattern `pattern\*`
+
+    ```shell script
+    # *r*: strings containing the letter 'w'
+    array=('number one' two three)
+    output=(${(M)array:#*w*})
+    typeset -p output
+    ```
+
+    {{< samp >}}typeset -a output=( two ){{< /samp >}}
+
+
+* Remove any line from 'whois' that doesn't start with 'CIDR'
+
+    ```shell script
+    ip='8.8.8.8'
+    print -- ${(M)${(@)${(f)${"$(whois ${ip})"}}}:#CIDR*}
+    ```
+
+    {{<samp >}}CIDR:           8.0.0.0/9{{< /samp >}}
 
 ## Background Jobs
 
