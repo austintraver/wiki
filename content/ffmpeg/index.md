@@ -23,6 +23,20 @@ Conversions between filetypes is usually as easy as the following example
     ffmpeg -i 'input.mp3' 'output.aiff'
     ```
 
+* Convert an MP3 file `song.mp3` into M4A format:
+
+    * Using `avconvert`:
+
+        ```shell script
+        avconvert -p 'PresetAppleM4A' -s 'song.mp3' -o 'song.m4a'
+        ```
+
+    * Using `ffmpeg`:
+
+        ```shell script
+        ffmpeg -i 'song.mp3' -c:a aac -c:v copy 'book.m4a'
+        ```
+
 * Encode an MP4 video file `input.mp4` as a GIF file, and save it as `output.gif`
 
     ```shell script
@@ -36,7 +50,48 @@ Conversions between filetypes is usually as easy as the following example
     ffmpeg -activation_bytes ${ACTIVATION_BYTES} -i 'book.aax' -c copy 'book.m4b'
     ```
 
-* Encode each MP3 audio file in the current folder as an M4A file, save it with
+* Convert an MP3 file `book.mp3` into an M4B audiobook:
+
+    * Using ffmpeg:
+
+        ```shell script
+        ffmpeg -i 'book.mp3' -c:a aac -c:v copy 'book.m4b'
+        ```
+
+        ```shell script
+        mp3='book.mp3'
+        m4a=${mp3:r}.m4a
+        m4b=${m4a:r}.m4b
+        jpeg=${mp3:r}.jpeg
+
+        # Extract the cover art from an MP3 file
+        ffmpeg \
+            -i ${mp3} \
+            -map 0:v \
+            -map -0:V \
+            -c copy \
+            ${jpeg}
+
+        # https://stackoverflow.com/questions/18710992/how-to-add-album-art-with-ffmpeg
+        # Convert the audiobook from MP3 to M4B
+        # preserving the existing cover art
+        ffmpeg \
+            -i ${mp3} \
+            -i ${jpeg} \
+            -map 0:0 \
+            -map 1:0 \
+            -c:a aac \
+            -c:v copy \
+            -id3v2_version 4 \
+            -metadata:s:v title="Album cover" \
+            -metadata:s:v comment="Cover (front)" \
+            ${m4b}
+        ```
+
+
+
+
+* Convert each MP3 audio file in the current folder as an M4A file, save it with
   the same name, (i.e., `example.mp3` → `example.m4a`)
 
     ```shell script
@@ -53,6 +108,7 @@ Conversions between filetypes is usually as easy as the following example
 * `-y`: Automatically overwrite files without asking
 * `-i <ifile>`: Specify an input filename
 * `-loglevel panic`: Reduce the verbosity of `ffmpeg` (in this case, silence it)
+* `loglevel quiet -stats`: Don't print any output other than the a one-line "progress report" of the conversion that's currently underway
 * `-activation_bytes <hash>`: The hexadecimal activation bytes used to decrypt
   Audible's DRM
 

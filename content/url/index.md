@@ -1,11 +1,11 @@
 ---
-title: "Uniform Resource Identifiers"
-description: "a string of characters that unambiguously identifies a resource"
+title: "URIs and URLs"
+description: "A string of characters that unambiguously locates a resource"
 date: 2020-07-23T22:20:14-07:00
 draft: false
 ---
 
-# Uniform Resource Identifiers
+# So which is it? URI or URL?
 
 I wrote this page because I kept forgetting the answers to questions like
 "What's the difference between a URI and a URL? What's a URN again? Was that
@@ -61,9 +61,6 @@ There are three types of uniform resources
 1. Uniform Resource *Identifiers* (**URI**s)
 1. Uniform Resource *Locators* (**URL**s)
 1. Uniform Resources *Names* (**URN**s)
-
-
-
 
 ## The syntax of a URI
 
@@ -222,11 +219,13 @@ Although in practice it is often omitted, this domain name is still a partially 
 * The **subdomain** would be `app` for the URL `app.product.net`
             
 ```txt
-          root domain name
-            ┌────┴───┐
+                                        
+          root domain name              
+            ┌────┴───┐                  
 https://sub.domain.net/dir/path/doc.html
-        └┬┘ └─┬──┘ └┬┘ 
-    subdomain SLD  TLD
+        └┬┘ └─┬──┘ └┬┘                  
+    subdomain SLD  TLD                  
+                                             
 ```
 
 
@@ -388,13 +387,8 @@ The commands above URL encode the angle brackets that must surround a message ID
 
 ## REST APIs
 
-All API paths are relative to a **base URL**, for example, `/users`, when specified, would truly refer to `<scheme>://<host>/<basePath>/users`
+All API paths are relative to a **base URL**, for example, `/users`, when specified, would truly refer to `<scheme>://<host>/<basePath>/users`, see the example below:
 
 ```txt
 https://{restapi_id}.execute-api.{region}.amazonaws.com/{stage_name}/
-```
-
-```txt
-https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest
-└───────────────┬─────────┘
 ```

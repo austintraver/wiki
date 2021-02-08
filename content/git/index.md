@@ -87,7 +87,10 @@ that the user has a GitHub account with the username `tommy`
     git create idea --description "My new idae"
 
     # v6
-    gh repo create {{< var REPO_NAME >}} [-d {{< var DESCRIPTION >}} ] {--private | --public} [--enable-wiki --enable-issues ...]
+    gh repo create {{< var REPO_NAME >}}
+        # [-d {{< var DESCRIPTION >}} ] \ optional
+        # {--private | --public} \ optional
+        # [--enable-wiki --enable-issues ...] optional
     ```
 
 * Adding a remote repository as a branch to track
@@ -98,10 +101,23 @@ that the user has a GitHub account with the username `tommy`
     # => git remote add ssh://git@github.com/tommy/project
     ```
 
+* Adding a remote repository, simulating the settings configured by `git clone`
+
+    ```shell script
+    git init
+    git remote add \
+        -t 'master' \
+        -m 'master' \
+        'origin' git@github.com:{{< var USER >}}/{{< var REPO >}}.git
+    git fetch origin
+    git merge origin
+    ```
+
 * Updating the URL of a remote repository
 
     ```shell script
-    git remote set-url origin 'git@github.com:/user/repo.git'
+    git remote set-url \
+        origin 'git@github.com:/{{< var USER >}}/{{< var REPO >}}.git'
     ```
 
 * [Pushing commits](https://docs.github.com/en/free-pro-team@latest/github/using-git/pushing-commits-to-a-remote-repository) to a remote repository
@@ -839,4 +855,6 @@ would any other code base.
     git clone 'https://github.com/ttrojan/fighton.wiki.git'
     ```
 
+## GitHub supports the OpenGraph API
 
+TIL GitHub supports [Custom Open Graph Images for repositories](https://github.blog/2019-04-17-custom-open-graph-images-for-repositories/)

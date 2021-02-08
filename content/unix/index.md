@@ -667,12 +667,22 @@ A *Proxy Auto-Config* **PAC** file contains a JavaScript function that decides w
   curl -x socks5://remote.net http://example.com
   ```
 
+## Authentication
+
+Article: [Authentication: Everything curl](https://everything.curl.dev/http/auth)
+
+```shell script
+curl --anyauth \
+    --user {{< var USERNAME >}}:{{< var PASSWORD >}} \
+    {{< var URL >}}
+```
+
 # `cron`
 
 Example crontab using `zsh` globbing
 
 ```shell script
-SHELL=/usr/local/bin/zsh
+SHELL=/bin/zsh
 
 # When the computer reboots,
 # delete any files in ~/tmp that haven't been accessed in over a day

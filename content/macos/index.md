@@ -1897,6 +1897,14 @@ The Compressor application is part of the iWork premium set of apps, which inclu
 
 ## AppleScript
 
+You can trigger AppleScript from a web link using the `applescript` URL scheme.
+
+For instance, this is the AppleScript to print `hello world` on a user's computer.
+
+```txt
+applescript://com.apple.scripteditor?action=new&script=display%20dialog%20%22hello%20world%22
+```
+
 * Create an alert window that shows a dialog and presents the user with two choices
 
     ```shell script
@@ -2280,3 +2288,41 @@ to erase the entry.*
     ```shell script
     launchctl submit -l -- /path/to/executable 'arg1' 'arg2' 'arg3'
     ```
+
+---
+
+I wasn't sure where the best place to put this is, but it will
+link the latest version of GCC installed by Homebrew into `/usr/local/bin`,
+while also removing the version number suffixed to the filename by Homebrew's
+installation formula.
+
+```shell script
+# Choose the directory containing the latest version of GCC
+# as indicated by the highest number suffixed to 
+# the filepath of the package directory
+print -v version /usr/local/opt/gcc@<->(n[-1])
+version=${version#*@}
+for file in /usr/local/opt/gcc@${version}/bin/*-${version}(*); do
+    tail=${file:t}
+    ln -sf ${file} /usr/local/bin/${tail%-*}
+done
+```
+
+If symbolic links are overkill for you, then check this out.
+The snippet below will hash the executable corresponding with each file,
+which zsh will expand each command to when called, and will do this up
+until the next point that the path is modified by the shell. At that point,
+these hashed commands will be rehashed, meaning the location specified in the
+`hash` command's specified directory will have its executable overwritten 
+and replaced by the executable in the foremost directory in the path 
+containing an executable with a matching name.
+
+```shell script
+print -v version /usr/local/opt/gcc@<->(n[-1])
+version=${version#*@}
+for file in /usr/local/opt/gcc@${version}/bin/*-${version}(*); {
+    tail=${file:t}
+    hash ${tail%-*}=${file}
+}
+```
+

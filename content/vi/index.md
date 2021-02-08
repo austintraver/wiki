@@ -61,15 +61,21 @@ case, I'll be referring to the program as "Vi," the original program.
 
 * Installing Neovim
 
-  * On Ubuntu
+    * On [Ubuntu](https://snapcraft.io/nvim)
+        
+        ```shell script
+        sudo snap install nvim --classic
+        ```
 
-    ```shell script
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    sudo apt update
-    sudo apt install neovim
-    ```
+    * On Debian
 
-  * On macOS
+        ```shell script
+        sudo add-apt-repository ppa:neovim-ppa/unstable
+        sudo apt update
+        sudo apt install neovim
+        ```
+
+    * On macOS
 
     ```shell script
     brew install neovim

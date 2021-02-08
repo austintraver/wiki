@@ -6,13 +6,21 @@ date: 2020-02-04T14:52:26-08:00
 
 # C / C++
 
-C was originally developed at Bell Labs by Dennis Ritchie between 1972 and 1973 to make utilities running on Unix. Later, it was applied to re-implementing the kernel of the Unix operating system. During the 1980s, C gradually gained popularity. It has become one of the most widely used programming languages, with C compilers from various vendors available for the majority of existing computer architectures and operating systems. C has been standardized by the International Organization for Standardization (ISO).
+C was originally developed at Bell Labs by Dennis Ritchie between 1972 and 1973
+to make utilities running on Unix. Later, it was applied to re-implementing the
+kernel of the Unix operating system. During the 1980s, C gradually gained
+popularity. It has become one of the most widely used programming languages,
+with C compilers from various vendors available for the majority of existing
+computer architectures and operating systems. C has been standardized by the
+International Organization for Standardization (ISO).
 
 ## `<stdint.h>`
 
 ### Specifying Integer Size
 
-Sometimes you know that you're only going to need a number that goes up to 255. It doesn't make sense to create a full `int` since that is typically encoded as 4-bytes large. A single byte is capable of coding numbers up to `255`.
+Sometimes you know that you're only going to need a number that goes up to 255.
+It doesn't make sense to create a full `int` since that is typically encoded as
+4-bytes large. A single byte is capable of coding numbers up to `255`.
 
 Luckily, C allows you to specifically declare the size of your integer, with the following syntax.
 
@@ -23,7 +31,8 @@ Luckily, C allows you to specifically declare the size of your integer, with the
 |4|32|`int32_t`|`uint32_t`|
 |8|64|`int64_t`|`uint64_t`|
 
-You're technically using some of these without even knowing it. Assuming you're running C on a 64-bit system, these following types are equivalent:
+You're technically using some of these without even knowing it. Assuming you're
+running C on a 64-bit system, these following types are equivalent:
 
 * `char` is a `int8_t`, an unsigned 1-byte integer
 * `short` is a `int16_t`, a signed 2-byte integer
@@ -36,50 +45,43 @@ You're technically using some of these without even knowing it. Assuming you're 
 * `gcc` is the Gnu C compiler
 * `g++` is the Gnu C++ compiler
 
-*However*, with this being said, `gcc` is a fully functional C++ compiler, and `g++` is effectively just a mapping to `gcc -xc++ -lstdc++ -shared-libgcc`
+*However*, with this being said, `gcc` is a fully functional C++ compiler, and
+`g++` is effectively just a mapping to `gcc -xc++ -lstdc++ -shared-libgcc`
 
 
 ### Setting the Version
 
 * In C
 
-  * Using `clang`:
+    * Using `clang`:
 
-    ```shell script
-    clang -std=c17
-    ```
+        ```shell script
+        clang -std=c17
+        ```
 
 * In C++
 
-  * Using `clang++`:
+    * Using `clang++`:
 
-    ```shell script
-    clang++ -std=c++2a
-    ```
+        ```shell script
+        clang++ -std=c++2a
+        ```
 
-  * Using `g++`:
+    * Using `g++`:
 
-    ```shell script
-    g++ -std=c++1z # (ISO c++ standard)
-    g++ -std=gnu++1z # (GNU c++ standard)
-    ```
-
-### Optimizations
-
-* Optimize compilation for the Raspberry Pi 4
-
-  ```shell script
-  export CFLAGS="-march=cortex-a72 -mcpu=cortex-a72 -mfloat-abi=hard -mfpu=neon-fp-armv8 -mneon-for-64bits"
-  ```
+        ```shell script
+        g++ -std=c++1z # (ISO c++ standard)
+        g++ -std=gnu++1z # (GNU c++ standard)
+        ```
 
 ### Checking Processor
 
-  ```shell script
-  gcc -march=native -Q --help=target | grep -- '-march=' | cut -f3 | head -n 1
-  # on macOS:        'haswell'
-  # on AWS EC2:      'skylake-avx512'
-  # on Raspberry Pi: 'cortex-a72'
-  ```
+    ```shell script
+    gcc -march=native -Q --help=target | grep -- '-march=' | cut -f3 | head -n 1
+    # on macOS:        'haswell'
+    # on AWS EC2:      'skylake-avx512'
+    # on Raspberry Pi: 'cortex-a72'
+    ```
 
 ## Input/Output
 
@@ -88,10 +90,10 @@ Import the `<stdio.h>` library to get started
 ### Formatted Strings
 
 * The `snprintf()` function can be used to write a formatted string to a buffer. The arguments supplied are as follows:
-  1. `char* buffer`
-  2. `int size`
-  3. `const char* format`
-  4. `<arg1>`, `<arg2>`, `...`
+    1. `char* buffer`
+    2. `int size`
+    3. `const char* format`
+    4. `<arg1>`, `<arg2>`, `...`
 
 * The `puts()` function writes a C-string to `stdout`, stopping at the first null terminator `\0` found. It additionall appends a newline `\n` to the output. To print to a particular stream instead of `stdout`, and/or to avoid the insertion of a trailing newline, `\n` instead of `stdout`, use the `fputs()` function instead.
 
@@ -102,12 +104,12 @@ Import the `<stdio.h>` library to get started
   #include <stdint.h>
 
   int main() {
-      uint8_t size = 100;
-      char buffer[size];
-      const char* format = "It takes %hhu to tango.";
-      uint8_t value = 2;
-      snprintf(buffer, size, format, value);
-      puts(buffer);
+    uint8_t size = 100;
+    char buffer[size];
+    const char* format = "It takes %hhu to tango.";
+    uint8_t value = 2;
+    snprintf(buffer, size, format, value);
+    puts(buffer);
   }
   ```
 
@@ -120,46 +122,46 @@ You can use *Initializer Lists* to zero out elements.
 
 * Initializing each element of an array to `0`:
 
-  ```c
-  char[8] buffer = {0};
-  ```
+    ```c
+    char[8] buffer = {0};
+    ```
 
 Initializing a 2D array with initializer lists even supports implied zero values, see below.
 
 * Initializing a 2D array of known values:
 
-  ```c
-  #include <stdio.h>
-  #include <stdint.h>
+    ```c
+    #include <stdio.h>
+    #include <stdint.h>
 
-  int main(int argc, char** argv) {
-    /* Create a 4x2 matrix */
-    uint8_t matrix[4][3] = {
-      { 0, 1 }, // 0
-      { 2, 3 }, // 0
-      { 4, 5 }, // 0
-      { 6, 7,      8 }
-    };
-    for (uint8_t i=0; i<4; i+=1) {
-      for (uint8_t j=0; j<3; j+=1) {
-        printf("%hhu ", matrix[i][j]);
+    int main(int argc, char** argv) {
+      /* Create a 4x2 matrix */
+      uint8_t matrix[4][3] = {
+        { 0, 1 }, // 0
+        { 2, 3 }, // 0
+        { 4, 5 }, // 0
+        { 6, 7,      8 }
+      };
+      for (uint8_t i=0; i<4; i+=1) {
+        for (uint8_t j=0; j<3; j+=1) {
+          printf("%hhu ", matrix[i][j]);
+        }
+        printf("\n");
       }
-      printf("\n");
+      return 0;
     }
-    return 0;
-  }
-  ```
+    ```
 
-  ```txt
-  0 1 0 
-  2 3 0 
-  4 5 0 
-  6 7 8 
-  ```
+    ```txt
+    0 1 0
+    2 3 0
+    4 5 0
+    6 7 8
+    ```
 
 ## Useful `<stdio.h>` Commands
 
-* `gets()`: Reads a c-string from stdin
+* `gets`: Reads a c-string from stdin
 
 * `fputc`: Writes a character to a stream
 
@@ -195,4 +197,131 @@ The style guide notes outlined below are taken directly from Apple's `llvm` and 
 
 * When coding in `C++`, favor using `std::static_cast<T>(var)` over C-style casts, (e.g. `(T) var`).
 
+
+## Formatting time and date { #time-and-date }
+
+A peer in my operating systems class asked:
+
+> Since there is no specific format required, I just wanted to check if this
+> format is acceptable for date:
+
+```
+1:35, 1-24-2021 // represents 1:35 AM UTC, January 24 2021
+13:35, 1-24-2021 // represents 1:35 PM UTC, January 24 2021
+```
+
+I'm not a CP/TA for CSCI 350, but I know of multiple classes where points are
+taken off for students who encode time this way.
+
+For example, the string representation of `1:02 AM UTC, March 4, 0005`, using
+this format, would be:
+
+```txt
+1:2, 3-4-5
+```
+
+Which would be a bit confusing. To solve this, ISO came together in 1988 and
+created a timestamp format, and published it under [ISO 8601][], with the most
+common implementation being that documented in [RFC 3339][]. Typically for
+computers, time as a string will be compliant with these formats.
+
+The main reason: A list of `ISO 8601` compliant timestamps, when sorted
+lexicographically, **are also in chronological order**
+
+That example written above in an `ISO 8601` compliant format would be
+
+`0005-04-03T01:02:00+00:00`
+
+*In `C/C++`* You can use [strftime()][strftime] to create ISO 8601 / RFC 3339
+compliant timestamp strings.
+
+Sources:
+* my burning hatred for dealing with date/time
+* data engineering internship
+
+[ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
+[RFC 3339]: https://tools.ietf.org/html/rfc3339#section-5.8
+[strftime]: http://www.cplusplus.com/reference/ctime/strftime/
+
+{{< youtube "-5wpm-gesOY" >}}
+
+## Inheritance
+
+```cpp
+class example {
+    demo();
+};
+
+class::demo(){}
+```
+
+In the example above, the `::` is called the scope resolution operator, which
+points out to the compiler that the function `demo()` is a member to the class
+`example`.
+
+## CMake
+
+### Adding GoogleTest to a C++ project
+
+It's late, so I'm putting this here so I don't forget it.
+
+Project file `CMakeList.txt`, at the root of the project
+
+```cmake
+cmake_minimum_required(VERSION 3.17)
+project(my-project)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+if (DEFINED ENV{GTEST_CMAKE})
+	message("GTEST_CMAKE:" $ENV{GTEST_CMAKE})
+	if(EXISTS $ENV{DOTFILES}/cmake/gtest.cmake)
+		configure_file($ENV{GTEST_CMAKE} gtest/download/CMakeLists.txt)
+	endif()
+endif()
+
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+		RESULT_VARIABLE result
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gtest/download)
+if (result)
+	message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+endif ()
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+		RESULT_VARIABLE result
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/gtest/download)
+if (result)
+	message(FATAL_ERROR "Build step for googletest failed: ${result}")
+endif ()
+
+# Add googletest directly to our build. This defines
+# the gtest and gtest_main targets.
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/gtest/src
+		${CMAKE_CURRENT_BINARY_DIR}/gtest/build
+		EXCLUDE_FROM_ALL)
+
+# Now simply link against gtest or gtest_main as needed. Eg
+add_executable(example example.cpp)
+target_link_libraries(example gtest_main)
+add_test(NAME example_test COMMAND example)
+```
+
+Environment variable `${GTEST_CMAKE}`, stored anywhere on the filesystem
+
+```cmake
+cmake_minimum_required(VERSION 2.8.12)
+project(gtest NONE)
+include(ExternalProject)
+ExternalProject_Add(googletest
+		GIT_REPOSITORY https://github.com/google/googletest.git
+		GIT_TAG master
+		SOURCE_DIR "${CMAKE_CURRENT_BINARY_DIR}/gtest/src"
+		BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/gtest/build"
+		CONFIGURE_COMMAND ""
+		BUILD_COMMAND ""
+		INSTALL_COMMAND ""
+		TEST_COMMAND ""
+		)
+```
 
