@@ -2,7 +2,7 @@
 title: Ubuntu
 description: "A linux distro we can all agree on"
 date: 2020-04-23T10:32:49-07:00
-draft: true
+draft: false
 ---
 
 # Distribution Upgrades
@@ -155,7 +155,7 @@ Installing SMB server on Ubuntu
 
     ```shell script
     sudo apt update
-    sudo apt install samba
+    sudo apt install samba samba-common-bin smbclient cifs-utils
     ```
 
     ```txt
@@ -226,15 +226,12 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 * Install GCC `v7` through `v10`
 
     ```shell script
-    sudo apt install g{cc,++}-{7..10}
-    ```
-
-    ```shell script
+    sudo apt install -y build-essential g{cc,++}-{7..10}
     for v in {7..10}; do
-        sudo update-alternatives \
-        --install /usr/bin/gcc gcc /usr/bin/gcc-${v} $((v*10)) \
-        --slave /usr/bin/g++ g++ /usr/bin/g++-${v} $((v*10)) \
-        --slave /usr/bin/gcov gcov /usr/bin/gcov-${v} $((v*10))
+        sudo update-alternatives \                                 
+        --install /usr/bin/gcc gcc /usr/bin/gcc-${v} $((${v}*10)) \
+        --slave /usr/bin/g++ g++ /usr/bin/g++-${v} \         
+        --slave /usr/bin/gcov gcov /usr/bin/gcov-${v}
     done
     ```
 
@@ -284,6 +281,22 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
         sudo apt install gh
         ```
 
+# Samba
+
+* Installing Samba
+
+    ```shell script
+    sudo apt install samba
+    ```
+
+# NodeJS
+
+* Installing NodeJS
+
+    ```shell script
+    v=15; curl -sL https://deb.nodesource.com/setup_${v}.x | sudo -E bash -
+    ```
+
 # Installing Ubuntu the hard way
 
 * On macOS:
@@ -297,3 +310,47 @@ sudo dd if=${HOME}/Downloads/ubuntu.img of=/dev/disk2 bs=1m
 diskutil eject /dev/disk2
 ```
 
+# Enable automatic login
+
+Using privileged admin account [open up terminal][] or your favorite text 
+editor and edit the configuration file `/etc/gdm3/custom.conf`
+
+Change the following snippet from
+
+before
+
+```conf
+[daemon]
+# Uncoment the line below to force the login screen to use Xorg
+#WaylandEnable=false
+
+# Enabling automatic login
+#  AutomaticLoginEnable = true
+#  AutomaticLogin = user1
+```
+
+after
+
+```conf
+[daemon]
+# Uncoment the line below to force the login screen to use Xorg
+#WaylandEnable=false
+
+# Enabling automatic login
+AutomaticLoginEnable = true
+AutomaticLogin = {{< var USERNAME >}}
+```
+
+You will need root/administrator privileges to perform this operation. Uncommenting the above lines will enable automatic login for the `linuxconfig` user. Change the username to suit your needs.
+
+[open up terminal]: https://linuxconfig.org/how-to-open-a-terminal-on-ubuntu-bionic-beaver-18-04-linux
+
+## Snap Packages
+
+Ubuntu is migrating away from using Debian's Apt to manage packages, and toward using Canonical's [Snapcraft](https://snapcraft.io)
+
+They wrote an article titled [How to keep your Linux disk usage nice and and tidy](https://snapcraft.io/blog/how-to-keep-your-linux-disk-usage-nice-and-tidy-and-save-space) where I learned you can reduce the number of prior package versions that Snapcraft keeps, which by default, is three.
+
+```shell script
+sudo snap set system refresh.retain=2
+```

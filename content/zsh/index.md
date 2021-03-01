@@ -155,11 +155,36 @@ case "$-" in
 esac
 ```
 
+Subshells will retain the value of variables exported to the environment. 
+In order to create a subshell with a clean environment, you need to pass
+specific commands to `exec` and `zsh`, as shown below:
 
-## `/etc vs. ~/`
+* Create a subshell with a clean user environment
 
-* A dotfile located in `/etc` will load for any user on the machine.
-* A dotfile located in `~/` will load for only that user.
+    ```shell script
+    exec -c -l zsh -d -f
+    ```
+    
+    A breakdown of the arguments provided below
+
+    `exec`
+
+    * `-c`: clear the environment
+
+    * `-l`: simulate login shell (prepend `-` to `argv[0]`)
+
+    `zsh`
+
+    * `-d`: ignore global runtime configuration files
+
+    * `-f`: ignore user runtime configuration files
+
+## User and System runtime configurations
+
+It comes down to whether the files are in `/etc` or `${HOME}`.
+
+* An rcfile located in `/etc` will load for any user on the machine.
+* An rcfile located in `~/` will load for only that user.
 * When a shell is a login shell, it will source `/etc/zprofile` and `~/.zprofile` in that order.
 * When a shell is a interactive shell, it will source `/etc/zshrc` and `~/.zshrc` in that order.
 * Regardless of the shell, `zsh` will source `/etc/zshenv` and `~/.zshenv` in that order.
@@ -266,7 +291,6 @@ else
   print "his name is not Austin"
 fi
 ```
-
 
 {{% aside info %}}
 
@@ -3489,24 +3513,53 @@ Every process has a process ID or "*PID*" and there are a variety of commands th
 
 Using the `kill` program, you can send any active process a signal.
 
-```shell script
-# [Kill a processes by PID]
-kill -9 <process_id>
-# [Kill a process by name]
-pkill "java"
-# [Kill a process running on a specific port]
-kill $(lsof -t -i :4000)
-# [Send the SIGTERM (15) to process 123]
-kill -15 123
-# [Send the SIGTERM (15) signal to process 123 & process 456]
-kill -TERM 123 456
-# [Send the SIGINT (2) signal to process 123]
-kill -2 123
-# [Send the SIGSTOP () signal to process 123]
-kill -TSTP 123
-# [Send the SIGINT (2) signal to job ID # 1]
-kill -2 %1
-```
+* Kill a processes by PID
+
+    ```shell script
+    kill -9 <process_id>
+    ```
+
+* Kill a process by name
+
+    ```shell script
+    pkill "java"
+    ```
+
+* Kill a process running on a specific port
+
+    ```shell script
+    kill $(lsof -t -i :4000)
+    ```
+
+* Send the SIGTERM (15) to process 123
+
+    ```shell script
+    kill -15 123
+    ```
+
+* Send the SIGTERM (15) signal to process 123 & process 456
+
+    ```shell script
+    kill -TERM 123 456
+    ```
+
+* Send the SIGINT (2) signal to process 123
+
+    ```shell script
+    kill -2 123
+    ```
+
+* Send the SIGSTOP () signal to process 123
+
+    ```shell script
+    kill -TSTP 123
+    ```
+
+* Send the SIGINT (2) signal to job ID # 1
+
+    ```shell script
+    kill -2 %1
+    ```
 
 ### The `pkill` Program
 
@@ -3564,10 +3617,10 @@ The bash prompt is actually a collection of several prompts.
 
   Personally I like the way it looks when I `ssh` into my virtual private server. If you want to try it out, you can run the following command in your terminal.
 
-*  Modify the bash prompt
+*  Modify the machine's hostname (on macOS):
 
     ```shell script
-    sudo scutil --set LocalHostName newname
+    sudo scutil --set HostName {{< var HOSTNAME >}}
     ```
 
 ## Directory Structure
@@ -3590,7 +3643,7 @@ echo -e ${PATH//:/\\n}
 
 {{% aside info %}}
 
-Normally each directory in the path is seperated by a : not a newline, but I
+Normally each directory in the path is seperated by a colon `:` not a newline, but I
 find this to be a clearer output.
 
 {{% /aside %}}
@@ -3601,9 +3654,9 @@ Sometimes you open up a file and it contains the first line, or something simila
 
 #### `greet`
 
-```python
+```py
 #!/usr/local/bin/python3
-print("Hello world!")
+print("hello world")
 ```
 
 That first line uses a *hashbang*. What it does, is it tells your computer what program to use when trying to run the code specified in the lines below. In this case, it says to use the `python3` program located in the directory `/usr/local/bin`
@@ -3673,18 +3726,35 @@ From here, you can type any command without having to use the sudo command.
 
 But there are very useful flags you can use, to type these out in the future
 
-```shell script
-# [Open the Postman.app file explicitly]
-open ~/Applications/Postman
-# [Open the application "Postman"]
-open -a Postman
-# [Open a website in Safari]
-open -a Safari 'https://google.com'
-# [Open with the default text editor]
-open -t textfile.txt
-# Launch a new instance of the application
-open -n sample.png
-```
+* Open the Postman.app file explicitly
+
+    ```shell script
+    open ~/Applications/Postman
+    ```
+
+* Open the application "Postman"
+
+    ```shell script
+    open -a Postman
+    ```
+
+* Open a website in Safari
+
+    ```shell script
+    open -a Safari 'https://google.com'
+    ```
+
+* Open with the default text editor
+
+    ```shell script
+    open -t textfile.txt
+    ```
+
+* Launch a new instance of the application
+
+    ```shell script
+    open -n sample.png
+    ```
 
 ### on Linux
 
