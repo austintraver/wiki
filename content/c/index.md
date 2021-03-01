@@ -113,6 +113,113 @@ Import the `<stdio.h>` library to get started
   }
   ```
 
+### Parsing Strings
+
+I've found a very smooth way to split strings is by iterating through tokens
+generated to match a regular expression. See below:
+
+```cpp
+#include <regex>
+#include <string>
+#include <iostream>
+
+int main() {
+  std::string content("1 - line #1\r\n2 - line #2\r\n3 - line #3");
+  // generate an iterator through each line token, excluding the <CR><LF>
+  // note: exclusion of the token itself is denoted by the `-1` provided as the 4th
+  // argument to the constructor of the std::regex_token_iterator
+  std::regex crlf("\\r\\n");
+  auto line{std::sregex_token_iterator{content.begin(),
+    content.end(),
+    crlf,
+    -1}};
+  while (line != std::sregex_token_iterator()) {
+    std::cout << "------" << std::endl;
+    std::cout << "[" << *line << "]" << std::endl;
+    std::string buffer(line->str());
+    // for the number, omit the (-1) previously provided
+    // which will cause this to tokenize the matches to the
+    // regular expression itself
+    std::regex blackspace("\\S+");
+    auto text{std::sregex_token_iterator{buffer.begin(),
+      buffer.end(),
+      blackspace,
+      }};
+    while (text != std::sregex_token_iterator()) {
+      std::cout << "\t" << "(" << *text << ")" << std::endl;
+      ++text;
+    }
+    ++line;
+  }
+  std::cout << "------" << std::endl;
+}
+```
+
+{{% samp %}}
+
+------
+[1 - line #1]
+	(1)
+	(-)
+	(line)
+	(#1)
+------
+[2 - line #2]
+	(2)
+	(-)
+	(line)
+	(#2)
+------
+[3 - line #3]
+	(3)
+	(-)
+	(line)
+	(#3)
+------
+
+{{% /samp %}}
+
+
+### Splitting Strings
+
+There's no `split()` function for strings... until now!
+
+* Split a string on each occurance of a regular expression pattern:
+
+    ```cpp
+    std::vector<std::string> split(const std::string &text, const std::regex &regex) {
+        return std::vector<std::string>{
+            std::sregex_token_iterator{
+                text.begin(), 
+                text.end(), 
+                regex, 
+                -1
+            }, 
+            std::sregex_token_iterator()
+        };
+    }
+    ```
+
+* Split text on every occurance of a carriage return, followed by a newline
+
+    ```cpp
+    std::regex crlf{"\\r\\n"};
+    for (auto& i : split(text, crlf)) {
+        std::cout << "[" << i << "]" << std::endl;
+    }
+    ```
+
+### Slurping Files
+
+* Read a file and store its content in a string variable:
+
+    ```cpp
+    std::ifstream ifile("file.txt");
+    std::stringstream ss;
+    ss << ifile.rdbuf();
+    std::string text(ss.str());
+    ```
+
 # Initialization
 
 
@@ -313,6 +420,9 @@ Environment variable `${GTEST_CMAKE}`, stored anywhere on the filesystem
 cmake_minimum_required(VERSION 2.8.12)
 project(gtest NONE)
 include(ExternalProject)
+# Replace "ON" with "OFF" to disable either gmock or gtest
+set(BUILD_GMOCK ON CACHE BOOL "" FORCE)
+set(BUILD_GTEST ON CACHE BOOL "" FORCE)
 ExternalProject_Add(googletest
 		GIT_REPOSITORY https://github.com/google/googletest.git
 		GIT_TAG master
@@ -325,3 +435,361 @@ ExternalProject_Add(googletest
 		)
 ```
 
+---
+
+{{% aside info %}}
+
+**Update**: You don't have to do this anymore. CMake has created some built in convenience functions in recent versions of CMake have built-in convenience functions to save you from having to pollute your C/C++ projects with all of this boilerplate. A cleaner example has been provided below.
+
+{{%/ aside %}}
+
+* Modern way to import Google Test into your CMake project.
+
+
+```cmake
+# ===========================================================================
+# Google Test
+include(FetchContent)
+set(FETCHCONTENT_BASE_DIR ${CMAKE_BINARY_DIR}/opt)
+set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+set(BUILD_GTEST ON CACHE BOOL "" FORCE)
+fetchcontent_declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_SHALLOW
+        GIT_PROGRESS
+)
+fetchcontent_makeavailable(googletest)
+# ===========================================================================
+
+# From here, importing a file that uses <gtest/gest.h> should be about 
+# as simple as this, though # I don't fully understand the implications of the
+# PUBLIC/PRIVATE/INTERFACE parameter as of yet.
+
+add_executable(t_node t_node.cpp)
+target_link_libraries(t_node PUBLIC gtest)
+```
+
+#### Pre-compiled headers
+
+Leaving this here as well, for my own memory
+
+```cmake
+target_precompile_headers(ajt INTERFACE ajt.hh
+        <string>
+        <vector>
+        <fstream>
+        <sstream>
+        <iostream>
+        <map>
+        <set>
+        <unordered_map>
+        <unordered_set>
+        <regex>
+        <exception>)
+```
+
+#### Header-only libraries
+
+```cmake
+add_library(http INTERFACE http.hh)
+target_precompile_headers(http)
+
+add_library(request INTERFACE request.hh)
+target_link_libraries(request INTERFACE http)
+target_precompile_headers(request REUSE_FROM http)
+
+add_library(response INTERFACE response.hh)
+target_link_libraries(response INTERFACE http)
+target_precompile_headers(response REUSE_FROM http)
+
+add_executable(network remotehosting.cpp)
+target_link_libraries(remotehosting INTERFACE request response)
+```
+
+---
+
+## Namespace Aliasing
+
+Leaving this here because I want to use it at some point, but when
+I'm not doing a graded assignment
+
+```cpp
+#include <string>
+#include <vector>
+#include <list>
+#include <regex>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+#include <queue>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+
+namespace etc {
+
+    template <typename K, typename V>
+    using map = std::unordered_map<K, V>;
+
+    template<typename K, typename V>
+    using multimap = std::unordered_multimap<K,V>;
+
+    template<typename K, typename V>
+    using treemap = std::map<K, V>;
+
+    template<typename K, typename V>
+    using multitreemap = std::multimap<K, V>;
+
+    template <typename T>
+    using set = std::unordered_set<T>;
+
+    template<typename T>
+    using multiset = std::unordered_multiset<T>;
+
+    template<typename T>
+    using treeset = std::set<T>;
+
+    template<typename T>
+    using multitreeset = std::multiset<T>;
+
+    template<typename T>
+    using list = std::vector<T>;
+
+    template<typename T>
+    using linkedlist = std::list<T>;
+
+    template<typename T>
+    using heap = std::priority_queue<T>;
+
+}
+```
+
+### Utility Functions
+
+* Determine the size of a file
+
+    ```cpp
+    #include <sys/stat.h>
+
+    /**
+    * Determines the size of a file
+    *
+    * @param filepath - the absolute or relative path to the file
+    * @return the size of the file, or (-1), in the event of an error
+    */
+    static size_t filesize(const char* filepath) {
+        struct stat result{};
+        return (stat(filepath, &result) == 0) ? result.st_size : -1;
+    }
+    ```
+
+* Reading and writing to file descriptors using C++ streams
+
+```cpp
+#include <fstream>
+#include <sstream>
+#include <iotream>
+
+int main() {
+    // read from standard input
+    std::ifstream ifile("/dev/fd/0");
+    // write to standard output
+    std::ofstream ofile("/dev/fd/1");
+    std::stringstream sfile;
+    // slurp the input into a string stream
+    sfile << ifile.rdbuf();
+    // output the string contained by the stream
+    ofile << sfile.str();
+}
+
+```
+
+* Checking if a file is empty
+
+```cpp
+std::ifstream ifile;
+ifile.open({{< var FILEPATH >}});
+// if the file is empty, return an empty string
+if (ifile.peek() == std::ifstream::traits_type::eof()) {
+    return std::string{};
+}
+```
+
+## Operator Overloading
+
+In the example below, I create a class `number`, and overload the addition
+operator, such that instead of adding `1` and `2` together, the numbers
+are instead *concatenated*, causing the value of `number` `charlie` to equal `3`.
+
+```cpp
+#include <iostream>
+#include <string>
+
+struct number {
+  number(int val): val(val) {}
+
+  number operator+(number rhs) {
+    return number(std::stoi(std::string(std::to_string(this->val) + std::to_string(rhs.val))));
+  }
+
+  friend std::ostream& operator<<(std::ostream& os, const number& num) {
+    os << num.val;
+    return os;
+  }
+
+  int val;
+};
+
+int main(int argc, char** argv) {
+  number alpha(1);
+  number bravo(2);
+  number charlie = alpha + bravo;
+  std::cout << charlie << std::endl;
+}
+```
+
+Output
+
+```txt
+12
+```
+
+
+## GCC
+
+### Flags
+
+#### Common Flags
+
+`-E`
+:   Have GCC run the pre-processer and output the resulting source code.
+
+`-S`
+:   Have GCC run the assembler and output the intermediate assembly code.
+
+`-C`
+:   Have GCC produce only the final result after compiled code
+
+`-I {{< var DIR >}}`
+:   When the codebase refers to files in a `#include` directive, check the contents of `{{< var DIR >}}` for a matching filename. 
+
+`-D{{< var MACRO >}}={{< var DEFINITION >}}`
+:   Define a macro `{{< var MACRO >}}` with definition `{{< var DEFINITION >}}`, same as saying `#define {{< var MACRO >}} = {{< var DEFINITION >}}` in your source files.
+
+`-B{{< var PREFIX >}}`
+:   This option specifies where to find the executables, libraries, include files, and data files of the compiler itself.
+
+`-l {{< var LIBRARY >}}` 
+:   Search the library named `{{< var LIBRARY >}}` when linking.  (The second alternative with the library as a separate argument is only for POSIX compliance and is not recommended.)
+
+`-L{{< var LIBRARY >}}`
+:   When we link a library with the `-l` flag, check the contents of the directory {{< var LIBRARY >}} for a match. (e.g.: a valid match to `-Lfolder`-lbla` would be `folder/libbla.so`)
+
+
+#### Useful Flags
+
+`-s`
+:   Remove all symbol table and relocation information from the executable.
+
+`-nostdinc++`
+:   Do not search for header files in the standard directories specific to C++ .
+
+`-nostdinc`
+:   Do not search for header files in the standard directories specific to C. 
+
+`-march=native` +  `-mtune=native`
+:   Enables optimizations which work specifically on your cpu and might not on others.
+
+`-pthread`
+:   Define additional macros required for using the POSIX threads library.  You should use
+this option consistently for both compilation and linking.  This option is supported on
+GNU/Linux targets, most other Unix derivatives, and also on x86 Cygwin and MinGW
+targets.
+
+`-fPIC`
+:   Compile the codebase into *position independent code*, useful for making shared libraries.
+
+`-fPIE`
+:   Compile the codebase into a *position independent executable* useful for securing code.
+
+`-fsanitize=pointer-compare`
+:   Ensure that their's no comparasson between two pointers from different objects using the relational operators. The option must be combined with -fsanitize=address
+
+`-fsanitize=address`: 
+:   Enable the address sanitizer to check for possible memory errors.
+
+`-fdiagnostics-color=aut`
+:   Use color in diagnostic messages only when the standard error is a terminal
+
+`-fdiagnostics-show-template-tree`
+:   Have the compiler errors more specifically identify mismatches between two templates, including a colorized tree as a visual aid.
+
+`-fsanitize=thread`
+:   Enable ThreadSanitizer, a fast data race detector.  Memory access instructions are instrumented to detect data race bugs.
+
+`-fsanitize=leak`
+:   Enable LeakSanitizer, a memory leak detector.  This option only matters for linking of executables and the executable is linked against a library that overrides "malloc" and other allocator functions.
+
+`-fdiagnostics-show-template-tree`
+:   Have the compiler errors more specifically identify mismatches between two templates, including a colorized tree as a visual aid.
+
+`-fstack-check`
+:   Generate code to verify that you do not go beyond the boundary of the stack.  You
+    should specify this flag if you are running in an environment with multiple threads,
+    but you only rarely need to specify it in a single-threaded environment since stack
+    overflow is automatically detected on nearly all systems if there is only one stack.
+
+
+`-c` or `-S` or `-E`
+:   prevent the linker from running at the end.
+
+Later on, I hope to add information on the following: `-ftabstop`  `-fdirectives-only` `-M` `-MD` `-MMD` `-ftrack-macro-expansion` `-fpch-deps` `-fpch-preprocess` `-fworking-directory` `-C` `-CC` `-H` `-fdebug-cpp` `-nostdlib` `-nolibc` `-nodefaultlibs` `-nostartfiles` `-r` `-s` `-static` -shared
+     
+
+#### Warning Flags
+
+`-Wall`
+:   Enable a sensible list of default warnings.
+
+`-Werror`
+:   Treat the detection of warnings as a failure of the build process.
+
+`-Wmissing-include-dirs`
+:   Warn if a user-supplied include directory does not exist.
+
+`-Wundef`
+:   Warn if an undefined identifier is evaluated in an "#if" directive.  Such identifiers are replaced with zero.
+
+`-Wredundant-decls`
+:   Warn if anything is declared more than once in the same scope, 
+even in cases where multiple declaration is valid and changes nothing.
+
+`-Winvalid-pch`
+:   Warn if a precompiled header is found in the search path but cannot be used.
+
+`-Wlarger-than={{< var BYTE_SIZE >}}
+:   Warn whenever an object is defined whose size exceeds {{< var BYTE_SIZE >}}.
+
+`-Weffc++`
+:   Warn about violations of the following style guidelines from 
+Scott Meyers' Effective C++ series of books:
+    *   Define a copy constructor and an assignment operator for classes with 
+    dynamically-allocated memory. 
+    *   Prefer initialization to assignment in constructors.
+    *   Have `operator=` return a reference to `*this`.
+    *   Don't try to return a reference when you must return an object.
+    *   Distinguish between prefix `++i` and postfix `i++` forms of increment and decrement operators.
+    *   Caution against overload the `&&`, `||`, or `,` operators.
+
+
+#### Debug Flags
+
+`-ggdb`
+:   Produce debugging information for use by GDB.  This means to use the most expressive
+           format available (DWARF, stabs, or the native format if neither of those are
+           supported), including GDB extensions if at all possible.
+
+`-gdwarf`
+:   Produce debugging information in DWARF format (if that is supported).

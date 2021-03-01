@@ -1593,3 +1593,10 @@ Vi will exit with an error code, which aborts the pending commit entirely.
     g <C-g>
     ```
 
+### Go to a particular line
+
+I'm surprised I went so long without discovering this on accident. 
+
+```txt
+{{< var NUMBER >}}<CR>
+```

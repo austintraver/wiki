@@ -47,7 +47,7 @@ html {
     color: #cccccc;
   }
 
-  q:before, q:after { content: ""; }
+  /* q:before, q:after { content: ""; } */
 
   nav img.portrait {
     background-color: #d2b189;
@@ -81,6 +81,9 @@ body {
   flex-direction: column;
 }
 
+kbd {
+  text-indent: 0px;
+}
 
 section.intro summary {
   text-indent: 0ch;

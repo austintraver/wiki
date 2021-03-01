@@ -614,7 +614,10 @@ git config --global alias.unstage 'reset'
 git -C ~/dotfiles status
 ```
 
-## Resolve Merge Conflicts With `vimdiff`
+
+## Merge conflicts
+
+* Resolve Merge Conflicts With `vimdiff`
 
 ```shell script
 git config --global --replace-all git.mergetool vimdiff
@@ -643,7 +646,7 @@ if &diff
 endif
 ```
 
-## Resolve merge conflicts with `code`
+* Resolve merge conflicts with `code`
 
 Add this to your `~/.gitconfig`
 
@@ -658,7 +661,7 @@ Add this to your `~/.gitconfig`
   keepbackup = false
 ```
 
-## View diff with `code`
+* View diff with `code`
 
 Add this to your `~/.gitconfig`
 
@@ -671,17 +674,26 @@ Add this to your `~/.gitconfig`
 
 ## Environment Variables
 
+There are six variables to be aware of when writing a commit, three for the author, and three for the committer. These variables, if found as variables set in your shell, will be used by Git during a commit.
+
 * `GIT_AUTHOR_NAME`: the human-readable name in the “author” field.
-
 * `GIT_AUTHOR_EMAIL`: the email for the “author” field.
-
 * `GIT_AUTHOR_DATE`: the timestamp used for the “author” field.
-
 * `GIT_COMMITTER_NAME`: sets the human name for the “committer” field.
-
 * `GIT_COMMITTER_EMAIL`: the email address for the “committer” field.
-
 * `GIT_COMMITTER_DATE`: the timestamp used for the “committer” field.
+
+For instance, this is how you would commit files, but **at a date and time that was in the past**:
+
+```shell script
+GIT_AUTHOR_DATE={{< var TIMESTAMP >}} \
+GIT_COMMITTER_DATE={{< var TIMESTAMP >}} \
+git commit -m 'Travel back in time'
+```
+
+Where {{< var TIMESTAMP >}} is an ISO 8601 timestamp string of a moment in the past, such as the example below:
+
+`2021-02-03T12:34:56-08:00`
 
 ## Rename Case-Sensitive Files
 
@@ -695,18 +707,43 @@ git mv 'Directory' 'temp'
 git mv 'temp' 'directory'
 ```
 
-## Showing Which Files Are Under Version Control
+## Working with files
+
+* Show information about files in the index and working tree
 
 ```shell script
 git ls-files
-# [ Output ]
-# __main__.py
-# backtest/backtest.py
-# functions/metrics.py
-# symbols/spx.yml
-# utils/__init__.py
-# utils/fetcher.py
 ```
+
+Output 
+
+```txt
+__main__.py
+backtest/backtest.py
+functions/metrics.py
+symbols/spx.yml
+utils/__init__.py
+utils/fetcher.py
+```
+
+## Git parameters
+
+The main utility you have when exploring the value of parameters set by Git is 
+[the `rev-parse` subcommand][`rev-parse`]
+
+[`rev-parse`]: https://git-scm.com/docs/git-rev-parse
+
+* Print the top level of the git repository, (i.e.: the root directory)
+
+    ```shell script
+    git rev-parse --show-toplevel
+    ```
+
+    Output
+
+    ```txt
+    /Users/austin/.wiki
+    ```
 
 ## Git Commit Messages
 

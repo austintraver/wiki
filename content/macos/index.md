@@ -256,6 +256,20 @@ custom alert sound must be an AIFF file (e.g. `example.aiff`).
     ffmpeg -i './input.mp3' "${HOME}/Library/Sounds/custom.aiff"
     ```
 
+If you'd like to discover sounds on your computer, use a recursive glob 
+to discover audio files within the system library
+
+```shell script
+print -l /System/Library/**/*.aiff
+```
+
+For instance, to play a sound, use the `afplay` command, and provide it the sound file
+you'd like to play. For example, the command below plays the default alert sound on macOS
+
+```shell script
+afplay '/System/Library/Sounds/Tink.aiff'
+```
+
 ## Move cursor with the mouse in terminal
 
 This is a cool trick I just discovered. Start typing out a command on the terminal, and then hold ⌥
@@ -441,20 +455,32 @@ introduced in late 1998 and designated a standard for a group of audio and video
 coding formats and related technology agreed upon by the ISO/IEC Moving Picture
 Experts Group (MPEG)
 
-* Encode MOV file `video.mov` as an H.265 (HEVC) encoded 1080p M4V file `video.m4v`
+* Encode MOV file `video.mov` as an H.265 (HEVC) encoded M4V file `video.m4v` preserving the original video resolution
 
-    * Preserving the original video resolution
+    ```shell script
+    avconvert -p 'PresetHEVCHighestQuality' -s 'video.mov' -o 'video.mp4'
+    ```
+
+* Encode MOV file `video.mov` as an H.265 (HEVC) encoded M4V file with 1080p resolution
+
+    ```shell script
+    # You can add the '-q' flag to suppress output
+    avconvert -p 'PresetHEVC1920x1080' -s 'video.mov' -o 'video@1080p.m4v'
+    ```
+
+* Encode MOV file `video.mov` as an H.264 encoded MOV file with 720p resolution
+
+    ```shell script
+    avconvert -p 'Preset640x480' -s 'video.mov' -o 'video@720p.mov'
+    ```
+
+* Encode MOV file `video.mov` as an H.264 encoded MOV file with 420p resolution
 
         ```shell script
-        avconvert -p 'PresetHEVCHighestQuality' -s 'video.mov' -o 'video.mp4'
+        avconvert -p 'Preset640x480' -s 'video.mov' -o 'video@420p.mov'
         ```
 
-    * With 1080p resolution
 
-        ```shell script
-        # You can add the '-q' flag to suppress output
-        avconvert -p 'PresetHEVC1920x1080' -s 'video.mov' -o 'video.m4v'
-        ```
 
 ### Convert MP3 to M4A
 
@@ -953,7 +979,11 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 ## `sysadminctl`
 
-* Create a user `tommy` whose password is `fighton`
+* Create a user `guest` with limited permissions
+
+    ```shell script
+    sysadminctl -addUser guest -fullName 'Tommy Trojan' -UID 404 -shell /bin/zsh -home /Users/guest
+    ```
 
     ```shell script
     # Use the user 'billy' and his password 'gobruins' to escalate privileges
@@ -2326,3 +2356,8 @@ for file in /usr/local/opt/gcc@${version}/bin/*-${version}(*); {
 }
 ```
 
+## iMessage
+
+This isn't written down anywhere, so I'm writing it here: You can
+send message effects on the macOS *Messages* application with
+a keyboard shortcut: **⌘ ⇧ A** 
