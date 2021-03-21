@@ -2,6 +2,11 @@
 
 Welcome to the wiki, which doubles as my personal notebook for all things "software engineering."
 
+This website is written in Go, Markdown, JavaScript, HTML, and CSS using 
+the [Hugo](https://github.com/gohugoio/hugo) development framework.
+
+Visit <https://helpful.wiki> to view the website where builds are deployed to. You may just learn something new!
+
 ## Inspiration
 
 When I was a freshman, I was struggling with a programming assignment.
