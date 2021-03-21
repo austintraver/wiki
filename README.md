@@ -7,6 +7,10 @@ the [Hugo](https://github.com/gohugoio/hugo) development framework.
 
 Visit <https://helpful.wiki> to view the website where builds are deployed to. You may just learn something new!
 
+To help empower other developers to write their own documentation, tutorials, and how-to articles,
+I created ["Doctober", a website theme for Hugo](https://github.com/austintraver/doctober).
+If you're trying to build your own website, I strongly encourage you to check it out.
+
 ## Inspiration
 
 When I was a freshman, I was struggling with a programming assignment.
