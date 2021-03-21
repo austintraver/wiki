@@ -6,7 +6,7 @@ date: 2020-02-04T14:52:27-08:00
 
 # Markdown
 
-## What is Markdown?
+## Introduction
 
 Markdown is a lightweight markup language used by Github. It’s designed to be easy to convert to HTML and simulate rich-text in a plain-text environment.
 
@@ -25,95 +25,101 @@ To learn Markdown, check out these resources:
 * [Communicating using Markdown](https://lab.github.com/githubtraining/communicating-using-markdown)
 * [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 
+## Lists
+
 * Creating an ordered list
-
-  ```md
-  1. Alpha
-  1. Bravo
-  1. Charlie
-  ```
-
-  Output
-
-  1. Alpha
-  1. Bravo
-  1. Charlie
+  
+    ```md
+    1. Alpha
+    1. Bravo
+    1. Charlie
+    ```
+  
+    Output
+  
+    1. Alpha
+    1. Bravo
+    1. Charlie
 
 * Creating an unordered list
 
-  ```md
-  * Alpha
-  * Bravo
-  * Charlie
-  ```
+    ```md
+    * Alpha
+    * Bravo
+    * Charlie
+    ```
+  
+    Output
+  
+    * Alpha
+    * Bravo
+    * Charlie
 
-  Output
-
-  * Alpha
-  * Bravo
-  * Charlie
+## Quotations
 
 * Creating a quotation
 
-  ```md
-  > e=mc^2
-  >
-  > -- Funny Hair Science Man
-  ```
-
-  Output
-
-  > e=mc^2 - Funny Hair Science Man
+    ```md
+    > e=mc^2
+    >
+    > -- Funny Hair Science Man
+    ```
+  
+    Output
+  
+    > e=mc^2
+    >
+    > -- Funny Hair Science Man
 
 * Creating a blockquote
 
-  ```md
-  > It was the best of times
-  > it was the worst of times
-  ```
-
-  Output
-
-  > It was the best of times
-  > it was the worst of times
+    ```md
+    > It was the best of times
+    > it was the worst of times
+    ```
+  
+    Output
+  
+    > It was the best of times
+    > it was the worst of times
 
 * Nested quotes
-
-  ```md
-  > This is the most recent message
-  > 
-  > Best,
-  > Alpha
-  > 
-  > > This is the reply to the original message
-  > > 
-  > > Best,
-  > > Bravo
-  > >
-  > > > This is the original message
-  > > > 
-  > > > Best,
-  > > > Alpha
-  > > > 
-  ```
-
-  Output
-
-  > This is the most recent message
-  > 
-  > Best,
-  > Alpha
-  > 
-  > > This is the reply to the original message
-  > > 
-  > > Best,
-  > > Bravo
-  > >
-  > > > This is the original message
-  > > > 
-  > > > Best,
-  > > > Alpha
-  > > > 
+  
+    ```md
+    > This is the most recent message
+    > 
+    > Best,
+    > Alpha
+    > 
+    > > This is the reply to the original message
+    > > 
+    > > Best,
+    > > Bravo
+    > >
+    > > > This is the original message
+    > > > 
+    > > > Best,
+    > > > Alpha
+    > > > 
+    ```
+  
+    Output
+  
+    > This is the most recent message
+    > 
+    > Best,
+    > Alpha
+    > 
+    > > This is the reply to the original message
+    > > 
+    > > Best,
+    > > Bravo
+    > >
+    > > > This is the original message
+    > > > 
+    > > > Best,
+    > > > Alpha
+    > > > 
 
 
 ```java
@@ -204,20 +210,36 @@ Specifying custom heading IDs can be done as follows:
   <h2 id="bar">Reference B</h2>
   ```
 
+## Footnotes
 
-## Extensions
+[Footnotes]: https://www.markdownguide.org/extended-syntax/#footnotes
+[Markdown Extra]: https://michelf.ca/projects/php-markdown/extra/#footnotes
+[Commonmark]: https://spec.commonmark.org/0.29/
+[GFM]: https://github.github.com/gfm/
+[Goldmark]: https://github.com/yuin/goldmark/#built-in-extensions
 
-### Footnotes
+[Footnotes][] are an extension to Markdown, but is less commonly implemented
+than other extensions. They are supported by PHP's [Markdown Extra][] but not
+by [Commonmark][], nor by [GitHub Flavored Markdown (GFM)][GFM]. It can enabled
+in [hugo](https://gohugo.io/getting-started/configuration-markup/#goldmark)'s
+configurations for [Goldmark][], the library used by hugo to generate 
+HTML from Markdown.
 
-[Footnotes](https://www.markdownguide.org/extended-syntax/#footnotes) are an
-extension to Markdown, but is less commonly implemented than other extensions.
-It is supported by PHP's
-[Markdown Extra](https://michelf.ca/projects/php-markdown/extra/#footnotes) but
-not by
-[Commonmark](https://spec.commonmark.org/0.29/), nor by
-[GitHub Flavored Markdown (GFM)](https://github.github.com/gfm/). It can enabled
-in
-[hugo](https://gohugo.io/getting-started/configuration-markup/#goldmark)'s
-configurations for
-[goldmark](https://github.com/yuin/goldmark/#built-in-extensions), the library
-used by hugo to generate HTML from Markdown.
+An example is provided below:
+
+
+```markdown
+This example uses the IEEE Reference List[^1] format 
+to create a footnote for a citation[^2] of a web article.
+
+[^1]: "Reference List." Purdue Owl. <https://owl.purdue.edu/owl/research_and_citation/ieee_style/reference_list.html>
+[^2]: "Citation." Wikipedia. <https://wikipedia.org/wiki/Citation>
+```
+
+Output:
+
+This example uses the IEEE Reference List[^1] format 
+to create a footnote for a citation[^2] of a web article.
+
+[^1]: "Reference List." Purdue Owl. <https://owl.purdue.edu/owl/research_and_citation/ieee_style/reference_list.html>
+[^2]: "Citation." Wikipedia. <https://wikipedia.org/wiki/Citation>

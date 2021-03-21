@@ -1069,8 +1069,6 @@ character,
 * `~+`: Expands to `$PWD`
 * `~-`: Expands to `$OLDPWD`
 
-## `command`
-
 ## Loading Bar
 
 You can use ANSI escape codes to make a loading bar
@@ -1113,6 +1111,8 @@ print "\x1b[E"
     print "There are ${#words} words"
     print ${words}
     ```
+
+    Output
 
     {{% samp %}}
 

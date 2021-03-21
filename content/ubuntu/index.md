@@ -135,6 +135,14 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 
 ## Snap
 
+* Installing Snapcraft
+
+    ```shell script
+    sudo apt install -y snapd
+    sudo snap set system refresh.retain=2
+    ```
+
+
 * Finding the specific version of a package
 
     ```shell script
@@ -278,20 +286,18 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
         sudo apt-key adv --keyserver 'keyserver.ubuntu.com' --recv-key 'C99B11DEB97541F0'
         sudo apt-add-repository 'https://cli.github.com/packages'
         sudo apt update
-        sudo apt install gh
+        sudo apt install -y gh
         ```
-
-# Samba
-
-* Installing Samba
-
-    ```shell script
-    sudo apt install samba
-    ```
 
 # NodeJS
 
-* Installing NodeJS
+* Installing NodeJS using Snapcraft
+
+    ```shell script
+    sudo snap install --classic --edge node
+    ```
+
+* Installing NodeJS using shell script
 
     ```shell script
     v=15; curl -sL https://deb.nodesource.com/setup_${v}.x | sudo -E bash -

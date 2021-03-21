@@ -75,6 +75,21 @@ go get golang.org/x/tour
 
 A heads up, oddly enough, the type comes *after* the variable name [article on Go's declaration syntax](https://blog.golang.org/declaration-syntax)
 
+## Strings
+
+[Creating a string representation](https://tour.golang.org/methods/17) of an interface:
+
+```go
+type Person struct {
+	Name string
+	Age  int
+}
+
+func (p Person) String() string {
+    return fmt.Sprintf("The person named %v is %v years old", p.Name, p.Age)
+}
+```
+
 ## Packages
 
 Programs in go are made up of multiple packages, and will run starting from the code defined in the `main` package.

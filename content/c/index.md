@@ -708,6 +708,8 @@ this option consistently for both compilation and linking.  This option is suppo
 GNU/Linux targets, most other Unix derivatives, and also on x86 Cygwin and MinGW
 targets.
 
+`-qopenmp-simd`: Enable vector optimization to improve performance of the parallel STL
+
 `-fPIC`
 :   Compile the codebase into *position independent code*, useful for making shared libraries.
 
