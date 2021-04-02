@@ -845,6 +845,19 @@ repository, as you won't be the one making/reversing those edits. Thankfully the
     git submodule summary
     ```
 
+* Update each submodule to the latest commit found on the remote
+
+    ```shell script
+    git submodule update --recursive --remote
+    ```
+
+* Configure git to fetch all submodules from their respective remotes
+  at the same time, instead of one-by-one (the default).
+
+    ```shell script
+    git config --set submodule.fetchJobs 0
+    ```
+
 * To see a list of all patterns currently being tracked by `git-lfs`, run git
   lfs track (with no arguments)
 
@@ -870,10 +883,15 @@ repository, as you won't be the one making/reversing those edits. Thankfully the
 
 ## The `clone` Subcommand
 
-* Create a [partial clone](https://git-scm.com/docs/partial-clone) of a remote repository
+* Create a [partial clone](https://git-scm.com/docs/partial-clone) of user {{< var USER >}}  repository {{< var REPO >}}:
 
     ```shell script
-    git clone --shallow --depth 1 {{< var REPO >}}
+    gh repo clone {{< var USER >}}/{{< var REPO >}} \
+        -- \
+        --single-branch \
+        --shallow-submodules \
+        --remote-submodules \
+        --depth 1
     ```
 
 ## GitHub Notes
@@ -891,6 +909,36 @@ would any other code base.
     ```shell script
     git clone 'https://github.com/ttrojan/fighton.wiki.git'
     ```
+
+## GitHub Issues
+
+GitHub has a useful shorthand notation for referencing content related to a
+repository. For instance, you can make references to links and urls using a
+shorthand syntax, as follows:
+
+```txt
+{{< var USER >}}/{{< var REPO >}}#{{< var NUMBER >}}
+```
+
+To learn more about the shorthand syntaxes available, see [Autolinked references and URLs][]
+
+[Autolinked references and URLs]: https://docs.github.com/en/github/writing-on-github/autolinked-references-and-urls#issues-and-pull-requests
+
+## GitHub Profile Repository
+
+GitHub supports a *secret* [profile repository](https://docs.github.com/en/github/setting-up-and-managing-your-github-profile/managing-your-profile-readme) feature. If you create a repository at {{< var USERNAME >}}/{{< var USERNAME >}}, you can add a bio to your profile. GitHub will display the contents of the repo's `README.md` on your profile page. Try it out:
+
+```shell script
+gh repo create --public {{< var USERNAME >}}/{{< var USERNAME >}}
+cd {{< var USERNAME >}}
+echo '# Bio' > README.md
+git add README.md
+git commit -m 'Initialize repository'
+git push -u origin master
+gh repo view --web
+```
+
+Once you've visited the repository, navigate to your profile to see the change!
 
 ## GitHub supports the OpenGraph API
 

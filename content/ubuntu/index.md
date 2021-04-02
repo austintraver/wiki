@@ -5,51 +5,16 @@ date: 2020-04-23T10:32:49-07:00
 draft: false
 ---
 
-# Distribution Upgrades
-
-Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on how to upgrade.
-
-* Upgrading to the latest Ubuntu distro:
-
-0. Sign in to the `root` user
-
-    ```shell script
-    sudo -i
-    ```
-
-1. Update the `/etc/apt/sources.list`, replace any entries of `bionic` or `eoal` with `focal`
-
-    ```shell script
-    sed -i 's/bionic/focal/g' /etc/apt/sources.list
-    ```
-
-2. Run the `apt` commands below
-
-    ```shell script
-    apt update
-    apt upgrade
-    apt full-upgrade
-    apt install update-manager-core
-    reboot
-    do-release-upgrade -d
-    ```
-
-3. Verify successful upgrade by checking the current distribution number
-
-    ```shell script
-    lsb_release -a
-    ```
-
 ## Users & Groups
 
 * Add a new user to the machine on a Linux OS
 
   ```shell script
   # Default shell /bin/sh
-  sudo adduser <user>
+  adduser <user>
 
   # Custom shell /usr/bin/zsh
-  sudo adduser --shell /usr/bin/zsh
+  adduser --shell /usr/bin/zsh
   ```
 
 * Add a user to the `sudo` group
@@ -62,19 +27,19 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 
   ```shell script
   # Keep a backup of the user's home directory, stored in the pwd
-  sudo deluser <user> --backup --remove-all-files
+  deluser <user> --backup --remove-all-files
   ```
 
 * Delete a group from the machine
 
   ```shell script
-  sudo delgroup <group>
+  delgroup <group>
   ```
 
 * Change the machine's hostname
 
   ```shell script
-  sudo hostnamectl set-hostname <hostname>
+  hostnamectl set-hostname <hostname>
   ```
 
 * Change a user's username
@@ -123,14 +88,13 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 * Install the development tools package
 
     ```shell script
-    sudo apt update
-    sudo apt install build-essential
+    apt install -y build-essential
     ```
 
 * Install the manual pages about using GNU/Linux for development:
 
     ```shell script
-    apt-get install manpages-dev
+    apt install -y manpages-dev
     ```
 
 ## Snap
@@ -138,8 +102,8 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 * Installing Snapcraft
 
     ```shell script
-    sudo apt install -y snapd
-    sudo snap set system refresh.retain=2
+    apt install -y snapd
+    snap set system refresh.retain=2
     ```
 
 
@@ -152,7 +116,7 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 * Installing a specific version of a package
 
     ```shell script
-    sudo snap install cmake --channel=3.17/stable --classic
+    snap install cmake --channel=3.17/stable --classic
     ```
 
 ## SMB
@@ -162,8 +126,8 @@ Installing SMB server on Ubuntu
 * Install the `samba` package from `apt`
 
     ```shell script
-    sudo apt update
-    sudo apt install samba samba-common-bin smbclient cifs-utils
+    apt update
+    apt install -y samba samba-common-bin smbclient cifs-utils
     ```
 
     ```txt
@@ -175,9 +139,9 @@ Installing SMB server on Ubuntu
     ```
 
     ```shell script
-    sudo service smbd restart
-    sudo ufw allow samba
-    sudo smbpasswd -a {{< var USERNAME >}}
+    service smbd restart
+    ufw allow samba
+    smbpasswd -a {{< var USERNAME >}}
     ```
 
 ## Update alternatives for common commands
@@ -234,76 +198,119 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 * Install GCC `v7` through `v10`
 
     ```shell script
-    sudo apt install -y build-essential g{cc,++}-{7..10}
+    apt install -y build-essential g{cc,++}-{7..10}
     for v in {7..10}; do
-        sudo update-alternatives \                                 
+        update-alternatives \                                 
         --install /usr/bin/gcc gcc /usr/bin/gcc-${v} $((${v}*10)) \
         --slave /usr/bin/g++ g++ /usr/bin/g++-${v} \         
         --slave /usr/bin/gcov gcov /usr/bin/gcov-${v}
     done
     ```
 
-# Java
+## Java
 
-* Installing the [openJDK](https://snapcraft.io/openjdk) implementation of Java SE:
+* Installing the [OpenJDK](https://snapcraft.io/openjdk) implementation of Java SE:
 
-    ```shell script
-    sudo snap install openjdk --candidate
-    ```
+    * Using Apt
 
-# Go
+        ```shell script
+        apt install -y default-jre default-jdk
+        ```
+
+    * Using Snapcraft
+
+        ```shell script
+        snap install openjdk --candidate
+        ```
+
+## Go
 
 * Installing the [Go](https://snapcraft.io/go) programming language
 
-    ```shell script
-    sudo snap install go --classic
-    ```
+    * Using Apt
 
-# Python
+        ```shell script
+        add-apt-repository -y -u ppa:longsleep/golang-backports
+        apt install -y golang
+        ```
+
+    * Using Snapcraft
+
+        ```shell script
+        snap install go --classic
+        ```
+
+## Python
 
 * Installing the [Python]() programming language
 
     ```shell script
-    sudo apt install software-properties-common
-    sudo add-apt-repository ppa:deadsnakes/ppa
-    sudo apt install python3.9
+    apt install -y software-properties-common
+    add-apt-repository -y -u ppa:deadsnakes/ppa
+    apt install -y python3
     ```
 
-# GitHub
+* Setting the command `python` to use Python 3:
+
+    ```shell script
+    update-alternatives --install /usr/bin/python 'python' /usr/bin/python3 100
+    ```
+
+## LLVM
+
+* Installing LLVM the risky way
+
+    ```shell script
+    # sudo -i
+    wget -O - https://apt.llvm.org/llvm.sh | bash -
+    ```
+
+## GitHub
 
 * Installing [the GitHub CLI](https://cli.github.com/manual/)
 
     * Using Snap
 
         ```shell script
-        sudo snap install --edge gh
+        snap install --edge gh
         snap connect gh:ssh-keys
         ```
 
     * Using APT
 
         ```shell script
-        sudo apt-key adv --keyserver 'keyserver.ubuntu.com' --recv-key 'C99B11DEB97541F0'
-        sudo apt-add-repository 'https://cli.github.com/packages'
-        sudo apt update
-        sudo apt install -y gh
+        apt-key adv --keyserver 'keyserver.ubuntu.com' --recv-key 'C99B11DEB97541F0'
+        add-apt-repository -y -u 'https://cli.github.com/packages'
+        apt install -y gh
         ```
 
-# NodeJS
+## NodeJS
 
 * Installing NodeJS using Snapcraft
 
     ```shell script
-    sudo snap install --classic --edge node
+    snap install --classic --edge node
     ```
 
-* Installing NodeJS using shell script
+* Installing NodeJS the risky way
 
     ```shell script
-    v=15; curl -sL https://deb.nodesource.com/setup_${v}.x | sudo -E bash -
+    # sudo -i
+    curl -sL https://deb.nodesource.com/setup_15.x | bash -
     ```
 
-# Installing Ubuntu the hard way
+## AWS
+
+* Installing the AWS CLI from Pip
+
+    ```shell script
+    apt install python3-pip
+    pip3 install awscli --upgrade --user
+    ```
+
+## Installation
+
+Installing Ubuntu the hard way
 
 * On macOS:
 
@@ -358,5 +365,41 @@ Ubuntu is migrating away from using Debian's Apt to manage packages, and toward 
 They wrote an article titled [How to keep your Linux disk usage nice and and tidy](https://snapcraft.io/blog/how-to-keep-your-linux-disk-usage-nice-and-tidy-and-save-space) where I learned you can reduce the number of prior package versions that Snapcraft keeps, which by default, is three.
 
 ```shell script
-sudo snap set system refresh.retain=2
+snap set system refresh.retain=2
 ```
+
+## Distribution Upgrades
+
+Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on how to upgrade.
+
+* Upgrading to the latest Ubuntu distro:
+
+0. Sign in to the `root` user
+
+    ```shell script
+    sudo -i
+    ```
+
+1. Update the `/etc/apt/sources.list`, replace any entries of `bionic` or `eoal` with `focal`
+
+    ```shell script
+    sed -i 's/bionic/focal/g' /etc/apt/sources.list
+    ```
+
+2. Run the `apt` commands below
+
+    ```shell script
+    apt update
+    apt upgrade
+    apt full-upgrade
+    apt install -y update-manager-core
+    reboot
+    do-release-upgrade -d
+    ```
+
+3. Verify successful upgrade by checking the current distribution number
+
+    ```shell script
+    lsb_release -a
+    ```
+

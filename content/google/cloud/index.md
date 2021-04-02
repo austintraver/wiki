@@ -5,9 +5,13 @@ draft: false
 
 ## `gcloud` CLI
 
-* Link to [gcloud CLI documentation](https://cloud.google.com/sdk/gcloud)
+To learn more, visit:
 
-* Link to [`gcloud` cheatsheet](https://cloud.google.com/sdk/docs/cheatsheet)
+* The official documentation for the [Google Cloud SDK](https://cloud.google.com/sdk/gcloud)
+
+* The [`gcloud` cheatsheet](https://cloud.google.com/sdk/docs/cheatsheet)
+
+I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud/reference/topic/offline-help) of the documentation offline.
 
 ### Getting Started
 
@@ -334,3 +338,15 @@ Google wrote a great article about [starting, stopping, and restarting instances
     ```
 
 ---
+
+## Cloud VPN
+
+I'm still exploring this topic, but I found [Stephanie Wong's video tutorials](https://www.youtube.com/playlist?list=PLIivdWyY5sqJ0oXcnZYqOnuNRsLF9H48u) to be helpful in gaining more solid footing on cloud networking fundamentals.
+
+* [Creating a VPN Gateway](https://cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn#create_an_gateway)
+
+* [Creating a Cloud Router](https://cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn#create_a)
+
+* [Creating a DNS Server Policy](https://cloud.google.com/dns/docs/policies#creating)
+
+

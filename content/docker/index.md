@@ -16,16 +16,19 @@ the first installment of Docker's "Docker 101" series on YouTube.
 
 Liz Rice's talk on [creating Docker containers from scratch](https://youtu.be/8fi7uSYlOdc)
 
-## Conceptual Notes
-
-
-
 ## Getting Started
 
 * Installing Docker on macOS
 
     ```shell script
     brew cask install docker
+    ```
+
+* [Installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+    ```shell script
+    sudo -i
+    curl -fsSL https://get.docker.com | bash -
     ```
 
 * Optionally, add the [docker completion script] for [zsh][zsh completion]
@@ -46,10 +49,10 @@ Open the application in the menu bar to have Docker run its initial configuratio
     docker logout
     ```
 
-* Pulling an image from Docker Hub
+* Pulling an image named {{< var IMAGE >}} from Docker Hub
 
     ```shell script
-    docker pull ubuntu
+    docker pull {{< var IMAGE >}}
     ```
 
 * List currently installed images
@@ -60,10 +63,10 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * [Rename a docker container](https://docs.docker.com/engine/reference/commandline/container_rename/)
 
-* Start running a docker image
+* Start running a docker image {{< var IMAGE >}} and execute the command `echo`
 
     ```shell script
-    docker run ubuntu echo 'hello'
+    docker run {{< var IMAGE >}} echo 'hello'
     ```
 
 {{% aside danger %}}
@@ -78,34 +81,38 @@ Open the application in the menu bar to have Docker run its initial configuratio
     docker ps
     ```
 
-* Start running the container in interactive mode, establishing a connection to the container with a console
+* View all processes, whether active or finished
 
     ```shell script
-    docker run -it ubuntu /bin/bash
+    docker ps --all
     ```
 
-* Start a docker container, specifying a name for the container
+* Start a docker container named {{< var CONTAINER >}} based on the image named {{< var IMAGE >}}, specifying a name for the container
 
     ```shell script
-    docker run --name example -it ubuntu /bin/bash
+    docker run \
+        --name {{< var CONTAINER >}} \
+        --interactive \
+        --tty {{< var IMAGE >}} \
+        /bin/bash
     ```
 
-* Continue running the container that you previously exited
+* Continue running the container named {{< var CONTAINER >}} that you previously exited
 
     ```shell script
-    docker start example
+    docker start {{< var CONTAINER >}}
     ```
 
-* Execute a command on a currently running docker container
+* Execute a command on a currently running docker container named {{< var CONTAINER >}}
 
     ```shell script
-    docker exec -it example '/bin/bash'
+    docker exec --interactive --tty {{< var CONTAINER >}} '/bin/bash'
     ```
 
-* Stop a container
+* Stop a container named {{< var CONTAINER >}}
 
     ```shell script
-    docker stop example
+    docker stop {{< var CONTAINER >}}
     ```
 
 * [Kill a running container](https://docs.docker.com/engine/reference/commandline/container_kill/)
@@ -132,17 +139,35 @@ Open the application in the menu bar to have Docker run its initial configuratio
     docker ps -a
     ```
 
-* Remove a container (not the image that created it)
+* Remove a container named {{< var CONTAINER >}} (not the image that created it)
 
     ```shell script
-    docker rm example
+    docker rm {{< var CONTAINER >}}
     ```
 
-* Remove an image from docker
+* Removing an image named {{< var IMAGE >}} from the local machine
 
     ```shell script
-    docker rmi ubuntu
+    docker rmi {{< var IMAGE >}}
     ```
+
+* Building an image named {{< var IMAGE >}} from a Dockerfile
+
+    ```shell script
+    docker build . \
+        --tag '{{< var USERNAME >}}/{{< var IMAGE >}}' \
+        --squash
+    ```
+
+## Publication
+
+* Publishing an image named {{< var IMAGE >}} to the Docker Hub container registry
+
+    ```shell script
+    docker publish {{< var USERNAME >}}/{{< var IMAGE >}}
+    ```
+
+A few additional steps are required to [publishing a container to GitHub's container registry](https://docs.github.com/en/packages/guides/connecting-a-repository-to-a-container-image#connecting-a-repository-to-a-container-image-on-the-command-line).
 
 {{% aside info %}}
 
@@ -150,8 +175,7 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 {{% /aside %}}
 
-## Misc
-
 [zsh completion]: https://zsh.fyi/completion-system.html#completion-system
 [docker completion script]: https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+
 
