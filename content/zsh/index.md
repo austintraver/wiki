@@ -660,10 +660,12 @@ The keyword `${@}` contains the set of all arguments to a program/function
     print -l /usr/local/opt/*/*(/:t) | sort | uniq
     ```
 
-# While loops
+# Looping
+
+## While loops
 
 ```shell script
-index=0
+typeset -i index=0
 while (( ${index} < 5 )); do
   print ${index}
 
@@ -672,8 +674,88 @@ while (( ${index} < 5 )); do
 
   # L33t variable increment
   ((index+=1))
+
 done
 ```
+
+# Anonymous Functions
+
+Zsh supports anonymous functions, which allow us to prevent variables from leaking in scope.
+
+This is particularly useful when you're building a script that will be sourced
+by the shell, such as `.zshenv` or `.zshrc`. Ideally, we'd prevent our script 
+from polluting the shell environment with variables that are left lingering at
+the end of our script's execution. We can do so by nesting our code inside of
+anonymous functions.
+
+Without using an anonymous function, the identifier used as the iterator
+in a for-loop **persists beyond the evaluation** of the for-loop itself:
+
+```shell script
+integer i
+for i in {1..3}; do 
+    print ${i}; 
+done
+integer -p i
+```
+
+Output
+
+{{% samp %}} typeset -i a=3 {{% /samp %}}
+
+By nesting our declaration of the for-loop iterator 
+within an anonymous function, we can prevent the scope
+of the variable from leaking into the greater namespace
+
+```shell script
+(){ 
+    integer i
+    for i in {1..3}; 
+        do print ${i}; 
+    done
+}
+integer -p i
+```
+
+Output
+
+{{% samp %}} integer: no such variable: i {{% /samp %}}
+
+You can also use the pre-increment (`++i`) and post-increment (`i++`) operators
+within the double parenthesis block `(( ))`
+
+* Using the pre-increment operator:
+
+    ```shell script
+    typeset -i a b
+    a=10
+    (( b = a++ ))
+    print "a=${a}\nb=${b}"
+    ```
+
+    Output
+
+    ```txt
+    a=11
+    b=10
+    ```
+
+* Using the post-increment operator:
+
+    ```shell script
+    typeset -i a b
+    a=10
+    (( b = ++a ))
+    print "a=${a}\nb=${b}"
+    ```
+
+    Output
+
+    ```txt
+    a=11
+    b=11
+    ```
+
 
 ## String Manipulation
 
@@ -1368,14 +1450,23 @@ Here are some flags below:
 
 * Print the absolute path to the file currently being sourced/executed
 
-    ```shell script
-    filename=${${(%):-%N}:A}
-    print ${filename}
-    ```
+    * Option one
+
+        ```shell script
+        echo ${ZSH_SCRIPT}
+        ```
+
+    * Option two
+
+        ```shell script
+        echo ${${(%):-%N}:A}
+        ```
+
+    Output
 
     {{% samp %}}
 
-    filename.sh
+    /usr/local/bin/filename.sh
 
     {{% /samp %}}
 
@@ -1841,7 +1932,20 @@ Sometimes you want to supply some text in a script across multiple lines. Furthe
     fi
     ```
 
-* Assigning a heredoc to a variable using Zsh
+* Using a here-doc to avoid printing leading tabs to stdout:
+
+    ```shell script
+    if [[ true ]]; then
+        cat < =( <<-EOF
+            this output is split along multiple lines
+            as such, but they strip any leading tabs 
+            but not leading spaces
+        EOF
+        ) >&1
+    fi
+    ```
+
+* Assigning a heredoc to a variable using Zsh:
 
     ```shell script
     read -r -d '' {{< var VARIABLE >}} <<-EOF
@@ -2642,29 +2746,53 @@ esac
 
 ## `typeset`
 
+The `typeset` builtin declares the type of a variable identified by a 
+{{< var name >}} that is optionally assigned a value {{< var value >}}.
+When an assignment is not made, the value of {{< var name >}} is printed
+as follows:
+
+```shell script
+typeset -i a=1
+a+=1
+
+typeset a
+```
+
+Output
+
+```txt
+a=1
+```
+
+```shell script
+typeset b=1
+typeset b=1
+```
+
 ### Flags to state variable type
 
-* `-F [ name[=value] ... ]`: declare variable `name` as floating point (decimal notation)
-* `-E [ name[=value] ... ]`: declare variable `name` as floating point (scientific notation)
-* `-i [ name[=value] ... ]`: declare variable `name` as an integer
-* `-a [ name[=value] ... ]`: declare variable `name` as an array
-* `-A [ name[=value] ... ]`: declare variable `name` as an associative array
+* `-F [ name[=value] ... ]`: set {{< var name >}} as floating point (decimal notation)
+* `-E [ name[=value] ... ]`: set {{< var name >}} as floating point (scientific notation)
+* `-i [ name[=value] ... ]`: set {{< var name >}} as an integer
+* `-a [ name[=value] ... ]`: set {{< var name >}} as an array
+* `-A [ name[=value] ... ]`: set {{< var name >}} as an associative array
 
 ### Flags to state variable properties
 
-* `typeset -r [ name[=value] ... ]`: mark variable `name` as read-only
-* `typeset -x [ name[=value] ... ]`: mark variable `name` as exported
-* `typeset -g [ name[=value] ... ]`: mark variable `name` as global
-* `typeset -U [ name[=value] ... ]`: convert array-type variable `name` such that it always contains unique-elements only
+* `typeset -r [ name[=value] ... ]`: mark {{< var name >}} as read-only
+* `typeset +r [ name[=value] ... ]`: remove the read-only property of {{< var NAME >}}
+* `typeset -x [ name[=value] ... ]`: mark {{< var name >}} as exported
+* `typeset -g [ name[=value] ... ]`: mark {{< var name >}} as global
+* `typeset -U [ name[=value] ... ]`: convert array-type variable {{< var name >}} such that it always contains unique-elements only
 
 ### Flags to modify command output
 
-* `typeset -l [ name[=value] ... ]`: print value of `name` in lower-case whenever expanded
-* `typeset -u [ name[=value] ... ]`: print value of `name` in upper-case whenever expanded
-* `typeset -H [ name[=value] ... ]`: suppress output for `typeset name` if variable `name` has already been assigned a value
-* `typeset -p [ name[=value] ... ]`: print `name` in the form of a typeset command with an assignment, regardless of other flags and options. Note: the `−H` flag will still be respected; no value will be shown for these parameters.
+* `typeset -l [ name[=value] ... ]`: print value of {{< var name >}} in lower-case whenever expanded
+* `typeset -u [ name[=value] ... ]`: print value of {{< var name >}} in upper-case whenever expanded
+* `typeset -H [ name[=value] ... ]`: suppress output for `typeset {{< var name >}}` if variable {{< var name >}} has already been assigned a value
+* `typeset -p [ name[=value] ... ]`: print {{< var name >}} in the form of a typeset command with an assignment, regardless of other flags and options. Note: the `−H` flag will still be respected; no value will be shown for these parameters.
 
-* `typeset -p1 [ name[=value] ... ]`: print `name` in the form of a typeset command with an assignment, regardless of other flags and options. Note: arrays and associative arrays are printed with newlines between indented elements for readability.
+* `typeset -p1 [ name[=value] ... ]`: print {{< var name >}} in the form of a typeset command with an assignment, regardless of other flags and options. Note: arrays and associative arrays are printed with newlines between indented elements for readability.
 
 
 #### Matching a Certain Type
@@ -3918,3 +4046,5 @@ Proof that `||` has operator precedence over `&&`
 
     {{% /samp %}}
 
+
+## Temporary Files

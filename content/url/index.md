@@ -387,8 +387,14 @@ The commands above URL encode the angle brackets that must surround a message ID
 
 ## REST APIs
 
-All API paths are relative to a **base URL**, for example, `/users`, when specified, would truly refer to `<scheme>://<host>/<basePath>/users`, see the example below:
+[^1]: "Introducing the Next-Generation Postman URL Processor." Postman. <https://blog.postman.com/introducing-the-next-generation-postman-url-processor/>
+
+### Base URLs
+
+Every endpoint within an API contains a path relative to a particular **base URL**, such as `https://api.getpostman.com`.
 
 ```txt
-https://{restapi_id}.execute-api.{region}.amazonaws.com/{stage_name}/
+https://api.example.com/v1/users
+└──────────┬──────────┘
+        base URL
 ```

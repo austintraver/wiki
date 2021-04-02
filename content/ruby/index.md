@@ -28,6 +28,24 @@ apt install ruby-full
 
 {{% /aside %}}
 
+There's also some debate as to what the canonical implementation of Ruby is this days. I've seen JRuby become more popular, so I've included
+the steps to install it on macOS below:
+
+```shell script
+curl -sSL https://get.rvm.io | bash -s stable
+
+<<-EOF
+# Source ruby environment command
+if [[ -e ~/.rvm/scripts/rvm ]]; then
+	source ~/.rvm/scripts/rvm
+fi
+EOF >> ~/.zshrc
+
+source ~/.rvm/scripts/rvm
+
+rvm install jruby
+```
+
 ## Input/Output
 
 *aka I/O - it's not rocket science, just computer science*

@@ -29,6 +29,15 @@ Installing Python on macOS via Homebrew, at the time of writing, will not instal
   ```
 
 
+### Do you really need to close?
+
+In business, yes. In Python, however, no&#42;. For more information, see below for a copy of [the explanation I gave](https://github.com/saadmk11/changelog-ci/pull/46/files#r600574116) to a collaborator on GitHub:
+
+**TL;DR**: 
+
+Once the reference count of `file` reaches zero, which happens at the end of this `try` block, CPython will call the `__del__()` method of the underlying [path-like object](https://docs.python.org/3/glossary.html#term-path-like-object), which makes the call to `close()` therein.  An argument can be made that [how Python manages memory](https://docs.python.org/3/faq/design.html#how-does-python-manage-memory) depends on which Python you're using. Most people use CPython, which uses this reference count system, so we have the guarantee that the file will receive the necessary call to `close()`.  But since this is running within a Docker container, and we know we're using CPython, I don't think it's worth changing this line of code to preserve niche cross-Python compatibility concerns, like maintaining support for [Jython](https://en.wikipedia.org/wiki/Jython)  🎤💧
+
+
 ### Silencing the `python` Console Welcome Message
 
 Normally, when you open the `python` console, the following welcome message will appear when you enter.

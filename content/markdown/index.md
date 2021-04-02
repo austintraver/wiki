@@ -131,27 +131,28 @@ if (three_backticks) {
 
 Similarly, this is `inline code`
 
-## Making Tables
+## Tables
+
+Tables are an extension of the original Markdown spec. They are, however, supported on GitHub.
+
 
 You can create tables by assembling a list of words and seperating them by the `|` character.
 
 The first row should include some hyphens `-` to underline it.
 
 ```md
-Header One | Header Two
----------- | ----------
-It doesn't matter how long this content is | Reason: pipe seperates each block!
-After you add a newline | You can write the next row in the table!
+| Header One | Header Two |
+| ---------- | ---------- |
+| This content can be as long as you want | Reason: it won't seperate until it sees this pipe: &vert; |
+| After you add a newline | You can write the next row in the table! |
 ```
 
 Output
 
-Header One | Header Two
----------- | ----------
-It doesn't matter how long this content is | Reason: pipe seperates each block!
-After you add a newline | You can write the next row in the table!
-
-## Text-Alignment in Tables
+| Header One | Header Two |
+| ---------- | ---------- |
+| This content can be as long as you want | Reason: it won't seperate until it sees this pipe: &vert; |
+| After you add a newline | You can write the next row in the table! |
 
 You can change the way a table's text aligns by appending a `:` to the dashes below your title
 
@@ -164,6 +165,10 @@ You can change the way a table's text aligns by appending a `:` to the dashes be
 | Left-aligned | Center-aligned | Right-aligned |
 | :---         |      :---:     |  ---:         |
 | Check        | This           | Out           |
+
+To learn more, see [Organizing information with tables][]
+
+[Organizing information with tables]: https://docs.github.com/en/github/writing-on-github/organizing-information-with-tables
 
 ## Escaping Characters in Markdown
 
