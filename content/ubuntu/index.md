@@ -72,16 +72,61 @@ draft: false
   chfn <user> --full-name "Austin Traver"
   ```
 
-* View which groups a user is associated with
+* View which groups the active user is associated with:
 
   ```shell script
-  # For the current user (first group is the primary group)
   groups
-  # => staff admin
-
-  # For any other user
-  groups <user>
   ```
+
+  The output is similar to the following:
+
+  ```txt
+  staff admin
+  ```
+
+  The first group listed in the output is the user's primary group.
+
+* View which groups a particular user belongs to
+
+    ```shell script
+    groups {{< var USER >}}
+    ```
+
+    The output is similar to the following:
+
+    ```txt
+    {{< var USER >}} : {{< var USER >}} cdrom floppy audio video admin netdev
+    ```
+
+    Where {{< var USER >}} is the name of the user provided in the command.
+
+
+* Change the owner that a particular file belongs to:
+
+    ```shell script
+    chgrp {{< var OWNER >}} {{< var FILE >}}
+    ```
+
+    Where {{< var OWNER >}} is the owner of the file located
+    at the filepath {{< var FILE >}}
+
+* Change the group that a particular file belongs to:
+
+    ```shell script
+    chgrp {{< var GROUP >}} {{< var FILE >}}
+    ```
+
+    Where {{< var GROUP >}} is the group of the file located at 
+    the filepath {{< var FILE >}}
+
+{{% aside warning %}}
+
+**Note**: If you need to change both the owner *and* group associated with a
+given file, *you change the group first*! If you change the owner first, you will
+have lost the permissions required in order to change the group a file belongs
+to. As a consequence, *you will no longer be able to change the group*.
+
+{{% /aside %}}
 
 ## Apt
 
@@ -330,7 +375,7 @@ editor and edit the configuration file `/etc/gdm3/custom.conf`
 
 Change the following snippet from
 
-before
+Before you begin editing, your configuration might look like this:
 
 ```conf
 [daemon]
@@ -339,10 +384,10 @@ before
 
 # Enabling automatic login
 #  AutomaticLoginEnable = true
-#  AutomaticLogin = user1
+#  AutomaticLogin = {{< var USERNAME >}}
 ```
 
-after
+Change the file so that it instead looks like this:
 
 ```conf
 [daemon]
@@ -403,3 +448,11 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
     lsb_release -a
     ```
 
+
+## Google Cloud SDK
+
+* [Installing a Snap package](https://cloud.google.com/sdk/docs/downloads-snap) for the Google Cloud SDK:
+
+    ```shell script
+    snap install google-cloud-sdk --classic
+    ```

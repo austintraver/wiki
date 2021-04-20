@@ -94,34 +94,37 @@ The `process` variable, only accessible to you in Node, not in the browser. `pro
 
 Modules in Nodejs are essentially Javascript libraries. There are quite a few built-in libraries available by default in Nodejs, including (thanks to [W3 Schools](https://www.w3schools.com/nodejs/ref_modules.asp) for the rundown):
 
-- `assert`	Provides a set of assertion tests
-- `buffer`:	To handle binary data
-- `child_process`:	To run a child process
-- `cluster`:	To split a single Node process into multiple processes
-- `crypto`:	To handle OpenSSL cryptographic functions
-- `dgram`:	Provides implementation of UDP datagram sockets
-- `dns`:	To do DNS lookups and name resolution functions
-- `domain`:	Deprecated. To handle unhandled errors
-- `events`:	To handle events
-- `fs`:	To handle the file system
-- `http`:	To make Node.js act as an HTTP server
-- `https`:	To make Node.js act as an HTTPS server.
-- `net`:	To create servers and clients
-- `os`:	Provides information about the operation system
-- `path`:	To handle file paths
-- `punycode`:	Deprecated. A character encoding scheme
-- `querystring`:	To handle URL query strings
-- `readline`:	To handle readable streams one line at the time
-- `stream`:	To handle streaming data
-- `string_decoder`:	To decode buffer objects into strings
-- `timers`:	To execute a function after a given number of milliseconds
-- `tls`:	To implement TLS and SSL protocols
-- `tty`:	Provides classes used by a text terminal
-- `url`:	To parse URL strings
-- `util`:	To access utility functions
-- `v8`:	To access information about V8 (the JavaScript engine)
-- `vm`:	To compile JavaScript code in a virtual machine
-- `zlib`:	To compress or decompress files
+
+| Name | Description |
+| --- | --- |
+|  `assert`	Provides a set of assertion tests |
+|  `buffer` | To handle binary data |
+|  `child_process` | To run a child process |
+|  `cluster` | To split a single Node process into multiple processes |
+|  `crypto` | To handle OpenSSL cryptographic functions |
+|  `dgram` | Provides implementation of UDP datagram sockets |
+|  `dns` | To do DNS lookups and name resolution functions |
+|  `domain` | Deprecated. To handle unhandled errors |
+|  `events` | To handle events |
+|  `fs` | To handle the file system |
+|  `http` | To make Node.js act as an HTTP server |
+|  `https` | To make Node.js act as an HTTPS server. |
+|  `net` | To create servers and clients |
+|  `os` | Provides information about the operation system |
+|  `path` | To handle file paths |
+|  `punycode` | Deprecated. A character encoding scheme |
+|  `querystring` | To handle URL query strings |
+|  `readline` | To handle readable streams one line at the time |
+|  `stream` | To handle streaming data |
+|  `string_decoder` | To decode buffer objects into strings |
+|  `timers` | To execute a function after a given number of milliseconds |
+|  `tls` | To implement TLS and SSL protocols |
+|  `tty` | Provides classes used by a text terminal |
+|  `url` | To parse URL strings |
+|  `util` | To access utility functions |
+|  `v8` | To access information about V8 (the JavaScript engine) |
+|  `vm` | To compile JavaScript code in a virtual machine |
+|  `zlib` | To compress or decompress files |
 
 ### Package management with NPM
 
@@ -911,11 +914,7 @@ Print the local prefix
 npm prefix
 ```
 
-{{% samp %}}
-
-/Users/tommy/Developer/project
-
-{{% /samp %}}
+{{% samp %}} /Users/tommy/Developer/project {{% /samp %}}
 
 * Print the global prefix
 
@@ -923,11 +922,7 @@ npm prefix
     npm prefix -g
     ```
 
-    {{% samp %}}
-
-    /usr/local
-
-{{% /samp %}}
+    {{% samp %}} /usr/local {{% /samp %}}
 
 You can use `npm prefix -g` to print the local prefix to standard out.
 

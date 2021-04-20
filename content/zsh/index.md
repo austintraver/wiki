@@ -1302,7 +1302,7 @@ To do so, specify the glob qualifier `n` in your filename generation pattern, su
 
 If `name` is an associative array, the expression `${(k)name}` will expand to the list of keys contained by the array `name`
 
-* `(k)` Print the keys of a assorted array
+* `(k)` Print the keys of a assorted array:
 
     ```shell script
     declare -A dict
@@ -1317,6 +1317,24 @@ If `name` is an associative array, the expression `${(k)name}` will expand to th
     a b c
 
     {{% /samp %}}
+
+
+* Filter a key from an associative array:
+
+    ```shell script
+    typeset -A map=([a]=alpha [b]=bravo [c]=charlie) 
+    typeset -a filter=(b)
+    print -- ${#${(k)foo}}
+    print -- ${#${(k)map:|filter}}
+    ```
+
+    The output is the following:
+
+    ```txt
+    3
+    2
+    ```
+
 
 * `(s)` Split a string into an array, separating array entries on the occurance of a delimiter, which is removed from the elements. The delimiter can be specified by placing it within any of the following matching pairs: `(...)`, `{...}`, `[...]`, or `<...>`
 
@@ -3738,6 +3756,7 @@ storage on your computer, type `$ du -chs`
 The bash prompt is actually a collection of several prompts.
 
 * PS1: The primary bash prompt, defaults to include the following bash escape sequences.
+
   * `\h`: The hostname `Austins-Macbook-Pro`
   * `\W`: The basename of the current working directory `~`
   * `\u`: The username `austintraver`
