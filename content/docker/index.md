@@ -179,3 +179,30 @@ A few additional steps are required to [publishing a container to GitHub's conta
 [docker completion script]: https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 
+
+## SSH Connections
+
+* As represented in a `compose.yaml` file
+
+```
+version: '3'
+services:
+  my_service_name:
+    build: .
+    environment:
+      - SSH_AUTH_SOCK="${SSH_AUTH_SOCK}"
+    volumes:
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+```
+
+* As a call to `docker`
+
+```
+docker run \
+    --rm \
+    --tty \
+    --interactive \
+    -v ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK} \
+    --env SSH_AUTH_SOCK=${SSH_AUTH_SOCK} \
+    {{< var CONTAINER_TAG >}}
+```

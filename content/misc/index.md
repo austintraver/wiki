@@ -521,9 +521,11 @@ To copy the location behind a hyperlink, do the following:
 1. Right click (or <kbd>⌃</kbd> Left-Click)
 1. Type <kbd>a</kbd>
 
-If you're curious <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=423905">why <kbd>a</kbd> was chosen</a>, I found the discussion on their website worth reading.
+Google Chrome uses `c`, which is what you would normally expect to select a command titled <em>Copy Link Address</em>. If you're curious, you can check out <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=423905">why <kbd>a</kbd> was chosen</a>. Personally, I feel it's a discussion worth reading.
 
 ## Search Operators
+
+### Mozilla Firefox
 
 When using the address bar to search, you can [filter the results suggested](https://support.mozilla.org/en-US/kb/address-bar-autocomplete-firefox#w_changing-results-on-the-fly) using a set of special characters separated by spaces
 
@@ -561,6 +563,12 @@ When using the address bar to search, you can [filter the results suggested](htt
     $ giphy
     ```
 
+### Google Chrome
+
+The shortcuts above require a little more configuration in order to be usable on Google Chrome. To be able to search bookmarks, you'll want to visit <chrome://settings/searchEngines>, add a search engine, and provide it with the URL <chrome://bookmarks/?#q=%s>. The `%s` should be provided as-is, but it will expand to contain the contents of your query when you are performing a search using this search engine.
+
+You can search history as well. The process is very similar: simply repeat the steps outlined above, and provide the following URL: <chrome://history/?#q=%s>.
+
 ## Quick Find
 
 Some websites use `/` as the keyboard shortcut to focus the cursor on the main search bar of the page. The problem, however, is that Firefox uses `/` as the keyboard shortcut for Quick Find, and intercepts a user when they press `/`. 
@@ -580,3 +588,20 @@ To disable the usage of `/` by Firefox
     ```
 
 Audio can be extracted using the `-x` or `--extract-audio` option
+
+## QR Code Generator
+
+Stumbled upon the [amzqr](https://github.com/hwxhw/amazing-qr) project and 
+I found it absolutely delightful.
+
+* Installing `amzqr`
+
+    ```shell script
+    pip install amzqr
+    ```
+
+* Creating a QR code with an image embedded inside of it:
+
+    ```shell script
+    amzqr -p {{< var IMAGE >}} 'https://{{< var URL >}}'
+    ```
