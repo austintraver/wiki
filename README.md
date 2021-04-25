@@ -33,11 +33,12 @@ I never had a chance to thank that senior-year student for the wisdom he
 passed on to me in the library that day. Even now, I still regularly share
 the same advice when coaching new developers: sometimes learning a new skill
 can be a lot less stressful if you document where you learned something, and
-an example of code that *actually worked*. From there, it's easy enough to jog
-your memory.
+an example of code that *actually worked*, along the way. 
 
-As for myself, it's all here. Everything I've ever learned that I
-had the foresight to write down, in hopes that one day, it will
-be something that I may need to remember.
+Whether its lines of code or lyrics in your favorite song, as soon as you can
+recall the first couple of lines, your brain magically seems to remember the rest!
+
+Everything I've ever learned that I had the foresight to write down, 
+in hopes that one day, it will be something that I may need to remember.
 
 Welcome to my notebook.
