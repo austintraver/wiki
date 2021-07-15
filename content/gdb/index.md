@@ -13,7 +13,7 @@ draft: true
 
 0. Install GDB using Homebrew
 
-  ```shell script
+  ```shell
   brew install gdb
   ```
 
@@ -47,6 +47,6 @@ draft: true
 
 3. Run the following script:
 
-  ```shell script
+  ```shell
   codesign --entitlements ./gdb.xml -fs 'gdb' =gdb
   ```

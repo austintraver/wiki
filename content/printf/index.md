@@ -158,7 +158,7 @@ Regarding the `c` specifier: it takes an `int` `win_t` as argument, but performs
 
 The `printf` command allows for the reuse of arguments, which can come in handy when you're trying to save space in a command. To use an argument specifier, the must be the very next character that comes after the `%` character, and must have a `$` character appended after it. e.g. `%1$s` would print the first argument.
 
-```shell script
+```shell
 printf '%1$s has been moved to %1$s.old\n' file.txt
 ```
 
@@ -234,7 +234,7 @@ The `printf` command's real utility is in its format specifiers, which allow you
 
 * Setting up a number to take up 10 columns, but only print 3 decimal places (`zsh`):
 
-  ```shell script
+  ```shell
   printf '| %10.3f | \n | %10.3f | \n' 3.1234 5.6
   # =>    |      3.123 |
   # =>    |      5.600 |
@@ -242,7 +242,7 @@ The `printf` command's real utility is in its format specifiers, which allow you
 
 * More examples of modifiers (`zsh`):
 
-  ```shell script
+  ```shell
   printf '| %10s | %20s | %10s | \n' 'Value1' 'Value2' 'Value3'
   # =>    |     Value1 |               Value2 |     Value3 |
 
@@ -273,7 +273,7 @@ The `printf` command's real utility is in its format specifiers, which allow you
 
 * More examples of `printf` (`zsh`):
 
-  ```shell script
+  ```shell
   printf 'My name is %s\n' 'Austin'
   # =>    My name is Austin
 

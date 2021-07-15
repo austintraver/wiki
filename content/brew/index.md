@@ -11,7 +11,7 @@ date: 2020-02-04T14:52:27-08:00
 
 ### Installing `brew` Itself
 
-```shell script
+```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
@@ -21,13 +21,13 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 Use the `search` command to search for a program, and see if it exists on `brew` (it always does)
 
-```shell script
+```shell
 brew search wget
 ```
 
 Use the `install` command to download a program
 
-```shell script
+```shell
 brew install wget
 ```
 
@@ -35,7 +35,7 @@ brew install wget
 
 Use the `cask` command to install applications directly onto your computer
 
-```shell script
+```shell
 brew cask install google-chrome
 brew cask install microsoft-office
 brew cask install java
@@ -43,7 +43,7 @@ brew cask install java
 
 #### Multiple Installations with 1 Command
 
-```shell script
+```shell
 brew install wget watch tree
 ```
 
@@ -51,7 +51,7 @@ brew install wget watch tree
 
 To see a list of programs that were installed by `brew`, as well as their dependencies, use the `list` command
 
-```shell script
+```shell
 brew list
 ```
 
@@ -61,7 +61,7 @@ brew list
 
 See the dependencies for `wget`
 
-```shell script
+```shell
 brew deps wget
 ```
 
@@ -69,7 +69,7 @@ brew deps wget
 
 See all packages that depend on `python3`
 
-```shell script
+```shell
 brew uses python3 --installed
 ```
 
@@ -83,13 +83,13 @@ brew uses python3 --installed
 
 List all programs that nothing depends on.
 
-```shell script
+```shell
 brew leaves
 ```
 
 Uninstall a program
 
-```shell script
+```shell
 brew uninstall wget
 ```
 
@@ -100,7 +100,7 @@ brew uninstall wget
 
 You can get more information than that, however. For instance, the command below shows you where a file was installed 
 
-```shell script
+```shell
 brew --prefix wget
 ```
 
@@ -114,7 +114,7 @@ Note that although the returned output is correct, it's truly a symlink to the d
 
 `brew` is usually installed at `/Users/username/Library/Caches/Homebrew`. You can check for yourself by typing
 
-```shell script
+```shell
 brew --cache
 ```
 
@@ -122,7 +122,7 @@ brew --cache
 
 Sometimes you want to install an application that needs to run at launch, such as a server. For example, let's install two common database servers, MongoDB and MySQL
 
-```shell script
+```shell
 # [Install MongoDB & MySQL]
 brew install mongodb && brew install mysql
 # [Brew service list]
@@ -133,13 +133,13 @@ Using the `services` command, `brew` makes it easy to configure when you want th
 
 #### View current server configurations
 
-```shell script
+```shell
 brew services list
 ```
 
 #### Starting a server
 
-```shell script
+```shell
 # [Configure the server to always start at runtime]
 brew services start mongodb
 # [Start the server, but just this once]
@@ -148,7 +148,7 @@ brew services run mongodb
 
 #### Stopping a server
 
-```shell script
+```shell
 brew services stop mongodb
 ```
 
@@ -217,13 +217,13 @@ In this example, we're going to assume that you've created a formula that instal
 
 * Install `gcc` from custom formula, and build it from source, preparing the package for bottling:
 
-  ```shell script
+  ```shell
   brew install --build-bottle ./path/to/gcc.rb
   ```
 
 * Bottle `gcc`, after having installed it using the previous command
 
-  ```shell script
+  ```shell
   brew bottle gcc
   # [ Output ]
   # ./gcc--9.2.catalina.bottle.1.tar.gz
@@ -237,7 +237,7 @@ After the previous step, you'll have a file `gcc--9.2.catalina.bottle.tar.gz` in
 
 * Moving `gcc` bottle into the appropriate location in the repository
 
-  ```shell script
+  ```shell
   # Note the name change!!!
   mv 'gcc--9.2.catalina.bottle.tar.gz' ./homebrew-tap/Bottles/gcc-9.2.catalina.bottle.tar.gz
   ```
@@ -286,7 +286,7 @@ Next, we'll need to actually add the file to the repository. Since this is a bin
 
 * Initialize the repository for `git lfs` support.
 
-  ```shell script
+  ```shell
   git lfs install --local
   ```
 
@@ -298,18 +298,18 @@ Next, we'll need to actually add the file to the repository. Since this is a bin
 
 * Add any compressed `tar` archives to large file storage
 
-  ```shell script
+  ```shell
   git lfs track '*.tar.gz'
   ```
 
 * Add `.gitattributes` to the commit, to enact the changes made
 
-  ```shell script
+  ```shell
   git add .gitattributes
   ```
 
 * Commit and push the updated formula and bottle
 
-  ```shell script
+  ```shell
   git commit -m "Add bottle for GCC" && git push
   ```

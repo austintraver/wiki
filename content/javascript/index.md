@@ -474,13 +474,13 @@ The best open source resource to learn TypeScript is
 To compile TypeScript into JavaScript, use `tsm`, a command you can install from
 NPM
 
-```shell script
+```shell
 npm install --global typescript
 ```
 
 * Creating a TypeScript project
 
-```shell script
+```shell
 mkdir project
 cd project
 

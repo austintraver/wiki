@@ -10,19 +10,19 @@ draft: true
 
 * Installing Firebase CLI:
 
-  ```shell script
+  ```shell
   curl -sL https://firebase.tools | bash
   ```
 
 * Log into firebase
 
-  ```shell script
+  ```shell
   firebase login
   ```
 
 * Set the active project
 
-  ```shell script
+  ```shell
   firebase use project_id
   ```
 
@@ -33,6 +33,6 @@ draft: true
 
 * [Link to documentation](https://gohugo.io/hosting-and-deployment/hosting-on-firebase/)
 
-```shell script
+```shell
 firebase init
 ```

@@ -15,7 +15,7 @@ date: 2020-02-04T14:52:27-08:00
 
 ## Getting Started
 
-```shell script
+```shell
 # macOS
 brew install ruby
 # Debian
@@ -31,7 +31,7 @@ apt install ruby-full
 There's also some debate as to what the canonical implementation of Ruby is this days. I've seen JRuby become more popular, so I've included
 the steps to install it on macOS below:
 
-```shell script
+```shell
 curl -sSL https://get.rvm.io | bash -s stable
 
 <<-EOF
@@ -162,14 +162,14 @@ end
 
 Check if any gems need to be updated
 
-```shell script
+```shell
 gem outdated
 gem update <gem_name>
 ```
 
 By default, ruby will keep old versions of gems, so after updating, it's good to run the `cleanup` command
 
-```shell script
+```shell
 gem cleanup
 ```
 
@@ -177,19 +177,19 @@ gem cleanup
 
 Find where a gem is installed
 
-```shell script
+```shell
 gem which <gem_name>
 ```
 
 Uninstall a single gem
 
-```shell script
+```shell
 gem uninstall <gem_name>
 ```
 
 Uninstall all gems with no confirmation
 
-```shell script
+```shell
 gem uninstall -aIx
 ```
 
@@ -203,13 +203,13 @@ Nowadays bundler is built into Ruby 2.6, so keep on using it.
 
 It's a good idea to make sure the website looks correct before pushing your repository to GitHub. You can do that by running the following command inside the root directory of your project
 
-```shell script
+```shell
 bundle exec jekyll serve
 ```
 
 You can close the server by issuing the following command in any directory
 
-```shell script
+```shell
 pkill jekyll
 ```
 

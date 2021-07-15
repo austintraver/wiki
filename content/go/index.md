@@ -13,20 +13,20 @@ First, [download go](https://golang.org/dl/) for your machine, or using a packag
 
 * on macOS
 
-    ```shell script
+    ```shell
     # macOS
     brew install go
     ```
 
 * on Debian
 
-    ```shell script
+    ```shell
     apt install golang-go
     ```
 
 You can actually check out the [official tour of Go](https://tour.golang.org/basics/1), which you can run locally.
 
-```shell script
+```shell
 go get golang.org/x/tour
 ```
 
@@ -48,7 +48,7 @@ go get golang.org/x/tour
 
 * Running your first program
 
-    ```shell script
+    ```shell
     go run hello.go
     ```
 
@@ -60,7 +60,7 @@ go get golang.org/x/tour
 
 * If you'd like to separate the compilation and execution steps, use the `build` subcommand
 
-    ```shell script
+    ```shell
     go build hello.go
 
     ./hello.go
@@ -115,7 +115,7 @@ You can [install go code](https://golang.org/doc/code.html) that you've written 
 
 For convenience, go commands accept paths relative to the working directory, and default to the package in the current working directory if no other path is given. So in our working directory, the following commands are all equivalent:
 
-```shell script
+```shell
 # Option 1
 go install example.com/user/hello
 
@@ -185,3 +185,107 @@ I've included some useful commands below:
 " Pull up documentation for the function `Printf` package `fmt`
 :GoDoc fmt Printf
 ```
+
+---
+
+## Have a slice
+
+Slices are a bit tricky, but Rob Pike explains it well in his blog post: <https://blog.golang.org/slices>
+
+Also, felt this was worth writing down for my own safe-keeping:
+
+> It is idiomatic to use a pointer receiver for a method that modifies a slice.
+>
+> --Rob Pike
+
+--
+
+## Arrays
+
+Arrays are used less often than slices, but sometimes you find yourself in a situation where you'd like
+to create a fixed size array, using the values contained within a slice. Here is the idiomatic way
+for you to do precisely that:
+
+```go
+var fixed [3]int
+
+sliced := []int{1, 2, 3, 5, 8, 13}
+
+copy(fixed[:], sliced)
+```
+
+This syntax takes advantage of the faxt that `copy` will only copy the minimum of `len(src)` and `len(dst)` bytes.
+
+---
+
+## Scanners
+
+If you need to read a file in line by line, the most idiomatic way to do so is by using `bufio.Scanner`
+
+```go
+file := os.Open("file.txt")
+scanner := bufio.NewScanner(file)
+scanner.Split(bufio.ScanLines)
+var txtlines []string
+
+for scanner.Scan() {
+    txtlines = append(txtlines, scanner.Text())
+}
+
+file.Close()
+
+for _, eachline := range txtlines {
+    fmt.Println(eachline)
+}
+```
+
+## JSON Marshalling
+
+Make an HTTP request, receive JSON in the body of the response, and unmarshall that JSON
+into a Go struct named `result`:
+
+```go
+response, err := http.Get("example.com/api/gimmejson")
+if err != nil {
+    return
+}
+defer func(Body io.ReadCloser) {
+    err = Body.Close()
+    if err != nil {
+        return
+    }
+}(response.Body)
+
+data, err := io.ReadAll(response.Body)
+if err != nil {
+    return
+}
+err = json.Unmarshal(data, result)
+return
+```
+
+## Style
+
+Below are some notes I took while reading "The Go Programming Language"
+
+The letters of acronyms and initialisms like ASCII and HTML are always rendered in the same case, so you might
+want to call a function `htmlEscape`, `HTMLEscape`, or `escapeHTML`, but should avoid calling it `escapeHtml`.
+
+A *declaration* names a program entity and specifies some or all of its properties. In Go, the four main types
+of declarations are `var`, `const`, `type`, and `func`, but every `.go` file begins with a `package` declaration,
+followed by `import` declarations, and finally, zero-or-more *package-level* declarations.
+
+In Go, there is no such thing as an unitialized variable. If a value is not provided for a variable at its declaration, 
+the variable will have its value initialized to the *zero-value* corresponding to that variable's underlying type.
+
+The `:=` operator performs *short variable* declaration. Unlike the `=` operator, which performs assignment, the `:=` operator performs declaration, which is distinct from assignment.
+
+* The *expression* `&x` should be read as "address of `x`"
+
+* The *expression* `*int` should be read as "pointer to `int`"
+
+The zero value for a pointer of any type is `nil`. If there is a variable `p`, which is a pointer type variable, the test `p != nil` is true
+if `p` points to a variable. Two pointers are equal if and only if they point to the same variable, or are both equal to `nil`.
+
+The expression `new(T)` creates an *unnamed variable* of type `T`, initializes it to the *zero-value* of type T, and returns its address, which
+is a value of type `*T`.

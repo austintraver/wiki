@@ -368,7 +368,7 @@ reset code is given, which is code #0. You can specify this with `\x1b[0m`
 * It's worth noting special attention to the escape character, which is decimal number `27` or hex value `0x1b` because
     it's often typed. For instance, try entering this command in your terminal. It will print a green background.
 
-```shell script
+```shell
 echo -e -n '\x1b[42m Green \x1b[0m\n'
 ```
 
@@ -410,7 +410,7 @@ Here are some of the most useful codes:
 
 The first 16 colors have RGB tuples predetermined by ANSI that don't follow the same formula as the others
 
-```shell script
+```shell
 typeset -A rgb256
 
 let index=0
@@ -429,7 +429,7 @@ done
 
 predeter
 
-```shell script
+```shell
 XColorTable() {
   i=16
   for ((r = 0; r <= 255; r+=40)); do
@@ -510,7 +510,7 @@ XColorTable() {
 
 * Repeat the last character 2 times
 
-    ```shell script
+    ```shell
     print -N '1234567890' '\E[2b'
     ```
 
@@ -522,7 +522,7 @@ XColorTable() {
 
 * Replace a character
 
-    ```shell script
+    ```shell
     print -N {9..1} '\E[3D' '_' '\E[2C'
     ```
 
@@ -534,7 +534,7 @@ XColorTable() {
 
 * Total black magic since I forgot what the instruction set was
 
-    ```shell script
+    ```shell
     print -N '#####' $'\E7\E[2G1\E82'
     ```
 
@@ -546,7 +546,7 @@ XColorTable() {
 
 * Go to the 2nd row, add a 1, return, add a 2
 
-    ```shell script
+    ```shell
     print -N '#####' '\E7' '\E[2G' '1' '\E8' '2'
     ```
 
@@ -558,13 +558,13 @@ XColorTable() {
 
 * Go back 2 columns, up 1 row, add a '0', return
 
-    ```shell script
+    ```shell
     print -N '####\n####' '\E7' '\E[2D' '\E[1A' '0' '\E8'
     ```
 
 * Go back 3 columns, and erase 2 characters
 
-    ```shell script
+    ```shell
     print -N 'hello' '\E[3D' '\E[2X'
     ```
 
@@ -576,7 +576,7 @@ XColorTable() {
 
 * Go back three columns, and remove two characters
 
-    ```shell script
+    ```shell
     print -N 'hello '\E[3D '\E[2P'
     ```
 
@@ -588,7 +588,7 @@ XColorTable() {
 
 * Replace the '+' in the 1st column, 2nd-to-last row with '-'
 
-    ```shell script
+    ```shell
     print -N +{5..1}$'\n' '\E7' '\E[2A' '-' '\E8'
     ```
 
@@ -604,7 +604,7 @@ XColorTable() {
 
 * Add two blank lines
 
-    ```shell script
+    ```shell
     print -N +{5..1}$'\n' '\E[3A' '\E[2L' '\E[2B' '\E[3B'
     ```
 
@@ -636,7 +636,7 @@ finished inserting. If you don't, your output will be truncated.
 
 * The program I wrote for practice, `globetrot`:
 
-    ```shell script
+    ```shell
     for row in {2..${LINES}}; do
       # Print a row of '#' characters
       print -f '#'%.s {1..${COLUMNS}}
@@ -730,4 +730,3 @@ Lastly, UTF-32 is problematic because it results in encoding many 8-bit strings
 of `0`'s. Traditional software interprets this as the null terminator, which
 signals the end of the string, which would truncate the remaining information
 previously encoded by UTF-32.
-

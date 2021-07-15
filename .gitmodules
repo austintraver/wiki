@@ -1,0 +1,6 @@
+[submodule "nvim/pack/usr/start/dbml"]
+	path = nvim/pack/usr/start/dbml
+	url = https://github.com/jidn/vim-dbml.git
+[submodule "nvim/pack/usr/start/postcss"]
+	path = nvim/pack/usr/start/postcss
+	url = git@github.com:stephenway/postcss.vim.git

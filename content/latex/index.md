@@ -41,7 +41,7 @@ Also, learned some of this from following along with the article
 ```
 
 
-```shell script
+```shell
 open http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 curl http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz -o ~/Downloads/texlive.tgz
 tar -xzf ~/Downloads/texlive.tgz -C ~/Downloads/texlive
@@ -53,7 +53,7 @@ cd ~/Downloads/texlive
 
 * List of packages installed with BasicTeX
 
-  ```shell script
+  ```shell
   tlmgr info --only-installed
   ```
 
@@ -71,7 +71,7 @@ The TeX Live Manager is a program (`tlmgr`) for TeX package management.
 
 * Setting the paper size to US letter (8.5" x 11")
 
-    ```shell script
+    ```shell
     sudo tlmgr paper letter
     ```
 

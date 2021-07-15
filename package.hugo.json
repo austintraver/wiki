@@ -1,0 +1,26 @@
+{
+  "name": "wiki",
+  "description": "Welcome to the wiki, which doubles as my personal notebook for all things \"software engineering.\"",
+  "version": "0.2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/austintraver/wiki.git"
+  },
+  "author": "Austin Traver <austintraver@users.noreply.github.com> (https://github.com/austintraver)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/austintraver/wiki/issues"
+  },
+  "homepage": "https://github.com/austintraver/wiki#readme",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "@docsearch/js": "*",
+    "firebase": "^8.3.2"
+  }
+}

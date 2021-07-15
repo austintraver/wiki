@@ -28,7 +28,7 @@ BigQuery is a serverless, scalable, multi-cloud data warehouse.
 
 In the examples below, sometimes I'm going to use command-line arguments, other times I won't, you'll see that you're allowed to specify project ID, dataset ID, and table ID, all in the same string, in the following format:
 
-```shell script
+```shell
 PROJECT_ID:DATASET_ID.TABLE_ID
 ```
 
@@ -36,7 +36,7 @@ PROJECT_ID:DATASET_ID.TABLE_ID
 
 * Examining the details of a table using the `show` subcommand:
 
-  ```shell script
+  ```shell
   bq show bigquery-public-data:samples.shakespeare
   ```
 
@@ -57,7 +57,7 @@ PROJECT_ID:DATASET_ID.TABLE_ID
 
 * List the datasets in project `my-project` using the `ls` subcommand:
 
-  ```shell script
+  ```shell
   bq ls 'my-project:'
   ```
 
@@ -73,7 +73,7 @@ PROJECT_ID:DATASET_ID.TABLE_ID
 
 * Creating a new dataset using the `mk` subcommand:
 
-  ```shell script
+  ```shell
   bq mk 'my-dataset'
   ```
 
@@ -85,7 +85,7 @@ PROJECT_ID:DATASET_ID.TABLE_ID
 
 * Exporting data to Google Cloud Storage, [link to documentation](https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#setting_up_a_cloud_storage_transfer)
 
-  ```shell script
+  ```shell
   bq mk \
     --transfer_config \
     --project_id 'my-project' \
@@ -105,7 +105,7 @@ The `load` subcommand creates or updates a table and loads data in a single step
 
 * Load a CSV file `my-data.csv` with JSON schema `my-schema.json` to project `my-project`, dataset `my-dataset`, table `my-table`, **replacing the contents of the table if it already exists**
 
-  ```shell script
+  ```shell
   bq load \
       --location 'US' \
       --project_id 'my-project' \
@@ -122,7 +122,7 @@ The `load` subcommand creates or updates a table and loads data in a single step
 
 * [Delete a single table](https://cloud.google.com/bigquery/docs/managing-tables#deleting_a_table), `my-table` in the dataset `my-dataset`
 
-  ```shell script
+  ```shell
   # With confirmation
   bq rm -t 'my-project:my-dataset.my-table'
 
@@ -132,7 +132,7 @@ The `load` subcommand creates or updates a table and loads data in a single step
 
 * [Delete every table](https://cloud.google.com/bigquery/docs/managing-datasets#deleting_a_dataset) in the dataset `my-dataset`
 
-  ```shell script
+  ```shell
   # With confirmation
   bq rm -r -d 'my-dataset'
 
@@ -144,7 +144,7 @@ The `load` subcommand creates or updates a table and loads data in a single step
 
 * Downloading the JSON schema for `my-table` from the command line:
 
-  ```shell script
+  ```shell
   bq show \
     --schema \
     --format=prettyjson \
@@ -158,7 +158,7 @@ The `load` subcommand creates or updates a table and loads data in a single step
 
   From the `bq` CLI:
 
-  ```shell script
+  ```shell
   bq extract \
     'my-project:my-dataset.my-table' \
     'gs://bucket/filename.ext' \
@@ -199,8 +199,6 @@ The `load` subcommand creates or updates a table and loads data in a single step
 
 * Make a bucket `bucket-ttrojan` in the project `project-ttrojan`
 
-  ```shell script
+  ```shell
   gsutil mb -p 'project-ttrojan' 'gs://bucket-ttrojan'
   ```
-
-

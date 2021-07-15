@@ -93,7 +93,7 @@ section.intro summary {
 }
 
 section.intro details {
-  max-width: min(90%, 80ch);
+  max-width: MIN(90%, 80ch);
   margin-left: auto;
   margin-right: auto;
 }
@@ -137,7 +137,7 @@ main > p {
   display: flex;
   flex-direction: column;
   height: 260px;
-  width: min(320px, 90vw);
+  width: MIN(320px, 90vw);
   border-radius: 16px;
   font-weight: normal;
   text-decoration: none;

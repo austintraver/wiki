@@ -76,7 +76,7 @@ The following meta-characters have either been added, or no longer require being
 escaped to use their special properties. To search for the literal character,
 prepend them with a backslash.
 
-```shell script
+```shell
 # [Search for line containing 'this' or 'that']
 grep -E 'this|that' file.txt
 # [Search for a line containing 'abcabc']
@@ -86,7 +86,7 @@ grep -E '(abc){2}' file.text
 Luckily, `vim`, `sed`, and `grep` all support the same `-E` flag to use extended
 regular expressions.
 
-```shell script
+```shell
 # [Use ex to replace hello with world on line 1]
 vim -E -nsc '1s/this|that/world/e' -cx file.txt
 # [Use sed to replace hello with world on line 1]

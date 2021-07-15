@@ -48,7 +48,7 @@ When the Raspberry Pi boots from this SD card, Raspberry Pi OS will move the con
 
 Also, you'll probably want to enable SSH access, which is disabled by default. To do so, create an empty file `ssh` in the root folder of the `/boot` Volume mounted on our host machine.
 
-```shell script
+```shell
 touch /Volumes/boot/ssh
 ```
 
@@ -83,21 +83,21 @@ Documentation on the Server Message Block (SMB) implementation can be found [her
 
 * Measure temperature of Raspberry Pi
 
-    ```shell script
+    ```shell
     vcgencmd measure_temp
     # temp=51.0'C
     ```
 
 * Print the MAC address of the ethernet and WiFi connections
 
-    ```shell script
+    ```shell
     cat /sys/class/net/eth0/address
     cat /sys/class/net/wlan0/address
     ```
 
 * Alter the MAC address of a network device
 
-    ```shell script
+    ```shell
     # Bring the network interface "eth0" offline
     ip link set dev eth0 down
     # Alter the address of the network interface "eth0"
@@ -110,38 +110,38 @@ Documentation on the Server Message Block (SMB) implementation can be found [her
 
 * Make the changed MAC address permanent
 
-    ```shell script
+    ```shell
     - to make it permanent, within /etc/network/interfaces, add the following stanza to the eth0 block: "pre-up ip link set dev eth0 address 02:03:04:05:06:07"
     ```
 
 * Write `hello world` to every terminal:
 
-    ```shell script
+    ```shell
     wall "hello world"
     ```
 
 * Enable receiving messages
 
-    ```shell script
+    ```shell
     mesg y
     ```
 
 * Send a message to the user `tommy` on `tty1`
 
-    ```shell script
+    ```shell
     ls | write tommy tty1
     ```
 
 * Change the current time on the computer
 
-    ```shell script
+    ```shell
     # Totally not when this was written...
     sudo date -s '30 Nov 2019 04:38'
     ```
 
 * Enable booting to the command-line
 
-    ```shell script
+    ```shell
     sudo systemctl set-default multi-user.target
     ```
 
@@ -151,25 +151,25 @@ Consumer Electronics Control (CEC) is supported by most displays, including Sams
 
 * Getting Started
 
-    ```shell script
+    ```shell
     sudo apt install cec-utils
     ```
 
 * Make the raspberry pi's console the active source for input
 
-    ```shell script
+    ```shell
     cec-client -s -d 1 <<< "as"
     ```
 
 * Turn the TV off (standby mode)
 
-    ```shell script
+    ```shell
     cec-client -s -d 1 <<< "standby 0"
     ```
 
 * Check the current TV status (on or off)
 
-    ```shell script
+    ```shell
     cec-client -s -d 1 <<< "pow 0"
     ```
 
@@ -189,7 +189,7 @@ PARTUUID=c8e1868f-02  /               ext4    defaults,noatime  0       1
 
 ## Backups
 
-```shell script
+```shell
 mount -t cifs //chronos.local/Alexandria /mnt/delorean 
 rsync -axHv --exclude-from exclude.txt --delete-during / /mnt/delorean/rpi/
 ```

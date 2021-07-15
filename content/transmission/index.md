@@ -18,7 +18,7 @@ You'll need a few applications on your computer, such as VLC and Homebrew.
 
 * On MacOS
 
-  ```shell script
+  ```shell
   brew cask install vlc
   brew install python transmission-cli watch
   pip install pirate-get
@@ -26,7 +26,7 @@ You'll need a few applications on your computer, such as VLC and Homebrew.
 
 * On Linux
 
-  ```shell script
+  ```shell
   apt install transmission-cli transmission-daemon watch
   pip install pirate-get
   ```
@@ -44,7 +44,7 @@ This will install the required programs that you need to use this software.
 
 {{% /aside %}}
 
-```shell script
+```shell
 brew services start transmission-cli
 ```
 
@@ -54,7 +54,7 @@ To search for the movie you aren't supposed to be pirating, use the `pirate-get`
 
 Download videos from the TV-Show Seinfeld
 
-```shell script
+```shell
 pirate-get -t 'seinfeld'
 ```
 
@@ -65,7 +65,7 @@ After this page loads, you will see various options to choose from. Simply type 
 
 View a real-time status of all transmission files
 
-```shell script
+```shell
 watch -n 0.1 'transmission-remote -l'
 ```
 
@@ -77,13 +77,13 @@ watch -n 0.1 'transmission-remote -l'
 
 ## Playing videos
 
-```shell script
+```shell
 vlc -f ~/Downloads/the_downloaded_file_name
 ```
 
 ## Removing Files
 
-```shell script
+```shell
 # list all torrent files
 transmission-remote -l
 # remove and delete torrent ID 2
@@ -94,13 +94,13 @@ transmission-remote -t 2 -rad
 
 * Starting the daemon
 
-```shell script
+```shell
 transmission-daemon
 ```
 
 * Stopping the daemon
 
-```shell script
+```shell
 transmission-remote --exit
 ```
 
@@ -108,7 +108,7 @@ transmission-remote --exit
 
 Configurations are stored at `~/.config/transmission-daemon`, you can write the following command to dump an initial config file to that location:
 
-```shell script
+```shell
 transmission-daemon --dump-settings &> ~/.config/transmission-daemon
 ```
 
@@ -128,18 +128,18 @@ You can specify a custom directory for your configuration file
 
 * Have transmission read the config file from {{< var CONFIG_DIR >}}/settings.json
 
-```shell script
+```shell
 transmission-daemon --config-dir {{< var CONFIG_DIR >}}
 ```
 
 * Print detailed information about a torrent
 
-```shell script
+```shell
 transmission-remote -t1 -i
 ```
 
 * Get the magnet for the `.torrent` file {{< var MAGNET_FILE >}}
 
-```shell script
+```shell
 transmission-show -m {{< var MAGNET_FILE >}}
 ```

@@ -8,7 +8,7 @@ date: 2020-02-04T14:52:27-08:00
 
 ## Getting Started
 
-```shell script
+```shell
 brew install gpg
 ```
 
@@ -33,7 +33,7 @@ At this point, GPG has been around a long time. It's currently on version 2, whi
 
 ## Generating a new key
 
-```shell script
+```shell
 gpg --quick-generate-key
 gpg --generate-key
 gpg --full-generate-key
@@ -41,13 +41,13 @@ gpg --full-generate-key
 
 ## Listing all keys in the keyring
 
-```shell script
+```shell
 gpg -K
 ```
 
 ## Listing the public keys in the keyring
 
-```shell script
+```shell
 gpg -k
 ```
 
@@ -56,12 +56,12 @@ gpg -k
 
 * Import a key file directly
 
-```shell script
+```shell
 gpg --import example.key
 ```
 * Download someone's public GPG key from GitHub
 
-```shell script
+```shell
 user="tommytrojan" # their GitHub username
 curl https://api.github.com/users/${user}/gpg_keys | jp '[0].raw_key' | gpg --import
 ```
@@ -70,37 +70,37 @@ curl https://api.github.com/users/${user}/gpg_keys | jp '[0].raw_key' | gpg --im
 
 * Exporting the public key specified by its email address to STDOUT
 
-  ```shell script
+  ```shell
   gpg --armor --export example@pm.me > example.asc
   ```
 
 * Exporting the public key specified by its comment "GitHub" to `/dev/stdout`
 
-  ```shell script
+  ```shell
   gpg -a --export GitHub
   ```
 
 * Exporting the public key to a file as binary data
 
-  ```shell script
+  ```shell
   gpg --output ./example.key --export example@pm.me
   ```
 
 * Exporting the public key to a file as armored ASCII
 
-  ```shell script
+  ```shell
   gpg -o example.asc -a --export example@pm.me
   ```
 
 * Export the private key as binary file
 
-  ```shell script
+  ```shell
   gpg --export-secret-keys example@pm.me > ./example.key
   ```
 
 * Export the private key as armored ASCII
 
-  ```shell script
+  ```shell
   gpg -a --export-secret-keys example@pm.me > ./example.asc
   ```
 
@@ -118,7 +118,7 @@ Sometimes you want to change the passphrase that you're prompted for when using 
 
 * Change the password of a private key
 
-  ```shell script
+  ```shell
   gpg --passwd tommy@pm.me
   ```
 
@@ -128,13 +128,13 @@ Use the `-r` flag to specify the recipient of the file. You can use this flag mu
 
 * Encrypt a file for a single recipient
 
-  ```shell script
+  ```shell
   gpg -r John -se file.txt
   ```
 
 * Encrypt a file for multiple recipients
 
-  ```shell script
+  ```shell
   gpg -r John -r Cam -se file.txt
   ```
 
@@ -149,7 +149,7 @@ Use the `-r` flag to specify the recipient of the file. You can use this flag mu
 
 * Decrypt the file `example.txt.gpg`
 
-  ```shell script
+  ```shell
   gpg -d example.txt.gpg
   ```
 
@@ -178,7 +178,7 @@ If you have multiple private keys on your keyring, you may want to encrypt a doc
 
 * Encrypt the file `file.txt` for recipient `friend@pm.me`, and sign it using the private key of `example@pm.me`
 
-  ```shell script
+  ```shell
   gpg -u example@pm.me -r friend@pm.me -se file.txt
   ```
 
@@ -193,7 +193,7 @@ If you import somebody's public key, that doesn't mean you trust them, it just t
 
 {{% /aside %}}
 
-```shell script
+```shell
 # import a friend's key
 gpg --import friend.key
 # list keyring's public key info (to find the associated key ID)
@@ -214,20 +214,20 @@ Use the `-o` flag to specify output to a particular file, instead of the default
 By default, encrypting `example.txt` will create `example.txt.gpg` but this can be altered by specifying the output file with the `-o` flag.
 
 
-```shell script
+```shell
 gpg -o boring_paperwork.gpg -se illegal_activities.txt
 ```
 
 
 ## Generating a key-pair
 
-```shell script
+```shell
 $ gpg --full-generate-key --no-emit-version
 ```
 
 ## Listing Keys
 
-```shell script
+```shell
 # list fingerprints for keys
 $ gpg --fingerprint
 
@@ -250,7 +250,7 @@ The keys are prefixed with the hex-value indicator, "0x"
 
 ## Deleting Keys
 
-```shell script
+```shell
 # Delete a friend's public key
 gpg --delete-keys friend@noreply.github.com
 # Delete your secret & public key-pair
@@ -262,7 +262,7 @@ gpg --delete-secret-and-public-keys me@noreply.github.com
 
 * Add this to your shell startup file.
 
-  ```shell script
+  ```shell
   # Enable support for GPG encryption of echo command
   export GPG_TTY=$(tty)
 
@@ -276,7 +276,7 @@ gpg --delete-secret-and-public-keys me@noreply.github.com
 
 * Add an authentication subkey to your keyring
 
-  ```shell script
+  ```shell
   gpg --expert --edit-key <keyID>
   addkey
   # press 8 <Enter>
@@ -290,7 +290,7 @@ gpg --delete-secret-and-public-keys me@noreply.github.com
 
 * Copy your authentication subkey's keygrip to `~/.gnupg/sshcontrol`
 
-  ```shell script
+  ```shell
   gpg -k --with-keygrip
   # 4EC68884AECA658DD0523C66E6C70FD9A1B61790
   ```
@@ -305,27 +305,27 @@ gpg --delete-secret-and-public-keys me@noreply.github.com
 
 * Check if SSH can detect this key
 
-  ```shell script
+  ```shell
   # View the MD5 fingerprint of the SSH key
   ssh-add -l -E md5
   ```
 
 * Check if these two commands produce matching output
 
-  ```shell script
+  ```shell
   ssh-add -L
   gpg --export-ssh-key <keyID>
   ```
 
 * If you ever need to kill the GPG agent, you can do so by running this command
 
-  ```shell script
+  ```shell
   gpgconf --kill gpg-agent
   ```
 
 * Checking the message digest of a key file
 
-  ```shell script
+  ```shell
   gpg --print-mds key.asc
   gpg --print-md md5 key.asc
   gpg --print-md sha256 key.asc
@@ -377,14 +377,14 @@ user ID can be specified many ways
 
 * Remove the expiration date of a key (even if it already happened)
 
-```shell script
+```shell
 # Disable expiration for a key, even if it's already expired
 gpg --quick-set-expire <key fingerprint> 0
 ```
 
 * Remove all expired keys from your keyring
 
-```shell script
+```shell
 # TODO fix
 gpg -k --with-colons \
 	| grep '^...:e' \
@@ -397,7 +397,7 @@ gpg -k --with-colons \
 
 * Launching a GPG agent that can support SSH compatibility
 
-```shell script
+```shell
 # Launch the GPG agent if one isn't already running
 # if there is an existing one running already, then ignore the message
 # that the GPG agent reports
@@ -407,14 +407,14 @@ gpg-agent --enable-ssh-support --daemon &> /dev/null
 
 * Transfering control of the SSH socket from the SSH agent to the GPG agent
 
-```shell script
+```shell
 # Allow GPG's socket to manage the `ssh` authentication process
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 ```
 
 * Export GPG key as an SSH public key
 
-  ```shell script
+  ```shell
   # Using GPG
   gpg --export-ssh-key ttrojan@usc.edu > ~/.ssh/id_rsa.pub
   ```
@@ -655,7 +655,7 @@ Pasted below is useful content that explains the output provided when the `--wit
 
 You can use a batch file to automate the generation of a large number of keys. Here is an example batch file.
 
-```shell script
+```shell
 Key-Type: RSA
 Key-Length: 4096
 Key-Usage: cert
@@ -678,7 +678,7 @@ Name-Real: Austin Traver
 
 ## Query User's GPG Key
 
-```shell script
+```shell
 # Enterprise
 USER=atraver
 curl https://github.fighton.com/api/v3/users/${USER}/gpg_keys \

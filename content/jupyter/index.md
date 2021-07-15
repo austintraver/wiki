@@ -8,7 +8,7 @@ date: 2019-07-14T09:48:23-08:00
 
 To get started, you'll need to install some packages
 
-```shell script
+```shell
 pip install notebook ipywidgets
 ```
 
@@ -16,7 +16,7 @@ By default, when you launch a Jupyter notebook, it will be hosted at `127.0.0.1`
 
 * Launching a Jupyter notebook without opening a browser window:
 
-    ```shell script
+    ```shell
     jupyter notebook --no-browser
     ```
 
@@ -26,7 +26,7 @@ By default, when you launch a Jupyter notebook, it will be hosted at `127.0.0.1`
 
     1. First, enter a Python shell
 
-        ```shell script
+        ```shell
         python
         ```
 
@@ -61,7 +61,7 @@ By default, when you launch a Jupyter notebook, it will be hosted at `127.0.0.1`
 
 * Installing plotly
 
-    ```shell script
+    ```shell
     pip install plotly # lol go figure
     ```
 

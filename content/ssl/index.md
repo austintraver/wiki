@@ -39,7 +39,7 @@ There are two common ways to encode the files containing certificates and keys:
 
 * Find the path to the SSL's configuration file:
 
-    ```shell script
+    ```shell
     openssl ca
     ```
 
@@ -55,7 +55,7 @@ This is a walkthrough for creating [certificate signing requests (CSRs)](https:/
 
 * Creating a certificate signing request using `gpgsm`
 
-    ```shell script
+    ```shell
     gpgsm --generate-key --output request.csr
     # Select the option to use an existing key, keeping your keygrip handy
     # When it asks you for some info, provide something similar to the line below
@@ -64,7 +64,7 @@ This is a walkthrough for creating [certificate signing requests (CSRs)](https:/
 
 Creating a Certificate Signing Request require a key. This key can be encoded in a variety of formats, including [PKCS #1](https://en.wikipedia.org/wiki/PKCS_1) and [PKCS #8](https://en.wikipedia.org/wiki/PKCS_8). using `openssl`
 
-  ```shell script
+  ```shell
   # Using PKCS #1 private key
   openssl req -new -key id_pkcs1 > {{< var REQUEST.CSR >}}
 
@@ -74,7 +74,7 @@ Creating a Certificate Signing Request require a key. This key can be encoded in
 
 * Submitting a Certificate Signing Request
 
-    ```shell script
+    ```shell
     certbot certonly --standalone --csr {{< var REQUEST.CSR >}}
     ```
 
@@ -82,7 +82,7 @@ If this certificate was ever compromised, you would issue a revocation certifica
 
 * Generating a Revocation Certificate
 
-    ```shell script
+    ```shell
     gpg --gen-revoke ttrojan@usc.edu > revocation.crt
     ```
 
@@ -92,7 +92,7 @@ The `certbot` command, provided by GNU Let's Encrypt, allows you to obtain a sig
 
 * Receive a certificate by submitting a CSR to `Lets Encrypt`
 
-    ```shell script
+    ```shell
     certbot certonly --standalone --csr request.csr
     ```
 
@@ -104,8 +104,7 @@ After you've done this, you'll receive three files
 
 Go ahead and delete the first two, you'll only need `0001_chain.pem`, which is a simple concenation of the previous two files. It's the combination of the server certificate and the intermediate certificate, which when used together, allow you to verify your identity
 
-```shell script
+```shell
 rm 0000_cert.pem 0000_chain.pem
 mv 0001_chain.pem fullchain.crt
 ```
-

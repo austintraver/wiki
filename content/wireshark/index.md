@@ -8,6 +8,6 @@ date: 2020-02-04T14:52:27-08:00
 
 Scan for multicast DNS `.local` domains on your local network
 
-```shell script
+```shell
 tshark -n -T fields -e dns.qry.name -Y "udp.srcport eq 5353"
 ```

@@ -12,14 +12,14 @@ you see here is probably something on there that I wrote down to keep here.
 
 * Install [the Stripe CLI](https://stripe.com/docs/stripe-cli)
 
-    ```shell script
+    ```shell
     brew tap stripe/stripe-cli
     brew install stripe
     ```
 
 * Login with your stripe account
 
-    ```shell script
+    ```shell
     stripe login
     ```
 
@@ -29,25 +29,25 @@ The [`open`](https://stripe.com/docs/cli/open) subcommand can open up pages on y
 
 * View the CLI reference
 
-    ```shell script
+    ```shell
     stripe open cliref
     ```
 
 * View the documentation
 
-    ```shell script
+    ```shell
     stripe open docs
     ```
 
 * View the API
 
-    ```shell script
+    ```shell
     stripe open api
     ```
 
 * View the dashboard
 
-    ```shell script
+    ```shell
     stripe open dashboard
     ```
 

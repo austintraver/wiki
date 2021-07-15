@@ -12,14 +12,14 @@ date: 2020-02-04T14:52:27-08:00
 
 * On Mac OS
 
-  ```shell script
+  ```shell
   brew tap mongodb/brew
   brew install mongodb-community
   ```
 
 * On Ubuntu
 
-  ```shell script
+  ```shell
   # Install GPG as a pre-requisite step
   sudo apt-get install gnupg
 
@@ -40,7 +40,7 @@ date: 2020-02-04T14:52:27-08:00
 
   * On Ubuntu
 
-    ```shell script
+    ```shell
     sudo systemctl start mongod
     ```
 
@@ -48,7 +48,7 @@ date: 2020-02-04T14:52:27-08:00
 
   * On Ubuntu
 
-    ```shell script
+    ```shell
     sudo systemctl stop mongod
     ```
 
@@ -56,7 +56,7 @@ date: 2020-02-04T14:52:27-08:00
 
   * On Ubuntu
 
-    ```shell script
+    ```shell
     sudo systemctl restart mongod
     ```
 
@@ -64,13 +64,13 @@ date: 2020-02-04T14:52:27-08:00
 
   * On macOS
 
-    ```shell script
+    ```shell
     brew services start mongodb/brew/mongodb-community
     ```
 
   * On Ubuntu
 
-    ```shell script
+    ```shell
     sudo systemctl enable mongod
     ```
 
@@ -84,7 +84,7 @@ MongoDB config files are written in YAML, an example `mongodb.conf` file is prov
 
 ## Connecting to a MongoDB Atlas Server
 
-```shell script
+```shell
 # Using a single URI
 mongo mongodb+srv://tommy:fighton@cluster-name.mongodb.net/dbname
 

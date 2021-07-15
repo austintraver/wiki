@@ -11,7 +11,7 @@ The *Bourne Again Shell*, or `bash`, is a shell scripting language written by GN
 
 * Check if an executable file in the `PATH` exists
 
-  ```shell script
+  ```shell
   if [[ -z $(type -p <command>) ]]; then
     echo "<command> exists"
   else
@@ -23,7 +23,7 @@ The *Bourne Again Shell*, or `bash`, is a shell scripting language written by GN
 
 * Read in user input
 
-  ```shell script
+  ```shell
   read -p "Enter username: " username
   printf "Your username is ${username}\n"
   read -p "Enter multiple words: " -a array

@@ -55,7 +55,7 @@ running C on a 64-bit system, these following types are equivalent:
 
     * Using `clang`:
 
-        ```shell script
+        ```shell
         clang -std=c17
         ```
 
@@ -63,20 +63,20 @@ running C on a 64-bit system, these following types are equivalent:
 
     * Using `clang++`:
 
-        ```shell script
+        ```shell
         clang++ -std=c++2a
         ```
 
     * Using `g++`:
 
-        ```shell script
+        ```shell
         g++ -std=c++1z # (ISO c++ standard)
         g++ -std=gnu++1z # (GNU c++ standard)
         ```
 
 ### Checking Processor
 
-    ```shell script
+    ```shell
     gcc -march=native -Q --help=target | grep -- '-march=' | cut -f3 | head -n 1
     # on macOS:        'haswell'
     # on AWS EC2:      'skylake-avx512'

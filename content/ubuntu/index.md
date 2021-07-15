@@ -9,7 +9,7 @@ draft: false
 
 * Add a new user to the machine on a Linux OS
 
-  ```shell script
+  ```shell
   # Default shell /bin/sh
   adduser <user>
 
@@ -19,32 +19,32 @@ draft: false
 
 * Add a user to the `sudo` group
 
-  ```shell script
+  ```shell
   usermod -aG sudo username
   ```
 
 * Delete a user from the machine
 
-  ```shell script
+  ```shell
   # Keep a backup of the user's home directory, stored in the pwd
   deluser <user> --backup --remove-all-files
   ```
 
 * Delete a group from the machine
 
-  ```shell script
+  ```shell
   delgroup <group>
   ```
 
 * Change the machine's hostname
 
-  ```shell script
+  ```shell
   hostnamectl set-hostname <hostname>
   ```
 
 * Change a user's username
 
-  ```shell script
+  ```shell
   # Short form
   usermod <user> -l <new_username> -md <new_home_filepath>
   # Long form
@@ -53,7 +53,7 @@ draft: false
 
 * Change a group's name
 
-  ```shell script
+  ```shell
   # Short form
   groupmod <group_name> -n <new_name>
 
@@ -63,7 +63,7 @@ draft: false
 
 * Change a user's information on a Linux OS
 
-  ```shell script
+  ```shell
   # [ Linux ]
 
   # Short form
@@ -74,7 +74,7 @@ draft: false
 
 * View which groups the active user is associated with:
 
-  ```shell script
+  ```shell
   groups
   ```
 
@@ -88,7 +88,7 @@ draft: false
 
 * View which groups a particular user belongs to
 
-    ```shell script
+    ```shell
     groups {{< var USER >}}
     ```
 
@@ -103,7 +103,7 @@ draft: false
 
 * Change the owner that a particular file belongs to:
 
-    ```shell script
+    ```shell
     chgrp {{< var OWNER >}} {{< var FILE >}}
     ```
 
@@ -112,7 +112,7 @@ draft: false
 
 * Change the group that a particular file belongs to:
 
-    ```shell script
+    ```shell
     chgrp {{< var GROUP >}} {{< var FILE >}}
     ```
 
@@ -132,13 +132,13 @@ to. As a consequence, *you will no longer be able to change the group*.
 
 * Install the development tools package
 
-    ```shell script
+    ```shell
     apt install -y build-essential
     ```
 
 * Install the manual pages about using GNU/Linux for development:
 
-    ```shell script
+    ```shell
     apt install -y manpages-dev
     ```
 
@@ -146,7 +146,7 @@ to. As a consequence, *you will no longer be able to change the group*.
 
 * Installing Snapcraft
 
-    ```shell script
+    ```shell
     apt install -y snapd
     snap set system refresh.retain=2
     ```
@@ -154,13 +154,15 @@ to. As a consequence, *you will no longer be able to change the group*.
 
 * Finding the specific version of a package
 
-    ```shell script
-    snap info cmake
+    ```shell
+    snap info {{< var PACKAGE >}}
     ```
+
+    Where {{< var PACKAGE >}} is a name, such as `cmake`
 
 * Installing a specific version of a package
 
-    ```shell script
+    ```shell
     snap install cmake --channel=3.17/stable --classic
     ```
 
@@ -170,7 +172,7 @@ Installing SMB server on Ubuntu
 
 * Install the `samba` package from `apt`
 
-    ```shell script
+    ```shell
     apt update
     apt install -y samba samba-common-bin smbclient cifs-utils
     ```
@@ -183,7 +185,7 @@ Installing SMB server on Ubuntu
     comment = hello world
     ```
 
-    ```shell script
+    ```shell
     service smbd restart
     ufw allow samba
     smbpasswd -a {{< var USERNAME >}}
@@ -195,7 +197,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * List all existing entries of known alternatives
 
-    ```shell script
+    ```shell
     update-alternatives --get-selections
     ```
 
@@ -209,7 +211,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 * List all possible alternatives of a existing entries
 
 
-    ```shell script
+    ```shell
     update-alternatives --list java
     ```
 
@@ -220,20 +222,20 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Add an unlisted entry to the set of possible alternatives
 
-    ```shell script
+    ```shell
     # Note: you'll still need to specify an entry using '--set'/'--config'
     update-alternatives --install /usr/bin/editor editor /usr/bin/vi 80
     ```
 
 * Interactivelly set a particular entry as the alternative
 
-    ```shell script
+    ```shell
     update-alternatives --config java
     ```
 
 * Programmatically set a particular entry as the alternative
 
-    ```shell script
+    ```shell
     update-alternatives --set editor /usr/bin/nvim
     ```
 
@@ -242,7 +244,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Install GCC `v7` through `v10`
 
-    ```shell script
+    ```shell
     apt install -y build-essential g{cc,++}-{7..10}
     for v in {7..10}; do
         update-alternatives \                                 
@@ -258,14 +260,14 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
     * Using Apt
 
-        ```shell script
+        ```shell
         apt install -y default-jre default-jdk
         ```
 
     * Using Snapcraft
 
-        ```shell script
-        snap install openjdk --candidate
+        ```shell
+        snap install openjdk
         ```
 
 ## Go
@@ -274,14 +276,14 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
     * Using Apt
 
-        ```shell script
+        ```shell
         add-apt-repository -y -u ppa:longsleep/golang-backports
         apt install -y golang
         ```
 
     * Using Snapcraft
 
-        ```shell script
+        ```shell
         snap install go --classic
         ```
 
@@ -289,7 +291,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Installing the [Python]() programming language
 
-    ```shell script
+    ```shell
     apt install -y software-properties-common
     add-apt-repository -y -u ppa:deadsnakes/ppa
     apt install -y python3
@@ -297,7 +299,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Setting the command `python` to use Python 3:
 
-    ```shell script
+    ```shell
     update-alternatives --install /usr/bin/python 'python' /usr/bin/python3 100
     ```
 
@@ -305,7 +307,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Installing LLVM the risky way
 
-    ```shell script
+    ```shell
     # sudo -i
     wget -O - https://apt.llvm.org/llvm.sh | bash -
     ```
@@ -316,14 +318,14 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
     * Using Snap
 
-        ```shell script
-        snap install --edge gh
+        ```shell
+        snap install gh
         snap connect gh:ssh-keys
         ```
 
     * Using APT
 
-        ```shell script
+        ```shell
         apt-key adv --keyserver 'keyserver.ubuntu.com' --recv-key 'C99B11DEB97541F0'
         add-apt-repository -y -u 'https://cli.github.com/packages'
         apt install -y gh
@@ -333,13 +335,13 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Installing NodeJS using Snapcraft
 
-    ```shell script
-    snap install --classic --edge node
+    ```shell
+    snap install node --classic
     ```
 
 * Installing NodeJS the risky way
 
-    ```shell script
+    ```shell
     # sudo -i
     curl -sL https://deb.nodesource.com/setup_15.x | bash -
     ```
@@ -348,7 +350,7 @@ Ubuntu keeps track of the default programs by maintaining a list of symbolic lin
 
 * Installing the AWS CLI from Pip
 
-    ```shell script
+    ```shell
     apt install python3-pip
     pip3 install awscli --upgrade --user
     ```
@@ -359,7 +361,7 @@ Installing Ubuntu the hard way
 
 * On macOS:
 
-```shell script
+```shell
 hdiutil convert ~/Downloads/ubuntu.iso -format UDRW -o ~/Downloads/ubuntu.img
 mv ~/Downloads/ubuntu.img.dmg ~/Downloads/ubuntu.img
 diskutil list
@@ -409,7 +411,7 @@ Ubuntu is migrating away from using Debian's Apt to manage packages, and toward 
 
 They wrote an article titled [How to keep your Linux disk usage nice and and tidy](https://snapcraft.io/blog/how-to-keep-your-linux-disk-usage-nice-and-tidy-and-save-space) where I learned you can reduce the number of prior package versions that Snapcraft keeps, which by default, is three.
 
-```shell script
+```shell
 snap set system refresh.retain=2
 ```
 
@@ -421,19 +423,19 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 
 0. Sign in to the `root` user
 
-    ```shell script
+    ```shell
     sudo -i
     ```
 
 1. Update the `/etc/apt/sources.list`, replace any entries of `bionic` or `eoal` with `focal`
 
-    ```shell script
+    ```shell
     sed -i 's/bionic/focal/g' /etc/apt/sources.list
     ```
 
 2. Run the `apt` commands below
 
-    ```shell script
+    ```shell
     apt update
     apt upgrade
     apt full-upgrade
@@ -444,7 +446,7 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 
 3. Verify successful upgrade by checking the current distribution number
 
-    ```shell script
+    ```shell
     lsb_release -a
     ```
 
@@ -453,6 +455,14 @@ Ubuntu 20.04 "Focal Fossa" has just released, so I thought I'd write a guide on 
 
 * [Installing a Snap package](https://cloud.google.com/sdk/docs/downloads-snap) for the Google Cloud SDK:
 
-    ```shell script
+    ```shell
     snap install google-cloud-sdk --classic
+    ```
+
+## Vim
+
+* Installing NeoVim
+
+    ```shell
+    snap install neovim --classic
     ```

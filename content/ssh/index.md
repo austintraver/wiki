@@ -9,7 +9,7 @@ date: 2020-02-04T14:52:27-08:00
 
 ## Enabling `ssh`
 
-```shell script
+```shell
 # Enable SSH
 sudo systemsetup -f -setremotelogin on
 # Disable SSH
@@ -26,20 +26,20 @@ sudo systemsetup -getremotelogin
 
 * Generating an SSH key on your computer
 
-  ```shell script
+  ```shell
   # Specifying bits of entropy is optional
   ssh-keygen -b 4096
   ```
 
 * Removing a comment from an SSH key
 
-  ```shell script
+  ```shell
   ssh-keygen -c -C '' -f ~/.ssh/id_rsa
   ```
 
 * Converting a private GPG authorization secret RSA subkey (RFC 4880 compliant) to a PEM-encoded private SSH PKCS #1 v2.2 authorization key (RFC 8017 compliant)
 
-  ```shell script
+  ```shell
   gpg --export-secret-subkeys <auth_key_id>! | openpgp2ssh <auth_key_id> > ~/.ssh/id_rsa
   ```
 
@@ -53,7 +53,7 @@ Once you have that key, you ought to convert it into make a bunch of different t
 
 * Making a PKCS #1 v2.2 private key (RFC 8017)
 
-  ```shell script
+  ```shell
   cp ~/.ssh/id_rsa ~/.ssh/id_pkcs1
   ssh-keygen -p -m pem -f ~/.ssh/id_pkcs1
   head !$
@@ -62,7 +62,7 @@ Once you have that key, you ought to convert it into make a bunch of different t
 
 * Making a PKCS #8 private key (RFC 5958)
 
-  ```shell script
+  ```shell
   cp ~/.ssh/id_rsa ~/.ssh/id_pkcs8
   ssh-keygen -p -m pem -f ~/.ssh/id_pkcs8
   head !$
@@ -71,7 +71,7 @@ Once you have that key, you ought to convert it into make a bunch of different t
 
 * Making an SSH v2 private key (RFC 4716)
 
-  ```shell script
+  ```shell
   cp ~/.ssh/id_rsa ~/.ssh/id_ssh
   ssh-keygen -p -m rfc4716 ~/.ssh/id_ssh
   head !$
@@ -82,7 +82,7 @@ Once you have that key, you ought to convert it into make a bunch of different t
 
 * Obtaining the public key corresponding with an RSA private key `id_rsa.pub` (RFC 4253)
 
-  ```shell script
+  ```shell
   # Note: this key format is supported by the SSH server
   #       running on macOS, Linux, and Windows
   ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
@@ -90,14 +90,14 @@ Once you have that key, you ought to convert it into make a bunch of different t
 
 * Making an SSH2 public key (RFC 4716)
 
-  ```shell script
+  ```shell
   # Note: this key format is rarely used in practice
   ssh-keygen -y -m rfc4716 -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
   ```
 
 * View the ASCII *randomart* of an SSH key
 
-  ```shell script
+  ```shell
   ssh-keygen -lv -f ~/.ssh/id_rsa
   ```
 
@@ -105,7 +105,7 @@ Once you have that key, you ought to convert it into make a bunch of different t
 
 There are two ways for you to have your ssh key added to another person's computer. Say you are the user `tommy` and you want `tina` to give you permission to enter her computer without a password.
 
-```shell script
+```shell
 # Option one: from tommy's computer
 ssh-copy-id tina@172.20.10.7
 
@@ -119,7 +119,7 @@ curl https://github.com/tommy.keys >> ~/.ssh/authorized_keys
 
 * Signing into remote.net as the user `tommy`
 
-  ```shell script
+  ```shell
   # using @
   ssh tommy@remote.net
   # using -l
@@ -133,7 +133,7 @@ curl https://github.com/tommy.keys >> ~/.ssh/authorized_keys
 You can use the `DISPLAY=0.0` command to tell your `ssh` session to open the application on the remote computer. You won't be able to see the app being opened, but it will launch on the remote computer.
 
 Opening a single application
-```shell script
+```shell
 DISPLAY=:0.0 open -a Safari
 ```
 
@@ -143,7 +143,7 @@ Use the `export` keyword in your shell to open all applications on your remote c
 
 {{% /aside %}}
 
-```shell script
+```shell
 export DISPLAY=:0.0
 open -a Safari
 open -a Mail
@@ -151,7 +151,7 @@ open -a Mail
 
 ## Seeing if anyone is logged into your computer
 
-```shell script
+```shell
 # shows the IP address of all local/remote users (including you!)
 who
 
@@ -164,7 +164,7 @@ pkill ttys001
 
 ## Transferring clipboard content from local machine to remote machine
 
-```shell script
+```shell
 # local machine -> remote machine
 pbpaste | ssh tommy@usc.edu pbcopy
 ```
@@ -173,7 +173,7 @@ pbpaste | ssh tommy@usc.edu pbcopy
 
 I wrote a program called `$ myip` which will tell you your current public and private IP address. If you'd like to use it, copy the script below into your terminal.
 
-```shell script
+```shell
 # Method 1
 brew tap austintraver/taps
 brew install myip
@@ -250,7 +250,7 @@ Then, on your local machine (not the bastion) give your computer the following i
 
 * Build reverse tunnel, allowing users to enter your computer if they first jump through the bastion host
 
-  ```shell script
+  ```shell
   # When connections are made to
   # user: "jump"
   # port: 1337
@@ -261,7 +261,7 @@ Then, on your local machine (not the bastion) give your computer the following i
 
 * Make an SSH connection, jumping from bastion host port 22, to bastion host port 1337 (which forwards to the remote machine)
 
-  ```shell script
+  ```shell
   # Connect to the machine that opened the connection
   ssh -J jump@remote.net ssh://user@127.0.0.1:1337
   ```
@@ -270,13 +270,13 @@ Then, on your local machine (not the bastion) give your computer the following i
 
 * On macOS
 
-  ```shell script
+  ```shell
   sudo launchctl kickstart -kp system/com.openssh.sshd
   ```
 
 * On Linux
 
-  ```shell script
+  ```shell
   sudo service ssh restart
   ```
 
@@ -306,14 +306,14 @@ The Secure Copy Protocol or SCP is designed to make sending and receiving files 
 * Upload local file {{< var FILE >}} to user `john` on the host listening at
   `172.20.10.7`
 
-    ```shell script
+    ```shell
     scp ./path/to/{{< var FILE >}} john@172.20.10.7:~/path/to/{{< var FILE >}}
     ```
 
 * Download remote file {{< var FILE >}} from user `john` at `172.20.10.7` to our
   Desktop
 
-    ```shell script
+    ```shell
     scp john@170.20.10.7:~/path/to/{{< var FILE >}} ~/Documents/{{< var FILE >}}
     ```
 
@@ -323,7 +323,7 @@ The Secure Copy Protocol or SCP is designed to make sending and receiving files 
 
 {{% /aside %}}
 
-```shell script
+```shell
 # Option 1: Specifying the path relative to the user's home directory
 vi scp://jump@remote.net:22/Desktop/file.txt
 # Option 2: Specifying the absolute path
@@ -334,7 +334,7 @@ If you have a jupyter notebook running on port 8888 of your computer, you could
 allow users on your network to view your notebook in their web browsers when
 they typed in your hostname.
 
-```shell script
+```shell
 ssh -fNR 0.0.0.0:80:127.0.0.1:8888 jump@remote.net
 ```
 
@@ -342,7 +342,7 @@ ssh -fNR 0.0.0.0:80:127.0.0.1:8888 jump@remote.net
 
 If you're in a pinch and you need a VPN, but all you have to work with is a server, you can still get most of the advantages of feigning your location by using a SOCKS5 proxy. On macOS, the commands are as follows:
 
-  ```shell script
+  ```shell
   ssh -fN -D 127.0.0.1:6789 user@remote.net
   sudo networksetup -setsocksfirewallproxy Wi-Fi 127.0.0.1 6789
   sudo networksetup -setsocksfirewallproxystate Wi-Fi on
@@ -354,7 +354,7 @@ If your SSH key has a password, you can cache the password for the SSH key in yo
 
 * Store the passphrase for the SSH key `~/.ssh/id_rsa`
 
-  ```shell script
+  ```shell
   ssh-add -K ~/.ssh/id_rsa
   ```
 
@@ -368,13 +368,13 @@ taught me computer systems, and how to SSH into a headless virtual machine
 * Configure the virtual machine {{< var VM_NAME >}} to listen on {{< var PORT
   \>}} for SSH connections and forward them to port 22 on the virtual machine
 
-    ```shell script
+    ```shell
     VBoxManage modifyvm {{< var VM_NAME >}} --natpf1 'ssh,tcp,,{{< var PORT >}},,22'
     ```
 
 * Launch the virtual machine in headless mode
 
-    ```shell script
+    ```shell
     # To leave the session in the foreground, omit the '&'
     VBoxHeadless -s {{< var VM_NAME >}} &
     ```
@@ -382,19 +382,19 @@ taught me computer systems, and how to SSH into a headless virtual machine
 * Access the host via SSH (note: you may have to wait a few seconds for the
   machine to boot up)
 
-    ```shell script
+    ```shell
     ssh 'ssh://{{< var USER >}}@{{< var HOST >}}:{{< var PORT >}}'
     ```
 
 * Shutting down the virtual machine safely
 
-    ```shell script
+    ```shell
     sudo shutdown now
     ```
 
 * Supposedly this enables caching of HTTPS credentials when working with remote git repositories
 
-    ```shell script
+    ```shell
     git config --global credential.helper cache
     ```
 
@@ -403,6 +403,6 @@ If you're trying to
 and you're not having any luck, try adding the following configuration to the
 `settings.json` configuration file.
 
-```shell script
+```shell
 "remote.SSH.showLoginTerminal": true
 ```

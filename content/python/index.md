@@ -12,7 +12,7 @@ date: 2020-02-04T14:52:27-08:00
 
 Installing Python on macOS via Homebrew, at the time of writing, will not install the most current version of Python available, despite it being released 5 months ago.
 
-  ```shell script
+  ```shell
   brew install python@3.8
 
   # Add to .zshenv
@@ -21,7 +21,7 @@ Installing Python on macOS via Homebrew, at the time of writing, will not instal
 
 * On Debian
 
-  ```shell script
+  ```shell
   sudo apt install python3.8
   sudo apt install python3-pip
   sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
@@ -50,7 +50,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 To disable it, use the following command to enter the `python` console:
 
-```shell script
+```shell
 python -q
 ```
 
@@ -162,11 +162,11 @@ The Jupyter Notebook will also render `LaTeX` and `Markdown`, allowing for flexi
 
 * to add configuration files to your local machine's jupyter notebook, type the following command. This will generate the folder `~/.jupyter` and insert a file into it called `jupyter_notebook_config.py`.
 
-```shell script
+```shell
 jupyter notebook --generate-config
 ```
 
-```shell script
+```shell
 pass="letmein"
 python -c "from notebook.auth import passwd; print(passwd('${pass}'))"
 ```
@@ -175,18 +175,18 @@ python -c "from notebook.auth import passwd; print(passwd('${pass}'))"
 
 * On macOS
 
-  ```shell script
+  ```shell
   pip install pylint
   export PATH="~/Library/Python/3.7/bin:${PATH}"
   ```
 
 * On Debian
 
-  ```shell script
+  ```shell
   sudo apt install pylint
   ```
 
-```shell script
+```shell
 pylint --generate-rcfile > ~/.pylintrc
 ```
 
@@ -653,7 +653,7 @@ Using the `subprocess` library, you can execute other commands from within your 
 
   * Shell script
 
-    ```shell script
+    ```shell
     #!/bin/zsh
     # `hello` program
 
@@ -725,7 +725,7 @@ def divmod(a, b, /):
 
 ## Python Image Library
 
-```shell script
+```shell
 pip install pillow
 ```
 
@@ -937,7 +937,7 @@ webbrowser.open('https://app.youneedabudget.com')
 
 * Find the IPv4 address for hostname `google.com`
 
-  ```shell script
+  ```shell
   import socket
   print(socket.gethostbyname('google.com'))
   ```
@@ -1000,7 +1000,7 @@ You can disable python caching entirely, preventing `.pyc` files from being writ
 
 * As a command line argument
 
-    ```shell script
+    ```shell
     python -B script.py
     ```
 

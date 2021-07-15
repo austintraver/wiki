@@ -11,13 +11,13 @@ Running Debian from Google Cloud
 
 First, authenticate to Google Cloud and configure Docker.
 
-```shell script
+```shell
 gcloud auth configure-docker
 ```
 
 * Listing the currently recommended, newest versions of Debian images on Google Compute Engine
 
-```shell script
+```shell
 gcloud compute images list \
     --no-standard-images \
     --project='debian-cloud'
@@ -25,7 +25,7 @@ gcloud compute images list \
 
 * Listing previous, outdated editions of Debian images on Google Compute Engine
 
-```shell script
+```shell
 gcloud compute images list \
     --no-standard-images \
     --project='debian-cloud' \
@@ -34,13 +34,13 @@ gcloud compute images list \
 
 * Pulling the Debian 10 image from Google's registry
 
-```shell script
+```shell
 docker pull 'marketplace.gcr.io/google/debian10:latest'
 ```
 
 * Creating a new instance
 
-    ```shell script
+    ```shell
     gcloud compute instances create {{< var INSTANCE_NAME >}}
         --image-project 'debian-cloud' \
         --image-family 'debian-10'

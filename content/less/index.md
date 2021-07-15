@@ -73,7 +73,7 @@ by a `$` for clarity.
 
 * Configure `less` to always squeeze multiple newlines and center search results
 
-    ```shell script
+    ```shell
     export LESS='$ s $ -j .5 $'
     ```
 
@@ -83,6 +83,6 @@ If you don't like how searching for a string in `less` causes it to appear at
 the top of the pager, there's a setting that centers it. Add the option `-j.5`
 to the command to cause this, or add it to the `LESS` environment variable.
 
-```shell script
+```shell
 less -j.5 ./example.txt
 ```

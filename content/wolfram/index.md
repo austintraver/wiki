@@ -39,19 +39,19 @@ doing so in your shell's runtime configuration file.
 After you have authenticated to the server, you will need to provide `wolframscript` with
 the path to the kernel file. It is located within your Wolfram Engine installation.
 
-```shell script
+```shell
 wolframscript -config WOLFRAMSCRIPT_KERNELPATH=/Applications/Wolfram\ Desktop.app/Contents/MacOS/WolframKernel
 ```
 
 Alternatively, you can set the kernel path as an environment variable
 
-```shell script
+```shell
 export WOLFRAMSCRIPT_KERNELPATH=/Applications/Wolfram\ Desktop.app/Contents/MacOS/WolframKernel
 ```
 
 I recommend you place your configuration files somewhere more standard, similar to what I have below:
 
-```shell script
+```shell
 export WOLFRAMSCRIPT_CONFIGURATIONPATH=${XDG_CONFIG_HOME}/wolfram/config.txt
 export WOLFRAMSCRIPT_AUTHORIZATIONPATH=${XDG_CONFIG_HOME}/wolfram/auth.txt
 ```
@@ -59,13 +59,13 @@ export WOLFRAMSCRIPT_AUTHORIZATIONPATH=${XDG_CONFIG_HOME}/wolfram/auth.txt
 Next, in order for `wolframscript` to generate our credentials at the authorization
 path provided above, we will need to authenticate ourselves to the cloud server.
 
-```shell script
+```shell
 wolframscript -authenticate
 ```
 
 From here, you're good to go!
 
-```shell script
+```shell
 wolframscript -l -c '1+1'
 ```
 
@@ -185,7 +185,7 @@ If you'd like to stay in Python, and have the features of Wolfram Engine,
 you can install the 
 [Wolfram Client Library for Python](https://reference.wolfram.com/language/WolframClientForPython/docpages/install.html#installation)
 
-```shell script
+```shell
 pip install wolframclient
 ```
 

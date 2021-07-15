@@ -377,7 +377,7 @@ In the macOS Mail app, go to **Preferences -> Viewing -> Show message headers ->
 
 To create a link to a message, right click the message ID, select **Copy**, open up Terminal, and run the following command:
 
-```shell script
+```shell
 email="message:%3c$(pbpaste)%3e"
 print ${email}
 pbcopy < =(<<<${email})
