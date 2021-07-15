@@ -9,6 +9,12 @@ draft: false
 
 ## Docs
 
+You can create a new presentation in Google Slides by navigating to any of the following URLs:
+
+* `docs.new`
+* `doc.new`
+* `document.new`
+
 You can
 [share links to PDF versions of your Docs files](https://support.google.com/a/users/answer/9308985)
 by appending `/export?format=pdf` to the URL
@@ -17,8 +23,13 @@ by appending `/export?format=pdf` to the URL
 http://docs.google.com/document/d/{{< var ID >}}/export?format=pdf
 ```
 
-
 ## Sheets
+
+You can create a new presentation in Google Slides by navigating to any of the following URLs:
+
+* `sheets.new`
+* `sheet.new`
+* `spreadsheet.new`
 
 You can
 [share links to PDF versions of your Sheets files](https://support.google.com/a/users/answer/9308985)
@@ -29,6 +40,13 @@ http://docs.google.com/document/d/{{< var ID >}}/export?format=pdf
 ```
 
 ## Slides
+
+You can create a new presentation in Google Slides by navigating to any of the following URLs:
+
+* `slides.new`
+* `slide.new`
+* `deck.new`
+* `presentation.new`
 
 Similarly, you can also share links to PDF versions of your Slides documents by
 appending `/export/pdf` to the URL

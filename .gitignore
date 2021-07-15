@@ -13,3 +13,6 @@
 /.idea/
 img/fa/r
 /resources/
+*.css.map
+*.js.map
+node_modules/

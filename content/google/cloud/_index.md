@@ -17,13 +17,13 @@ I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud
 
 * Install the Google Cloud SDK
 
-    ```shell script
+    ```shell
     curl https://sdk.cloud.google.com | bash
     ```
 
 * Update the components
 
-    ```shell script
+    ```shell
     gcloud components update
     ```
 
@@ -32,7 +32,7 @@ I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud
 * Create a new project {{< var PROJECT_ID >}}, setting it as the default for
   `gcloud`:
 
-    ```shell script
+    ```shell
     gcloud projects create {{< var PROJECT_ID >}} \
       [--name {{< var PROJECT_NAME >}}] \
       --set-as-default
@@ -40,26 +40,26 @@ I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud
 
 * Set your default project to existing project {{< var PROJECT_ID >}}
 
-    ```shell script
+    ```shell
     gcloud config set project {{< var PROJECT_ID >}}
     ```
 
 
 * Delete the project
 
-    ```shell script
+    ```shell
     gcloud projects delete 'my-project'
     ```
 
 * Undelete a project
 
-    ```shell script
+    ```shell
     gcloud projects undelete 'my-project'
     ```
 
 * Set `example` as the default project
 
-    ```shell script
+    ```shell
     gcloud projects set project 'example'
     ```
 
@@ -68,37 +68,37 @@ I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud
 
 * If you don't have an existing account, create one
 
-    ```shell script
+    ```shell
     gcloud init
     ```
 
 * Set an existing account to be the current active account
   
-    ```shell script
+    ```shell
     gcloud config set account 'ttrojan@usc.edu'
     ```
 
 * Generate credentials for the client libraries (such as Python)
 
-    ```shell script
+    ```shell
     gcloud auth application-default login
     ```
 
 * Generate credentials for the `bq` command-line interface
 
-    ```shell script
+    ```shell
     gcloud auth login --no-launch-browser
     ```
 
 * List the name of the active account
 
-    ```shell script
+    ```shell
     gcloud auth list --filter=status:ACTIVE --format="value(account)"
     ```
 
 * List the name of all inactive accounts starting with `tmp`
 
-    ```shell script
+    ```shell
     gcloud auth list --filter="-status:ACTIVE account:test*" \
     --format="value(account)"
     ```
@@ -109,25 +109,25 @@ I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud
 
 * Describe the project information for `project_id`
 
-    ```shell script
+    ```shell
     gcloud dns project-info describe 'project_id'
     ```
 
 * Create a managed zone
 
-    ```shell script
+    ```shell
     gcloud dns managed-zones create --dns-name='helpful.wiki' --description='Helpful Wiki managed zone' 'helpfulwiki'
     ```
 
 * Enable DNSSEC
 
-    ```shell script
+    ```shell
     gcloud dns managed-zones update 'helpfulwiki' --dnssec-state on
     ```
 
 * Add an `A` name records to your domain
 
-    ```shell script
+    ```shell
     # Preset the variables
     project="project-id"
     zone="zone-id"
@@ -156,24 +156,8 @@ I'd also suggest you [generate a local copy](https://cloud.google.com/sdk/gcloud
 
 * Create a certificate for `helpful.wiki`, and name it `certificate`
 
-    ```shell script
+    ```shell
     gcloud compute ssl-certificates create 'certificate' --domains='helpful.wiki' --global
-    ```
-
-## Static IP
-
-* [Link to documentation](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#gcloud)
-
-
-* Create a static IP for a external [HTTPS load balancer](https://cloud.google.com/load-balancing/docs/https/ext-load-balancer-backend-buckets#ip-address)
-
-* For [Cloud CDN](https://cloud.google.com/cdn/docs/setting-up-cdn-with-bucket#ip-address)
-
-    ```shell script
-    gcloud compute addresses create 'website' \
-        --network-tier=PREMIUM \
-        --ip-version=IPV4 \
-        --global
     ```
 
 ## Cloud SQL
@@ -185,7 +169,7 @@ Note, the `--async` flag returns immediately, without waiting for the operation 
 * [Creating an instance](https://cloud.google.com/sql/docs/mysql/create-instance)
 
 
-    ```shell script
+    ```shell
     instance_name='my_instance'
     tier='db-f1-micro'
     region='us-west1'
@@ -196,7 +180,7 @@ Note, the `--async` flag returns immediately, without waiting for the operation 
 
 * [Deleting an instance](https://cloud.google.com/sql/docs/mysql/create-manage-databases#delete)
 
-    ```shell script
+    ```shell
     instance_name='my_instance'
 
     gcloud sql instances delete ${instance_name} --async
@@ -204,7 +188,7 @@ Note, the `--async` flag returns immediately, without waiting for the operation 
 
 * [Creating a database](https://cloud.google.com/sql/docs/mysql/create-manage-databases#gcloud)
 
-    ```shell script
+    ```shell
     instance_name='my_instance'
     database_name='my_database'
 
@@ -213,7 +197,7 @@ Note, the `--async` flag returns immediately, without waiting for the operation 
 
 * [Deleting a database](https://cloud.google.com/sql/docs/mysql/create-manage-databases#delete)
 
-    ```shell script
+    ```shell
     instance_name='my_instance'
     database_name='my_database'
 
@@ -223,7 +207,7 @@ Note, the `--async` flag returns immediately, without waiting for the operation 
 
 * [Exporting SQL data](https://cloud.google.com/sql/docs/mysql/import-export/exporting)
 
-    ```shell script
+    ```shell
     bucket='gs://helpfulwiki'
     instance_name='my_instance'
     database_name='my_database'
@@ -244,43 +228,43 @@ I'd also take a look at Google's article about [creating and managing MySQL user
 
 * Assigning a password to the root user
 
-    ```shell script
+    ```shell
     gcloud sql users set-password 'root' --password='root' --instance='my_instance' --host='%'
     ```
 
 * Changing the password of a regular user
 
-    ```shell script
+    ```shell
     gcloud sql users set-password 'username' --instance='my_instance' --host='1.2.3.4' --prompt-for-password
     ```
 
 * Enabling access via a public IP
 
-    ```shell script
+    ```shell
     gcloud sql instances patch 'my_instance' --assign-ip
     ```
 
 * Configuring which public IPs can access the instance
 
-    ```shell script
+    ```shell
     gcloud sql instances patch 'my_instance' --authorized-networks='1.2.3.4, 5.6.7.8'
     ```
 
 * Creating a user
 
-    ```shell script
+    ```shell
     gcloud sql users create 'username' --host='1.2.3.4' --instance='my_instance' --prompt-for-password
     ```
 
 * Listing existing users
 
-    ```shell script
+    ```shell
     gcloud sql users list --instance='my_instance'
     ```
 
 * Deleting a user
 
-    ```shell script
+    ```shell
     gcloud sql users delete atraver --host='1.2.3.4' --instance='my_instance'
     ```
 
@@ -294,7 +278,7 @@ Check out Google's article about [connecting with MySQL Workbench](https://cloud
 
     * First, enable WRITE access for the Cloud SQL instance's service account:
 
-        ```shell script
+        ```shell
         gcloud sql instances describe 'myinstance' | grep 'serviceAccountEmailAddress'
         # => p11111-hp11gs@gcp-sa-cloud-sql.iam.gserviceaccount.com
         service_account='p11111-hp11gs@gcp-sa-cloud-sql.iam.gserviceaccount.com'
@@ -304,7 +288,7 @@ Check out Google's article about [connecting with MySQL Workbench](https://cloud
     
     * Next, export the data
 
-    ```shell script
+    ```shell
     gcloud sql export sql 'myinstance' gs://mybucket/sqldump.gz --database='mydatabase'
     ```
 
@@ -312,25 +296,25 @@ Google wrote a great article about [starting, stopping, and restarting instances
 
 * Starting an instance
 
-    ```shell script
+    ```shell
     gcloud sql instances patch 'myinstance' --activation-policy 'ALWAYS'
     ```
 
 * Stopping an instance
 
-    ```shell script
+    ```shell
     gcloud sql instances patch 'myinstance' --activation-policy 'NEVER'
     ```
 
 * Restarting an instance
 
-    ```shell script
+    ```shell
     gcloud sql instances restart 'myinstance'
     ```
 
 * Opening up port 445 (SMB protocol) to all addresses
 
-    ```shell script
+    ```shell
     gcloud compute firewall-rules create {{< var RULE_NAME >}} \
         --priority 1000 \
         --allow 'tcp:445' \
@@ -349,4 +333,5 @@ I'm still exploring this topic, but I found [Stephanie Wong's video tutorials](h
 
 * [Creating a DNS Server Policy](https://cloud.google.com/dns/docs/policies#creating)
 
+---
 

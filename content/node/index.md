@@ -137,7 +137,7 @@ If you see a line like the one below in package documentation, ignore the
 `--save` argument. It does nothing. It used to do something, but it doesn't
 anymore.
 
-```shell script
+```shell
 npm install {{< var PACKAGE >}} --save
 ```
 
@@ -146,7 +146,7 @@ it will save the installed package to package.json file in the dependency
 section. If you are using a recent version of NPM, save yourself some effort,
 and just type
 
-```shell script
+```shell
 npm install {{< var PACKAGE >}}
 ```
 
@@ -173,7 +173,7 @@ you run `npm install`, but it's easier to add it to your config file.
 
 * Disabling funding requests for NPM packages
 
-    ```shell script
+    ```shell
     npm config set fund false
     ```
 
@@ -191,6 +191,8 @@ the message in future package installations.
   ```js
   const hello = require('./hello')
   ```
+
+The best documentation to learn more about module imports is the [Typescript article Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html)
 
 ## The Core
 
@@ -638,7 +640,7 @@ Add the `read:packages` and `write:packages` permissions to your `GITHUB_TOKEN` 
 
 To add [this Package](https://github.com/Codertocat/hello-world-npm/packages/10696) registered on the GitHub NPM Registry, enter the following command
 
-```shell script
+```shell
 npm install @codertocat/hello-world-npm
 ```
 
@@ -872,7 +874,7 @@ update here.
 
     {{% /samp %}}
 
-    ```shell script
+    ```shell
     shasum -a 1 < =(<<<'letmein')
     shasum -a 256 < =(<<<'letmein')
     ```
@@ -910,7 +912,7 @@ well as the methods below:
 
 Print the local prefix
 
-```shell script
+```shell
 npm prefix
 ```
 
@@ -918,7 +920,7 @@ npm prefix
 
 * Print the global prefix
 
-    ```shell script
+    ```shell
     npm prefix -g
     ```
 

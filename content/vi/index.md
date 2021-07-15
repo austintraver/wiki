@@ -63,13 +63,13 @@ case, I'll be referring to the program as "Vi," the original program.
 
     * On [Ubuntu](https://snapcraft.io/nvim)
         
-        ```shell script
+        ```shell
         sudo snap install nvim --classic
         ```
 
     * On Debian
 
-        ```shell script
+        ```shell
         sudo add-apt-repository ppa:neovim-ppa/unstable
         sudo apt update
         sudo apt install neovim
@@ -77,7 +77,7 @@ case, I'll be referring to the program as "Vi," the original program.
 
     * On macOS
 
-    ```shell script
+    ```shell
     brew install neovim
     ```
 
@@ -135,25 +135,25 @@ the DOM treats the command (<kbd>⌘</kbd>) and windows (<kbd>⊞</kbd>) as
 
 * Start vi in encrypted mode
 
-    ```shell script
+    ```shell
     vi -x text.txt
     ```
 
 * Start vim in diff mode
 
-    ```shell script
+    ```shell
     vi -d file1.txt file2.txt
     ```
 
 * Start vim in ex mode
 
-    ```shell script
+    ```shell
     vi -e text.txt
     ```
 
 * Start vi in vi mode (woah <q>#meta</q>)
 
-    ```shell script
+    ```shell
     vi -v text.txt
     ```
 
@@ -345,7 +345,7 @@ You can use the `|` character to chain multiple `ex` commands together.
 
 You have multiple ways of calling `ex`
 
-```shell script
+```shell
 # Run ex on file.txt
 ex file.txt
 # Run ex on file.txt
@@ -591,7 +591,7 @@ You can use `vim` to edit files hosted remotely on a different computer. First,
 however, you'll need to add your public SSH key to the `~/.ssh/authorized_keys`
 file on the host of that computer
 
-```shell script
+```shell
 vim scp://user@remote.network/Documents/file.txt
 ```
 
@@ -896,7 +896,7 @@ On your terminal, the `vim` command has a `-d` flag which you can use to activat
 
 * Launching vim in *diff mode*
 
-    ```shell script
+    ```shell
     vim -d old.txt new.txt
     ```
 
@@ -1357,42 +1357,42 @@ Each of these commands is preceded by `\C-w`, or alternatively, the `:wincmd` co
 
 * Open each file in its own tab
 
-    ```shell script
+    ```shell
     # :help -p
     vim -p ./*.md
     ```
 
 * Open each file in the same window, split horizontally
 
-    ```shell script
+    ```shell
     # :help -o
     vim -o ./*.md
     ```
 
 * Open each file in the same window, split vertically
 
-    ```shell script
+    ```shell
     # :help -O
     vim -O ./*.md
     ```
 
 * Open each file in its own tab
 
-    ```shell script
+    ```shell
     # :help -p
     vim -p ./*.md
     ```
 
 * Open a file with the cursor starting on line 13
 
-    ```shell script
+    ```shell
     # :help -+
     vim '+13' file.txt
     ```
 
 * Open a file with the cursor starting on the first match to `pattern`
 
-    ```shell script
+    ```shell
     vim '+/pattern' file.txt
     ```
 
@@ -1400,13 +1400,13 @@ Each of these commands is preceded by `\C-w`, or alternatively, the `:wincmd` co
 
 * Using `+`
 
-    ```shell script
+    ```shell
     vim '+echo "hello"' file.txt
     ```
 
 * Using `-c`
 
-    ```shell script
+    ```shell
     vim -c 'echo "hello"' file.txt
     ```
 
@@ -1414,7 +1414,7 @@ All the characters that you type are recorded in the file "scriptout", until
 you exit Vim. This is useful if you want to create a script file to be used
 with `vim -s` or `:source!`.
 
-```shell script
+```shell
 # -h -w
 # -h :complex-repeat
 
@@ -1427,7 +1427,7 @@ vim -W 'inputs.vim' file.txt
 
 * Open a file, and execute the commands as input to normal mode of the file `inputs.vim`
 
-```shell script
+```shell
 vim -s 'inputs.vim'
 ```
 
@@ -1490,7 +1490,7 @@ Useful to check out [`:help jump-motions`](https://vimhelp.org/motion.txt.html#j
 
 * Set the maximum height of the completion menu to 10 rows
 
-    ```shell script
+    ```shell
     set pumheight 10
     ```
 

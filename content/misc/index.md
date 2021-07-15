@@ -14,7 +14,7 @@ A section dedicated to other applications and tools worth getting to know.
 
 * Getting Started
 
-    ```shell script
+    ```shell
     brew cask install keka kekadefaultapp
     ```
 
@@ -28,7 +28,7 @@ Then, open `keka`, configure your preferences, and set keka to be your default a
 
 You can use `figlet` to convert any string into a lovely piece of ASCII art.
 
-```shell script
+```shell
 figlet 'Hello World'
 ```
 
@@ -68,7 +68,7 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
 
 * Installing `lsyncd`
 
-  ```shell script
+  ```shell
   # macOS
   brew install lsyncd
   # Debian distro
@@ -81,7 +81,7 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
 
 * Installing `mutt`
 
-  ```shell script
+  ```shell
   # Using Mutt
   brew install mutt
   # Using NeoMutt
@@ -143,13 +143,13 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
 
 * Compress a PDF to a smaller size file
 
-  ```shell script
+  ```shell
   convert 'input.pdf' -format 'PDF' -quality 10 'output.pdf'
   ```
 
 * Combine multiple images into a single PDF
 
-  ```shell script
+  ```shell
   magick *.jpg combined.pdf
   ```
 
@@ -157,7 +157,7 @@ The `lsyncd` program allows bi-directional syncing of files between a local and 
 
 * Generate bash autocompletions for Hugo
 
-  ```shell script
+  ```shell
   sudo hugo gen autocomplete --type bash --completionfile /usr/local/etc/bash_completion.d/hugo.sh
   ```
 
@@ -177,7 +177,7 @@ If you open a directory that is not a part of a project, the IDE adds the `.idea
 
 * Open a project (this one) in Webstorm without showing the splash loading screen
 
-  ```shell script
+  ```shell
   webstorm ~/.wiki --nosplash --wait
   ```
 
@@ -206,7 +206,7 @@ These URLs represent various resources - any information or content accessed at 
 
   * Generate HTTP header for basic authentication by base64 encoding the username and password
 
-    ```shell script
+    ```shell
     username='Alladin'
     password='open sesame'
     token=$(base64 -w 0 < =(<<<${username}:${password}))
@@ -221,7 +221,7 @@ These URLs represent various resources - any information or content accessed at 
 
   * Copy it to clipboard immediately
 
-    ```shell script
+    ```shell
     pbcopy < =(<<<"Basic $(base64 -w 0 < =(<<<${username}:${password}))")
     ```
 
@@ -229,7 +229,7 @@ These URLs represent various resources - any information or content accessed at 
 
 * How to [look up a phone number](https://www.twilio.com/docs/lookup/quickstart?code-sample=code-lookup-with-national-formatted-number&code-language=PHP&code-sdk-version=6.x#how-to-look-up-a-phone-number) using [the Twilio CLI](https://www.twilio.com/docs/twilio-cli/quickstart)
 
-  ```shell script
+  ```shell
   twilio api:lookups:v1:phone-numbers:fetch --phone-number '+15551234567' --type=carrier --type=caller-name
   ```
 
@@ -338,7 +338,7 @@ You can reverse search for images at `images.google.com`, details provided in [t
 
 * Enable the safari webdriver
 
-```shell script
+```shell
 safaridriver --enable
 ```
 
@@ -389,7 +389,7 @@ setting this up in a different location, results may vary.
 
 * Install latest version of `libwebp`:
 
-    ```shell script
+    ```shell
     mkdir -p ~/.local/opt/libwebp
     url='https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.1.0-mac-10.15.tar.gz '
     curl ${url} > ~/Downloads/libwebp.tgz
@@ -400,7 +400,7 @@ setting this up in a different location, results may vary.
 
 * Enable optional packages in the `libwebp` installation:
 
-    ```shell script
+    ```shell
     ./configure --prefix=${HOME}/.local --enable-everything
 
     ```
@@ -411,13 +411,13 @@ setting this up in a different location, results may vary.
 
 * Compress PNG file `image.png` to WebP file `image.webp` (with quality range of 80)
 
-  ```shell script
+  ```shell
   cwebp -q 80 image.png -o image.webp
   ```
 
 * Compress PNG file `image.png` to WebP file `image.webp`
 
-    ```shell script
+    ```shell
     # quality: 100
     # width: 1920
     # height: auto-fit
@@ -426,7 +426,7 @@ setting this up in a different location, results may vary.
 
 * Compress JPG file `image.jpg` to WebP file `image.webp`
 
-    ```shell script
+    ```shell
     cwebp \
         -noalpha \
         -hint 'photo' \
@@ -450,7 +450,7 @@ without causing a noticable change in quality between the two image files
 
 * Crop a `500x1000` photo so that `10px` are cut off from all four sides
 
-    ```shell script
+    ```shell
     cwebp \
         -crop 10 10 480 980 \
         image.jpg \
@@ -463,7 +463,7 @@ without causing a noticable change in quality between the two image files
 
 * Decode WebP file `image.webp` to PNG file `image.png`
 
-  ```shell script
+  ```shell
   dwebp image.webp -o image.png
   ```
 
@@ -471,13 +471,13 @@ without causing a noticable change in quality between the two image files
 
 * Convert a file to WebP, with the same filename, but with `.webp` extension
 
-    ```shell script
+    ```shell
     cwebp ~/Downloads/file.jpg -o !{#^:r}.cwebp
     ```
 
 * Convert the most recently created file
 
-    ```shell script
+    ```shell
     cwebp ~/Downloads/*(om[1]) -o image.cwebp
     ```
 
@@ -485,7 +485,7 @@ without causing a noticable change in quality between the two image files
 
 * Compress a series of [images into the animated WebP format](https://developers.google.com/speed/webp/docs/img2webp)
 
-    ```shell script
+    ```shell
     img2webp -lossy -d 1000 -m 6 -loop 0 'one.jpg' 'two.jpg' -o ~/Downloads/mowgli.webp 
     ```
 
@@ -495,7 +495,7 @@ Slack supports URL Schemes, which they document on their [developer API site](ht
 
 * Link to a conversation with a specific user, in a particular workspace
 
-    ```shell script
+    ```shell
     user_id=W01543F37L3
     workspace_id=T019B257FQT
 
@@ -506,7 +506,7 @@ Slack supports URL Schemes, which they document on their [developer API site](ht
 
 * Decompress WOFF2 font face into its original file format (TTF or OTF)
 
-    ```shell script
+    ```shell
     brew install woff2
     woff2_decompress 'font.woff2'
     ```
@@ -583,7 +583,7 @@ To disable the usage of `/` by Firefox
 
 * Custom config file location
 
-    ```shell script
+    ```shell
     youtube-dl --config-location {{< var FILE >}}
     ```
 
@@ -596,12 +596,12 @@ I found it absolutely delightful.
 
 * Installing `amzqr`
 
-    ```shell script
+    ```shell
     pip install amzqr
     ```
 
 * Creating a QR code with an image embedded inside of it:
 
-    ```shell script
+    ```shell
     amzqr -p {{< var IMAGE >}} 'https://{{< var URL >}}'
     ```

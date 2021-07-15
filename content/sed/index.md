@@ -15,7 +15,7 @@ I've found the one on MacOS to not only be frustrating, but to be incompatible w
 Type this below to install the GNU `sed` known as `sed` onto your computer.
 Next, add `/usr/local/opt/gnu-sed/libexec/gnubin/sed` to your `${PATH}`
 
-```shell script
+```shell
 # Install GNU sed
 brew install gnu-sed
 
@@ -35,13 +35,13 @@ Include the `-i` flag have `sed` perform the substitution *in-place*
 
 * In-place replacement, with a backup of `file.txt` written to `file.txt.old`
 
-```shell script
+```shell
 sed -i '.old' 's/old/new/' file.txt
 ```
 
 ### Replacing text in a file
 
-```shell script
+```shell
 sed -i 's/before/after' file.txt
 ```
 
@@ -49,14 +49,14 @@ sed -i 's/before/after' file.txt
 
 By default, `sed`'s `s` will not replace every single instance. To run it globally, use the `/g` flag at the end of the command:
 
-```shell script
+```shell
 # [removing damn and replacing it with darn]
 sed -i 's/damn/darn/g' swearing.txt
 ```
 
 ### Specifying multiple instructions
 
-```shell script
+```shell
 # [Method 1: using '-e']
 sed -i -e 's/local/remote/g' -e 's/real/virtual/g' file.txt
 # [Method 2: using ';']
@@ -73,7 +73,7 @@ sed -i 's/local/remote/g;s/real/virtual/g' file.txt
 
 You can use extended regular expression syntax with the `-E` flag.
 
-```shell script
+```shell
 sed -E 's_[0-9]{3,4}_###_g' <<< "(650)941-8758"
 # => (###)###-###
 ```
@@ -84,14 +84,14 @@ You can prepend a line using `1i` and append using `$a`
 
 * Prepending a line to the start of `file.txt`:
 
-  ```shell script
+  ```shell
   # The whitespace after '1i' is not interpreted
   sed -i '1i New last line' file.txt
   ```
 
 * Appending a line to the end of `file.txt`:
 
-  ```shell script
+  ```shell
   # The whitespace after '$a' is not interpreted
   sed -i '$a New last line' file.txt
   ```
@@ -101,7 +101,7 @@ You can prepend a line using `1i` and append using `$a`
 
 * Convert each file in the directory from `snake_case.pdf` to `Title Case.pdf`
 
-    ```shell script
+    ```shell
     for file in *; {
         new=$(<<< ${file} sed \
             -e 's/.*/\L&/' \

@@ -20,13 +20,13 @@ Liz Rice's talk on [creating Docker containers from scratch](https://youtu.be/8f
 
 * Installing Docker on macOS
 
-    ```shell script
+    ```shell
     brew cask install docker
     ```
 
 * [Installing Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
-    ```shell script
+    ```shell
     sudo -i
     curl -fsSL https://get.docker.com | bash -
     ```
@@ -39,25 +39,25 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * Logging into Docker
 
-    ```shell script
+    ```shell
     docker login
     ```
 
 * Logging out of Docker
 
-    ```shell script
+    ```shell
     docker logout
     ```
 
 * Pulling an image named {{< var IMAGE >}} from Docker Hub
 
-    ```shell script
+    ```shell
     docker pull {{< var IMAGE >}}
     ```
 
 * List currently installed images
 
-    ```shell script
+    ```shell
     docker images
     ```
 
@@ -65,7 +65,7 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * Start running a docker image {{< var IMAGE >}} and execute the command `echo`
 
-    ```shell script
+    ```shell
     docker run {{< var IMAGE >}} echo 'hello'
     ```
 
@@ -77,19 +77,19 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * See if any processes are running
 
-    ```shell script
+    ```shell
     docker ps
     ```
 
 * View all processes, whether active or finished
 
-    ```shell script
+    ```shell
     docker ps --all
     ```
 
 * Start a docker container named {{< var CONTAINER >}} based on the image named {{< var IMAGE >}}, specifying a name for the container
 
-    ```shell script
+    ```shell
     docker run \
         --name {{< var CONTAINER >}} \
         --interactive \
@@ -99,25 +99,25 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * Continue running the container named {{< var CONTAINER >}} that you previously exited
 
-    ```shell script
+    ```shell
     docker start {{< var CONTAINER >}}
     ```
 
 * Execute a command on a currently running docker container named {{< var CONTAINER >}}
 
-    ```shell script
+    ```shell
     docker exec --interactive --tty {{< var CONTAINER >}} '/bin/bash'
     ```
 
 * Stop a container named {{< var CONTAINER >}}
 
-    ```shell script
+    ```shell
     docker stop {{< var CONTAINER >}}
     ```
 
 * [Kill a running container](https://docs.docker.com/engine/reference/commandline/container_kill/)
 
-    ```shell script
+    ```shell
     container_id='384bf99f07c8'
 
     docker container kill ${container_id}
@@ -125,7 +125,7 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * List the currently running containers
 
-    ```shell script
+    ```shell
     # [ Short Form ]
     docker ps
 
@@ -135,25 +135,25 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * List all containers
 
-    ```shell script
+    ```shell
     docker ps -a
     ```
 
 * Remove a container named {{< var CONTAINER >}} (not the image that created it)
 
-    ```shell script
+    ```shell
     docker rm {{< var CONTAINER >}}
     ```
 
 * Removing an image named {{< var IMAGE >}} from the local machine
 
-    ```shell script
+    ```shell
     docker rmi {{< var IMAGE >}}
     ```
 
 * Building an image named {{< var IMAGE >}} from a Dockerfile
 
-    ```shell script
+    ```shell
     docker build . \
         --tag '{{< var USERNAME >}}/{{< var IMAGE >}}' \
         --squash
@@ -163,7 +163,7 @@ Open the application in the menu bar to have Docker run its initial configuratio
 
 * Publishing an image named {{< var IMAGE >}} to the Docker Hub container registry
 
-    ```shell script
+    ```shell
     docker publish {{< var USERNAME >}}/{{< var IMAGE >}}
     ```
 

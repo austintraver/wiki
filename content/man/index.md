@@ -10,7 +10,7 @@ date: 2020-02-04T14:52:27-08:00
 
 If you're on macOS, by default you'll be using a pretty old version. The new version can be installed using [Homebrew](/homebrew)
 
-```shell script
+```shell
 brew install man-db
 
 # Add the man-db directory to your path
@@ -23,7 +23,7 @@ file="/usr/local/opt/man-db/libexec/bin"
 
 * Creating the cached manpages (catpages) for manpages (requires prior call to `mandb`)
 
-  ```shell script
+  ```shell
   # As root
   catman -M ${PATH}
   ```
@@ -33,7 +33,7 @@ file="/usr/local/opt/man-db/libexec/bin"
 
 * View where a manpage is loaded from
 
-  ```shell script
+  ```shell
   man -w netstat
   ```
 
@@ -43,7 +43,7 @@ file="/usr/local/opt/man-db/libexec/bin"
 
 * Viewing where a catpage is loaded from
 
-  ```shell script
+  ```shell
   man -W netstat
   ```
 
@@ -55,7 +55,7 @@ file="/usr/local/opt/man-db/libexec/bin"
 
 * Add this line to your `~/.zshrc` to have `nvim` be the default pager for opening up your manpages.
 
-```shell script
+```shell
 MANPAGER='nvim +Man!'
 ```
 
@@ -69,26 +69,26 @@ You shouldn't need to set the `MANPATH` environment variable, but here are some 
 
 * Viewing the path that `man` will search for catpages
 
-```shell script
+```shell
 manpath
 ```
 
 * Viewing the path that `man` will search for catpages
 
-```shell script
+```shell
 manpath -c
 ```
 
 * Creating a database to index manpages:
 
-  ```shell script
+  ```shell
   # As root
   mandb -c
   ```
 
 * Purging *stray cats* (cached catpages of manpages that no longer exist)
 
-  ```shell script
+  ```shell
   # As root
   mandb
   ```
@@ -101,7 +101,7 @@ manpath -c
 
 * When you type `man grep`, what's really happening is:
 
-  ```shell script
+  ```shell
   # command:
   man 1 grep
 
@@ -115,7 +115,7 @@ manpath -c
 
 ## Making a PDF of a manpage
 
-```shell script
+```shell
 # Saving the produced manpage before opening it
 man -t grep > ./grep.ps
 open -a 'Preview' ./grep.ps
@@ -229,4 +229,3 @@ If you want to learn more about how to read manpages, take a look at the followi
 If you're trying to write a manpage, take a look at these manpages
 
 * `groff_man(7)`: the macro package for `man`
-

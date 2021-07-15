@@ -21,13 +21,13 @@ If you've already learned some Java in the past, GitHub's Learning Lab [Intermed
 
   * on macOS
 
-  ```shell script
+  ```shell
   brew cask install java
   ```
 
   * on Ubuntu
 
-  ```shell script
+  ```shell
   apt install default-jdk-headless
   # apt install default-jre-headless
   # ↑ this is installed as a dependency
@@ -38,19 +38,19 @@ If you've already learned some Java in the past, GitHub's Learning Lab [Intermed
 
 * running a `.java` file
 
-  ```shell script
+  ```shell
   java <file.java>
   ```
 
 * running a `.jar` file
 
-  ```shell script
+  ```shell
   java -jar <archive.jar>
   ```
 
 * running `jshell`, Java's **Read Evaluate Print Loop** (REPL)
 
-  ```shell script
+  ```shell
   jshell
   System.out.println("It works")
   ```
@@ -59,7 +59,7 @@ If you've already learned some Java in the past, GitHub's Learning Lab [Intermed
 
 Java’s `System.getProperty()` method allows you to essentially pass in flags to the command line. Every property is a name-value string pair, and you can pass each one in with the following "-D" syntax
 
-```shell script
+```shell
 # passing in System Properties
 $ java \
   -Dstreet=sesame \
@@ -87,7 +87,7 @@ On a Unix system, you can set the environment variable `CLASSPATH` like so:
 
 * Setting the `CLASSPATH` for Java imports globally:
 
-  ```shell script
+  ```shell
   # 3 classpath locations. the user's home directory, a jar in another user's directory, and '.' the current directory
   export CLASSPATH=/path/to/packages:.
   ```
@@ -104,7 +104,7 @@ Alternatively, you can use the `-cp` argument when running or compiling a progra
 
 * Setting the classpath for Java imports manually:
 
-  ```shell script
+  ```shell
   # [ Example 1 ]
   java -cp ~/path/to/packages Test.java
 
@@ -123,7 +123,7 @@ The `javap` command on bash lets you print a description of a compiled class. It
 
 * Input
 
-  ```shell script
+  ```shell
   javap java.util.Stack
   ```
 
@@ -145,7 +145,7 @@ The `javap` command on bash lets you print a description of a compiled class. It
 
 The `javac` command lets you compile a *.java* source file into a *.class* bytecode file. By default, it will store both files in the same directory, so it’s best to use the "-d" option to specify the directory the *.class* file should go into
 
-```shell script
+```shell
 # compile one file
 javac -d /home/austin/Desktop BigBird.java
 # compile 2 files
@@ -160,7 +160,7 @@ The Java Archive `jar` utility is very similar in structure to Unix’s Tape Arc
 
 Some examples of ways to use the `jar` command are included below.
 
-```shell script
+```shell
 # create a jar file
 jar -cvf Practice.jar bin/Practice.class
 # list the contents within a jar

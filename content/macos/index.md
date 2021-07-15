@@ -169,25 +169,25 @@ There's a hidden terminal command `screencapture` that you can use to capture a 
 
 * Capture the screen, save to `example.png`
 
-    ```shell script
+    ```shell
     screencapture 'example.png'
     ```
 
 * Capture the screen, save to the clipboard
 
-    ```shell script
+    ```shell
     screencapture -c
     ```
 
 * Capture the screen, disable the "click" sound effect
 
-    ```shell script
+    ```shell
     screencapture -x 'example.png'
     ```
 
 * Capture the screen, (but after 10 second delay)
 
-    ```shell script
+    ```shell
     screencapture -T 10 'example.png' &
     ```
 
@@ -197,7 +197,7 @@ You can even use `screencapture` to record video. The `-V` flag specifies to cap
 
 * Record the screen for 10 seconds
 
-    ```shell script
+    ```shell
     screencapture -V 10 'example.mp4' &
     ```
 
@@ -216,7 +216,7 @@ I like to put my screenshots in the `~/Downloads` directory. Luckily there's a t
 
 * Set the directory of all future screenshots.
 
-    ```shell script
+    ```shell
     defaults write com.apple.screencapture location ~/Downloads && killall SystemUIServer
     ```
 
@@ -226,7 +226,7 @@ By default, screenshots save as PNG files, but you can change this
 
 * Change default screenshot filetype from PNG to JPG
 
-    ```shell script
+    ```shell
     defaults write com.apple.screencapture type -string 'jpg' && killall SystemUIServer
     ```
 
@@ -238,7 +238,7 @@ By default, screenshots save as PNG files, but you can change this
 
 * Change the screen capture filename to `screenshot`
 
-    ```shell script
+    ```shell
     defaults write com.apple.screencapture name -string 'screenshot' && killall SystemUIServer
     ```
 
@@ -252,21 +252,21 @@ custom alert sound must be an AIFF file (e.g. `example.aiff`).
 
 * Use [ffmpeg](/ffmpeg) to convert an `.mp3` to `.aiff`
 
-    ```shell script
+    ```shell
     ffmpeg -i './input.mp3' "${HOME}/Library/Sounds/custom.aiff"
     ```
 
 If you'd like to discover sounds on your computer, use a recursive glob 
 to discover audio files within the system library
 
-```shell script
+```shell
 print -l /System/Library/**/*.aiff
 ```
 
 For instance, to play a sound, use the `afplay` command, and provide it the sound file
 you'd like to play. For example, the command below plays the default alert sound on macOS
 
-```shell script
+```shell
 afplay '/System/Library/Sounds/Tink.aiff'
 ```
 
@@ -282,7 +282,7 @@ You can actually update the software on your computer directly from the terminal
 
 * List available software updates
 
-    ```shell script
+    ```shell
     softwareupdate -l
     ```
 
@@ -290,7 +290,7 @@ You can actually update the software on your computer directly from the terminal
 
 * Install all updates
 
-    ```shell script
+    ```shell
     # Short form
     sudo softwareupdate -iaR
   
@@ -306,7 +306,7 @@ You can actually update the software on your computer directly from the terminal
 
 * The default terminal font, **SF Mono**, is by default hidden from the Font Book, and is available exclusively for use in the terminal app. To copy SF Mono to your computer's **Font Book**, run this command.
 
-    ```shell script
+    ```shell
     cp -R /System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts/* /Library/Fonts
     ```
 
@@ -314,7 +314,7 @@ You can actually update the software on your computer directly from the terminal
 
 * Although the GUI doesn't give us an option to disable user-pictures, you can do it with the terminal commands below.
 
-    ```shell script
+    ```shell
     # Delete the image chosen during OS installation
     sudo dscl . delete /Users/${USER} Picture
 
@@ -349,7 +349,7 @@ If you mess up your `/etc` files, like I did when I accidentally made every file
 
 * Reset system file permissions to default
 
-    ```shell script
+    ```shell
     diskutil resetUserPermissions / $(id -u)
     ```
 
@@ -357,7 +357,7 @@ If you mess up your `/etc/sudoers` file, you'll have to boot into single-user mo
 
 * Reset sudoers file
 
-    ```shell script
+    ```shell
     mount -uw /
     chown root:wheel /etc/sudoers
     chmod 440 /etc/sudoers
@@ -372,7 +372,7 @@ The property list file that controls which app launches for a particular filetyp
 
 * Open the Launch Services properties list file
 
-    ```shell script
+    ```shell
     open file:///Users/${USER}/Library/Preferences/com.apple.LaunchServices/com.apple.launchservices.secure.plist
     ```
 
@@ -382,7 +382,7 @@ You can install the command `duti` on homebrew to configure the default applicat
 
 * Setting default application used for `.c` files.
 
-    ```shell script
+    ```shell
     # Set apple as the default editor for .c files
     duti -s com.apple.Xcode public.c editor
     # Check the current handlers performed by a UTI
@@ -412,7 +412,7 @@ choices. These are ordered from **best** to **worst**.
 
 * Using `librsvg`:
 
-    ```shell script
+    ```shell
     # If necessary
     brew install librsvg
 
@@ -421,7 +421,7 @@ choices. These are ordered from **best** to **worst**.
 
 * Using [magick resize][ImageMagick's `-resize` option]
 
-    ```shell script
+    ```shell
     # If necessary
     brew install imagemagick
 
@@ -434,7 +434,7 @@ choices. These are ordered from **best** to **worst**.
 * Using `qlmanage`, the built-in command-line utility for QuickLook:
 
 
-    ```shell script
+    ```shell
     qlmanage -ts 1024 -o . example.svg
     ```
 
@@ -457,26 +457,26 @@ Experts Group (MPEG)
 
 * Encode MOV file `video.mov` as an H.265 (HEVC) encoded M4V file `video.m4v` preserving the original video resolution
 
-    ```shell script
+    ```shell
     avconvert -p 'PresetHEVCHighestQuality' -s 'video.mov' -o 'video.mp4'
     ```
 
 * Encode MOV file `video.mov` as an H.265 (HEVC) encoded M4V file with 1080p resolution
 
-    ```shell script
+    ```shell
     # You can add the '-q' flag to suppress output
     avconvert -p 'PresetHEVC1920x1080' -s 'video.mov' -o 'video@1080p.m4v'
     ```
 
 * Encode MOV file `video.mov` as an H.264 encoded MOV file with 720p resolution
 
-    ```shell script
+    ```shell
     avconvert -p 'Preset640x480' -s 'video.mov' -o 'video@720p.mov'
     ```
 
 * Encode MOV file `video.mov` as an H.264 encoded MOV file with 420p resolution
 
-        ```shell script
+        ```shell
         avconvert -p 'Preset640x480' -s 'video.mov' -o 'video@420p.mov'
         ```
 
@@ -486,7 +486,7 @@ Experts Group (MPEG)
 
 * Convert `song.mp3` into an AAC encoded M4A audio file `song.m4a`
 
-    ```shell script
+    ```shell
     # -v is for "verbose"
     avconvert -v -p PresetAppleM4A -s ~/Desktop/song.mp3 -o ~/Desktop/song.m4a
     ```
@@ -497,25 +497,25 @@ The `networksetup` command allows you to configure your System Preference's *Net
 
 * Get the current DNS servers
 
-    ```shell script
+    ```shell
     networksetup -getdnsservers Wi-Fi
     ```
 
 * Configure the DNS servers
 
-    ```shell script
+    ```shell
     networksetup -setdnsservers Wi-Fi 1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
     ```
 
 * Get the local machine's MAC address
 
-    ```shell script
+    ```shell
     networksetup -getmacaddress Wi-Fi | awk '{print $3}'
     ```
 
 * Configure the SOCKS proxy
 
-    ```shell script
+    ```shell
     ssh -fNCD 3339 bastion@remote.site
     networksetup -setsocksfirewallproxy Wi-Fi 127.0.0.1 3339
     networksetup -setsocksfirewallproxy Wi-Fi 127.0.0.1 3339
@@ -523,55 +523,55 @@ The `networksetup` command allows you to configure your System Preference's *Net
 
 * Enable the SOCKS proxy
 
-    ```shell script
+    ```shell
     networksetup -setsocksfirewallproxystate Wi-Fi on
     ```
 
 * Disable the SOCKS proxy
 
-    ```shell script
+    ```shell
     networksetup -setsocksfirewallproxystate Wi-Fi off
     ```
 
 * List preferred wireless networks
 
-    ```shell script
+    ```shell
     networksetup -listpreferredwirelessnetworks en0
     ```
 
 * Remove a preferred wireless network
 
-    ```shell script
+    ```shell
     networksetup -removepreferredwirelessnetwork en0 <network>
     ```
 
 * Connect to a WiFi Network
 
-    ```shell script
+    ```shell
     networksetup -setairportnetwork en0 <WiFi name> <password>
     ```
 
 * List order of network devices used to connect to the internet
 
-    ```shell script
+    ```shell
     networksetup -listnetworkserviceorder
     ```
 
 * Check if Wi-Fi is currently enabled
 
-    ```shell script
+    ```shell
     networksetup -getnetworkserviceenabled Wi-Fi
     ```
 
 * Get the name of the current network an interface is connected to
 
-    ```shell script
+    ```shell
     networksetup -getairportnetwork en0
     ```
 
 * Print detailed information about the current network connection
 
-    ```shell script
+    ```shell
     networksetup -getinfo Wi-Fi
     ```
 
@@ -594,20 +594,20 @@ There is a hidden command, called airport.
 
 * Adding the `airport` command to the `${PATH}`
 
-    ```shell script
+    ```shell
     file=/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport
     >> ~/.zshrc < =(<<<"path+=(${file})")
     ```
 
 * Scan available WiFi networks
 
-    ```shell script
+    ```shell
     airport -s
     ```
 
 * Disconnect from the current WiFi network
 
-    ```shell script
+    ```shell
     airport -z
     ```
 
@@ -615,37 +615,37 @@ There is a hidden command, called airport.
 
 * Get the computer's name
 
-    ```shell script
+    ```shell
     scutil --get ComputerName
     ```
 
 * Set the computer's name
 
-    ```shell script
+    ```shell
     scutil --set ComputerName "Tommy's MacBook Pro"
     ```
 
 * Get the host name
 
-    ```shell script
+    ```shell
     scutil --get HostName
     ```
 
 * Set the host name
 
-    ```shell script
+    ```shell
     scutil --set HostName "nova"
     ```
 
 * Get the localhost name (used for Bonjour)
 
-    ```shell script
+    ```shell
     scutil --get LocalHostName
     ```
 
 * Set the localhost name (used for Bonjour)
 
-    ```shell script
+    ```shell
     scutil --set LocalHostName "nova"
     ```
 
@@ -655,7 +655,7 @@ There is a hidden command, called airport.
 
 * Backups are stored in the following location:
 
-    ```shell script
+    ```shell
     tmutil latestbackup
     ```
 
@@ -672,25 +672,25 @@ There is a hidden command, called airport.
 
 * Turn on Time Machine
 
-    ```shell script
+    ```shell
     tmutil enable
     ```
 
 * Turn off Time Machine
 
-    ```shell script
+    ```shell
     tmutil disable
     ```
 
 * Start backing up to the Time Capsule
 
-    ```shell script
+    ```shell
     tmutil startbackup
     ```
 
 * Stop backing up to the Time Capsule
 
-    ```shell script
+    ```shell
     tmutil stopbackup
     ```
 
@@ -700,13 +700,13 @@ If you are having trouble because time machine is taking too long, there's a way
 
 * Enabling speedy backups (by disabling priority filtering)
 
-    ```shell script
+    ```shell
     sudo sysctl debug.lowpri_throttle_enabled=0
     ```
 
 * Disabling speedy backups (by enabling priority filtering)
 
-    ```shell script
+    ```shell
     sudo sysctl debug.lowpri_throttle_enabled=1
     ```
 
@@ -719,13 +719,13 @@ By default, Time Machine will create *local snapshots*, locally stored backup vo
 
 * Enable Local Snapshots
 
-    ```shell script
+    ```shell
     tmutil disablelocal
     ```
 
 * Disable Local Snapshots
 
-    ```shell script
+    ```shell
     tmutil enablelocal
     ```
 
@@ -735,7 +735,7 @@ By default, Time Machine will back up everything on your drive. You may, however
 
 * Exclude files in the directory `~/Downloads` from backups
 
-    ```shell script
+    ```shell
     tmutil addexclusion ~/Downloads
     ```
 
@@ -747,13 +747,13 @@ By default, Time Machine will back up everything on your drive. You may, however
 
 * Exclude the directory path `~/Downloads` from backups
 
-    ```shell script
+    ```shell
     tmutil addexclusion -p ~/Downloads
     ```
 
 * Re-enable backups for the directory (and path) `~/Downloads`
 
-    ```shell script
+    ```shell
     tmutil removeexclusion ~/Downloads
     ```
 
@@ -761,7 +761,7 @@ You can also check if a given file, directory, or volume is excluded
 
 * Check if a file is excluded
 
-    ```shell script
+    ```shell
     tmutil isexcluded ~/Downloads
     # => [Included] /Users/austin/Downloads
     # => [Included] /Users/austin/Downloads
@@ -769,13 +769,13 @@ You can also check if a given file, directory, or volume is excluded
 
 * See an exhaustive list of what's being ignored
 
-    ```shell script
+    ```shell
     sudo mdfind "com_apple_backup_excludeItem = 'com.apple.backupd'"
     ```
 
 * Restore files to their previous state
 
-    ```shell script
+    ```shell
     tmutil restore
     ```
 
@@ -788,56 +788,56 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 1. Create a user named `tommy`
 
-    ```shell script
+    ```shell
     dscl . create /Users/tommy
     ```
 
 2. Set `tommy`'s shell to `/bin/zsh`
 
-    ```shell script
+    ```shell
     dscl . create '/Users/tommy' UserShell '/bin/zsh'
     ```
 
 3. Set Tommy's have the home directory `/Users/tommy`
 
-    ```shell script
+    ```shell
     dscl . create '/Users/tommy' NFSHomeDirectory '/Users/tommy'
     createhomedir -u tommy -c
     ```
 
 4. Set tommy's RealName to `Tommy Trojan`
 
-    ```shell script
+    ```shell
     dscl . create '/Users/tommy' RealName 'Tommy Trojan'
     ```
 
 5. Give tommy a `UID` number, (for instance, 502)
 
-    ```shell script
+    ```shell
     dscl . create '/Users/tommy' UniqueID 502
     ```
 
 6. Give tommy the primary group ID of `20` (the default for the `staff` group on macOS)
 
-    ```shell script
+    ```shell
     dscl . create '/Users/username' PrimaryGroupID 20
     ```
 
 7. Give tommy the password `fighton`
 
-    ```shell script
+    ```shell
     dscl . passwd /Users/tommy 'fighton'
     ```
 
 8. Add tommy to the list of user's that can be logged into with `ssh`
 
-    ```shell script
+    ```shell
     dseditgroup -o edit -t user -a tommy com.apple.access_ssh
     ```
 
 9. Optionally add `tommy` to the list of `admin` users on the computer
 
-    ```shell script
+    ```shell
     dseditgroup -o edit -d tommy -t user admin
     ```
 
@@ -845,13 +845,13 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Allow the creation of secret users, hidden if their UID is 500 or lower
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow Hide500Users -bool YES
     ```
 
 * Make the user `tommy` a hidden user
 
-  ```shell script
+  ```shell
   # Enabling hidden status
   sudo dscl . create '/Users/tommy' IsHidden 1
 
@@ -861,25 +861,25 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Disable the `Other...` user from appearing in the login screen
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWOTHERUSERS_MANAGED -bool false
     ```
 
 * Add `tommy` to the list of users hidden on the login screen
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add "tommy"
     ```
 
 * Hide the public share folder for the user whose long name is `Tommy Trojan`
 
-    ```shell script
+    ```shell
     sudo dscl . delete "/SharePoints/Hidden Tommy Trojan's Public Folder"
     ```
 
 * Force the user `tommy` to set a new password
 
-    ```shell script
+    ```shell
     sudo dscl . passwd '/Users/tommy' ''
     sudo pwpolicy -u username -setpolicy 'newPasswordRequired=1'
     sudo rm -r ~tommy/Library/Keychains/*
@@ -888,67 +888,67 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Get a list of all users short names
 
-    ```shell script
+    ```shell
     sudo dscl . list /Users
     ```
 
 * Get detailed info on a particular user
 
-    ```shell script
+    ```shell
     sudo dscl . read /Users/<username>
     ```
 
 * Get a specific value from a user
 
-    ```shell script
+    ```shell
     dscl . read /Users/<username> <key>
     ```
 
 * Get detailed info on *all* users
 
-    ```shell script
+    ```shell
     dscl . readall /Users
     ```
 
 * Get a specific value from all users
 
-    ```shell script
+    ```shell
     dscl . readall /Users <key>
     ```
 
 * Get concise information about all users
 
-    ```shell script
+    ```shell
     dscl . ls /Users
     ```
 
 * Get all of the groups that user `root` is associated with
 
-    ```shell script
+    ```shell
     dscl . search /Groups GroupMembership 'root'
     ```
 
 * Get the name os all of the groups
 
-    ```shell script
+    ```shell
     dscl . ls /Groups
     ```
 
 * Check if the user `tommy` is a member of the group `admin`
 
-    ```shell script
+    ```shell
     dseditgroup -o checkmember -m 'tommy' 'admin'
     ```
 
 * Add the user `tommy` to the group `admin`
 
-    ```shell script
+    ```shell
     dseditgroup -o edit -a 'tommy' -t user 'admin'
     ```
 
 * Change a user's information
 
-    ```shell script
+    ```shell
     # [ macOS ]
     sudo dscl . change /Users/austin RealName 'Austin Traver' 'Fake Name'
     # confirming the change
@@ -967,7 +967,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Remove `tommy` from the list of users who are members of the `admin` group
 
-    ```shell script
+    ```shell
     dseditgroup -o edit -d 'tommy' -t user 'admin'
     ```
 
@@ -981,11 +981,11 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Create a user `guest` with limited permissions
 
-    ```shell script
+    ```shell
     sysadminctl -addUser guest -fullName 'Tommy Trojan' -UID 404 -shell /bin/zsh -home /Users/guest
     ```
 
-    ```shell script
+    ```shell
     # Use the user 'billy' and his password 'gobruins' to escalate privileges
     sysadminctl -adminUser 'billy' -adminPassword 'gobruins' \
       -addUser 'tommy' \
@@ -996,14 +996,14 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
       -home /Users/tommy
     ```
 
-    ```shell script
+    ```shell
     # Create the home directory for 'tommy'
     sudo createhomedir -c
     ```
 
 * Add a user's password to those capable of unlocking the FileVault at boot
 
-    ```shell script
+    ```shell
     # Use the existing admin account 'billy' whose password is 'gobruins'
     # to allow the new admin account 'tommy' to login with the 'fighton' password
     sysadminctl -adminUser 'billy' -adminPassword 'gobruins' -secureTokenOn 'tommy' -password 'fighton'
@@ -1013,7 +1013,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Restart the computer, but bypass FileVault
 
-    ```shell script
+    ```shell
     sudo fdesetup authrestart
     ```
 
@@ -1022,7 +1022,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Reboot the computer into single user mode
 
-    ```shell script
+    ```shell
     sudo launchctl reboot -s system
     ```
 
@@ -1030,7 +1030,7 @@ Adding a new user to a Mac computer from a Terminal window requires you to defin
 
 * Play the audio file that stores the "device is charging" chime.
 
-    ```shell script
+    ```shell
     afplay /System/Library/CoreServices/PowerChime.app/Contents/Resources/connect_power.aif
     ```
 
@@ -1052,19 +1052,19 @@ There are three directories that are not protected:
 
 * Disabling system integrity protection
 
-    ```shell script
+    ```shell
     csrutil disable
     ```
 
 * Enabling system integrity protection
 
-    ```shell script
+    ```shell
     csrutil enable
     ```
 
 * Checking system integrity protection
 
-    ```shell script
+    ```shell
     csrutil status
     ```
 
@@ -1072,13 +1072,13 @@ There are three directories that are not protected:
 
 * Show additional info by clicking the clock in the top-right corner
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo IPAddress
     ```
 
 * Adding a welcome message to the login page
 
-  ```shell script
+  ```shell
   # [ Adding the message ]
   sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string 'Welcome back'
 
@@ -1088,7 +1088,7 @@ There are three directories that are not protected:
 
 * Adding a script to run at login
 
-    ```shell script
+    ```shell
     sudo defaults write com.apple.loginwindow LoginHook /path/to/script
     ```
 
@@ -1100,13 +1100,13 @@ There are three directories that are not protected:
 
 * Adding a graphic+text banner to appear upon login
 
-    ```shell script
+    ```shell
     sudo cp ./banner /Library/Security/PolicyBanner
     ```
 
 * Disable buttons on the login page
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow ShutDownDisabled -bool true
     sudo defaults write /Library/Preferences/com.apple.loginwindow RestartDisabled -bool true
     sudo defaults write /Library/Preferences/com.apple.loginwindow SleepDisabled -bool true
@@ -1115,7 +1115,7 @@ There are three directories that are not protected:
 
 * Reenable buttons on the login page
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow ShutDownDisabled -bool false
     sudo defaults write /Library/Preferences/com.apple.loginwindow RestartDisabled -bool false
     sudo defaults write /Library/Preferences/com.apple.loginwindow SleepDisabled -bool false
@@ -1124,7 +1124,7 @@ There are three directories that are not protected:
 
 * Disable the user icons from the login page (this sets the "username & password" format as the default for the login page)
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
     ```
 
@@ -1142,19 +1142,19 @@ Something learned from `man hdiutil`:
 
 * View available storage devices
 
-    ```shell script
+    ```shell
     diskutil list
     ```
 
 * Erase a hard drive's partitions
 
-    ```shell script
+    ```shell
     sudo diskutil partitionDisk /dev/disk2 1 MBR "Free Space" "%noformat%" 100%
     ```
 
 * Copy image to a new hard drive
 
-    ```shell script
+    ```shell
     diskutil unmount /dev/disk2s1
     sudo dd bs=1M if='/path/to/file.img' of='/dev/rdisk2' conv=sync
     sudo dd bs=1M if='/path/to/file.img' of='/dev/rdisk2' conv=sync
@@ -1162,7 +1162,7 @@ Something learned from `man hdiutil`:
 
 * Copy the current hard drive into an image
 
-  ```shell script
+  ```shell
   # Exporting an SD card save
   sudo dd bs=4M if=/dev/sdb of=raspbian.img
 
@@ -1172,13 +1172,13 @@ Something learned from `man hdiutil`:
 
 * Eject a device
 
-    ```shell script
+    ```shell
     sudo diskutil eject /dev/rdisk2
     ```
 
 * Enable vpn connection on port 3340
 
-    ```shell script
+    ```shell
     kill $(lsof -ti :3340) &> /dev/null
     ssh -fNCD 3340 'ssh://bastion@52.52.124.230:22'
     networksetup -setsocksfirewallproxystate Wi-Fi on
@@ -1188,7 +1188,7 @@ Something learned from `man hdiutil`:
 
 * Disable vpn connection on port 3340
 
-    ```shell script
+    ```shell
     kill $(lsof -ti :3340) &> /dev/null
     networksetup -setsocksfirewallproxystate Wi-Fi off
     return 0
@@ -1202,7 +1202,7 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 
 * Keep Books in a more convenient folder:
 
-    ```shell script
+    ```shell
     ln -s ~/Library/Containers/com.apple.BKAgentService/Data/Documents/iBooks/Books ~/Books
     ```
 
@@ -1214,25 +1214,25 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 
 * Scan for printers on the network that support the `IPP` protocol
 
-    ```shell script
+    ```shell
     dns-sd -Z _ipp._tcp .
     ```
 
 * Scan for hosts on the network that have enabled login via the `SSH` protocol.
 
-    ```shell script
+    ```shell
     dns-sd -Z _ssh._tcp .
     ```
 
 * Ping the printer to see if it responds
 
-    ```shell script
+    ```shell
     ping BRN3C2AF4C9463F.local
     ```
 
 * Setup the printer, giving it the name `Brother`
 
-    ```shell script
+    ```shell
     # `-p 'Brother'`: Name the printer "Brother"
     # `-E`: Use TLS encryption when communicating across the network
     # `-v 'ipp://brother.local'`: Print to the URI `<ipp://brother.local>`
@@ -1243,7 +1243,7 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 
 * Make this printer the default
 
-    ```shell script
+    ```shell
     lpoptions -E -d 'Brother' -o sides=two-sided-long-edge
     # Creates ~/.cups/lpoptions with one line: "Default Brother sides=two-sided-long-edge"
     ```
@@ -1255,13 +1255,13 @@ New to macOS Catalina is the Books application, which provides a cleaner interfa
 
 * Print a file
 
-    ```shell script
+    ```shell
     lp ~/path/to/file.pdf
     ```
 
 * Check the current printer configurations
 
-    ```shell script
+    ```shell
     lpstat -v
     ```
 
@@ -1271,19 +1271,19 @@ Virtual Network Computing, or *VNC*, is more commonly known as *Screen Sharing*,
 
 * Launching a Screen Share from the terminal:
 
-    ```shell script
+    ```shell
     open vnc://tommy@trojan.net
     ```
 
 * Enabling **Screen Sharing** from the terminal:
 
-    ```shell script
+    ```shell
     sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool false
     ```
 
 * Disabling **Screen Sharing** from the terminal:
 
-    ```shell script
+    ```shell
     sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
     ```
 
@@ -1310,7 +1310,7 @@ You can also find some of the iOS icons in the following places
 
 * Listing all icon files
 
-    ```shell script
+    ```shell
     print -l /System/Library/**/*/Contents/Resources/*.icns
     ```
 
@@ -1318,7 +1318,7 @@ I've made a script that can convert an image into an icon
 
 * Convert PNG file `pic.png` into ICNS file `pic.icns`
 
-    ```shell script
+    ```shell
     iconset=${1%%.*}.iconset
     mkdir -v ${iconset}
     for ((s=16; s<=512; s*=2)); do
@@ -1342,13 +1342,13 @@ I've made a script that can convert an image into an icon
 
 * Convert a text file to PostScript
 
-    ```shell script
+    ```shell
     cupsfilter -m 'application/postscript' file.txt > file.ps
     ```
 
 * Convert a text file to PDF
 
-    ```shell script
+    ```shell
     cupsfilter -m 'application/pdf' file.txt > file.pdf
     ```
 
@@ -1358,21 +1358,21 @@ I've made a script that can convert an image into an icon
 
 * Display file extensions
 
-    ```shell script
+    ```shell
     defaults write NSGlobalDomain AppleShowAllExtensions -bool true
     killall Finder
     ```
 
 * Prevent file icons from displaying on the Desktop
 
-    ```shell script
+    ```shell
     defaults write com.apple.finder CreateDesktop -bool FALSE
     killall Finder
     ```
 
 * Enable quit button for Finder application
 
-    ```shell script
+    ```shell
     defaults write com.apple.finder QuitMenuItem -bool true
     killall Finder
     ```
@@ -1387,20 +1387,20 @@ You can prohibit the modification of Finder preferences by selecting `Preference
 
 * Disabling key repeat
 
-    ```shell script
+    ```shell
     defaults write -g InitialKeyRepeat -int 10
     ```
 
 * Resetting key repeat to default settings
 
-    ```shell script
+    ```shell
     defaults write -g InitialKeyRepeat -int 15 # 225 ms
     defaults write -g KeyRepeat -int 2 # 30 ms
     ```
 
 * Disable modification of Finder preferences
 
-    ```shell script
+    ```shell
     defaults write com.apple.finder ProhibitFinderPreferences -bool true
     killall Finder
     ```
@@ -1409,7 +1409,7 @@ Similarly, you could prohibit the `Go to folder` action in Finder as well, for w
 
 * Disable `Go to folder` action in the menu bar:
 
-    ```shell script
+    ```shell
     defaults write com.apple.finder ProhibitGoToFolder -bool true
     killall Finder
     ```
@@ -1418,13 +1418,13 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 * Disable creation of `.DS_Store` files
 
-    ```shell script
+    ```shell
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
     ```
 
 * Delete dock hiding delay
 
-    ```shell script
+    ```shell
     defaults write com.apple.dock autohide-delay -float 0
     killall Dock
     killall Dock
@@ -1432,7 +1432,7 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 * Change minimum file size threshold for Mail Drop for macOS Mail
 
-    ```shell script
+    ```shell
     # 1024 = 1MB
     defaults write com.apple.mail minSizeKB 1024
     defaults write com.apple.mail minSizeKB 1024
@@ -1440,7 +1440,7 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 * Hide the preview of images attached to a message in Mail
 
-    ```shell script
+    ```shell
     defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
     ```
 
@@ -1448,7 +1448,7 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 * Use plain text as the default in TextEdit instead of rich text
 
-    ```shell script
+    ```shell
     defaults write com.apple.TextEdit RichText -int 0
     ```
 
@@ -1457,47 +1457,47 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 * Reset the DNS cache
 
-    ```shell script
+    ```shell
     sudo discoveryutil udnsflushcaches
     ```
 
 * Change the cursor's blink rate
 
-    ```shell script
+    ```shell
     # Enter time in milliseconds
     defaults write -g NSTextInsertionPointBlinkPeriodOn -float 200
     ```
 
 * Disable the full screen animation
 
-    ```shell script
+    ```shell
     # Disable slow animation
     defaults write -g NSWindowResizeTime -float 0.001
     ```
 
 * Disable filenames from including date on screenshots
 
-    ```shell script
+    ```shell
     defaults write com.apple.screencapture 'include-date' -bool false
     killall SystemUIServer
     ```
 
 * Disable power button sleeping the system
 
-    ```shell script
+    ```shell
     defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool false
     ```
 
 * Treat the help window (the one that shows user manuals) as a normal window [link to source](https://osxdaily.com/2012/12/13/stop-the-help-viewer-window-from-hovering-over-everything-else-in-mac-os-x/)
 
-    ```shell script
+    ```shell
     defaults write com.apple.helpviewer DevMode -bool true
     ```
 
 * Change the format of the clock in the menu bar (A great tutorial on
   [setting the date and time format](https://www.tech-otaku.com/mac/setting-the-date-and-time-format-for-the-macos-menu-bar-clock-using-terminal/))
 
-    ```shell script
+    ```shell
     defaults write com.apple.menuextra.clock DateFormat 'EEE dd MMM h:mm:ss a'
     ```
 
@@ -1507,7 +1507,7 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
 * Adding previews for markdown files
 
-    ```shell script
+    ```shell
     brew cask install qlmarkdown
     xattr -cr ~/Library/QuickLook/QLMarkdown.qlgenerator
     qlmanage -r
@@ -1525,7 +1525,7 @@ If you're tired of `.DS_Store` files popping up in all of your directories, ther
 
     1. Sign the application
 
-        ```shell script
+        ```shell
         xattr -r -d com.apple.quarantine /Applications/Syntax\ Highlight.app
         ```
 
@@ -1801,13 +1801,13 @@ Siri uses natural language processing (NLP) to identify good matches for searche
 
 * Have Spotlight ignore every external volume
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.SpotlightServer.plist ExternalVolumesIgnore -bool True
     ```
 
 * Have Spotlight ignore, by default, each new network volume it encounters, from here on out:
 
-    ```shell script
+    ```shell
     sudo defaults write /Library/Preferences/com.apple.SpotlightServer.plist ExternalVolumesDefaultOff -bool True
     ```
 
@@ -1818,7 +1818,7 @@ To convert Firefox web extensions into Safari web extensions, you'll need Xcode
 
 * Converting the extension from a Firefox extension into a Safari extension
 
-    ```shell script
+    ```shell
     xcrun safari-web-extension-converter [options] ./path/to/extension
     ```
 
@@ -1830,7 +1830,7 @@ You can control which calendars in your Google Calendar to share with iCloud by 
 
 * Print out all supported URL schemes
 
-    ```shell script
+    ```shell
     /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -dump | grep -B6 'bindings:.*:'
     ```
 
@@ -1840,7 +1840,7 @@ The Compressor application is part of the iWork premium set of apps, which inclu
 
 * Using [Compressor from the command line](https://support.apple.com/guide/compressor/syntax-cpsr9be73312/)
 
-    ```shell script
+    ```shell
     alias compressor='/Applications/Compressor.app/Contents/MacOS/Compressor'
     ```
 
@@ -1850,61 +1850,61 @@ The Compressor application is part of the iWork premium set of apps, which inclu
 
 * Check the battery life from your terminal
 
-    ```shell script
+    ```shell
     pmset -g batt
     ```
 
 * Disable sleep for one session
 
-    ```shell script
+    ```shell
     pmset noidle &!
     ```
 
 * Disable sleep entirely
 
-    ```shell script
+    ```shell
     sudo systemsetup -setcomputersleep Never
     ```
 
 * Immediately put the computer to sleep
 
-    ```shell script
+    ```shell
     pmset sleepnow
     ```
 
 * Schedule for the computer to regularly wake up (or boot) on weekdays @ 7:45AM
 
-    ```shell script
+    ```shell
     pmset repeat wakeorpoweron MTWRF 07:45:00
     ```
 
 * Schedule for the computer to sleep on 12/24 @ 8:00AM
 
-    ```shell script
+    ```shell
     pmset schedule sleep "12/24/2019 08:00:00"
     ```
 
 * Schedule for computer to sleep in 1 hour:
 
-    ```shell script
+    ```shell
     sudo systemsetup -setcomputersleep 60
     ```
 
 * Check when the computer is scheduled to sleep
 
-    ```shell script
+    ```shell
     sudo systemsetup -getcomputersleep
     ```
 
 * Schedule for the computer to wake on 12/24 @ 8:00PM
 
-    ```shell script
+    ```shell
     pmset schedule wake "12/24/2019 20:00:00"
     ```
 
 * Restart the computer immediately
 
-    ```shell script
+    ```shell
     # Option 1
     sudo reboot now
 
@@ -1914,13 +1914,13 @@ The Compressor application is part of the iWork premium set of apps, which inclu
 
 * Shut down the computer immediately
 
-    ```shell script
+    ```shell
     sudo shutdown now
     ```
 
 * Dangerously shut the computer down immediately
 
-    ```shell script
+    ```shell
     sudo halt
     ```
 
@@ -1937,7 +1937,7 @@ applescript://com.apple.scripteditor?action=new&script=display%20dialog%20%22hel
 
 * Create an alert window that shows a dialog and presents the user with two choices
 
-    ```shell script
+    ```shell
     osascript <<< 'display alert "Do you accept?" buttons {"Cancel", "Yes"}'
     ```
 
@@ -1945,13 +1945,13 @@ applescript://com.apple.scripteditor?action=new&script=display%20dialog%20%22hel
 
     * Simple message
 
-        ```shell script
+        ```shell
         osascript  <<< "display notification \"${message}\""
         ```
 
     * Message with a title
 
-        ```shell script
+        ```shell
         title='Breaking news'
         message='You are a hacker'
 
@@ -1960,7 +1960,7 @@ applescript://com.apple.scripteditor?action=new&script=display%20dialog%20%22hel
 
     * Message with a title and a subtitle
 
-        ```shell script
+        ```shell
         title="Breaking news"
         subtitle="No seriously"
         message="You are my sunshine"
@@ -1969,7 +1969,7 @@ applescript://com.apple.scripteditor?action=new&script=display%20dialog%20%22hel
 
     * Message with a title and a sound
 
-        ```shell script
+        ```shell
         title="Quick question"
         message="Did you hear that?"
         osascript <<< "display notification \"${message}\" with title \"${title}\" sound name \"default\""
@@ -1979,7 +1979,7 @@ applescript://com.apple.scripteditor?action=new&script=display%20dialog%20%22hel
 
 * Swatches have an extension of `.clr` and can be found in `~/Library/Colors`
 
-    ```shell script
+    ```shell
     ls ~/Library/Colors
     ```
 
@@ -1999,7 +1999,7 @@ Personally, I think the drop shadow is a good touch. If, however, you prefer tha
 
 * Disable drop shadow for application window screenshots:
 
-    ```shell script
+    ```shell
     defaults write com.apple.screencapture disable-shadow -bool true && killall SystemUIServer
     ```
 
@@ -2009,7 +2009,7 @@ When you're on a FaceTime audio call, or any phone call for that matter, your de
 
 * Hide the FaceTime window
 
-    ```shell script
+    ```shell
     pkill -9 FaceTimeNotificationService
     ```
 
@@ -2031,7 +2031,7 @@ You can change the Launchpad icon grid layout, but it requires some `defaults wr
 
 * Set the number of rows in Launchpad
 
-    ```shell script
+    ```shell
     # Default: 5 rows 
     defaults write com.apple.dock springboard-rows -int 5
     killall Dock
@@ -2039,7 +2039,7 @@ You can change the Launchpad icon grid layout, but it requires some `defaults wr
 
 * Set the number of columns in Launchpad
 
-    ```shell script
+    ```shell
     # Default 7 columns
     defaults write com.apple.dock springboard-columns -int 7
     killall Dock
@@ -2047,14 +2047,14 @@ You can change the Launchpad icon grid layout, but it requires some `defaults wr
 
 * Restore the default Launchpad app layout
 
-    ```shell script
+    ```shell
     defaults write com.apple.dock ResetLaunchPad -bool true
     killall Dock
     ```
 
 * Restore the Launchpad dimensions to its original 5x7 layout
 
-    ```shell script
+    ```shell
     defaults delete com.apple.dock springboard-rows
     defaults delete com.apple.dock springboard-columns
     killall Dock
@@ -2071,7 +2071,7 @@ To get to it, open up Safari and navigate to the URL `applefeedback://`
 
 * Remove the `Where from` field from `video.mp4`, which was downloaded using `curl`
 
-    ```shell script
+    ```shell
     xattr -d 'com.apple.metadata:kMDItemWhereFroms' video.mp4
     ```
 
@@ -2082,7 +2082,7 @@ To get to it, open up Safari and navigate to the URL `applefeedback://`
 
 * Enabling the Xcode Beta command line tools
 
-    ```shell script
+    ```shell
     sudo xcode-select --switch /Applications/Xcode-beta.app/
     ```
 
@@ -2101,7 +2101,7 @@ the command as a separate image, use the `-o {{< var OUTPUT_FILE >}}` option.
 
 * Convert PNG file to JPEG format
 
-    ```shell script
+    ```shell
     # Valid formats are as follows:
     # jpeg | tiff | png | gif | jp2 |
     # pict | bmp | qtif | psd | sgi | tga
@@ -2110,45 +2110,45 @@ the command as a separate image, use the `-o {{< var OUTPUT_FILE >}}` option.
 
 * Rotate PNG file 90 degrees
 
-    ```shell script
+    ```shell
     sips -r 90 'image.png'
     ```
 
 * Flip an image horizontally
 
-    ```shell script
+    ```shell
     sips -f horizontal 'image.png'
     ```
 
 * Flip an image vertically
 
-    ```shell script
+    ```shell
     sips -f vertical 'image.png'
     ```
 
 * Crop an image to {{< var HEIGHT >}} by {{< var WIDTH >}}
 
-    ```shell script
+    ```shell
     sips -c {{< var HEIGHT >}} {{< var WIDTH >}} 'image.png'
     ```
 
 * Resize image to updated dimensions {{< var HEIGHT >}} by {{< var WIDTH >}}.
   (**Note:** this may alter the actual aspect ratio)
 
-    ```shell script
+    ```shell
     sips -z {{< var HEIGHT >}} {{< var WIDTH >}} 'image.png'
     ```
 
 * Resize image to a maximum height **or** width {{< var DIMENSION >}},
   preserving the existing aspect ratio
 
-    ```shell script
+    ```shell
     sips -Z {{< var DIMENSION >}} 'image.png'
     ```
 
 * Get the dimensions (width and height) of an image
 
-    ```shell script
+    ```shell
     sips -g pixelWidth -g pixelHeight {{< var IMAGE >}}
     ```
 
@@ -2224,26 +2224,26 @@ If you're setting up processes in `/Library/LaunchDaemons`, which are run as the
 
 * View `launchctl` information about a daemon process by its `PID`:
 
-    ```shell script
+    ```shell
     sudo launchctl profinfo <PID>
     ```
 
 * View information about all services pertaining to a user's `UID`:
 
-    ```shell script
+    ```shell
     launchctl print user/$UID
     ```
 
 * View information about a particular *running* service under a user's `UID`:
 
-    ```shell script
+    ```shell
     # ~/Library/LaunchAgents/com.tommy.foo.plist
     launchctl print com.tommy.foo
     ```
 
 * For all daemon processes owned by the current user, print `true` if they are disabled
 
-    ```shell script
+    ```shell
     launchctl print-disabled user/$UID
     ```
 
@@ -2253,13 +2253,13 @@ Type the command without arguments to get the help. You'll see new domains to se
 
 * Printing the system root
 
-    ```shell script
+    ```shell
     launchctl print system
     ```
 
 * Printing details about a particular service within the root domain
 
-    ```shell script
+    ```shell
     launchctl print system/{{< var com.example.service >}}
     ```
 
@@ -2267,7 +2267,7 @@ For your processes: if it's not in the system domain it's probably in the domain
 
 * Checking the domain of a particular user
 
-    ```shell script
+    ```shell
     launchctl print user/<uid>/
     launchctl print user/<uid>/{{< var com.example.useragent >}}
     ```
@@ -2276,7 +2276,7 @@ However, since you'll be logged into the GUI, you might want to check the domain
 
 * Checking the domain of the GUI
 
-    ```shell script
+    ```shell
     launchctl print gui/<uid>
     launchctl print gui/<uid>/{{< var com.example.service >}}
     ```
@@ -2297,25 +2297,25 @@ to erase the entry.*
 
 * Enable a daemon service
 
-    ```shell script
+    ```shell
     launchctl enable user/$UID/com.tommy.foo
     ```
 
 * Disable a daemon service
 
-    ```shell script
+    ```shell
     launchctl disable user/$UID/com.tommy.foo
     ```
 
 * Launch a daemon service
 
-    ```shell script
+    ```shell
     launchctl kickstart
     ```
 
 * Launch any executable file with arguments as a launchctl
 
-    ```shell script
+    ```shell
     launchctl submit -l -- /path/to/executable 'arg1' 'arg2' 'arg3'
     ```
 
@@ -2326,7 +2326,7 @@ link the latest version of GCC installed by Homebrew into `/usr/local/bin`,
 while also removing the version number suffixed to the filename by Homebrew's
 installation formula.
 
-```shell script
+```shell
 # Choose the directory containing the latest version of GCC
 # as indicated by the highest number suffixed to 
 # the filepath of the package directory
@@ -2347,7 +2347,7 @@ these hashed commands will be rehashed, meaning the location specified in the
 and replaced by the executable in the foremost directory in the path 
 containing an executable with a matching name.
 
-```shell script
+```shell
 print -v version /usr/local/opt/gcc@<->(n[-1])
 version=${version#*@}
 for file in /usr/local/opt/gcc@${version}/bin/*-${version}(*); {

@@ -10,7 +10,7 @@ draft: true
 * Separate input fields by a colon, return the output separated by space,
   and save it into an array
 
-  ```shell script
+  ```shell
   gpg -k --with-colons \
     | grep '^...:e' \
     | awk -F ':' '{ print $5 }' \
@@ -19,4 +19,3 @@ draft: true
 
   gpg --delete-keys ${array}
   ```
-

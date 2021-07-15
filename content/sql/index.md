@@ -14,19 +14,19 @@ The first few lines of code are from inside your terminal, but the rest of the c
 
 Installing `mysql`
 
-```shell script
+```shell
 brew install mysql
 ```
 
 Starting up the `mysql` Server
 
-```shell script
+```shell
 brew services start mysql
 ```
 
 Stopping the `mysql` Server
 
-```shell script
+```shell
 brew services stop mysql
 ```
 
@@ -38,13 +38,13 @@ brew services stop mysql
 
 Export a Database to `.sql` File
 
-```shell script
+```shell
 mysqldump -u [username] -p [database name] > [database name].sql
 ```
 
 Execute a `sql` script on a Database
 
-```shell script
+```shell
 mysql -u root -p db_name < script.sql > output.tab
 ```
 
@@ -52,13 +52,13 @@ mysql -u root -p db_name < script.sql > output.tab
 
 * Check the server's MySQL version from the command line
 
-    ```shell script
+    ```shell
     mysqld --version
     ```
 
 * Check the client's MySQL version from the command line
 
-    ```shell script
+    ```shell
     mysql --version
     ```
 
@@ -99,7 +99,7 @@ The commands below will require you to log into your `mysql` server, which you c
 
 Connecting to MySQL server from the command line
 
-```shell script
+```shell
 # [Local MySQL Server]
 mysql -u root
 # [Remote MySQL Server]

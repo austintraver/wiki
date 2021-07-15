@@ -16,25 +16,24 @@ To add Google Cloud Storage to a Firebase Application, check out their
 
 * Enable WRITE access to bucket `gs://bucketname` for owners of the project `example`
 
-    ```shell script
+    ```shell
     gsutil acl ch -p owners-example:W gs://bucketname
     ```
 
 * Create a publicly accessible bucket
 
-    ```shell script
+    ```shell
     gsutil mb -b on 'gs://example.site'
     ```
 
 * [Change a bucket to be publicly accessible](https://cloud.google.com/storage/docs/access-control/making-data-public#buckets)
 
-    ```shell script
+    ```shell
     gsutil iam ch allUsers:objectViewer 'gs://example.site'
     ```
 
 * Synchronise the contents of a directory
 
-    ```shell script
+    ```shell
     gsutil rsync -R ./site/docs 'gs://example.site'
     ```
-

@@ -30,7 +30,7 @@ Some of these are taken from learning to
 
 * Find the most popular commands related to the word blob
 
-    ```shell script
+    ```shell
     az find blob
     ```
 
@@ -43,31 +43,31 @@ very well, so follow along their and come back when you have `az` set up.
 
 * Logging into the Azure CLI
 
-    ```shell script
+    ```shell
     az login
     ```
 
 * Loggout out of the Azure CLI
 
-    ```shell script
+    ```shell
     az logout --username {{< var USERNAME >}}
     ```
 
 * Search for a command
 
-    ```shell script
+    ```shell
     az find secret
     ```
 
 * Upgrade the `az` CLI
 
-    ```shell script
+    ```shell
     az upgrade --all --yes
     ```
 
 * Enter interactive mode
 
-    ```shell script
+    ```shell
     az interactive
     ```
 
@@ -102,7 +102,7 @@ or [the python SDK](https://docs.microsoft.com/en-us/azure/developer/python/azur
 
 * Python SDK:
 
-    ```shell script
+    ```shell
     pip install \
       azure-cli-core \
       azure-mgmt-storage \
@@ -125,7 +125,7 @@ Interestingly, you can't create a subscription from the command line. You'll hav
 
 * Get a list of all subscriptions for the current account ([az account](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest))
 
-    ```shell script
+    ```shell
     # Short form
     az account list -o table
 
@@ -135,7 +135,7 @@ Interestingly, you can't create a subscription from the command line. You'll hav
 
 * Set the default subscription to use in the Azure CLI:
 
-    ```shell script
+    ```shell
     # Short form
     az account set -s {{< var SUBSCRIPTION_NAME >}}
 
@@ -150,7 +150,7 @@ Check out
 
 * View a list of all current defaults
 
-    ```shell script
+    ```shell
     # Short form
     az configure -l
 
@@ -161,7 +161,7 @@ Check out
 * [Set the default location](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create)
 to {{< var LOCATION >}}, (e.g. `westus`)
 
-    ```shell script
+    ```shell
     # Short form
     az configure -d location={{< var LOCATION >}}
 
@@ -174,7 +174,7 @@ to {{< var LOCATION >}}, (e.g. `westus`)
 * [Create an Azure resource group](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az_group_create) 
 in {{< var LOCATION >}}, (e.g. `westus`)
 
-    ```shell script
+    ```shell
     # Short form
     az group create -n {{< var GROUP_NAME >}} [-l {{< var LOCATION >}}]
 
@@ -185,13 +185,13 @@ in {{< var LOCATION >}}, (e.g. `westus`)
 * [Set the default Azure resource group](https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az_configure-examples) 
 to {{< var GROUP_NAME >}}
 
-    ```shell script
+    ```shell
     az configure --defaults group={{< var GROUP_NAME >}}
     ```
 
 * Listing information about a resource group
 
-    ```shell script
+    ```shell
     resource_group='learn-ff1ca2e8-ec34-4b09-abf6-e1a70c9ce459'
     resource_type='Microsoft.Web/sites'
 
@@ -204,20 +204,20 @@ to {{< var GROUP_NAME >}}
 
 * Print a list of resource providers
 
-    ```shell script
+    ```shell
     az provider list --output table
     ```
 
 * Register the resource provider for the `Microsoft.Search` namespace
 
-    ```shell script
+    ```shell
     # `--wait` until the registration has completed
     az provider register --wait --namespace 'Microsoft.Search'
     ```
 
 * Show the registration status of a particular namespace
 
-    ```shell script
+    ```shell
     az provider show --namespace 'Microsoft.Search' --output table
     ```
 
@@ -225,7 +225,7 @@ to {{< var GROUP_NAME >}}
 
 * [Create a storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-cli#create-a-storage-account-1)
 
-    ```shell script
+    ```shell
     az storage account create \
     --name 'firestationhub' \
     --resource-group 'firestationhub' \
@@ -236,7 +236,7 @@ to {{< var GROUP_NAME >}}
 
 * [Create a blob storage container](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli#create-a-container)
 
-    ```shell script
+    ```shell
     az storage container create \
         --account-name {{< var STORAGE_ACCOUNT >}} \
         --name {{< var CONTAINER_NAME >}} \
@@ -245,19 +245,19 @@ to {{< var GROUP_NAME >}}
 
 * Set the Azure storage account name to be read from the environment
 
-    ```shell script
+    ```shell
     typeset -gx AZURE_STORAGE_ACCOUNT={{< var STORAGE_ACCOUNT_NAME >}}
     ```
 
 * [Upload a directory of files to a blob storage container](https://docs.microsoft.com/en-us/cli/azure/storage/blob?view=azure-cli-latest#az_storage_blob_upload_batch)
 
-    ```shell script
+    ```shell
     az storage blob upload-batch -d {{< var CONTAINER_NAME >}} -s ${PWD}
     ```
 
 * [Authorize access to the container scoped to the resource-group layer](https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-rbac-cli)
 
-    ```shell script
+    ```shell
     az role assignment create \
         --role 'Storage Blob Data Owner' \
         --assignee 'ttrojan@usc.edu' \
@@ -276,7 +276,7 @@ for Azure Files as well.
 
 1. [Create a storage account](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share?tabs=azure-cli#create-file-share)
 
-    ```shell script
+    ```shell
     az storage account create \
         --name {{< var ACCOUNT_NAME >}} \
         --resource-group {{< var GROUP_NAME >}} \
@@ -288,7 +288,7 @@ for Azure Files as well.
 1. [Create a file share](https://docs.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share?tabs=azure-cli#create-file-share)
 
 
-    ```shell script
+    ```shell
     az storage share-rm create \
         --resource-group {{< var GROUP_NAME >}} \
         --storage-account {{< var ACCOUNT_NAME >}} \
@@ -311,7 +311,7 @@ and its contents whenever you'd like with the following command:
 
 * Deleting a storage account
 
-    ```shell script
+    ```shell
     az storage account delete \
     --resource-group {{< var GROUP_NAME >}} \
     --name {{< var ACCOUNT_NAME >}}
@@ -319,7 +319,7 @@ and its contents whenever you'd like with the following command:
 
 * Updating the storage tier to `cool`
 
-    ```shell script
+    ```shell
     az storage share-rm update \
         --group {{< var GROUP >}} \
         --storage-account {{< var ACCOUNT_NAME >}} \
@@ -348,7 +348,7 @@ A single App Service plan can host multiple App Service apps.
 
 * List existing App Service plans
 
-    ```shell script
+    ```shell
     # Short form
     az appservice plan list -o table
 
@@ -358,7 +358,7 @@ A single App Service plan can host multiple App Service apps.
 
 * [Create a new app service](https://docs.microsoft.com/en-us/cli/azure/appservice/plan?view=azure-cli-latest#az_appservice_plan_create) {{< var SERVICE_NAME >}}
 
-    ```shell script
+    ```shell
     az appservice plan create \
         --name {{< var SERVICE_NAME >}} \
         --resource-group {{< var GROUP >}} \
@@ -368,7 +368,7 @@ A single App Service plan can host multiple App Service apps.
 
 * Get the details of a source control deployment configuration
 
-    ```shell script
+    ```shell
     az webapp deployment source show \
         --name {{< var WEB_APP_NAME >}} \
         --resource-group {{< var GROUP >}} \
@@ -377,7 +377,7 @@ A single App Service plan can host multiple App Service apps.
 
 * Get the details for available web app deployment profiles
 
-    ```shell script
+    ```shell
     az webapp deployment list-publishing-profiles \
         --name {{< var WEB_APP_NAME >}} \
         --resource-group {{< var GROUP >}} \
@@ -387,14 +387,14 @@ A single App Service plan can host multiple App Service apps.
 * [Set an environment variable](https://docs.microsoft.com/en-us/azure/app-service/configure-common#automate-app-settings-with-the-azure-cli)
   for an Azure web app
 
-    ```shell script
+    ```shell
     az webapp config appsettings set --settings {{< var KEY >}}={{< var VALUE >}}
     ```
 
 
 * Delete an app service (and all apps within it)
 
-    ```shell script
+    ```shell
     az appservice plan delete --name {{< var SERVICE_NAME >}}
     ```
 
@@ -402,7 +402,7 @@ A single App Service plan can host multiple App Service apps.
 
 * Create a web application {{< var APP_NAME >}}
 
-    ```shell script
+    ```shell
     az webapp create \
         --name {{< var APP_NAME >}} \
         --resource-group {{< var GROUP >}} \
@@ -411,13 +411,13 @@ A single App Service plan can host multiple App Service apps.
 
 * Set the default web application to {{< var APP_NAME >}}
 
-    ```shell script
+    ```shell
     az configure --defaults web={{< var APP_NAME >}}
     ```
 
 * Configure continuous deployment from GitHub repository {{< var REPO >}} (`https://github.com/ttrojan/helloworld`)
 
-    ```shell script
+    ```shell
     az webapp deployment source config \
         --name {{< var APP_NAME >}} \
         --resource-group {{< var GROUP >}} \
@@ -428,7 +428,7 @@ A single App Service plan can host multiple App Service apps.
 
 * Start a web app
 
-    ```shell script
+    ```shell
     resource_group='learn-ff1ca2e8-ec34-4b09-abf6-e1a70c9ce459'
     name='sandboxappforlearning'
 
@@ -439,7 +439,7 @@ A single App Service plan can host multiple App Service apps.
 
 * Stop a web app
 
-    ```shell script
+    ```shell
     resource_group='learn-ff1ca2e8-ec34-4b09-abf6-e1a70c9ce459'
     name='sandboxappforlearning'
 
@@ -450,13 +450,13 @@ A single App Service plan can host multiple App Service apps.
 
 * List available runtimes
 
-    ```shell script
+    ```shell
     az webapp list-runtimes
     ```
 
 * View the web app in your browser
 
-    ```shell script
+    ```shell
     az browse --name {{< var APPLICATION_NAME >}}
     ```
 
@@ -467,7 +467,7 @@ Microsoft's documentation has a great article about the steps to
 
 * Create a Cognitive Search service
 
-    ```shell script
+    ```shell
     az search service create \
         -n {{< var SERVICE_NAME >}} \
         -g {{< var RESOURCE_GROUP >}} \
@@ -475,4 +475,3 @@ Microsoft's documentation has a great article about the steps to
     ```
 
 You won't be able to do much else using the command-line interface past this point. Follow along in the Azure documentation to learn how to [create a search index](https://docs.microsoft.com/en-us/azure/search/search-get-started-portal)
-

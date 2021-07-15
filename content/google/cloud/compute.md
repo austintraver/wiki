@@ -4,13 +4,52 @@ date: 2020-08-22T04:19:26
 draft: true
 ---
 
+# Google Cloud Compute
+
+## Getting started
+
+* Create a new instance:
+
+  ```shell
+  gcloud compute instances create \
+    --image-family={{< var IMAGE_FAMILY >}}
+    --machine-type={{< var MACHINE_TYPE >}}
+    --zone={{< var ZONE >}}
+    --image-project={{< var IMAGE_PROJECT >}}
+    {{< var INSTANCE >}}
+  ```  
+
+  Where, for example:
+
+  * {{< var IMAGE_FAMILY >}} is `ubuntu-2004-lts`
+  * {{< var MACHINE_TYPE >}} is `f1-micro`
+  * {{< var ZONE >}} is `us-west1-a`
+  * {{< var IMAGE_PROJECT >}} is `ubuntu-os-cloud`
+  * {{< var INSTANCE >}} is `my-instance`
+
+* Configuring the default region:
+
+```shell
+gcloud config set compute/region {{< var REGION >}}
+```
+
+Where {{< var REGION >}} is, for example, `us-west2`
+
+```shell
+gcloud config set compute/zone {{< var ZONE >}}
+```
+
+Where {{< var ZONE >}} is, for example, `us-west2-a`
+
+* Configuring the default zone:
+
 ## Imported VM from `.ova` File
 
 * [Link to documentation](https://cloud.google.com/compute/docs/import/import-ovf-files#import_ova_file)
 
 * Copy the `.ova` VM file to Cloud Storage
 
-```shell script
+```shell
 gsutil cp ./path/to/vm.ova 'gc://bucket/vm.ova'
 ```
 
@@ -19,22 +58,24 @@ Article: [Connecting apps to instances using SSH](https://cloud.google.com/compu
 * Create a new compute instance using the imported VM file
 
 
-    ```shell script
-    gcloud compute instances import 'instance_name' \
-        --os='ubuntu-1804'
+    ```shell
+    gcloud compute instances import {{< var INSTANCE >}} \
+        --os={{< var OPERATING_SYSTEM >}}
         --source-uri='gs://bucket/vm.ova'
     ```
 
+    Where {{< var OPERATING_SYSTEM >}} is, for example, `ubuntu-1804`
+
 * Create a network
 
-    ```shell script
-    gcloud compute networks create 'vm_network' \
-    --project 'project_id'
+    ```shell
+    gcloud compute networks create {{< var NETWORK_ID >}} \
+    --project {{< var PROJECT >}}
     ```
 
 * Open the firewall
 
-    ```shell script
+    ```shell
     gcloud compute firewall-rules create ssh-all \
     --project 'project_id' \
     --network 'my_network' \
@@ -45,56 +86,99 @@ Article: [Connecting apps to instances using SSH](https://cloud.google.com/compu
 
 ## Standard setup instructions
 
-* List all current-edition images of Ubuntu OS
+* Printing a list of Google's current-edition images
 
-    ```shell script
-    gcloud compute images list --filter 'ubuntu' --standard-images
+    ```shell
+    gcloud compute images list --standard-images
     ```
 
-* [List all zones in a region](https://cloud.google.com/sdk/gcloud/reference/compute/zones/list)
+* Listing all of the 
+  [zones in a region](https://cloud.google.com/sdk/gcloud/reference/compute/zones/list)
 
-    ```shell script
+    ```shell
     gcloud compute zones list
     ```
 
-* List all machine types in region US West 1A
+* Listing all machine types in a region
 
-    ```shell script
-    gcloud compute machine-types list --zones 'us-west1-a'
+    ```shell
+    gcloud compute machine-types list --zones {{< var REGION >}}
+    ```
+  
+    Where {{< var REGION >}} is, for example, `us-west1`
+
+* Listing information about a particular instances network addresses
+
+    ```shell
+    gcloud compute addresses describe {{< var INSTANCE >}} --global
+    ```
+  
+* Provisioning a static IP address for an instance
+
+    ```shell
+    gcloud compute addresses create {{< var INSTANCE >}} --global --ip-version 'IPV4'
     ```
 
-* Acquire a static IP address
+* Setting the 
+  [machine type](https://cloud.google.com/sdk/gcloud/reference/compute/instances/set-machine-type)
 
-    ```shell script
-    gcloud compute addresses create {{< var NAME >}} --global --ip-version 'IPV4'
-    ```
-
-* List information about a static IP address
-
-    ```shell script
-    gcloud compute addresses describe {{< var NAME >}} --global
-    ```
-
-* [Set the machine type](https://cloud.google.com/sdk/gcloud/reference/compute/instances/set-machine-type)
-
-    ```shell script
+    ```shell
     gcloud compute instances set-machine-type bastion --machine-type 'g1-small'
     ```
+  
+    Where {{< var MACHINE_TYPE >}} is, for example, `g1-small`
 
-* [Import SSH keys using OS login](https://cloud.google.com/compute/docs/instances/managing-instance-access#add_oslogin_keys)
+* Stopping a currently running instance:
 
-    ```shell script
+    ```shell
+    gcloud compute instances stop {{< var INSTANCE >}}
+    ```
+
+* Uploading SSH keys onto a remote instance using [OS login](https://cloud.
+  google.
+  com/compute/docs/instances/managing-instance-access#add_oslogin_keys)
+
+    ```shell
     gcloud compute os-login ssh-keys add --key-file .ssh/id_rsa.pub --ttl 0
     ```
+  
+* Logging into an instance remotely using SSH:
 
-* Stop an instance
-
-    ```shell script
-    gcloud compute instances stop {{< var NAME >}}
+    ```shell
+    gcloud instances ssh {{< var INSTANCE >}}
     ```
 
-* SSH into an instance
+## Static IP
 
-    ```shell script
-    gcloud instances ssh {{< var NAME >}}
+* [Reserving an external IP address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#gcloud)
+
+    ```shell
+    gcloud compute addresses create 'website' \
+        --network-tier=PREMIUM \
+        --ip-version=IPV4 \
+        --global
     ```
+
+## Google Cloud Functions
+
+
+Following along Google Cloud documentation
+article [Quickstart: Using the gcloud Command-Line Tool][quickstart]
+
+[quickstart]: https://cloud.google.com/functions/docs/quickstart#functions-prepare-environment-go
+
+
+```shell
+gcloud functions deploy {{< var FUNCTION_NAME >}} \
+	--trigger-http \
+	--allow-unauthenticated \
+	--runtime {{< var LANGUAGE_RUNTIME >}} 'go113'
+```
+
+* Replace {{< var FUNCTION_NAME >}} with the name of a Google Cloud Function
+* Replace {{< var LANGUAGE_RUNTIME >}} with a value, such as `go113`
+
+
+```text
+https://us-west2-austintraver.cloudfunctions.net/Gist
+```

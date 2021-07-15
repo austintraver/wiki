@@ -40,7 +40,7 @@ like your `php.ini` file to be located.
 
 * Setting a custom location for `php.ini`
 
-    ```shell script
+    ```shell
     export PHPRC=/path/to/php.ini
     ```
 
@@ -57,13 +57,13 @@ like your `php.ini` file to be located.
 
 * Display the currently loaded extensions:
 
-    ```shell script
+    ```shell
     php -m
     ```
 
 * Check if a particular extension is loaded
 
-    ```shell script
+    ```shell
     ext='json'
     php -r "var_dump(extension_loaded('${ext}'));"
     ```
@@ -71,7 +71,7 @@ like your `php.ini` file to be located.
 * Running a Docker container of an Apache web server `php:rc-apache`
 running PHP on the backend
 
-    ```shell script
+    ```shell
     docker run -P --name phpguy -v ${PWD}:/var/www/html php:rc-apache
     ```
 
@@ -96,7 +96,7 @@ it far better than I could
 
 * Installing the extension `mysqli` from a container of the Docker `php:latest` image:
 
-    ```shell script
+    ```shell
     docker-php-ext-install mysqli
     ```
 
@@ -146,7 +146,7 @@ I'm not sure if this is always the case, but when I created a Docker container
 To fix this, update the Run/Debug configurations for the Docker application.
 The final command should look like this:
 
-```shell script
+```shell
 docker run \
     -P \
     -v ${PWD}:/var/www/html \
@@ -166,7 +166,7 @@ guide][xdebug install], or just copy the command below:
 
 * Installing Xdebug
 
-    ```shell script
+    ```shell
     brew install php@7.4
     pecl install xdebug
     ```
@@ -286,7 +286,6 @@ I've been told that
 [Composer](https://getcomposer.org/) is a useful tool for managing PHP
 dependencies. You can download it on macOS with the following command:
 
-```shell script
+```shell
 brew install composer
 ```
-

@@ -9,7 +9,7 @@ draft: false
 
 * Installing AWS on macOS:
 
-    ```shell script
+    ```shell
     curl 'https://awscli.amazonaws.com/AWSCLIV2.pkg' -o 'aws.pkg'
     installer -pkg aws.pkg -target /
     mv '/usr/local/aws-cli' '/usr/local/opt/aws'
@@ -18,7 +18,7 @@ draft: false
 
 * Installing AWS on macOS:
 
-    ```shell script
+    ```shell
     rm '/usr/local/opt/aws'
     rm -- /usr/local/bin/*(-@)
     ```
@@ -27,7 +27,7 @@ draft: false
 
 * Enabling completion for Zsh:
 
-    ```shell script
+    ```shell
     # Add this to `~/.zshrc`
     if (( ${+commands[aws]} )) {
       autoload bashcompinit
@@ -160,7 +160,7 @@ EC2, Amazon's Elastic Compute Cloud, is a virtual server that can perform comput
 
 * Create AWS EC2 RSA Private Key
 
-    ```shell script
+    ```shell
     aws ec2 create-key-pair > ~/.ssh/aws_key.pem \
       --key-name 'aws' \
       --query 'KeyMaterial' \
@@ -171,31 +171,31 @@ EC2, Amazon's Elastic Compute Cloud, is a virtual server that can perform comput
 
 * Describe the existing EC2 RSA Keys
 
-    ```shell script
+    ```shell
     aws ec2 describe-key-pairs --key-name 'aws'
     ```
 
 * Describe existing VPCs
 
-    ```shell script
+    ```shell
     aws ec2 describe-vpcs
     ```
 
 * Describe existing VPC Subnets
 
-    ```shell script
+    ```shell
     aws ec2 describe-subnets
     ```
 
 * Describe existing security groups
 
-    ```shell script
+    ```shell
     aws ec2 describe-security-groups
     ```
 
 * Create an EC2 instance
 
-    ```shell script
+    ```shell
     aws ec2 run-instances \
       --count 1 \
       --image-id 'ami-0e34e7b9ca0ace12d' \
@@ -209,7 +209,7 @@ Recently, AWS announced [support for Mac EC2 instances](https://aws.amazon.com/b
 
 * Create an [EC2 instance running macOS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#mac-instance-launch)
 
-    ```shell script
+    ```shell
     aws ec2 allocate-hosts --instance-type mac1.metal \
     --availability-zone us-east-1a --auto-placement on \
     --quantity 1 --region us-east-1
@@ -230,7 +230,7 @@ Stack Overflow! You can type `help` after any subcommand, which will summon
 a manual page that explains the available functionality.
 {{% /aside %}}
 
-```shell script
+```shell
 aws configure --profile tommy
 ```
 
@@ -261,7 +261,7 @@ The AWS Console will check for these variables in your shell environment:
 
 * Example `~/.zprofile` 
 
-    ```shell script
+    ```shell
     typeset -gx AWS_DEFAULT_OUTPUT='json'
     typeset -gx AWS_DEFAULT_REGION='us-west-2'
     typeset -gx AWS_ACCESS_KEY_ID='foo'
@@ -397,13 +397,13 @@ Types of Policies:
 
 * Create an IAM group `admin`:
 
-    ```shell script
+    ```shell
     aws iam create-group --group-name 'admin'
     ```
 
 * List existing IAM groups:
 
-    ```shell script
+    ```shell
     aws iam list-groups
     ```
 
@@ -412,55 +412,55 @@ Types of Policies:
 
 * Create an S3 Bucket
 
-    ```shell script
+    ```shell
     aws s3 mb s3://mybucket
     ```
 
 * Add an item to S3 Bucket
 
-    ```shell script
+    ```shell
     aws s3 cp file.txt s3://mybucket
     ```
 
 * Add a folder (and all its items) to S3 Bucket
 
-    ```shell script
+    ```shell
     aws s3 cp folder/ s3://mybucket
     ```
 
 * Add every item in a folder to S3 Bucket
 
-    ```shell script
+    ```shell
     aws s3 cp --recursive ./folder/ s3://mybucket
     ```
 
 * View the permissions of an object in an S3 Bucket
 
-    ```shell script
+    ```shell
     aws s3api get-object-acl --bucket 'mybucket' --key 'file.txt'
     ```
 
 * Grant anonymous read access to an object in an S3 Bucket
 
-    ```shell script
+    ```shell
     aws s3api put-object-acl --bucket 'mybucket' --key 'file.txt' --acl 'public-read'
     ```
 
 * Pull the associated torrent file
 
-    ```shell script
+    ```shell
     aws s3api get-object-torrent --bucket 'mybucket' --key 'file.txt' !#^.torrent
     ```
 
 * Now anyone can download the torrent file `file.txt.torrent` over HTTPS (works from web browser as well)
 
-    ```shell script
+    ```shell
     curl 'https://mybucket.s3.amazonaws.com/file.txt?torrent' > ~/Downloads/file.txt.torrent
     ```
 
 * Add the torrent to [transmission](https://helpful.wiki/transmission)
 
-    ```shell script
+    ```shell
     transmission-remote -a ~/Downloads/file.txt.torrent
     ```
 
@@ -468,7 +468,7 @@ Types of Policies:
 
 * Call the lambda function named `my-lambda-function`, supplying it with three arguments
 
-    ```shell script
+    ```shell
     aws lambda invoke \
       --function-name 'my-lambda-function' \
       --payload \
@@ -484,7 +484,7 @@ Types of Policies:
 
 * Whitelist Port `22` for IP `45.144.81.36` on the account's EC2 instances
 
-    ```shell script
+    ```shell
     aws ec2 \
         authorize-security-group-ingress \
         --group-name 'aws_security_group' \
@@ -495,19 +495,19 @@ Types of Policies:
 
 * Allocate an elastic public IP address
 
-    ```shell script
+    ```shell
     aws ec2 allocate-address
     ```
 
 * Describe elastic public IP addresses:
 
-    ```shell script
+    ```shell
     aws ec2 describe-addresses --public-ips
     ```
 
 * Associate an Elastic IP
 
-    ```shell script
+    ```shell
     aws ec2 associate-address \
       --instance-id 'i-004183eed3bb647a9' \
       --public-ip '34.210.111.105'
@@ -515,7 +515,7 @@ Types of Policies:
 
 * Release the IP address associated with a given allocation ID
 
-    ```shell script
+    ```shell
     aws ec2 release-address --allocation-id 'eipalloc-0adf787bf251776d3'
     ```
 
@@ -525,19 +525,19 @@ Types of Policies:
 
 * Launch the AWS CLI configuration wizard
 
-    ```shell script
+    ```shell
     aws configure wizard
     ```
 
 * Import credentials from a CSV file
 
-    ```shell script
+    ```shell
     aws configure import --csv file://path/to/creds.csv
     ```
 
 * Change the default region
 
-    ```shell script
+    ```shell
     # Default profile
     aws configure set default.region us-west-2
 
@@ -547,13 +547,13 @@ Types of Policies:
 
 * Change the default output to YAML
 
-    ```shell script
+    ```shell
     aws configure set default.output yaml
     ```
 
 * Launch the SSO configuration program
 
-    ```shell script
+    ```shell
     aws configure sso
     ```
 
@@ -566,7 +566,7 @@ two different ways:
 
 * Clearing SSO credentials
 
-    ```shell script
+    ```shell
     aws sso logout
     ```
 
@@ -579,7 +579,7 @@ EC2 instance. Supposedly it supports pair programming as well.
 
 * Create a new organization
 
-    ```shell script
+    ```shell
     aws organizations create-organization
     ```
 
@@ -587,7 +587,7 @@ EC2 instance. Supposedly it supports pair programming as well.
 
 * Create a REST API called `example-api`:
 
-    ```shell script
+    ```shell
     aws apigateway create-rest-api --name 'example-api'
     ```
 
@@ -599,4 +599,12 @@ EC2 instance. Supposedly it supports pair programming as well.
       - EDGE
     id: b3aszbiwb7
     name: example-api
+    ```
+
+## SQS
+
+* Create a new queue
+
+    ```shell
+    aws sqs --queue-name {{< var QUEUE_NAME >}}
     ```

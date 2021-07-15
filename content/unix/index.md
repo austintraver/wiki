@@ -11,13 +11,13 @@ draft: false
 
 * Enabling the root account
 
-  ```shell script
+  ```shell
   sudo passwd
   ```
 
 * Disable (`--lock`) the root account
 
-  ```shell script
+  ```shell
   sudo passwd -l root
   ```
 
@@ -38,7 +38,7 @@ draft: false
 
 * Installing `coreutils` on macOS
 
-  ```shell script
+  ```shell
   brew install coreutils
   export path=('/usr/local/opt/coreutils/libexec/gnubin' ${path})
   ```
@@ -52,18 +52,18 @@ Examples
 
 * Print the date in ISO8601 format
 
-  ```shell script
+  ```shell
   date -I
   ```
 
 * Print the local date & time in ISO8601 format
 
-  ```shell script
+  ```shell
   date -Is
   ```
 * Print the UTC date & time in ISO8601 format
 
-  ```shell script
+  ```shell
   date -uIs
   ```
 
@@ -73,7 +73,7 @@ Examples
 If you have a process running in the background of your terminal, you can release it. The process will continue, retaining the original PID, but it will no longer be part of your terminal session.
 
 
-```shell script
+```shell
 # disown the process with job id %2
 disown %2
 ```
@@ -92,31 +92,31 @@ You can use `stat` to get information about a file.
 
 * Get the octal permission code
 
-  ```shell script
+  ```shell
   stat -c '%a' <file>
   ```
 
 * Get the owner's user name
 
-  ```shell script
+  ```shell
   stat -c '%U' <file>
   ```
 
 * Get the owner's user ID
 
-  ```shell script
+  ```shell
   stat -c '%u' <file>
   ```
 
 * Get the owner's group name
 
-  ```shell script
+  ```shell
   stat -c '%G' <file>
   ```
 
 * Get the owner's group ID
 
-  ```shell script
+  ```shell
   stat -c '%g' <file>
   ```
 
@@ -128,33 +128,33 @@ The `du` command stands for *disk usage*. It can tell you information about how 
 
 * In human-readable format
 
-  ```shell script
+  ```shell
   du -sh ~/Desktop
   ```
 
 * In kilobytes
 
-  ```shell script
+  ```shell
   du -sBK ~/Desktop
   du -sk ~/Desktop
   ```
 
 * In megabytes
 
-  ```shell script
+  ```shell
   du -sBM ~/Desktop
   du -sm ~/Desktop
   ```
 
 * In gigabytes
 
-  ```shell script
+  ```shell
   du -sBG ~/Desktop
   ```
 
 * In terabytes
 
-  ```shell script
+  ```shell
   du -sBT ~/Desktop
   ```
 
@@ -168,7 +168,7 @@ You can also set the environment variable `DU_BLOCK_SIZE` to have a default sett
 
 * Configure `du` to use 1GB blocks
 
-  ```shell script
+  ```shell
   export DU_BLOCK_SIZE=1G
   ```
 
@@ -178,7 +178,7 @@ The `lsof` command stands for *list open files*. On the surface, this doesn't se
 
 * Check which program is running on a given port with the command below:
 
-  ```shell script
+  ```shell
   # Check for processes running on port 4000
   lsof -i :4000
   # Check for processes running on a range of ports, from 400 to 500
@@ -190,7 +190,7 @@ The `lsof` command stands for *list open files*. On the surface, this doesn't se
 
 * Check for connections to a specific host
 
-  ```shell script
+  ```shell
   # Check for connections to a specific host
   lsof -i@172.16.12.5
   # Check for connections to a specific host, but only on port 22
@@ -201,25 +201,25 @@ The `lsof` command stands for *list open files*. On the surface, this doesn't se
 
 * Check which files, sockets, ports are opened by a given PID
 
-  ```shell script
+  ```shell
   lsof -p 4125
   ```
 
 * Get all information about files opened by processes run by command `ruby`
 
-  ```shell script
+  ```shell
   lsof -c ruby
   ```
 
 * Get just the process id corresponding with processes run by command `ruby`
 
-  ```shell script
+  ```shell
   lsof -tc ruby
   ```
 
 * Get the process id of just processes run by user `tommy`
 
-  ```shell script
+  ```shell
   lsof -i -u tommy
   ```
 
@@ -229,7 +229,7 @@ The `-m` flag allows you to specify the octal permissions code for the files ins
 
 * Make a folder whose contents can only be written by the user
 
-  ```shell script
+  ```shell
   mkdir -m 755 folder
   ```
 
@@ -239,19 +239,19 @@ By default, `head` will return the first 10 lines of the specified file. You can
 
 * Print the first 5 lines of the file
 
-  ```shell script
+  ```shell
   head -n 5 file.txt
   ```
 
 * Print the first 5 lines of output
 
-  ```shell script
+  ```shell
   ls | head -n 5 file.txt
   ```
 
 * Print everything *except* the last 5 lines of the file
 
-  ```shell script
+  ```shell
   head -n -5 file.txt
   ```
 
@@ -261,19 +261,19 @@ By default, `tail` will return the last 10 lines of the specified file. You can 
 
 * Print the last 5 lines of the file
 
-  ```shell script
+  ```shell
   tail -n 5 file.txt
   ```
 
 * Print everything *except* the first 5 lines of the file
 
-  ```shell script
+  ```shell
   tail -n +5 file.txt
   ```
 
 * Print the last 5 lines of the output
 
-  ```shell script
+  ```shell
   ls | tail -n 5 file.txt
   ```
 
@@ -283,32 +283,32 @@ Although more people are familiar with the `.zip` extention written by microsoft
 
 * Compress `file.txt` into `file.txt.gz`
 
-  ```shell script
+  ```shell
   gzip file.txt
   # => Removes file.txt and creates file.txt.gz
   ```
 
 * Decompress `file.txt.gz` into `file.txt`
 
-  ```shell script
+  ```shell
   gzip -d file.txt.gz
   ```
 
 * Use the `-k` flag to `--keep` the original `file.txt` when creating the compressed `file.txt.gz`
 
-  ```shell script
+  ```shell
   gzip -k file.txt
   # => Creates file.txt.gz without deleting file.txt
   ```
 
 * Use the `-l` flag to `--list` some statistics about the compression, such as the percentage smaller the compressed file is compared to the original.
 
-  ```shell script
+  ```shell
   gzip -l file.txt.gz
   ```
 * Use the `-f` flag to `--force` the archive to be created, removing the pre-existing output file if it already exists.
 
-  ```shell script
+  ```shell
   gzip -cf file.txt
   # => Deletes file.txt.gz if it already exists
   ```
@@ -317,7 +317,7 @@ Although more people are familiar with the `.zip` extention written by microsoft
 
 The Unix `dig` command, which stands for "Domain Information Groper" is a program used to query DNS servers for the records held by domain names.
 
-```shell script
+```shell
 dig @1.1.1.1 helpful.wiki A +short
 # => 185.199.108.153
 ```
@@ -380,7 +380,7 @@ Examples
 
 * Create an archive of ~/example with root directory `example`
 
-  ```shell script
+  ```shell
   # Short form
   tar -C ~ -c example -f archive.tar
   # Long form
@@ -389,7 +389,7 @@ Examples
 
 * Create a compressed archive of `example`
 
-  ```shell script
+  ```shell
   # Short form
   tar -C ~ -c example -f archive.tgz -a
   # Long form
@@ -404,7 +404,7 @@ Examples
 
 * Append a file to an archive
 
-  ```shell script
+  ```shell
   # Short form
   tar -f archive.tar -r extra.txt
   # Long form
@@ -413,7 +413,7 @@ Examples
 
 * Listing the contents of an archive
 
-```shell script
+```shell
 tar -f archive.tar -t
 tar --file archive.tar --list
 # -> example/spaced out.txt
@@ -424,21 +424,21 @@ tar --file archive.tar --list --quoting shell
 
 * Unpack a tarball
 
-  ```shell script
+  ```shell
   tar --extract --verbose --file archive.tar
   tar -xvf archive.tar
   ```
 
 * Unpack a compressed tarball (exactly the same)
 
-  ```shell script
+  ```shell
   tar --extract --verbose --file archive.tgz
   tar -xvf archive.tgz
   ```
 
 * Unpack the tarball archive.tgz inside directory ~/Documents
 
-  ```shell script
+  ```shell
   tar -xvf archive.tgz -C ~/Documents
   tar --extract --verbose --file archive.tgz --dir ~/Documents
   ```
@@ -447,31 +447,31 @@ tar --file archive.tar --list --quoting shell
 
 Getting Started
 
-```shell script
+```shell
 brew install tree
 ```
 
 * View the directory structure up to 4 layers deep
 
-  ```shell script
+  ```shell
   tree -L 4
   ```
 
 * View only directories, not files
 
-  ```shell script
+  ```shell
   tree -d
   ```
 
 * View only files/folders matching a wildcard pattern
 
-  ```shell script
+  ```shell
   tree -P '.md'
   ```
 
 * View only files/folders that _don't_ match a wildcard pattern
 
-  ```shell script
+  ```shell
   # 1 directory
   tree -I 'node_modules'
   # >1 directory
@@ -482,28 +482,28 @@ brew install tree
 
 * Count the number of characters in `file.txt`
 
-  ```shell script
+  ```shell
   wc -m file.txt # the number of characters (supports utf-8)
   wc --chars file.txt
   ```
 
 * Count the number of words in `file.txt`
 
-  ```shell script
+  ```shell
   wc -w file.txt # the number of words
   wc --words file.txt
   ```
 
 * Count the number of lines in `file.txt`
 
-  ```shell script
+  ```shell
   wc -l file.txt # number of lines
   wc --lines file.txt
   ```
 
 * Count the number of words using *heredoc* style notation
 
-  ```shell script
+  ```shell
   wc -w << EOF
   one
   two
@@ -514,7 +514,7 @@ brew install tree
 
 * Count the number of chars using *herestring* style notation
 
-  ```shell script
+  ```shell
   wc -m <<< "你好"
   # => 3
   ```
@@ -527,7 +527,7 @@ brew install tree
 
 * Count the occurences of a single char `/` from stdin
 
-  ```shell script
+  ```shell
   echo '/Users/tommy/local/temp' | tr -cd '/' | wc -c
   ```
 
@@ -535,7 +535,7 @@ brew install tree
 
 * Given a spreadsheet of rows and columns, transpose the rows and columns
 
-  ```shell script
+  ```shell
   # Using BSD `rs`
   rs -T < input.txt > output.txt
 
@@ -581,7 +581,7 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
 
 * View the location of the `man` page associated with `printf`
 
-  ```shell script
+  ```shell
   # Short form
   man -w printf
 
@@ -607,13 +607,13 @@ Typically, a manpage for a given command is located at `/usr/share/man/man1/comm
 
 {{% /aside %}}
 
-  ```shell script
+  ```shell
   sudo update-alternatives /usr/bin/yarn yarn /usr/bin/yarnpkg 1
   ```
 
 You can also do the same for `python3`
 
-  ```shell script
+  ```shell
   sudo apt install python3
   sudo apt install python3-pip
   sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
@@ -624,7 +624,7 @@ You can also do the same for `python3`
 
 * Pretty print the path, with each directory on its own line
 
-  ```shell script
+  ```shell
   echo -e "${PATH//:/\\n}"
   ```
 
@@ -638,7 +638,7 @@ You can also do the same for `python3`
 
 * View the manual on file system hierarchies
 
-  ```shell script
+  ```shell
   man hier
   ```
 
@@ -656,7 +656,7 @@ A *Proxy Auto-Config* **PAC** file contains a JavaScript function that decides w
 
 * the `-x` or `--proxy` specifies to `curl` to use the following argument as the `HTTP` proxy. Unless specified otherwise, it will default to using port 3128.
 
-  ```shell script
+  ```shell
   # Using an HTTP proxy
   curl -x http://remote.net:80 http://example.com
 
@@ -671,7 +671,7 @@ A *Proxy Auto-Config* **PAC** file contains a JavaScript function that decides w
 
 Article: [Authentication: Everything curl](https://everything.curl.dev/http/auth)
 
-```shell script
+```shell
 curl --anyauth \
     --user {{< var USERNAME >}}:{{< var PASSWORD >}} \
     {{< var URL >}}
@@ -681,7 +681,7 @@ curl --anyauth \
 
 Example crontab using `zsh` globbing
 
-```shell script
+```shell
 SHELL=/bin/zsh
 
 # When the computer reboots,
@@ -713,7 +713,7 @@ SHELL=/bin/zsh
 
 * Edit `crontab` file for the user `tommy`
 
-  ```shell script
+  ```shell
   crontab -u tommy -e
   ```
 
@@ -726,7 +726,7 @@ SHELL=/bin/zsh
 
 * Create an archive containing the contents of inside `folder/`
 
-  ```shell script
+  ```shell
   # Short form
   zip -r sandbox.zip sandbox
 
@@ -770,7 +770,7 @@ SHELL=/bin/zsh
 
 * Ask for permission to run `sudo` commands in a script
 
-  ```shell script
+  ```shell
   #!/bin/zsh
 
   # Ask for elevated privileges with -v
@@ -785,7 +785,7 @@ SHELL=/bin/zsh
 
 * Logging into the `root` user
 
-  ```shell script
+  ```shell
   # Using the user `root`'s password
   sudo -i
 
@@ -795,19 +795,19 @@ SHELL=/bin/zsh
 
 * Logging into the user `tommy`'s account
 
-  ```shell script
+  ```shell
   sudo su -l tommy
   ```
 
 * Execute a sudo command using a plaintext password
 
-  ```shell script
+  ```shell
   sudo -S <<< "letmein" 2> /dev/null echo "No password"
   ```
 
 * Allow the user `tommy` to type `sudo` commands without having to input his password
 
-  ```shell script
+  ```shell
   # As the root user
   <<-EOF > /etc/sudoers.d/tommy
   tommy ALL = NOPASSWD: ALL
@@ -820,7 +820,7 @@ SHELL=/bin/zsh
 
 * See which users are logged on, and from where
 
-  ```shell script
+  ```shell
   who
   # tommy ttys001      2019-07-31 15:05
   # tommy ttys002      2019-07-31 15:21 (127.0.0.1)
@@ -830,7 +830,7 @@ SHELL=/bin/zsh
 
 * Show the differences between two files in side-by-side format
 
-  ```shell script
+  ```shell
   # [ Short Form ]
   diff -y one.txt two.txt
 
@@ -842,7 +842,7 @@ SHELL=/bin/zsh
 
 * Change the default shell for user `tommy` to `/bin/sh`
 
-  ```shell script
+  ```shell
   chsh -s /bin/sh tommy
   ```
 
@@ -850,7 +850,7 @@ SHELL=/bin/zsh
 
 * Print the name of the current operating system
 
-  ```shell script
+  ```shell
   uname
   # Darwin
   ```
@@ -859,7 +859,7 @@ SHELL=/bin/zsh
 
 * Print [the current architecture](https://stackoverflow.com/questions/12763296/os-x-arch-command-incorrect/12763379#12763379), either `i386` for Intel architectures capable of running Intel's 32-bit.
 
-```shell script
+```shell
 arch
 ```
 
@@ -871,7 +871,7 @@ i386
 
 * Translate the character `\n` to `,` for the contents of `/dev/stdin`
 
-  ```shell script
+  ```shell
   grep -o 'regex' | tr '\n' ','
   ```
 
@@ -887,13 +887,13 @@ To change what time it is, make a symbolic link from another timezone, and store
 
 * Set the timezone to `America/Los_Angeles`
 
-  ```shell script
+  ```shell
   sudo ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
   ```
 
 * Set the timezone to `Etc/UTC`
 
-  ```shell script
+  ```shell
   sudo ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
   ```
 
@@ -901,7 +901,7 @@ To change what time it is, make a symbolic link from another timezone, and store
 
 * Disable standard message banners that appear when logging into a UNIX-like system (tested on raspbian and ubuntu)
 
-  ```shell script
+  ```shell
   sudo chmod -x /etc/update-motd.d/*
   ```
 
@@ -913,19 +913,19 @@ The `dns-sd` diagnostic tool is useful for network scanning. If you are trying t
 
 * Browse the local network for `.local` domains to connect to via `ssh`
 
-  ```shell script
+  ```shell
   dns-sd -Z _ssh._tcp
   ```
 
 * Lookup detailed information about `Tommy's MacBook Pro`
 
-  ```shell script
+  ```shell
   dns-sd -L "Tommy's MacBook Pro" _ssh._tcp
   ```
 
 * Look up all advertised bonjour services
 
-  ```shell script
+  ```shell
   dns-sd -B _services._dns-sd._udp .
   ```
 
@@ -961,13 +961,13 @@ The `dns-sd` diagnostic tool is useful for network scanning. If you are trying t
 
 * Get a report of the last recorded amount of memory available in storage
 
-    ```shell script
+    ```shell
     df -kh
     ```
 
 * Begin recording a new entry for the last recorded amount of memory available in storage
 
-    ```shell script
+    ```shell
     du -ch
     ```
 

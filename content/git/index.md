@@ -27,7 +27,7 @@ default, we name this *remote repository* "origin."
 
 * Download `git` and `hub` on macOS
 
-    ```shell script
+    ```shell
     # Install both `git` and `hub` to the local machine
     brew install git hub
     ```
@@ -35,7 +35,7 @@ default, we name this *remote repository* "origin."
 * Add `hub` as an alias for `git` in your
   [zsh](/zsh) runtime configurations
 
-    ```shell script
+    ```shell
     < =(<<<'alias hub=zsh') >> ~/.zshrc
     source ~/.zshrc
     ```
@@ -50,7 +50,7 @@ fully-supported
 * Create a public (`-p`) gist for `manpager.sh` with description (`-d`) `Read
   manpages inside vi`, reading from standard input (`-`)
 
-    ```shell script
+    ```shell
     gh gist create -p \
       -f 'manpager.sh' \
       -d 'Read manpages inside vi' \
@@ -64,7 +64,7 @@ that the user has a GitHub account with the username `tommy`
 
 * Creating a local git repository
 
-    ```shell script
+    ```shell
     # v.1: Create a git repository in the current directory: `project/`
     git init
     # v.2: Create a repo, and GitHub repo, set it as the upstream
@@ -73,7 +73,7 @@ that the user has a GitHub account with the username `tommy`
 
 * Creating a remote GitHub repository
 
-    ```shell script
+    ```shell
     # v3: Create a public GitHub repository of this existing git repo
     git create
 
@@ -95,7 +95,7 @@ that the user has a GitHub account with the username `tommy`
 
 * Adding a remote repository as a branch to track
 
-    ```shell script
+    ```shell
     # Add a remote repository named "origin"
     git remote add origin
     # => git remote add ssh://git@github.com/tommy/project
@@ -103,7 +103,7 @@ that the user has a GitHub account with the username `tommy`
 
 * Adding a remote repository, simulating the settings configured by `git clone`
 
-    ```shell script
+    ```shell
     git init
     git remote add \
         -t 'master' \
@@ -115,14 +115,14 @@ that the user has a GitHub account with the username `tommy`
 
 * Updating the URL of a remote repository
 
-    ```shell script
+    ```shell
     git remote set-url \
         origin 'git@github.com:/{{< var USER >}}/{{< var REPO >}}.git'
     ```
 
 * [Pushing commits](https://docs.github.com/en/free-pro-team@latest/github/using-git/pushing-commits-to-a-remote-repository) to a remote repository
 
-    ```shell script
+    ```shell
     # Implicit push of current branch "master" to default remote "origin"
     git push
     # Explicit push of branch "master" to remote "origin"
@@ -167,7 +167,7 @@ The HEAD ref refers to the current branch that the user is working on.
 
 * View what branch you are working on
 
-    ```shell script
+    ```shell
     # View all local branches
     git branch -l
     git branch --list
@@ -186,19 +186,19 @@ The HEAD ref refers to the current branch that the user is working on.
 
 * Changing a branch's name
 
-    ```shell script
+    ```shell
     git branch -m <oldname> <newname>
     ```
 
 * [Changing a remote's URL](https://docs.github.com/en/free-pro-team@latest/github/using-git/changing-a-remotes-url)
 
-    ```shell script
+    ```shell
     git remote set-url origin git@github.com:{{< var USERNAME >}}/{{< var REPOSITORY >}}.git
     ```
 
 * Adding a local branch that tracks a remote branch
 
-    ```shell script
+    ```shell
     # Add local branch named `feature` that tracks `tina/project` on GitHub
     git remote -m feature
     git branch feature tina/project
@@ -206,7 +206,7 @@ The HEAD ref refers to the current branch that the user is working on.
 
 * Setting the upstream for a branch
 
-    ```shell script
+    ```shell
     # Short form
     git branch -u <upstream>,
 
@@ -244,7 +244,7 @@ type
 * Create a new branch that starts from the current commit of `master`, name this
   branch `feature`
 
-    ```shell script
+    ```shell
     # Create a new branch and check it out
     git checkout -b 'feature'
 
@@ -254,26 +254,26 @@ type
 
 * Add all the changes and commit them
 
-    ```shell script
+    ```shell
     git add . && git commit -m 'Make changes'
     ```
 
 * Switch to the previous branch
 
-    ```shell script
+    ```shell
     git checkout -
     ```
 
 * Merge the changes of the branch `feature`
 
-    ```shell script
+    ```shell
     # Merge the head of 'feature' with that of the current branch 'master'
     git merge 'feature'
     ```
 
 * Abandoning All Changes in Staging Area
 
-    ```shell script
+    ```shell
     # Perform a dry-run of the removal
     git rm -n --cached -r *
 
@@ -306,7 +306,7 @@ Using the `-a` and `-m` flags in conjunction, you can make a commit to a git
 repository in a single line. This flag will stage and commit all files that have
 been modified, but will not stage any files that are currently untracked.
 
-```shell script
+```shell
 git commit -am "My commit"
 ```
 
@@ -317,7 +317,7 @@ your username and password every time. That obviously gets old really quickly.
 If you're on a mac, you can integrate git with the OS X Keychain so that it
 remembers your username and password for future commands.
 
-```shell script
+```shell
 git config --global credential.helper osxkeychain
 ```
 
@@ -327,7 +327,7 @@ the next time you pull using HTTPS from GitHub
 If you ever need to reset this information (for instance, after changing your
 GitHub password), use the `erase` command
 
-```shell script
+```shell
 git credential-osxkeychain erase
 ```
 
@@ -376,7 +376,7 @@ it does not have any special properties.
 
 * Delete a branch from the local repository
 
-    ```shell script
+    ```shell
     # Short form
     git branch -d <branch>
 
@@ -388,13 +388,13 @@ it does not have any special properties.
 
 * Push all local branches to the remote repository
 
-    ```shell script
+    ```shell
     git push --all <remote>
     ```
 
 * Delete a branch from a remote repository
 
-    ```shell script
+    ```shell
     # Short form
     git push <remote> -d <branch>
 
@@ -404,7 +404,7 @@ it does not have any special properties.
 
 * Delete remote branches that are not present locally
 
-    ```shell script
+    ```shell
     git push --prune <remote>
     ```
 
@@ -439,19 +439,19 @@ Your configuration file is stored in a few places, and will be searched for in t
 
 * View the file associated with the current configurations set
 
-    ```shell script
+    ```shell
     git config --list --show-origin
     ```
 
 * View the file associated with a particular configuration
 
-    ```shell script
+    ```shell
     git config --show-origin --get-all core.autocrlf
     ```
 
 * Create a custom location for the global `.git/ignore` file
 
-    ```shell script
+    ```shell
     git config --global core.excludesfile ~/custom/path/to/my_gitignore
     ```
 
@@ -467,14 +467,14 @@ changes, use one of these commands
 * Roll back the last commit, overwriting the contents of files to their previous
   values the moment directly before the commit was made.
 
-    ```shell script
+    ```shell
     git reset --soft HEAD^
     ```
 
 * Roll back the last two commits, overwriting the contents of files to their
   previous values the moment directly more the second-to-last commit was made.
 
-    ```shell script
+    ```shell
     git reset --soft HEAD~2
     ```
 
@@ -485,13 +485,13 @@ as you would like, you just type in ~3, ~4 etc.
 
 * Abandon all staged and unstaged changes
 
-    ```shell script
+    ```shell
     git reset --hard HEAD
     ```
 
 * Abandoning all unstaged changes made in {{< var FILE >}}
 
-    ```shell script
+    ```shell
     git checkout {{< var FILE >}}
     ```
 
@@ -501,7 +501,7 @@ If you host your repositories on GitHub, you should download their command line
 tool `hub` which provides useful functionality for managing your GitHub remote
 repository directly from your command line.
 
-```shell script
+```shell
 brew install hub
 ```
 
@@ -509,26 +509,26 @@ Then, add `eval "$(hub alias -s)"` to your `.zshrc` file.
 
 * View open pull-requests for a repository
 
-    ```shell script
+    ```shell
     git pr list
     ```
 
 * Check out pull-request #1 (create a new branch with the contents of the pull
   request)
 
-    ```shell script
+    ```shell
     git pr checkout 1
     ```
 
 * Submit a pull-request from your remote's branch to their remote branch
 
-    ```shell script
+    ```shell
     git pull-request -h myremote:master -b theirs:master -m "Vague commit message"
     ```
 
 * Add two forks as remote branches to the repository
 
-    ```shell script
+    ```shell
     git fetch userone,usertwo
     ```
 
@@ -539,19 +539,19 @@ cryptographic signature. Usually, this is SSH, but it can be GPG as well.
 
 * Make a signed commit
 
-    ```shell script
+    ```shell
     git commit --gpg-sign
     ```
 
 * Verify the signature of a commit
 
-    ```shell script
+    ```shell
     git verify-commit HEAD
     ```
 
 * Merge all commits, but only if all of its commits were signed
 
-    ```shell script
+    ```shell
     # Short form
     git merge --verify -S develop
 
@@ -561,20 +561,20 @@ cryptographic signature. Usually, this is SSH, but it can be GPG as well.
 
 * Sign the previous commit
 
-    ```shell script
+    ```shell
     git commit --amend --no-edit -n -S
     ```
 
 * Sign every commit since `<commit>`
 
-    ```shell script
+    ```shell
     git filter-branch --commit-filter 'git commit-tree -S "$@";' <commit>..HEAD
     ```
 
 If you'd like to have GitHub show a `Verified` tag next to your commits, specify
 to `git` on your local machine that you'd like to sign your commits locally
 
-```shell script
+```shell
 # List all keys as well as their corresponding key ID
 gpg -k --keyid-format LONG
 # Specify the key ID for git to use for signing commits
@@ -588,7 +588,7 @@ git config --global commit.gpgsign true
 algorithm. To generate a key, follow below
 {{% /aside %}}
 
-```shell script
+```shell
 gpg --full-generate-key
 ```
 
@@ -596,7 +596,7 @@ gpg --full-generate-key
 key. To do so, copy the key ID to your clipboard and paste it inside the GitHub
 profile section for GPG keys.
 
-```shell script
+```shell
 gpg -k
 gpg --armor --export GitHub | pbcopy
 ```
@@ -619,7 +619,7 @@ git -C ~/dotfiles status
 
 * Resolve Merge Conflicts With `vimdiff`
 
-```shell script
+```shell
 git config --global --replace-all git.mergetool vimdiff
 git config --global --replace-all merge.conflictstyle diff3
 git config --global --replace-all mergetool.prompt false
@@ -685,7 +685,7 @@ There are six variables to be aware of when writing a commit, three for the auth
 
 For instance, this is how you would commit files, but **at a date and time that was in the past**:
 
-```shell script
+```shell
 GIT_AUTHOR_DATE={{< var TIMESTAMP >}} \
 GIT_COMMITTER_DATE={{< var TIMESTAMP >}} \
 git commit -m 'Travel back in time'
@@ -702,7 +702,7 @@ If you're developing on a macOS environment, and rename a file directory from
 perform a case-sensitive rename of a version-controlled file, you'll need to do
 it in two steps.
 
-```shell script
+```shell
 git mv 'Directory' 'temp'
 git mv 'temp' 'directory'
 ```
@@ -711,7 +711,7 @@ git mv 'temp' 'directory'
 
 * Show information about files in the index and working tree
 
-```shell script
+```shell
 git ls-files
 ```
 
@@ -735,7 +735,7 @@ The main utility you have when exploring the value of parameters set by Git is
 
 * Print the top level of the git repository, (i.e.: the root directory)
 
-    ```shell script
+    ```shell
     git rev-parse --show-toplevel
     ```
 
@@ -756,13 +756,13 @@ The main utility you have when exploring the value of parameters set by Git is
 
 * Sign all commits that can be reached from the current head
 
-    ```shell script
+    ```shell
     git rebase -i --root --exec 'git commit --amend --no-edit --no-verify -S'
     ```
 
 * Remove every instance of a file from the repository's commit history
 
-  ```shell script
+  ```shell
   git filter-branch --index-filter \
     'git rm --cached -f -r --ignore-unmatch <file>' \
     --tag-name-filter cat -- --all
@@ -772,13 +772,13 @@ The main utility you have when exploring the value of parameters set by Git is
 
 * Print the hash and description for each commit that ever modified a file named `settings.json`
 
-    ```shell script
+    ```shell
     git log --oneline --follow --full-history -- '**/settings.json'
     ```
 
 * Print a graph of the changes made over time across branches and commits to `settings.json`
 
-    ```shell script
+    ```shell
     git log --graph -- '**/settings.json'
     ```
 
@@ -808,60 +808,74 @@ importantly of all, supported by GitHub.
 
 * Prepare a repository for `git lfs` commands
 
-    ```shell script
+    ```shell
     git lfs install
     ```
 
 * Track all files ending with `.tgz` file extension
 
-    ```shell script
+    ```shell
     git lfs track '*.tgz'
     git add '.gitattributes'
     ```
 
 ## Git Submodules
 
+the quick brown
+fox jumps over the lazy dog
+oh my god
+
 Sometimes you need to use somebody's project as part of your project. It'd be
 wasteful to copy all of the revisions of their code base into your git
-repository, as you won't be the one making/reversing those edits. Thankfully the
+repository, as you won't be the one making/reversing those edits. 
+
+An excerpt from the book "Pro Git" has come to the rescue:
+
+Git addresses this issue using submodules. Submodules allow you to keep a Git
+repository as a subdirectory of another Git repository. This lets you clone
+another repository into your project and keep your commits separate.
+
+Thankfully the
 `git submodule` command allows us to use other repositories within our own.
+
+https://docs.github.com/en/packages/guides/about-github-container-registry
 
 * Initialize repository for submodule support
 
-    ```shell script
+    ```shell
     git submodule init
     ```
 
 * Add a submodule to a repository
 
-    ```shell script
+    ```shell
     repo='git@github.com:austintraver/homebrew-tap.git'
     git submodule add ${repo} rel/path/to/dest
     ```
 
 * View the status of all submodules
 
-    ```shell script
+    ```shell
     git submodule summary
     ```
 
 * Update each submodule to the latest commit found on the remote
 
-    ```shell script
+    ```shell
     git submodule update --recursive --remote
     ```
 
 * Configure git to fetch all submodules from their respective remotes
   at the same time, instead of one-by-one (the default).
 
-    ```shell script
+    ```shell
     git config --set submodule.fetchJobs 0
     ```
 
 * To see a list of all patterns currently being tracked by `git-lfs`, run git
   lfs track (with no arguments)
 
-    ```shell script
+    ```shell
     git lfs track
     # Listing tracked paths
     # *.bin (.gitattributes)
@@ -871,13 +885,13 @@ repository, as you won't be the one making/reversing those edits. Thankfully the
 
 * View the date that a file was last added/commited
 
-    ```shell script
+    ```shell
     git log -1 --format="%ai" -- /path/to/file
     ```
 
 * View the date that files were first added/committed
 
-    ```shell script
+    ```shell
     git log --format="format:%ci" --name-only --diff-filter=A
     ```
 
@@ -885,7 +899,7 @@ repository, as you won't be the one making/reversing those edits. Thankfully the
 
 * Create a [partial clone](https://git-scm.com/docs/partial-clone) of user {{< var USER >}}  repository {{< var REPO >}}:
 
-    ```shell script
+    ```shell
     gh repo clone {{< var USER >}}/{{< var REPO >}} \
         -- \
         --single-branch \
@@ -906,7 +920,7 @@ would any other code base.
 
 * Cloning the wiki for the `fighton` repo made by user `ttrojan`
 
-    ```shell script
+    ```shell
     git clone 'https://github.com/ttrojan/fighton.wiki.git'
     ```
 
@@ -928,7 +942,7 @@ To learn more about the shorthand syntaxes available, see [Autolinked references
 
 GitHub supports a *secret* [profile repository](https://docs.github.com/en/github/setting-up-and-managing-your-github-profile/managing-your-profile-readme) feature. If you create a repository at {{< var USERNAME >}}/{{< var USERNAME >}}, you can add a bio to your profile. GitHub will display the contents of the repo's `README.md` on your profile page. Try it out:
 
-```shell script
+```shell
 gh repo create --public {{< var USERNAME >}}/{{< var USERNAME >}}
 cd {{< var USERNAME >}}
 echo '# Bio' > README.md
@@ -943,3 +957,49 @@ Once you've visited the repository, navigate to your profile to see the change!
 ## GitHub supports the OpenGraph API
 
 TIL GitHub supports [Custom Open Graph Images for repositories](https://github.blog/2019-04-17-custom-open-graph-images-for-repositories/)
+
+## GitHub Container Registory
+
+* Authenticating to [the GitHub container registry], located at <https://ghcr.io>
+
+    ```shell
+    docker login ghcr.io \
+        --username {{< var USERNAME >}} \
+        --password {{< var PASSWORD >}}
+    ```
+
+    Where <https://ghcr.io>
+
+[the GitHub container registry]: https://docs.github.com/en/packages/guides/about-github-container-registry
+
+## GitHub Security Policy
+
+# Security Policy
+
+## Reporting a Vulnerability
+
+Create the file `SECURITY.md` and place it in any of the following locations:
+
+* `/`
+* `/docs/`
+* `/.github/`
+
+See my example below to learn more about [Adding a security policy to your repository][]
+
+[Adding a security policy to your repository]: https://docs.github.com/en/code-security/security-advisories/adding-a-security-policy-to-your-repository
+
+```markdown
+Use this section to tell people how to report a vulnerability.
+
+Tell them where to go, how often they can expect to get an update on a
+reported vulnerability, what to expect if the vulnerability is accepted or
+declined, etc.
+
+---
+
+**Note**: Added this to practice [GitHub's security policy] feature.
+
+-- @austintraver
+
+[GitHub's security policy]: https://docs.github.com/en/code-security/security-advisories/adding-a-security-policy-to-your-repository
+```
