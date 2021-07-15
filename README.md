@@ -20,7 +20,7 @@ me as a beginner programmer.
 
 I asked a senior sitting next to me:
 
-> How can I possibly be expected to remember [all of this boilerplate]?
+> How can I possibly be expected to remember all of this?
 
 He advised me:
 
