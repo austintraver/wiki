@@ -1,0 +1,22 @@
+{{ if not (.Get 0) }}
+    {{ errorf "%v - @%v: failed to embed URL" .Position .Name }}
+{{ end }}
+{{  $url := (.Get 0) }}
+{{/* Extract the video ID from a standard URL */}}
+{{ if hasPrefix $url "https://www.youtube.com/watch?v=" }}
+    {{ $url = $url.trimPrefix "https://www.youtube.com/watch?v=" }}
+{{/* Extract the video ID from an embedded URL */}}
+{{ else if hasPrefix $url "https://www.youtube.com/embed/" }}
+    {{ $url = $url.trimPrefix "https://www.youtube.com/embed/" }}
+{{ end }}
+{{/* Inject the ID into an embedded URL */}}
+{{ $url = (printf "https://www.youtube.com/embed/%s" $url) }}
+{{/* TODO: create a class for the "div" and "iframe" corresponding to this shortcode */}}
+<div style="position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 5vh; overflow: hidden;">
+  <iframe
+      src="{{ $url }}"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"
+      allowfullscreen
+      title="YouTube Video">
+  </iframe>
+</div>

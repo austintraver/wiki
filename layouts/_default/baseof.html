@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--suppress HtmlUnknownTarget, HtmlRequiredTitleElement -->
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+  {{ partial "hydra" . }}
+  {{ block "head" . }}
+    {{ partial "firebase" . }}
+    {{ partial "head" . }}
+  {{ end }}
+</head>
+<body>
+  <nav class="partial">
+    {{ partial "nav" . }}
+  </nav>
+  <main>
+    {{ block "main" . }}
+      {{ .Content }}
+    {{ end }}
+  </main>
+  <footer>
+    {{ block "footer" . }}
+    {{ end }}
+  </footer>
+</body>
+</html>

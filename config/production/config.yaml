@@ -1,5 +1,4 @@
 # ------------------------------------------------------------------------------
-# doctober config.yaml
 # https://gohugo.io/getting-started/configuration/
 buildDrafts: false
 buildExpired: false

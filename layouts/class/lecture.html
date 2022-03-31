@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article>
+    <h1>{{ .Title }}</h1>
+    {{ if .Params.publishDate }}
+    <strong>
+      <time datetime='{{ .Date.Format "2006-01-02" }}'>
+        {{ .Date.Format "Jan 2, 2006" }}
+      </time>
+    </strong>
+    {{ end }}
+    <hr>
+    {{ .Content }}
+  </article>
+  <div class="toast"></div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "footer" . }}
+{{ end }}

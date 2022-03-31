@@ -1,0 +1,15 @@
+{{ define "head" }}
+  {{ partial "firebase" . }}
+  {{ partial "head" . }}
+  <script defer src="/js/single.js"></script>
+{{ end }}
+{{ define "main" }}
+  <article>
+  {{ .Content }}
+  </article>
+  <div class="toast"></div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "footer" . }}
+{{ end }}

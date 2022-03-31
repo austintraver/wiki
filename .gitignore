@@ -16,3 +16,5 @@ img/fa/r
 *.css.map
 *.js.map
 node_modules/
+/public/
+

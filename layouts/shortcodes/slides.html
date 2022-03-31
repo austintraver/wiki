@@ -1,0 +1,13 @@
+{{ if .Get 0 }}
+<div
+    style="padding-bottom:56.25%; position:relative; display:block; width: 100%; margin-bottom: 5vh"
+>
+  <iframe
+      allowfullscreen=""
+      height="100%"
+      src="{{ .Get 0 }}"
+      style="position:absolute; top:0; left: 0"
+      width="100%"
+  ></iframe>
+</div>
+{{ end }}

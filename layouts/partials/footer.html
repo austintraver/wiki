@@ -1,0 +1,12 @@
+{{ if .Params.Date }}
+<p>First created
+  <time datetime='{{ .Date.Format "2006-01-02" }}'>
+    {{ .Date.Format "Jan 2, 2006" }}
+  </time>
+</p>
+{{ end }}
+<p>Last modified
+  <time datetime='{{ .Lastmod.Format "2006-01-02" }}'>
+    {{ .Lastmod.Format "Jan 2, 2006" }}
+  </time>
+</p>
