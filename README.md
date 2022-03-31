@@ -13,16 +13,13 @@ If you're trying to build your own website, I strongly encourage you to check it
 
 ## Inspiration
 
-When I was a freshman, I was struggling with a programming assignment.
+When I was a freshman, I remember struggling with my programming assignments. The amount of code that's required to... well... *code*, felt overwhelming to me as a novice programmer.
 
-The amount of code that's required to... "code", was overwhelming to 
-me as a beginner programmer.
-
-I asked a senior sitting next to me:
+One time, during a late night in the computer lab, I turned to the senior sitting next to me, and in a moment of exasperation, I asked him:
 
 > How can I possibly be expected to remember all of this?
 
-He advised me:
+He thought about it, shrugged, and advised me:
 
 > You don't have to remember how you did it, you just have to remember where you wrote it down.
 

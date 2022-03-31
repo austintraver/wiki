@@ -3,24 +3,6 @@
  "bugs": {
   "url": "https://github.com/austintraver/wiki/issues"
  },
- "comments": {
-  "dependencies": {
-   "@docsearch/js": "project",
-   "@popperjs/core": "/Users/austin/.doctober",
-   "bootstrap": "/Users/austin/.doctober",
-   "firebase": "project",
-   "katex": "/Users/austin/.doctober"
-  },
-  "devDependencies": {
-   "@babel/cli": "/Users/austin/.doctober",
-   "@babel/core": "/Users/austin/.doctober",
-   "@docsearch/css": "/Users/austin/.doctober",
-   "@docsearch/js": "/Users/austin/.doctober",
-   "esbuild": "/Users/austin/.doctober",
-   "sass": "/Users/austin/.doctober",
-   "typescript": "project"
-  }
- },
  "dependencies": {
   "@docsearch/js": "*",
   "@popperjs/core": "^2.9.2",
