@@ -1,0 +1,163 @@
+@media screen and (min-width: 576px) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    header {
+        scroll-margin-top: 8px;
+    }
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    font-size: inherit;
+    margin-bottom: 5px;
+}
+
+nav a.logo {
+    justify-content: space-between;
+}
+
+nav a.author {
+    display: none;
+}
+
+@media screen and (min-width: 576px) {
+    nav a.author {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+html {
+    /* Adjust offset for the height of the <nav> element */
+    scroll-padding-top: 64px;
+}
+
+
+@media screen and (min-width: 576px) {
+    nav .author q {
+        font-style: italic;
+        font-size: 0.7rem;
+        color: #cccccc;
+    }
+
+    /* q:before, q:after { content: ""; } */
+
+    nav img.portrait {
+        background-color: #d2b189;
+        border-radius: 10%;
+        margin-left: 24px;
+        height: auto;
+        width: 48px;
+    }
+
+    nav a.author div {
+        display: block;
+    }
+
+    nav a.author div p.author {
+        font-family: "Roboto Mono", monospace;
+        margin-top: 0;
+        margin-bottom: 4px;
+        padding: 0;
+    }
+
+    nav a.author div p.name {
+        font-size: 1.2rem;
+        text-align: left;
+    }
+
+}
+
+body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+kbd {
+    text-indent: 0px;
+}
+
+section.intro summary {
+    text-indent: 0ch;
+    font-size: 1.5rem;
+    max-width: max-content;
+    margin: 20px auto;
+}
+
+section.intro details {
+    max-width: min(90%, 80ch);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section.intro details p {
+    text-indent: 4ch;
+    font-family: serif;
+    font-size: 18px;
+}
+
+@media screen and (min-width: 768px) {
+    section.intro details p {
+        font-size: 20px;
+        line-height: 32px;
+    }
+}
+
+main {
+    max-width: 1200px;
+    margin: unset;
+}
+
+main > h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+main > p {
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+}
+
+.collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Individual elements of the grid */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 260px;
+    width: min(320px, 90vw);
+    border-radius: 16px;
+    font-weight: normal;
+    text-decoration: none;
+    margin: 16px;
+}
+
+.card img,
+.card picture {
+    border-radius: 16px 16px 0 0;
+    object-fit: cover;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.card header {
+    font-size: 22px;
+    letter-spacing: 0.05rem;
+    margin: 0;
+    padding: 16px;
+    text-align: center;
+}

@@ -1,9 +1,4 @@
 .DS_Store
-*.webp
-*.png
-*.jpg
-*.jpeg
-*.svg
 *.ico
 *.ttf
 *.otf
@@ -17,4 +12,4 @@ img/fa/r
 *.js.map
 node_modules/
 /public/
-
+/firebase-debug.log
