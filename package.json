@@ -7,7 +7,6 @@
   "@docsearch/js": "*",
   "@popperjs/core": "^2.9.2",
   "bootstrap": "^5.0.0-beta3",
-  "firebase": "^8.3.2",
   "katex": "^0.13.2"
  },
  "description": "Welcome to the wiki, which doubles as my personal notebook for all things \"software engineering.\"",
