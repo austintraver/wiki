@@ -4,7 +4,7 @@
   </section>
   <section class="collection">
     {{ range sort .Pages ".FuzzyWordCount" "desc" }}
-      {{ $img := path.Join .RelPermalink "featured" }}
+      {{ $img := path.Join "https://media.githubusercontent.com/media/austintraver/wiki/master/content/" (slicestr (path.Join .RelPermalink "featured") ) }}
       <a class="card" href="{{ .RelPermalink }}">
         <picture>
           <source type="image/webp"
