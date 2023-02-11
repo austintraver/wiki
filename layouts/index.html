@@ -4,15 +4,15 @@
   </section>
   <section class="collection">
     {{ range sort .Pages ".FuzzyWordCount" "desc" }}
-      {{ $img := path.Join "https://docs.austin.jp/" (slicestr (path.Join .RelPermalink "featured") ) }}
+      {{ $img := path.Join "docs.austin.jp" (slicestr (path.Join .RelPermalink "featured") ) }}
       <a class="card" href="{{ .RelPermalink }}">
         <picture>
           <source type="image/webp"
-              srcset="{{ $img }}-1x.webp 1x,
-                      {{ $img }}-2x.webp 2x,
-                      {{ $img }}-3x.webp 3x"
+              srcset="https://{{ $img }}-1x.webp 1x,
+                      https://{{ $img }}-2x.webp 2x,
+                      https://{{ $img }}-3x.webp 3x"
           >
-          <img alt="" loading=lazy class="preview" src="{{ $img }}.png">
+          <img alt="" loading=lazy class="preview" src="https://{{ $img }}.png">
         </picture>
         <header>{{ .Title }}</header>
       </a>
