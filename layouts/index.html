@@ -4,7 +4,7 @@
   </section>
   <section class="collection">
     {{ range sort .Pages ".FuzzyWordCount" "desc" }}
-      {{ $img := path.Join .RelPermalink "poster" }}
+      {{ $img := path.Join .RelPermalink "cover" }}
       <a class="card" href="{{ .RelPermalink }}">
         <picture>
           <img alt="" loading=lazy class="preview" src="{{ $img }}.png">
