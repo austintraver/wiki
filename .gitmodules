@@ -1,3 +1,0 @@
-[submodule "nvim/pack/usr/start/dbml"]
-	path = nvim/pack/usr/start/dbml
-	url = https://github.com/jidn/vim-dbml.git
