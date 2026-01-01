@@ -381,7 +381,7 @@ Before you begin editing, your configuration might look like this:
 
 ```conf
 [daemon]
-# Uncoment the line below to force the login screen to use Xorg
+# Uncomment the line below to force the login screen to use Xorg
 #WaylandEnable=false
 
 # Enabling automatic login
@@ -393,7 +393,7 @@ Change the file so that it instead looks like this:
 
 ```conf
 [daemon]
-# Uncoment the line below to force the login screen to use Xorg
+# Uncomment the line below to force the login screen to use Xorg
 #WaylandEnable=false
 
 # Enabling automatic login

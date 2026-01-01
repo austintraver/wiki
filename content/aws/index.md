@@ -99,7 +99,7 @@ draft: false
     * Example: *AWS EC2*
 
 * Platform as a Service (PaaS)
-    * Provides a platform that allows developers to build, run, and manage applciations
+    * Provides a platform that allows developers to build, run, and manage applications
     * Example: *Heroku*, *Elastic Beanstalk*, *Google App Engine*
 
 * Software as a Service (SaaS)
@@ -391,7 +391,7 @@ Types of Policies:
 - AWS Organizations: Contain Service control policies (SCPs)
 - AWS Identity Access Management
 - AWS Security Token Service (STS)
-- Virual Private Cloud (VPC) Endpoints
+- Virtual Private Cloud (VPC) Endpoints
 
 ### IAM on the Command-Line
 

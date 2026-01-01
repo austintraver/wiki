@@ -22,7 +22,7 @@ chose the name, he cleverly replied:
 > because `less` is `more` - Mark Nudelman
 
 When you type `$ man grep` on your terminal, the navigation is different from
-how onw would, say, inspect a file in Safari. For instance, you might be
+how one would, say, inspect a file in Safari. For instance, you might be
 wondering how to close the man file. If you jumped for `⌃ C` then you're not
 alone. However, pressing `q` is the keybinding to exit from the `less` pager,
 which is the program used to render the text output by the `man` command.

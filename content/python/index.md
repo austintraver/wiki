@@ -190,7 +190,7 @@ python -c "from notebook.auth import passwd; print(passwd('${pass}'))"
 pylint --generate-rcfile > ~/.pylintrc
 ```
 
-If `pylint` notifies you about a linting error that you don't like, add it as an entry, seperated by a comma, to `disable`. e.g.
+If `pylint` notifies you about a linting error that you don't like, add it as an entry, separated by a comma, to `disable`. e.g.
 
 ```txt
 disable=missing-docstring,
@@ -274,9 +274,9 @@ Regular Expression Flags
 |         +         |                                           Match 1 or more                                            |
 |        \*         |                                           Match 0 or more                                            |
 |         ?         |                                                0 or 1                                                |
-|        {k}        |                       Match k consecutive occurances of the preceeding pattern                       |
-|       {m,n}       | Match from m to n consecutive occurences (inclusive) of the preceeding pattern (as many as possible) |
-|      {m,n}?       | Match from m to n consecutive occurrences (inclusive) of the preceeding pattern (as few as possible) |
+|        {k}        |                       Match k consecutive occurrences of the preceding pattern                       |
+|       {m,n}       | Match from m to n consecutive occurrences (inclusive) of the preceding pattern (as many as possible) |
+|      {m,n}?       | Match from m to n consecutive occurrences (inclusive) of the preceding pattern (as few as possible)  |
 |         .         |                              Match any character except a newline `\n`                               |
 |         ^         |                                    Match the start of the string                                     |
 |         $         |                                       Match the end of string                                        |
@@ -353,7 +353,7 @@ The `datetime` library has a few packages:
     event = datetime.date.fromisoformat("2018-12-31")
     # -00:00 is an illegal format but Python will interpret it successfully
     event = datetime.datetime.fromisoformat("2018-12-31T12:31:58-08:00")
-    # Using whitespace seperator instead of 'T' character
+    # Using whitespace separator instead of 'T' character
     event = datetime.datetime.fromisoformat("2018-12-31 04:31:58+00:00")
     ```
 

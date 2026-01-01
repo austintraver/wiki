@@ -188,7 +188,7 @@ In archive syntax, the meanings of those flags are as follows:
 Every Java implementation contains the following core packages. This is effectively the STL for Java, outlined below
 
 * java.text (text classes)
-* java.lang (langauge classes)
+* java.lang (language classes)
 * java.io (input output)
 * java.net (network classes)
 * java.util.concurrent (thread utilities)
@@ -208,7 +208,7 @@ String lastname = "Smith";
 String fullname = firstname + " " + lastname;
 
 // although in C++, strings can span multiple lines...
-// ...they can't in Java without this type of workaroudn syntax
+// ...they can't in Java without this type of workaround syntax
 String multiline = "Roses are red\n" +
                    "Violets are blue";
 ```
@@ -284,7 +284,7 @@ str3.compareTo(str3); // 0 (equal)
 
 Strings come with many useful methods built-in:
 
-* `startsWith()` and `endsWith()` provide an easy way to splice a string without dealing with array indeces.
+* `startsWith()` and `endsWith()` provide an easy way to splice a string without dealing with array indices.
 * `indexOf()` lets you find the index of a substring. You can include a string, not just a char, and it will return the index of the first matching char in the substring.
 * `charAt()` returns the char of the String at a given index.
 * `contains()` checks if a string contains a substring
@@ -608,17 +608,17 @@ public class Example {
 
   public static void main(String[] args) throws Exception {
 
-  // initalize a PrintStream that writes to "stdout.txt"
+  // initialize a PrintStream that writes to "stdout.txt"
   System.setOut(new PrintStream(new FileOutputStream("stdout.txt")));
   // write to stdout
   System.out.printf("This is stdout\n");
 
-  // initalize a PrintStream that writes to "stderr.txt"
+  // initialize a PrintStream that writes to "stderr.txt"
   System.setErr(new PrintStream(new FileOutputStream("stderr.txt")));
   // write to stderr
   System.err.printf("This is stderr\n");
 
-  // initalize an input stream from "stdin.txt"
+  // initialize an input stream from "stdin.txt"
   System.setIn(new FileInputStream("stdin.txt"));
   }
 }
@@ -825,7 +825,7 @@ This is a static class that allows us to create a connection. It has two useful 
 
 ### `java.sql.Connection`
 
-A connection object represents a conection to a specific database in the SQL server. We can use it to send multiple consecutive queries to the same database. A SQL connection is created from the `DriverManager` class's `getConnection()` method.
+A connection object represents a connection to a specific database in the SQL server. We can use it to send multiple consecutive queries to the same database. A SQL connection is created from the `DriverManager` class's `getConnection()` method.
 
 ### `java.sql.Statement`
 
@@ -956,9 +956,9 @@ try {
 
   // Handle any exceptions that may occur
 } catch (IOException ioe) {
-  System.out.prinf("Error: %s", ioe.getMessage());
+  System.out.printf("Error: %s", ioe.getMessage());
 } catch (UnknownHostException uhe) {
-  System.out.prinf("Error: %s", uhe.getMessage());
+  System.out.printf("Error: %s", uhe.getMessage());
 }
 ```
 

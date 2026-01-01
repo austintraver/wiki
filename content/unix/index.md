@@ -279,7 +279,7 @@ By default, `tail` will return the last 10 lines of the specified file. You can 
 
 # `gzip`
 
-Although more people are familiar with the `.zip` extention written by microsoft, there also exists the GNU zip `.gz` extension, which has a slightly higher performance benchmark in comarison to `.zip`.
+Although more people are familiar with the `.zip` extension written by microsoft, there also exists the GNU zip `.gz` extension, which has a slightly higher performance benchmark in comparison to `.zip`.
 
 * Compress `file.txt` into `file.txt.gz`
 
@@ -525,7 +525,7 @@ brew install tree
 
 {{% /aside %}}
 
-* Count the occurences of a single char `/` from stdin
+* Count the occurrences of a single char `/` from stdin
 
   ```shell
   echo '/Users/tommy/local/temp' | tr -cd '/' | wc -c
@@ -547,7 +547,7 @@ brew install tree
 
 ## `FS`
 
-* By default, `awk` delimits entries by runs of whitespace. If `FS` contains more than one character, it will delimit the line based on every occurance of the pattern.
+* By default, `awk` delimits entries by runs of whitespace. If `FS` contains more than one character, it will delimit the line based on every occurrence of the pattern.
 
   ```awk
   # "./pattern.awk"

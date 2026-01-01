@@ -33,7 +33,7 @@ need to install the following applications:
 After you have completed this step, search within the application's package contents,
 and look for an executable file titled 
 [`wolframscript`](https://reference.wolfram.com/language/ref/program/wolframscript.html).
-Add the directory containing this file to your shell's search path, preferrably
+Add the directory containing this file to your shell's search path, preferably
 doing so in your shell's runtime configuration file.
 
 After you have authenticated to the server, you will need to provide `wolframscript` with

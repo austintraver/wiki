@@ -1,5 +1,5 @@
 ---
-title: "Rasberry Pi"
+title: "Raspberry Pi"
 description: "What was once brought to you by a supercomputer, can now be achieved with a $20 bill"
 date: 2020-02-04T14:52:27-08:00
 ---
@@ -10,7 +10,7 @@ date: 2020-02-04T14:52:27-08:00
 
 This is mostly taken from the article [Setting up a Raspberry Pi headless](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md) 
 
-First, you'll need to format the SD card to [install Rasbperry Pi OS](https://www.raspberrypi.org/software/). 
+First, you'll need to format the SD card to [install Raspberry Pi OS](https://www.raspberrypi.org/software/). 
 
 Once you've done that, you'll need to mount the SD card to your computer once more. The volume should mount as `boot`. 
 

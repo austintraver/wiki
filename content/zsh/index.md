@@ -277,7 +277,7 @@ My name is ttrojan
 ## Conditional Expressions
 
 When coding, we typically expect *less than* to be represented by the `<`
-character. In shell scripting, however, the `<` symbol has an entirely seperate
+character. In shell scripting, however, the `<` symbol has an entirely separate
 meaning (more on that later). To perform an equality check, we have to use `-lt`
 to signify the same meaning. Also, we will use square brackets `[[ ]]` to
 contain the statement, and literally specify `then` as well as the end of our if
@@ -1355,7 +1355,7 @@ If `name` is an associative array, the expression `${(k)name}` will expand to th
     ```
 
 
-* `(s)` Split a string into an array, separating array entries on the occurance of a delimiter, which is removed from the elements. The delimiter can be specified by placing it within any of the following matching pairs: `(...)`, `{...}`, `[...]`, or `<...>`
+* `(s)` Split a string into an array, separating array entries on the occurrence of a delimiter, which is removed from the elements. The delimiter can be specified by placing it within any of the following matching pairs: `(...)`, `{...}`, `[...]`, or `<...>`
 
     ```shell
     string="one:two:three"
@@ -1757,7 +1757,7 @@ the sunny is is
 
     {{% /samp %}}
 
-* Printing the count of each word occuring in `words.txt` in descending order
+* Printing the count of each word occurring in `words.txt` in descending order
 
     ```shell
     words=($(<words.txt))
@@ -2118,7 +2118,7 @@ A `here-string` is documented exactly twice by name in the entire `zsh` manual. 
 
 ### Expanding Parameters in Files
 
-If you have a super long string of text, for instance, a SQL query, you may want to save the contents of that query in a different file. It's possible you may need to store a variable in the query, and if so, you can use the `(e)` paramater expansion flag when referencing the string. This flag causes the string to have any `${variable}` words treated as if they were a normal shell variable, and not text from the file.
+If you have a super long string of text, for instance, a SQL query, you may want to save the contents of that query in a different file. It's possible you may need to store a variable in the query, and if so, you can use the `(e)` parameter expansion flag when referencing the string. This flag causes the string to have any `${variable}` words treated as if they were a normal shell variable, and not text from the file.
 
 * Expanding parameters as if they were variables in a file:
 
@@ -2286,7 +2286,7 @@ a lower index number in the dictionary
 
 {{% aside warning %}}
 
-**Warning:** Inside of double brackets, the evalution is not a true ternary
+**Warning:** Inside of double brackets, the evaluation is not a true ternary
 operator, because the third statement will still execute if an error is thrown
 by the second statement
 
@@ -3815,7 +3815,7 @@ echo -e ${PATH//:/\\n}
 
 {{% aside info %}}
 
-Normally each directory in the path is seperated by a colon `:` not a newline, but I
+Normally each directory in the path is separated by a colon `:` not a newline, but I
 find this to be a clearer output.
 
 {{% /aside %}}

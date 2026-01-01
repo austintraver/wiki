@@ -852,7 +852,7 @@ Use the `"` mapping to refer to the clipboard register `"+`
 
 1. Command-line Mode
 
-Use the `:y[ank]` comamnd
+Use the `:y[ank]` command
 
 * Copying the contents of the active buffer to the clipboard
 
@@ -1542,7 +1542,7 @@ command:
     a quick brown fox jumped over a lazy dog
     ```
 
-### Replacement Expessions
+### Replacement Expressions
 
 You can use `\=` in a `:substitute` command to signify that you'd like to replace matches to the pattern with *an expression* instead of a string. To learn more, visit [`:help sub-replace-expression`](https://vimhelp.org/change.txt.html#sub-replace-expression)
 

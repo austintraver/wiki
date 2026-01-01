@@ -189,7 +189,7 @@ Their section on [Command-line terminology](https://developers.google.com/style/
 
 * Optional item: `[{{<var OPTIONAL_ITEM >}}]`
 
-* Mutually exlusive items: `{{{< var ALPHA >}} | {{< var BRAVO >}}}`
+* Mutually exclusive items: `{{{< var ALPHA >}} | {{< var BRAVO >}}}`
 
 * Non-mandatory option with parameter: `[--option={{<var PARAMETER >}}]`
 
