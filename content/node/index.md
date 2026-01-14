@@ -238,7 +238,7 @@ There are four major types of streamed connections in Nodejs:
 3. UDP/Datagram Socket - `dgram` module
 4. Readline/Child_Process - `readline`, `child_process` modules
 
-Using a TCP connection, we can recieve messages from client's standard input on the server program. The `process` is used directly here to access standard I/O streams.
+Using a TCP connection, we can receive messages from client's standard input on the server program. The `process` is used directly here to access standard I/O streams.
 
 * Example of a TCP Server:
 
@@ -324,7 +324,7 @@ Using a TCP connection, we can recieve messages from client's standard input on 
 
 ## Working with I/O
 
-The `.pipe(<stream>)` is used to send the ouput of one stream to another.
+The `.pipe(<stream>)` is used to send the output of one stream to another.
 
 * Sending the output of one process to another:
 
@@ -340,7 +340,7 @@ The readline module allows the reading of standard I/O streams line by line duri
 
 ### Using system streams with `child_process`
 
-Using the `child_process` module, a Node application can make system calls and recieve input from standard I/O. We do this in Node by defining a child process and redirecting its input and output by defining functions for whenever specific input is recieved.
+Using the `child_process` module, a Node application can make system calls and receive input from standard I/O. We do this in Node by defining a child process and redirecting its input and output by defining functions for whenever specific input is received.
 
 For example, let's take the command `ls`:
 
@@ -492,7 +492,7 @@ JavaScript also has some built-in objects
 
 ### String Substitutions
 
-* Using the backtick syntax to substitue a variable's value inside of a string.
+* Using the backtick syntax to substitute a variable's value inside of a string.
 
   ```js
   const temp = 22.5

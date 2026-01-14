@@ -405,7 +405,7 @@ gpg-agent --enable-ssh-support --daemon &> /dev/null
 
 ```
 
-* Transfering control of the SSH socket from the SSH agent to the GPG agent
+* Transferring control of the SSH socket from the SSH agent to the GPG agent
 
 ```shell
 # Allow GPG's socket to manage the `ssh` authentication process
@@ -509,7 +509,7 @@ Pasted below is useful content that explains the output provided when the `--wit
 *** Field 5 - KeyID
 
     This is the 64 bit keyid as specified by OpenPGP and the last 64
-    bit of the SHA-1 fingerprint of an X.509 certifciate.
+    bit of the SHA-1 fingerprint of an X.509 certificate.
 
 *** Field 6 - Creation date
 

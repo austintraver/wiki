@@ -444,7 +444,7 @@ setting this up in a different location, results may vary.
 
 **Clarification:** A lot of those settings aren't required, but this was the 
 set of configurations I found does the best job at reducing the filesize 
-without causing a noticable change in quality between the two image files
+without causing a noticeable change in quality between the two image files
 
 {{% /aside %}}
 

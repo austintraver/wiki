@@ -1094,7 +1094,7 @@ There are three directories that are not protected:
 
 {{% aside warning %}}
 
-**Note:** It's preferrable to have these processes launch as LaunchAgents, but LoginHooks still work in the latest version of macOS.
+**Note:** It's preferable to have these processes launch as LaunchAgents, but LoginHooks still work in the latest version of macOS.
 
 {{% /aside %}}
 

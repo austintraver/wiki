@@ -84,7 +84,7 @@ that the user has a GitHub account with the username `tommy`
     # v5: Create a GitHub repository of the current directory,
     # but name the repo "idea" and add the description "My new idea"
     git create idea -d "My new idea"
-    git create idea --description "My new idae"
+    git create idea --description "My new idea"
 
     # v6
     gh repo create {{< var REPO_NAME >}}
@@ -300,7 +300,7 @@ type
     * Changed the structure of the binary search tree
     ```
 
-## Commiting Even Faster
+## Committing Even Faster
 
 Using the `-a` and `-m` flags in conjunction, you can make a commit to a git
 repository in a single line. This flag will stage and commit all files that have
@@ -883,7 +883,7 @@ https://docs.github.com/en/packages/guides/about-github-container-registry
 
 ## The `log` Subcommand
 
-* View the date that a file was last added/commited
+* View the date that a file was last added/committed
 
     ```shell
     git log -1 --format="%ai" -- /path/to/file

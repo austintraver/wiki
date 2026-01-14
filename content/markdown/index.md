@@ -136,14 +136,14 @@ Similarly, this is `inline code`
 Tables are an extension of the original Markdown spec. They are, however, supported on GitHub.
 
 
-You can create tables by assembling a list of words and seperating them by the `|` character.
+You can create tables by assembling a list of words and separating them by the `|` character.
 
 The first row should include some hyphens `-` to underline it.
 
 ```md
 | Header One | Header Two |
 | ---------- | ---------- |
-| This content can be as long as you want | Reason: it won't seperate until it sees this pipe: &vert; |
+| This content can be as long as you want | Reason: it won't separate until it sees this pipe: &vert; |
 | After you add a newline | You can write the next row in the table! |
 ```
 
@@ -151,7 +151,7 @@ Output
 
 | Header One | Header Two |
 | ---------- | ---------- |
-| This content can be as long as you want | Reason: it won't seperate until it sees this pipe: &vert; |
+| This content can be as long as you want | Reason: it won't separate until it sees this pipe: &vert; |
 | After you add a newline | You can write the next row in the table! |
 
 You can change the way a table's text aligns by appending a `:` to the dashes below your title

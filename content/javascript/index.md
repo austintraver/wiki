@@ -197,7 +197,7 @@ run, so it is wise to check before adding a listener.
   }
   /* If the document has already finished loading */
   else {
-    initalize()
+    initialize()
   }
   ```
 

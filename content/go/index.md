@@ -275,7 +275,7 @@ A *declaration* names a program entity and specifies some or all of its properti
 of declarations are `var`, `const`, `type`, and `func`, but every `.go` file begins with a `package` declaration,
 followed by `import` declarations, and finally, zero-or-more *package-level* declarations.
 
-In Go, there is no such thing as an unitialized variable. If a value is not provided for a variable at its declaration, 
+In Go, there is no such thing as an uninitialized variable. If a value is not provided for a variable at its declaration, 
 the variable will have its value initialized to the *zero-value* corresponding to that variable's underlying type.
 
 The `:=` operator performs *short variable* declaration. Unlike the `=` operator, which performs assignment, the `:=` operator performs declaration, which is distinct from assignment.

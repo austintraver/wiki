@@ -95,7 +95,7 @@ Import the `<stdio.h>` library to get started
     3. `const char* format`
     4. `<arg1>`, `<arg2>`, `...`
 
-* The `puts()` function writes a C-string to `stdout`, stopping at the first null terminator `\0` found. It additionall appends a newline `\n` to the output. To print to a particular stream instead of `stdout`, and/or to avoid the insertion of a trailing newline, `\n` instead of `stdout`, use the `fputs()` function instead.
+* The `puts()` function writes a C-string to `stdout`, stopping at the first null terminator `\0` found. It additional appends a newline `\n` to the output. To print to a particular stream instead of `stdout`, and/or to avoid the insertion of a trailing newline, `\n` instead of `stdout`, use the `fputs()` function instead.
 
 * Printing a formatted string to `stdout`:
 
@@ -184,7 +184,7 @@ int main() {
 
 There's no `split()` function for strings... until now!
 
-* Split a string on each occurance of a regular expression pattern:
+* Split a string on each occurrence of a regular expression pattern:
 
     ```cpp
     std::vector<std::string> split(const std::string &text, const std::regex &regex) {
@@ -200,7 +200,7 @@ There's no `split()` function for strings... until now!
     }
     ```
 
-* Split text on every occurance of a carriage return, followed by a newline
+* Split text on every occurrence of a carriage return, followed by a newline
 
     ```cpp
     std::regex crlf{"\\r\\n"};

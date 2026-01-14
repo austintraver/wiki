@@ -27,7 +27,7 @@ Don't dive down the rabbit hole yet (or ever, honestly.) Because if you open up
 [RFC 3986][] you'll find that at the top of page one, [RFC 3986][] itself ends
 up being updated by publications later on like [RFC 6874][], [RFC 7320][], and
 [RFC 8820][]. It turns out, these updates don't really update the syntax much
-(if at all), they're moreso clarifications made about some of the more ambiguous
+(if at all), they're more so clarifications made about some of the more ambiguous
 parts of [RFC 3986][] and general guidelines for the people reading it. As far
 as I know, [RFC 3986][] is still the ultimate "source of truth" for this topic.
 
